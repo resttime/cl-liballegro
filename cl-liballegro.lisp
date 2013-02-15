@@ -103,4 +103,65 @@
   (master :pointer) (add :pointer))
 
 ;;; Display
+;; Display Creation
 (defcstruct allegro-display)
+
+(defcfun ("al_create_display" create-display) :pointer (width :int) (height :int))
+(defcfun ("al_destroy_display" destroy-display) :void (display :pointer))
+
+(defcfun ("al_set_new_display_flags" set-new-display-flags) :void (flags :int))
+
+;; Display Operations
+
+(defcfun ("al_flip_display" flip-display) :void)
+(defcfun ("al_get_backbuffer" get-back-buffer) :pointer (display :pointer))
+
+(defcfun ("al_get_display_event_source" get-display-event-source) :pointer
+  (display :pointer))
+
+;; Fullscreen display modes
+(defcstruct allegro-display-mode
+  (width :int)
+  (height :int)
+  (format :int)
+  (refresh-rate :int))
+
+(defcfun ("al_get_display_mode" get-display-mode) :pointer
+  (index :int) (mode :pointer))
+(defcfun ("al_get_num_display_modes" get-num-display-modes) :int)
+
+;;; Events
+(defctype allegro-event-type :uint)
+(defcenum (enum :uint)
+  ;; Joystick Events
+  (:allegro-event-joystick-axis 1)
+  :allegro-event-joystick-button-down
+  :allegro-event-joystick-button-up
+  :allegro-event-joystick-configuration
+  ;; Keyboard Events
+  (:allegro-event-key-down 10)
+  :allegro-event-key-char
+  :allegro-event-key-up
+  ;; Mouse Events
+  (:allegro-event-mouse-axis 20)
+  :allegro-event-mouse-button-down
+  :allegro-event-mouse-button-up
+  :allegro-event-mouse-enter-display
+  :allegro-event-mouse-leave-display
+  :allegro-event-mouse-warped
+  ;; Timer Events
+  (:allegro-event-timer 30)
+  ;; Display Events
+  (:allegro-event-display-expose 40)
+  :allegro-event-display-resize
+  :allegro-event-display-close
+  :allegro-event-display-lost
+  :allegro-event-display-found
+  :allegro-event-display-switch-in
+  :allegro-event-display-switch-out
+  :allegro-event-display-orientation)
+
+(defcstruct allegro-any-event
+  (type allegro-event-type))
+
+
