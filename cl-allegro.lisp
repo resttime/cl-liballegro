@@ -266,52 +266,6 @@
 
 (in-package :allegro)
 
-(define-foreign-library liballegro
-  (:windows "allegro-5.0.8-monolith-mt.dll")
-  (t (:default "liballegro")))
-(use-foreign-library liballegro)
-
-(when (not (equal (software-type) "Win32"))
-  (define-foreign-library liballegro-acodec
-    (t (:default "liballegro_acodec")))
-  (use-foreign-library liballegro-acodec)
-  
-  (define-foreign-library liballegro-audio
-    (t (:default "liballegro_audio")))
-  (use-foreign-library liballegro-audio)
-  
-  (define-foreign-library liballegro-color
-    (t (:default "liballegro_color")))
-  (use-foreign-library liballegro-color)
-  
-  (define-foreign-library liballegro-dialog
-   (t (:default "liballegro_dialog")))
-  (use-foreign-library liballegro-dialog)
-  
-  (define-foreign-library liballegro-font
-    (t (:default "liballegro_font")))
-  (use-foreign-library liballegro-font)
-  
-  (define-foreign-library liballegro-image
-    (t (:default "liballegro_image")))
-  (use-foreign-library liballegro-image)
-  
-  (define-foreign-library liballegro-memfile
-    (t (:default "liballegro_memfile")))
-  (use-foreign-library liballegro-memfile)
-  
-  (define-foreign-library liballegro-physfs
-    (t (:default "liballegro_physfs")))
-  (use-foreign-library liballegro-physfs)
-  
-  (define-foreign-library liballegro-primitives
-    (t (:default "liballegro_primitives")))
-  (use-foreign-library liballegro-primitives)
-  
-  (define-foreign-library liballegro-ttf
-    (t (:default "liballegro_ttf")))
-  (use-foreign-library liballegro-ttf))
-
 ;;; base.h
 (defconstant +allegro-version+ 5)
 (defconstant +allegro-sub-version+ 0)
