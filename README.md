@@ -1,6 +1,6 @@
 cl-liballegro
 ==========
-**This is going to be the formal CFFI.**
+**This is going to be a formal CFFI.**
 
 **The files will be organized by sections of the Allegro 5.0 reference manual.**
 
