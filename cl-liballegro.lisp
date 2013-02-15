@@ -132,6 +132,7 @@
 
 ;;; Events
 (defctype allegro-event-type :uint)
+
 (defcenum (enum :uint)
   ;; Joystick Events
   (:allegro-event-joystick-axis 1)
@@ -162,6 +163,105 @@
   :allegro-event-display-orientation)
 
 (defcstruct allegro-any-event
-  (type allegro-event-type))
+  (type allegro-event-type)
+  (source :pointer)
+  (timestamp :double))
+(defcstruct allegro-display-event
+  (type allegro-event-type)
+  (source :pointer)
+  (timestamp :double)
+  (x :int)
+  (y :int)
+  (width :int)
+  (height :int)
+  (orientation :int))
+(defcstruct allegro-joystick-event
+  (type allegro-event-type)
+  (source :pointer)
+  (timestamp :double)
+  (id :pointer)
+  (stick :int)
+  (axis :int)
+  (pos :float)
+  (button :int))
+(defcstruct allegro-keyboard-event
+  (type allegro-event-type)
+  (source :pointer)
+  (timestamp :double)
+  (display allegro-display)
+  (keycode :int)
+  (unichar :int)
+  (modifiers :uint)
+  (repeat :boolean))
+(defcstruct allegro-mouse-event
+  (type allegro-event-type)
+  (source :pointer)
+  (timestamp :double)
+  (display allegro-display)
+  (x :int)
+  (y :int)
+  (z :int)
+  (w :int)
+  (dx :int)
+  (dy :int)
+  (dz :int)
+  (dw :int)
+  (button :uint)
+  (pressure :float))
+(defcstruct allegro-timer-event
+  (type allegro-event-type)
+  (source :pointer)
+  (timestamp :double)
+  (count :int64)
+  (error :double))
+(defcstruct allegro-user-event
+  (type allegro-event-type)
+  (source :pointer)
+  (timestamp :double)
+  (--internal--descr :pointer) 
+  (data1 (:pointer :int))
+  (data2 (:pointer :int))
+  (data3 (:pointer :int))
+  (data4 (:pointer :int)))
+(defcunion allegro-event
+  (type allegro-event-type)
+  (any allegro-any-event)
+  (display allegro-display-event)
+  (joystick allegro-joystick-event)
+  (keyboard allegro-keyboard-event)
+  (mouse allegro-mouse-event)
+  (timer allegro-timer-event)
+  (user allegro-user-event))
 
+(defcstruct (allegro-event-source :size 128))
+(defcstruct allegro-event-queue)
 
+(defcfun ("al_create_event_queue" create-event-queue) :pointer)
+(defcfun ("al_destroy_event_queue" destroy-event-queue) :void (queue :pointer))
+(defcfun ("al_register_event_source" register-event-source) :void
+  (queue :pointer) (source :pointer))
+(defcfun ("al_unregister_event_source" unregister-event-source) :void
+  (queue :pointer) (source :pointer))
+(defcfun ("al_is_event_queue_empty" is-event-queue-empty) :boolean (queue :pointer))
+(defcfun ("al_get_next_event" get-next-event) :boolean
+  (queue :pointer) (ret-event :pointer))
+(defcfun ("al_peek_next_event" peek-next-event) :boolean
+  (queue :pointer) (ret-event :pointer))
+(defcfun ("al_drop_next_event" drop-next-event) :boolean (queue :pointer))
+(defcfun ("al_flush_event_queue" flush-event-queue) :void (queue :pointer))
+(defcfun ("al_wait_for_event" wait-for-event) :void
+  (queue :pointer) (ret-event :pointer))
+(defcfun ("al_wait_for_event_timed" wait-for-event-timed) :boolean
+  (queue :pointer) (ret-event :pointer) (secs :float))
+(defcfun ("al_wait_for_event_until" wait-for-event-until) :boolean
+  (queue :pointer) (ret-event :pointer) (timeout :pointer))
+(defcfun ("al_init_user_event_source" init-user-event-source) :void (src :pointer))
+(defcfun ("al_destroy_user_event_source" destroy-user-event-source) :void
+  (src :pointer))
+(defcfun ("al_emit_user_event" emit-user-event) :boolean
+  (src :pointer) (event :pointer) (dtor :pointer))
+(defcfun ("al_unref_user_event" unref-user-event) :void (event :pointer))
+(defcfun ("al_get_event_source_data" get-event-source-data) :pointer
+  (source :pointer))
+(defcfun ("al_set_event_source_data" set-event-source-data) :void
+  (source :pointer) (data :pointer))
