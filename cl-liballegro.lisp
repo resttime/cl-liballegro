@@ -541,3 +541,40 @@
 
 ;; Audio file I/O
 (defcfun ("al_load_sample" load-sample) :pointer (filename :pointer))
+
+;;; Audio codecs addon
+(defcfun ("al_init_acodec_addon" init-acodec-addon) :boolean)
+(defcfun ("al_get_allegro_acodec_version" get-allegro-acodec-version) :uint32)
+
+;;; Font addons
+;; General font routinues
+(defconstant +allegro-align-left+ 0)
+(defconstant +allegro-align-centre+ 1)
+(defconstant +allegro-align-center+ 1)
+(defconstant +allegro-align-right+ 2)
+(defconstant +allegro-align-integer+ 4)
+
+(defcstruct allegro-font)
+
+(defcfun ("al_init_font_addon" init-font-addon) :void)
+(defcfun ("al_shutdown_font_addon" shutdown-font-addon) :void)
+
+(defcfun ("al_draw_text" draw-text) :void
+  (font :pointer)
+  (r :float) (g :float) (b :float) (a :float)
+  (x :float) (y :float)
+  (flags :int)
+  (ustr :pointer))
+
+;; TTF fonts
+(defcfun ("al_init_ttf_addon" init-ttf-addon) :boolean)
+(defcfun ("al_shutdown_ttf_addon" shutdown-ttf-addon) :void)
+(defcfun ("al_load_ttf_font" load-ttf-font) :pointer
+  (filename :pointer) (size :int) (flags :int))
+(defcfun ("al_load_ttf_font_f" load-ttf-font-f) :pointer
+  (file :pointer) (filename :pointer) (size :int) (flags :int))
+
+;;; Image I/O addon
+(defcfun ("al_init_image_addon" init-image-addon) :boolean)
+(defcfun ("al_shutdown_image_addon" shutdown-image-addon) :void)
+(defcfun ("al_get_allegro_image_version" get-allegro-image-version) :uint32)
