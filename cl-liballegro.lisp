@@ -2,7 +2,7 @@
 
 (defpackage #:cl-liballegro
   (:use #:cl #:cffi)
-  (:nicknames #:al)
+  (:nicknames #:al #:liballegro :alleg)
   (:export
    
    ;; Configuration Files
