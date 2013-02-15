@@ -6,6 +6,8 @@ cl-liballegro
 
 **I hope for it to be clean and neat like cl-opengl**
 
+**Example Evaluation: (al:draw-bitmap sprite 200 300 0)**
+
 This is going to take a while to complete...
 http://alleg.sourceforge.net/a5docs/5.0.8/
 
