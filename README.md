@@ -13,9 +13,9 @@ http://alleg.sourceforge.net/a5docs/5.0.8/
 
 Configuration Files **[100%]**
 
-Display
+Display **[30%]?**
 
-Events
+Events **[80%]**
 
 File I/O
 
