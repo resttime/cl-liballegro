@@ -1,4 +1,4 @@
-(ql:quickload "cffi")
+ (ql:quickload "cffi")
 (defpackage :allegro
   (:use :common-lisp :cffi)
   (:export "+ALLEGRO-VERSION+"
