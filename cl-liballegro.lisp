@@ -101,3 +101,6 @@
   (cfg1 :pointer) (cfg2 :pointer))
 (defcfun ("al_merge_config_into" merge-config-into) :void
   (master :pointer) (add :pointer))
+
+;;; Display
+(defcstruct allegro-display)
