@@ -3,18 +3,6 @@
 (in-package :cl-liballegro)
 
 ;;; base.h
-(defconstant +allegro-version+ 5)
-(defconstant +allegro-sub-version+ 0)
-(defconstant +allegro-wip-version+ 8)
-(defconstant +allegro-release-number+ 1)
-
-(defconstant +allegro-version-int+ (logior (ash +allegro-version+ 24)
-					   (ash +allegro-sub-version+ 16)
-					   (ash +allegro-wip-version+ 8)
-					   +allegro-release-number+))
-
-(defconstant +allegro-pi+ 3.14159265358979323846)
-
 (defcfun "al_get_allegro_version" :uint32)
 (defun al-id (a b c d)
   (logior (ash a 24)
