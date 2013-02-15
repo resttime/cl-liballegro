@@ -11,68 +11,70 @@ cl-liballegro
 This is going to take a while to complete...
 http://alleg.sourceforge.net/a5docs/5.0.8/
 
-Configuration Files **[100%]**
+**I'm using not verified, estimated percentages**
+
+Configuration Files **[90%]**
 
 Display **[30%]?**
 
-Events **[80%]**
+Events - **[80%]**
 
-File I/O
+File I/O - **[0%]**
 
-Filesystem
+Filesystem - **[0%]**
 
-Fixed point math
+Fixed point math - **[0%]**
 
-Graphics - Implementing Color structures will be problematic. The CFFI cannot pass structures by value.
+Graphics - **[50%]**
 
-Joystick
+Joystick - **[0%]**
 
-Keyboard
+Keyboard - **[60%]**
 
-Memory
+Memory - **[0%]**
 
-Mouse
+Mouse - **[75%]**
 
-Path
+Path - **[0%]**
 
-State
+State - **[0%]**
 
-System
+System - **[10%]**
 
-Threads
+Threads - **[0%]**
 
-Time
+Time - **[90%]**
 
-Timer
+Timer - **[90%]**
 
-Transformations
+Transformations - **[0%]**
 
-UTF-8
+UTF-8 - **[0%]**
 
-Miscellaneous
+Miscellaneous - **[99%]**
 
-Platform-specific
+Platform-specific - **[0%]**
 
-Direct3D
+Direct3D - **[0%]**
 
-OpenGL
+OpenGL - **[0%]**
 
-Audio addon
+Audio addon - **[5%]**
 
-Audio codecs
+Audio codecs - **[99%]**
 
-Color addon
+Color addon - **[0%]**
 
-Font addons
+Font addons - **[20%]**
 
-Image I/O addon
+Image I/O addon - **[10%]**
 
-Main addon
+Main addon - **[0%]**
 
-Memfile addon
+Memfile addon - **[0%]**
 
-Native dialogs addon
+Native dialogs addon - **[0%]**
 
-PhysicsFS addon
+PhysicsFS addon - **[0%]**
 
-Primitives addon
+Primitives addon - **[0%]**
