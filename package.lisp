@@ -1,6 +1,6 @@
 (defpackage #:cl-liballegro
   (:use #:cl #:cffi)
-  (:nicknames #:al #:allegro
+  (:nicknames #:al #:allegro #:cl-allegro
   (:export "+ALLEGRO-VERSION+"
            "+ALLEGRO-SUB-VERSION+"
            "+ALLEGRO-WIP-VERSION+"
