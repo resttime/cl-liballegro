@@ -162,41 +162,58 @@
   :allegro-event-display-switch-out
   :allegro-event-display-orientation)
 
+(defconstant +allegro-event-joystick-axis+ 1)
+(defconstant +allegro-event-joystick-button-down+ 2)
+(defconstant +allegro-event-joystick-button-up+ 3)
+(defconstant +allegro-event-joystick-configuration+ 4)
+
+(defconstant +allegro-event-key-down+ 10)
+(defconstant +allegro-event-key-char+ 11)
+(defconstant +allegro-event-key-up+ 12)
+
+(defconstant +allegro-event-mouse-axes+ 20)
+(defconstant +allegro-event-mouse-button-down+ 21)
+(defconstant +allegro-event-mouse-button-up+ 22)
+(defconstant +allegro-event-mouse-enter-display+ 23)
+(defconstant +allegro-event-mouse-leave-display+ 24)
+(defconstant +allegro-event-mouse-warped+ 25)
+
+(defconstant +allegro-event-timer+ 30)
+
+(defconstant +allegro-event-display-expose+ 40)
+(defconstant +allegro-event-display-resize+ 41)
+(defconstant +allegro-event-display-close+ 42)
+(defconstant +allegro-event-display-lost+ 43)
+(defconstant +allegro-event-display-found+ 44)
+(defconstant +allegro-event-display-switch-in+ 45)
+(defconstant +allegro-event-display-switch-out+ 46)
+(defconstant +allegro-event-display-orientation+ 47)
+
 (defcstruct allegro-any-event
-  (type allegro-event-type)
-  (source :pointer)
-  (timestamp :double))
+  (type allegro-event-type) (source :pointer) (timestamp :double))
 (defcstruct allegro-display-event
-  (type allegro-event-type)
-  (source :pointer)
-  (timestamp :double)
+  (type allegro-event-type) (source :pointer) (timestamp :double)
   (x :int)
   (y :int)
   (width :int)
   (height :int)
   (orientation :int))
 (defcstruct allegro-joystick-event
-  (type allegro-event-type)
-  (source :pointer)
-  (timestamp :double)
+  (type allegro-event-type) (source :pointer) (timestamp :double)
   (id :pointer)
   (stick :int)
   (axis :int)
   (pos :float)
   (button :int))
 (defcstruct allegro-keyboard-event
-  (type allegro-event-type)
-  (source :pointer)
-  (timestamp :double)
+  (type allegro-event-type) (source :pointer) (timestamp :double)
   (display allegro-display)
   (keycode :int)
   (unichar :int)
   (modifiers :uint)
   (repeat :boolean))
 (defcstruct allegro-mouse-event
-  (type allegro-event-type)
-  (source :pointer)
-  (timestamp :double)
+  (type allegro-event-type) (source :pointer) (timestamp :double)
   (display allegro-display)
   (x :int)
   (y :int)
@@ -209,15 +226,11 @@
   (button :uint)
   (pressure :float))
 (defcstruct allegro-timer-event
-  (type allegro-event-type)
-  (source :pointer)
-  (timestamp :double)
+  (type allegro-event-type) (source :pointer) (timestamp :double)
   (count :int64)
   (error :double))
 (defcstruct allegro-user-event
-  (type allegro-event-type)
-  (source :pointer)
-  (timestamp :double)
+  (type allegro-event-type) (source :pointer) (timestamp :double)
   (--internal--descr :pointer) 
   (data1 (:pointer :int))
   (data2 (:pointer :int))
@@ -265,3 +278,266 @@
   (source :pointer))
 (defcfun ("al_set_event_source_data" set-event-source-data) :void
   (source :pointer) (data :pointer))
+
+;;; Graphics
+;; Colors
+(defcstruct allegro-color (r :float) (g :float) (b :float) (a :float))
+
+;; Bitmap Creation
+(defcstruct allegro-bitmap)
+
+(defcfun ("al_create_bitmap" create-bitmap) :pointer (w :int) (h :int))
+(defcfun ("al_create_sub_bitmap" create-sub-bitmap) :pointer
+  (parent :pointer) (x :int) (y :int) (w :int) (h :int))
+(defcfun ("al_clone_bitmap" clone-bitmap) :pointer (bitmap :pointer))
+(defcfun "al_destroy_bitmap" :void (bitmap :pointer))
+
+;; Bitmap Properties
+
+(defcfun ("al_get_bitmap_width" get-bitmap-width) :int (bitmap :pointer))
+(defcfun ("al_get_bitmap_height" get-bitmap-height) :int (bitmap :pointer))
+
+;; Drawing Operations
+(defcfun ("al_clear_to_color" clear-to-color) :void
+  (r :float) (g :float) (b :float) (a :float))
+(defcfun ("al_draw_bitmap" draw-bitmap) :void
+  (bitmap :pointer) (dx :float) (dy :float) (flags :int))
+(defcfun ("al_draw_tinted_bitmap" draw-tinted-bitmap) :void
+  (bitmap :pointer)
+  (r :float) (g :float) (b :float) (a :float)
+  (dx :float) (dy :float)
+  (flags :int))
+
+(defcfun ("al_draw_rotated_bitmap" draw-rotated-bitmap) :void
+  (bitmap :pointer)
+  (cx :float) (cy :float)
+  (dx :float) (dy :float)
+  (angle :float)
+  (flags :int))
+
+;; Images I/O
+
+(defcfun ("al_load_bitmap" load-bitmap) :pointer (filename :pointer))
+(defcfun ("al_load_bitmap_f" load-bitmap-f) :pointer (fp :pointer) (ident :pointer))
+
+;;; Keyboard
+(defcstruct allegro-keyboard-state)
+
+;; Key codes
+(defconstant +allegro-key-a+ 1)
+(defconstant +allegro-key-b+ 2)
+(defconstant +allegro-key-c+ 3)
+(defconstant +allegro-key-d+ 4)
+(defconstant +allegro-key-e+ 5)
+(defconstant +allegro-key-f+ 6)
+(defconstant +allegro-key-g+ 7)
+(defconstant +allegro-key-h+ 8)
+(defconstant +allegro-key-i+ 9)
+(defconstant +allegro-key-j+ 10)
+(defconstant +allegro-key-k+ 11)
+(defconstant +allegro-key-l+ 12)
+(defconstant +allegro-key-m+ 13)
+(defconstant +allegro-key-n+ 14)
+(defconstant +allegro-key-o+ 15)
+(defconstant +allegro-key-p+ 16)
+(defconstant +allegro-key-q+ 17)
+(defconstant +allegro-key-r+ 18)
+(defconstant +allegro-key-s+ 19)
+(defconstant +allegro-key-t+ 20)
+(defconstant +allegro-key-u+ 21)
+(defconstant +allegro-key-v+ 22)
+(defconstant +allegro-key-w+ 23)
+(defconstant +allegro-key-x+ 24)
+(defconstant +allegro-key-y+ 25)
+(defconstant +allegro-key-z+ 26)
+
+(defconstant +allegro-key-0+ 27)
+(defconstant +allegro-key-1+ 28)
+(defconstant +allegro-key-2+ 29)
+(defconstant +allegro-key-3+ 30)
+(defconstant +allegro-key-4+ 31)
+(defconstant +allegro-key-5+ 32)
+(defconstant +allegro-key-6+ 33)
+(defconstant +allegro-key-7+ 34)
+(defconstant +allegro-key-8+ 35)
+(defconstant +allegro-key-9+ 36)
+
+(defconstant +allegro-key-pad-0+ 37)
+(defconstant +allegro-key-pad-1+ 38)
+(defconstant +allegro-key-pad-2+ 39)
+(defconstant +allegro-key-pad-3+ 40)
+(defconstant +allegro-key-pad-4+ 41)
+(defconstant +allegro-key-pad-5+ 42)
+(defconstant +allegro-key-pad-6+ 43)
+(defconstant +allegro-key-pad-7+ 44)
+(defconstant +allegro-key-pad-8+ 45)
+(defconstant +allegro-key-pad-9+ 46)
+
+(defconstant +allegro-key-f1+ 47)
+(defconstant +allegro-key-f2+ 48)
+(defconstant +allegro-key-f3+ 49)
+(defconstant +allegro-key-f4+ 50)
+(defconstant +allegro-key-f5+ 51)
+(defconstant +allegro-key-f6+ 52)
+(defconstant +allegro-key-f7+ 53)
+(defconstant +allegro-key-f8+ 54)
+(defconstant +allegro-key-f9+ 55)
+(defconstant +allegro-key-f10+ 56)
+(defconstant +allegro-key-f11+ 57)
+(defconstant +allegro-key-f12+ 58)
+
+(defconstant +allegro-key-escape+ 59)
+(defconstant +allegro-key-tilde+ 60)
+(defconstant +allegro-key-minus+ 61)
+(defconstant +allegro-key-equals+ 62)
+(defconstant +allegro-key-backspace+ 63)
+(defconstant +allegro-key-tab+ 64)
+(defconstant +allegro-key-openbrace+ 65)
+(defconstant +allegro-key-closebrace+ 66)
+(defconstant +allegro-key-enter+ 67)
+(defconstant +allegro-key-semicolon+ 68)
+(defconstant +allegro-key-quote+ 69)
+(defconstant +allegro-key-backslash+ 70)
+(defconstant +allegro-key-backslash2+ 71)
+(defconstant +allegro-key-comma+ 72)
+(defconstant +allegro-key-fullstop+ 73)
+(defconstant +allegro-key-slash+ 74)
+(defconstant +allegro-key-space+ 75)
+
+(defconstant +allegro-key-insert+ 76)
+(defconstant +allegro-key-delete+ 77)
+(defconstant +allegro-key-home+ 78)
+(defconstant +allegro-key-end+ 79)
+(defconstant +allegro-key-pgup+ 80)
+(defconstant +allegro-key-pgdn+ 81)
+(defconstant +allegro-key-left+ 82)
+(defconstant +allegro-key-right+ 83)
+(defconstant +allegro-key-up+ 84)
+(defconstant +allegro-key-down+ 85)
+
+(defconstant +allegro-key-pad-slash+ 86)
+(defconstant +allegro-key-pad-asterisk+ 87)
+(defconstant +allegro-key-pad-minus+ 88)
+(defconstant +allegro-key-pad-plus+ 89)
+(defconstant +allegro-key-pad-delete+ 90)
+(defconstant +allegro-key-pad-enter+ 91)
+
+(defconstant +allegro-key-printscreen+ 92)
+(defconstant +allegro-key-pause+ 93)
+
+(defconstant +allegro-key-modifiers 215)
+(defconstant +allegro-key-lshift+ 215)
+(defconstant +allegro-key-rshift+ 216)
+(defconstant +allegro-key-lctrl+ 217)
+(defconstant +allegro-key-rctrl+ 218)
+(defconstant +allegro-key-alt+ 219)
+(defconstant +allegro-key-altgr+ 220)
+(defconstant +allegro-key-lwin+ 221)
+(defconstant +allegro-key-rwin+ 222)
+(defconstant +allegro-key-menu+ 223)
+(defconstant +allegro-key-scrolllock+ 224)
+(defconstant +allegro-key-numlock+ 225)
+(defconstant +allegro-key-capslock+ 226)
+
+;; Keyboard modifier flags
+(defconstant +allegro-keymod-shift+ #x00001)
+(defconstant +allegro-keymod-ctrl+ #x00002)
+(defconstant +allegro-keymod-alt+ #x00004)
+(defconstant +allegro-keymod-lwin+ #x00008)
+(defconstant +allegro-keymod-rwin+ #x00010)
+(defconstant +allegro-keymod-menu+ #x00020)
+(defconstant +allegro-keymod-altgr+ #x00040)
+(defconstant +allegro-keymod-command+ #x00080)
+(defconstant +allegro-keymod-scrolllock+ #x00100)
+(defconstant +allegro-keymod-numlock+ #x00200)
+(defconstant +allegro-keymod-capslock+ #x00400)
+
+(defcfun ("al_install_keyboard" install-keyboard) :boolean)
+(defcfun ("al_is_keyboard_installed" is-keyboard-installed) :boolean)
+(defcfun ("al_uninstall_keyboard" uninstall-keyboard) :void)
+(defcfun ("al_get_keyboard_state" get-keyboard-state) :void (ret-state :pointer))
+(defcfun ("al_key_down" key-down) :boolean (state :pointer) (keycode :int))
+(defcfun ("al_keycode_to_name" keycode-to-name) :pointer (keycode :int))
+(defcfun ("al_set_keyboard_leds" set-keyboard-leds) :boolean (leds :int))
+(defcfun ("al_get_keyboard_event_source" get-keyboard-event-source) :pointer)
+
+;;; Mouse
+(defstruct allegro-mouse-state)
+
+(defcfun ("al_install_mouse" install-mouse) :boolean)
+(defcfun ("al_is_mouse_installed" is-mouse-installed) :boolean)
+(defcfun ("al_uninstall_mouse" uninstall-mouse) :void)
+(defcfun ("al_get_mouse_num_axes" get-mouse-num-axes) :uint)
+(defcfun ("al_get_mouse_num_buttons" get-mouse-num-buttons) :uint)
+(defcfun ("al_get_mouse_state" get-mouse-state) :void (ret-state :pointer))
+(defcfun ("al_get_mouse_state_axis" get-mouse-state-axis) :int
+  (state :pointer) (axis :int))
+(defcfun ("al_get_mouse_button_down" get-mouse-button_down) :boolean
+  (state :pointer) (button :int))
+(defcfun ("al_set_mouse_xy" set-mouse-xy) :boolean
+  (display :pointer) (x :int) (y :int))
+(defcfun ("al_set_mouse_z" set-mouse-z) :boolean
+  (z :int))
+(defcfun ("al_set_mouse_w" set-mouse-w) :boolean
+  (w :int))
+(defcfun ("al_set_mouse_axis" set-mouse-axis) :boolean (which :int) (value :int))
+(defcfun ("al_get_mouse_event_source" get-mouse-event-source) :pointer)
+
+;; Mouse cursors
+(defcfun ("al_create_mouse_cursor" create-mouse-cursor) :pointer
+  (bmp :pointer) (x_focus :int) (y_focus :int))
+
+;;; System
+(defcfun ("al_install_system" install-system) :boolean
+  (version :int) (atexit-ptr :pointer))
+(defcfun ("al_get_allegro_version" get-allegro-version) :uint32)
+(defun init () (install-system (get-allegro-version) (null-pointer)))
+(defcfun ("al_uninstall_system" uninstall-system) :void)
+(defcfun ("al_is_system_installed" is-system-installed) :boolean)
+
+;;; Time
+(defcstruct allegro-timeout)
+
+(defcfun ("al_get_time" get-time) :double)
+(defun current-time () (get-time))
+(defcfun ("al_init_timeout" init-timeout) :void (timeout :pointer) (seconds :double))
+(defcfun ("al_rest" rest-time) :void (seconds :double))
+
+;;; Timer
+(defcstruct allegro-timer)
+
+(defcfun ("al_create_timer" create-timer) :pointer (speed-secs :double))
+(defcfun ("al_start_timer" start-timer) :void (timer :pointer))
+(defcfun ("al_stop_timer" stop-timer) :void (timer :pointer))
+(defcfun ("al_get_timer_started" get-timer-started) :boolean (timer :pointer))
+(defcfun ("al_destroy_timer" destroy-timer) :void (timer :pointer))
+(defcfun ("al_get_timer_count" get-timer-count) :int64 (timer :pointer))
+(defcfun ("al_set_timer_count" set-timer-count) :void
+  (timer :pointer) (new-count :int64))
+(defcfun ("al_add_timer_count" add-timer-count) :void
+  (timer :pointer) (diff :int64))
+(defcfun ("al_get_timer_speed" get-timer-speed) :double (timer :pointer))
+(defcfun ("al_set_timer_speed" set-timer-speed) :void
+  (timer :pointer) (new-speed-secs :double))
+(defcfun ("al_get_timer_event_source" get-timer-event-source) :pointer
+  (timer :pointer))
+
+;;; Miscellaneous routinues
+(defconstant +allegro-pi+ 3.14159265358979323846)
+
+;;; Audio addon
+;; Setting up audio
+(defcfun ("al_install_audio" install-audio) :boolean)
+(defcfun ("al_uninstall_audio" uninstall-audio) :void)
+(defcfun ("al_is_audio_installed" is-audio-installed) :boolean)
+(defcfun ("al_reserve_samples" reserve-samples) :boolean (reserve-samples :int))
+
+;; Sample functions
+(defcfun ("al_play_sample" play-sample) :boolean
+  (spl :pointer)
+  (gain :float) (pan :float) (speed :float)
+  (playmode :uint)
+  (ret-id :pointer))
+
+;; Audio file I/O
+(defcfun ("al_load_sample" load-sample) :pointer (filename :pointer))
