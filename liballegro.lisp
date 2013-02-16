@@ -33,6 +33,39 @@
   (master :pointer) (add :pointer))
 
 ;;; Display
+(defcenum allegro-display-options
+  :allegro_red_size
+  :allegro_green_size
+  :allegro_blue_size
+  :allegro_alpha_size
+  :allegro_red_shift
+  :llegro_green_shift
+  :allegro_blue_shift
+  :allegro_alpha_shift
+  :allegro_acc_red_size
+  :allegro_acc_green_size
+  :allegro_acc_blue_size
+  :allegro_acc_alpha_size
+  :allegro_stereo
+  :allegro_aux_buffers
+  :allegro_color_size
+  :allegro_depth_size
+  :allegro_stencil_size
+  :allegro_sample_buffers
+  :allegro_samples
+  :allegro_render_method
+  :allegro_float_color
+  :allegro_float_depth
+  :allegro_single_buffer
+  :allegro_swap_method
+  :allegro_compatible_display
+  :allegro_update_display_region
+  :allegro_vsync
+  :allegro_max_bitmap_size
+  :allegro_support_npot_bitmap
+  :allegro_can_draw_into_bitmap
+  :allegro_support_separate_alpha
+  :allegro_display_options_count)
 ;; Display Creation
 (defcstruct allegro-display)
 
@@ -41,7 +74,10 @@
 
 (defcfun ("al_set_new_display_flags" set-new-display-flags) :void (flags :int))
 
-;; Display Operations
+(defcfun ("al_set_new_display_option" set-new-display-option) :void
+  (option allegro-display-options) (value :int) (importance :int))
+
+;; Display Operations 
 
 (defcfun ("al_flip_display" flip-display) :void)
 (defcfun ("al_get_backbuffer" get-backbuffer) :pointer (display :pointer))
