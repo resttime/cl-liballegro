@@ -1,1 +1,1 @@
-(require 'cl-liballegro)
+(require "cl-liballegro")
