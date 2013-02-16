@@ -27,6 +27,8 @@
    #:create-display
    #:destroy-display
    #:set-new-display-flags
+
+   #:set-new-display-option
    
    ;; Display Operations
    #:flip-display
