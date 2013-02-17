@@ -96,12 +96,13 @@
   (refresh-rate :int))
 
 ;; Display Operations 
-
-(defcfun ("al_flip_display" flip-display) :void)
-(defcfun ("al_get_backbuffer" get-backbuffer) :pointer (display :pointer))
-
 (defcfun ("al_get_display_event_source" get-display-event-source) :pointer
   (display :pointer))
+(defcfun ("al_get_backbuffer" get-backbuffer) :pointer (display :pointer))
+(defcfun ("al_flip_display" flip-display) :void)
+(defcfun ("al_update_display_region" update-display-region) :void
+  (x :int) (y :int) (width :int) (height :int))
+(defcfun ("al_wait_for_vsync" wait-for-vsync) :boolean)
 
 ;; Fullscreen display modes
 (defcstruct allegro-display-mode
