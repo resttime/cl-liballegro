@@ -38,8 +38,8 @@ Filesystem - **[5%]**
 Fixed point math - **[10%]**
 Fullscreen modes - **[95%]**
 Graphics - **[85%]**
-Joystick - **[95%]**
-Keyboard - **[60%]**
+Joystick - **[90%]**
+Keyboard - **[90%]**
 Memory - **[0%]**
 Mouse - **[75%]**
 Path - **[0%]**
