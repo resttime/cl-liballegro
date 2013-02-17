@@ -308,6 +308,16 @@
 (defcfun ("al_create_fs_entry" create-fs-entry) :pointer (path :pointer))
 (defcfun ("al_destroy_fs_entry" destroy-fs-entry) :void (fh :pointer))
 
+;;; Fixed point math
+(defctype fixed :int32)
+
+(defcfun ("al_itofix" ito-fix) fixed (x :int))
+(defcfun ("al_fixtoi" fixtoi) :int (x fixed))
+(defcfun ("al_fixfloor" fixfloor) :int (x fixed))
+(defcfun ("al_fixceil" fixceil) :int (x fixed))
+(defcfun ("al_ftofix" ftofix) fixed (x :double))
+(defcfun ("al_fixtof" fixtof) :double (x fixed))
+
 ;;; Fullscreen modes
 (defcstruct allegro-display-mode
   (width :int)
