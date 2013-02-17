@@ -416,18 +416,119 @@
   (r :float) (g :float) (b :float) (a :float)
   (dx :float) (dy :float)
   (flags :int))
-
+(defcfun ("al_draw_bitmap_region" draw-bitmap-region) :void
+  (bitmap :pointer)
+  (sx :float) (sy :float) (sw :float) (sh :float) (dx :float (dy :float))
+  (flags :int))
+(defcfun ("al_draw_tinted_bitmap_region" draw-tinted-bitmap-region) :void
+  (bitmap :pointer)
+  (r :float) (g :float) (b :float) (a :float)
+  (sx :float) (sy :float) (sw :float) (sh :float) (dx :float (dy :float))
+  (flags :int))
+(defcfun ("al_draw_pixel" draw-pixel) :void
+  (x :float) (y :float)
+  (r :float) (g :float) (b :float) (a :float))
 (defcfun ("al_draw_rotated_bitmap" draw-rotated-bitmap) :void
   (bitmap :pointer)
   (cx :float) (cy :float)
   (dx :float) (dy :float)
   (angle :float)
   (flags :int))
+(defcfun ("al_draw_tinted_rotated_bitmap" draw-tinted-rotated-bitmap) :void
+  (bitmap :pointer)
+  (r :float) (g :float) (b :float) (a :float)
+  (cx :float) (cy :float)
+  (dx :float) (dy :float)
+  (angle :float)
+  (flags :int))
+(defcfun ("al_draw_scaled_rotated_bitmap" draw-scaled-rotated-bitmap) :void
+  (bitmap :pointer)
+  (cx :float) (cy :float)
+  (dx :float) (dy :float)
+  (xscale :float) (yscale :float)
+  (angle :float)
+  (flags :int))
+(defcfun ("al_draw_tinted_scaled_rotated_bitmap" draw-tinted-scaled-rotated-bitmap)
+    :void
+  (bitmap :pointer)
+  (r :float) (g :float) (b :float) (a :float)
+  (cx :float) (cy :float)
+  (dx :float) (dy :float)
+  (xscale :float) (yscale :float)
+  (angle :float)
+  (flags :int))
+(defcfun ("al_draw_tinted_scaled_rotated_bitmap_region"
+	  draw-tinted-scaled-rotated-bitmap-region) :void
+  (sx :float) (sy :float) (sw :float) (sh :float)
+  (bitmap :pointer)
+  (r :float) (g :float) (b :float) (a :float)
+  (cx :float) (cy :float)
+  (dx :float) (dy :float)
+  (xscale :float) (yscale :float)
+  (angle :float)
+  (flags :int))
+(defcfun ("al_draw_scaled_bitmap" draw-scaled-bitmap) :void
+  (sx :float) (sy :float) (sw :float) (sh :float)
+  (dx :float) (dy :float) (dw :float) (dh :float)
+  (flags :int))
+(defcfun ("al_draw_tinted_scaled_bitmap" draw-tinted-scaled-bitmap) :void
+  (r :float) (g :float) (b :float) (a :float)
+  (sx :float) (sy :float) (sw :float) (sh :float)
+  (dx :float) (dy :float) (dw :float) (dh :float)
+  (flags :int))
+(defcfun ("al_get_target_bitmap" get-target-bitmap) :pointer)
+(defcfun ("al_put_pixel" put-pizel) :void
+  (x :int) (y :int)
+  (r :float) (g :float) (b :float) (a :float))
+(defcfun ("al_put_blended_pixel" put-blended-pixel) :void
+  (x :int) (y :int)
+  (r :float) (g :float) (b :float) (a :float))
+(defcfun ("al_set_target_bitmap" set-target-bitmap) :void (bitmap :pointer))
+(defcfun ("al_set_target_backbuffer" set-target-backbuffer) :void (display :pointer))
+(defcfun ("al_get_current_display" get-current-display) :pointer)
+
+;; Blending modes
+(defcfun ("al_get_blender" get-blender) :void
+  (op :pointer) (src :pointer) (dst :pointer))
+(defcfun ("al_get_separate_blender" get-separate-blender) :void
+  (op :pointer) (src :pointer) (dst :pointer)
+  (alpha-op :pointer) (alpha-src :pointer) (alpha-dst :pointer))
+(defcfun ("al_set_blender" set-blender) :void
+  (op :int) (src :int) (dst :int))
+(defcfun ("al_set_separate_blender" set-separate-blender) :void
+  (op :int) (src :int) (dst :int)
+  (alpha-op :int) (alpha-src :int) (alpha-dst :int))
+
+;; Clipping
+(defcfun ("al_get_clipping_rectangle" get-clipping-rectangle) :void
+  (x :pointer) (y :pointer) (w :pointer) (h :pointer))
+(defcfun ("al_set_clipping_rectangle" set-clipping-rectangle) :void
+  (x :int) (y :int) (w :int) (h :int))
+(defcfun ("al_reset_clipping_rectangle" reset-clipping-rectangle) :void)
+
+;; Graphics utility functions
+(defcfun ("al_convert_mask_to_alpha" convert-mask-to-alpha) :void
+  (bitmap :pointer) (r :float) (g :float) (b :float) (a :float))
+
+;; Deferred drawing
+(defcfun ("al_hold_bitmap_drawing" hold-bitmap-drawing) :void (hold :boolean))
+(defcfun ("al_is_bitmap_drawing_held" is-bitmap-drawing-held) :boolean)
 
 ;; Images I/O
-
+(defcfun ("al_register_bitmap_loader" register-bitmap-loader) :boolan
+  (extension :pointer) (loader :pointer))
+(defcfun ("al_register_bitmap_saver" register-bitmap-saver) :boolan
+  (extension :pointer) (saver :boolean))
+(defcfun ("al_register_bitmap_loader_f" register-bitmap-loader-f) :boolean
+  (extension :pointer) (loader-f :pointer))
+(defcfun ("al_register_bitmap_saver_f" register-bitmap-saver-f) :boolean
+  (extension :pointer) (loader-f :pointer))
 (defcfun ("al_load_bitmap" load-bitmap) :pointer (filename :pointer))
 (defcfun ("al_load_bitmap_f" load-bitmap-f) :pointer (fp :pointer) (ident :pointer))
+(defcfun ("al_save_bitmap" save-bitmap) :boolean
+  (filename :pointer) (bitmap :pointer))
+(defcfun ("al_save_bitmap_f" save-bitmap-f) :boolean
+  (fp :pointer) (ident :pointer) (bitmap :pointer))
 
 ;;; Keyboard
 (defcstruct allegro-keyboard-state)

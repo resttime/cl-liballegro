@@ -37,7 +37,7 @@ File I/O - **[5%]**
 Filesystem - **[5%]**
 Fixed point math - **[10%]**
 Fullscreen modes - **[95%]**
-Graphics - **[50%]**
+Graphics - **[85%]**
 Joystick - **[0%]**
 Keyboard - **[60%]**
 Memory - **[0%]**
