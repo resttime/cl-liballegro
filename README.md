@@ -40,7 +40,7 @@ Fullscreen modes - **[95%]**
 Graphics - **[85%]**
 Joystick - **[90%]**
 Keyboard - **[90%]**
-Memory - **[0%]**
+Memory - **[???%]**
 Mouse - **[75%]**
 Path - **[0%]**
 State - **[0%]**

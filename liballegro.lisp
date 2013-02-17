@@ -705,6 +705,8 @@
 (defcfun ("al_set_keyboard_leds" set-keyboard-leds) :boolean (leds :int))
 (defcfun ("al_get_keyboard_event_source" get-keyboard-event-source) :pointer)
 
+;;; ??? Memory ???
+
 ;;; Mouse
 (defstruct allegro-mouse-state)
 
