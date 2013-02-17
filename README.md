@@ -55,7 +55,7 @@ Platform-specific - **[0%]**
 Direct3D - **[0%]**
 OpenGL - **[0%]**
 
-Audio addon - **[5%]**
+Audio addon - **[95%]**
 Audio codecs - **[99%]**
 Color addon - **[0%]**
 Font addons - **[20%]**

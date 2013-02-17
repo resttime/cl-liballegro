@@ -843,8 +843,8 @@
 (defcfun ("al_get_allegro_version" get-allegro-version) :uint32)
 (defcfun ("al_get_standard_path" get-standard-path) :pointer (id :int))
 (defcfun ("al_set_exe_name" set-exe-name) :void (path :pointer))
-(defcfun ("al_set_app_app" set-app-name) :void (app-name :pointer))
-(defcfun ("al_set_org_app" set-org-name) :void (org-name :pointer))
+(defcfun ("al_set_app_name" set-app-name) :void (app-name :pointer))
+(defcfun ("al_set_org_name" set-org-name) :void (org-name :pointer))
 (defcfun ("al_get_app_name" get-app-name) :pointer)
 (defcfun ("al_get_org_name" get-org-name) :pointer)
 (defcfun ("al_get_system_config" get-system-config) :pointer)
@@ -856,7 +856,8 @@
 
 (defcfun ("al_get_time" get-time) :double)
 (defmacro current-time () `(get-time))
-(defcfun ("al_init_timeout" init-timeout) :void (timeout :pointer) (seconds :double))
+(defcfun ("al_init_timeout" init-timeout) :void
+  (timeout :pointer) (seconds :double))
 (defcfun ("al_rest" rest-time) :void (seconds :double))
 
 ;;; Timer
@@ -925,6 +926,23 @@
   (:allegro-channel-conf-6-1  #x61)
   (:allegro-channel-conf-7-1  #x71))
 
+(defcenum allegro-mixer-quality
+  (:allegro-mixer-quality-point    #x110)
+  (:allegro-mixer-quality-linear   #x111)
+  (:allegro-mixer-quality-cubic    #x112))
+
+(defcenum allegro-playmode
+  (:allegro-playmode-once    #x100)
+  (:allegro-playmode-loop    #x101)
+  (:allegro-playmode-bidir   #x102)
+  (:-allegro-playmode-stream-once    #x103)  
+  (:-allegro-playmode-stream-onedir  #x104))
+
+(defcstruct allegro-mixer)
+
+(defcstruct allegro-audio-stream)
+(defcstruct allegro-voice)
+
 ;; Setting up audio
 (defcfun ("al_install_audio" install-audio) :boolean)
 (defcfun ("al_uninstall_audio" uninstall-audio) :void)
@@ -938,15 +956,229 @@
 (defcfun ("al_get_channel_count" get-channel-count) :uint
   (conf allegro-channel-conf))
 
+;; Voice functions
+(defcfun ("al_create_voice" create-voice) :pointer
+  (freq :uint) (depth allegro-audio-depth) (chan-conf allegro-channel-conf))
+(defcfun ("al_destroy_voice" destory-voice) :void (voice :pointer))
+(defcfun ("al_detach_voice" detach-voice) :void (voice :pointer))
+(defcfun ("al_attach_audio_stream_to_voice" attach-audio-stream-to-voice) :boolean
+    (stream :pointer) (voice :pointer))
+(defcfun ("al_attach_mixer_to_voice" attach-mixer-to-voice) :boolean
+  (mixer :pointer) (voice :pointer))
+(defcfun ("al_attach_sample_instance_to_voice" attach-sample-instance-to-voice)
+    :boolean
+  (spl :pointer) (voice :pointer))
+(defcfun ("al_get_voice_frequency" get-voice-frequency) :uint (voice :pointer))
+(defcfun ("al_get_voice_channels" get-voice-channels) allegro-channel-conf
+  (voice :pointer))
+(defcfun ("al_get_voice_depth" get-voice-depth) allegro-audio-depth
+  (voice :pointer))
+(defcfun ("al_get_voice_playing" get-voice-playing) :boolean (voice :pointer))
+(defcfun ("al_set_voice_playing" set-voice-playing) :boolean
+  (voice :pointer) (val :boolean))
+(defcfun ("al_get_voice_position" get-voice-position) :uint (voice :pointer))
+(defcfun ("al_set_voice_position" set-voice-position) :boolean
+  (voice :pointer) (val :int))
+
 ;; Sample functions
+(defcfun ("al_create_sample" create-sample) :pointer
+  (buf :pointer) (samples :uint) (freq :uint)
+  (depth allegro-audio-depth) (chan-conf allegro-channel-conf)
+  (free-buf :boolean))
+(defcfun ("al_destroy_sample" destroy-sample) :void (spl :pointer))
 (defcfun ("al_play_sample" play-sample) :boolean
   (spl :pointer)
   (gain :float) (pan :float) (speed :float)
   (playmode :uint)
   (ret-id :pointer))
+(defcfun ("al_stop_sample" stop-sample) :void (spl-id :pointer))
+(defcfun ("al_stop_samples" stop-samples) :void)
+(defcfun ("al_get_sample_channels" get-sample-channels) allegro-channel-conf
+  (spl :pointer))
+(defcfun ("al_get_sample_depth" get-sample-depth) allegro-audio-depth
+  (spl :pointer))
+(defcfun ("al_get_sample_frequency" get-sample-frequency) :uint (spl :pointer))
+(defcfun ("al_get_sample_length" get-sample-length) :uint (spl :pointer))
+(defcfun ("al_get_sample_data" get-sample-data) :void (spl :pointer))
+
+;; Sample instance functions
+(defcfun ("al_create_sample_instance" create-sample-instance) :pointer
+  (sample-data :pointer))
+(defcfun ("al_destroy_sample_instance" destroy-sample-instance) :void
+  (sample-data :pointer))
+(defcfun ("al_play_sample_instance" play-sample-instance) :boolean (spl :pointer))
+(defcfun ("al_stop_sample_instance" stop-sample-instance) :boolean (spl :pointer))
+(defcfun ("al_get_sample_instance_channels" get-sample-instance-channels)
+    allegro-channel-conf
+  (spl :pointer))
+(defcfun ("al_get_sample_instance_depth" get-sample-instance-depth)
+    allegro-audio-depth
+  (spl :pointer))
+(defcfun ("al_get_sample_instance_frequency" get-sample-instance-frequency) :uint
+  (spt :pointer))
+(defcfun ("al_get_sample_instance_length" get-sample-instance-length) :uint
+  (spt :pointer))
+(defcfun ("al_set_sample_instance_length" set-sample-instance-length) :boolean
+  (spt :pointer) (val :uint))
+(defcfun ("al_get_sample_instance_position" get-sample-instance-position) :uint
+  (spl :pointer))
+(defcfun ("al_set_sample_instance_position" set-sample-instance-position) :boolean
+  (spl :pointer) (val :uint))
+(defcfun ("al_get_sample_instance_speed" get-sample-instance-speed) :float
+  (spl :pointer))
+(defcfun ("al_set_sample_instance_speed" set-sample-instance-speed) :boolean
+  (spl :pointer) (val :float))
+(defcfun ("al_get_sample_instance_gain" get-sample-instance-gain) :float
+  (spl :pointer))
+(defcfun ("al_set_sample_instance_gain" set-sample-instance-gain) :boolean
+  (spl :pointer) (val :float))
+(defcfun ("al_get_sample_instance_pan" get-sample-instance-pan) :float
+  (spl :pointer))
+(defcfun ("al_set_sample_instance_pan" set-sample-instance-pan) :boolean
+  (spl :pointer) (val :float))
+(defcfun ("al_get_sample_instance_time" get-sample-instance-time) :float
+  (spl :pointer))
+(defcfun ("al_get_sample_instance_playmode" get-sample-instance-playmode)
+    allegro-playmode
+  (spl :pointer))
+(defcfun ("al_set_sample_instance_playmode" set-sample-instance-playmode) :boolean
+  (spl :pointer) (val :float))
+(defcfun ("al_get_sample_instance_playing" get-sample-instance-playing) :boolean
+  (spl :pointer))
+(defcfun ("al_set_sample_instance_playing" set-sample-instance-playing) :boolean
+  (spl :pointer) (val :float))
+(defcfun ("al_get_sample_instance_attached" get-sample-instance-attached) :boolean
+  (spl :pointer))
+(defcfun ("al_detach_sample_instance" detach-sample-instance) :boolean
+  (spl :pointer))
+(defcfun ("al_get_sample" get-sample) :pointer (spl :pointer))
+(defcfun ("al_set_sample" set-sample) :boolean (spl :pointer) (data :pointer))
+
+;; Mixer functions
+(defcfun ("al_create_mixer" create-mixer) :pointer
+  (freq :uint) (depth allegro-audio-depth) (chan-conf allegro-channel-conf))
+(defcfun ("al_destroy_mixer" destroy-mixer) :void (mixer :pointer))
+(defcfun ("al_get_default_mixer" get-default-mixer) :pointer)
+(defcfun ("al_set_default_mixer" set-default-mixer) :boolean (mixer :pointer))
+(defcfun ("al_restore_default_mixer" restore-default-mixer) :boolean)
+(defcfun ("al_attach_mixer_to_mixer" attach-mixer-to-mixer) :boolean
+  (stream :pointer) (mixer :pointer))
+(defcfun ("al_attach_sample_instance_to_mixer" attach-sample-instance-to-mixer)
+    :boolean
+  (spl :pointer) (mixer :pointer))
+(defcfun ("al_attach_audio_stream_to_mixer" attach-audio-stream-to-mixer) :boolean
+  (stream :pointer) (mixer :pointer))
+(defcfun ("al_get_mixer_frequency" get-mixer-frequency) :uint (mixer :pointer))
+(defcfun ("al_set_mixer_frequency" set-mixer-frequency) :boolean
+  (mixer :pointer) (val :uint))
+(defcfun ("al_get_mixer_channels" get-mixer-channels) allegro-channel-conf
+  (mixer :pointer))
+(defcfun ("al_get_mixer_depth" get-mixer-depth) allegro-audio-depth
+  (mixer :pointer))
+(defcfun ("al_get_mixer_gain" get-mixer-gain) :float
+  (mixer :pointer))
+(defcfun ("al_set_mixer_gain" set-mixer-gain) :boolean
+  (mixer :pointer) (new-gain :float))
+(defcfun ("al_get_mixer_quality" get-mixer-quality) allegro-mixer-quality
+  (mixer :pointer))
+(defcfun ("al_set_mixer_quality" set-mixer-quality) :boolean
+  (mixer :pointer) (new-quality allegro-mixer-quality))
+(defcfun ("al_get_mixer_playing" get-mixer-playing) :boolean
+  (mixer :pointer))
+(defcfun ("al_set_mixer_playing" set-mixer-playing) :boolean
+  (mixer :pointer) (val :boolean))
+(defcfun ("al_get_mixer_attached" get-mixer-attached) :boolean (mixer :pointer))
+(defcfun ("al_detach_mixer" detach-mixer) :boolean (mixer :pointer))
+(defcfun ("al_set_mixer_postprocess_callback" set-mixer-postprocess-callback)
+    :boolean
+  (mixer :pointer) (pp-callback :pointer) (pp-callback-userdata :pointer))
+
+;; Stream functions
+(defcfun ("al_create_audio_stream" create-audio-stream) :pointer
+  (fragment-count :uint) (frag-samples :uint) (freq :uint)
+  (depth allegro-audio-depth) (chan-conf allegro-channel-conf))
+(defcfun ("al_destroy_audio_stream" destroy-audio-stream) :void (stream :pointer))
+(defcfun ("al_get_audio_stream_event_source" get-sudio-stream-event-source)
+    :pointer
+  (stream :pointer))
+(defcfun ("al_drain_audio_stream") :void (stream :pointer))
+(defcfun ("al_rewind_audio_stream") :boolean (stream :pointer))
+(defcfun ("al_get_audio_stream_frequency" get-audio-stream-frequency) :uint
+  (stream :pointer))
+(defcfun ("al_get_audio_stream_channels" get-audio-stream-channels)
+    allegro-channel-conf
+  (stream :pointer))
+(defcfun ("al_get_audio_stream_depth" get-audio-stream-depth) allegro-audio-depth
+  (stream :pointer))
+(defcfun ("al_get_audio_stream_length" get-audio-stream-length) :uint
+  (stream :pointer))
+(defcfun ("al_get_audio_stream_speed" get-audio-stream-speed) :float
+  (stream :pointer))
+(defcfun ("al_set_audio_stream_speed" set-audio-stream-speed) :boolean
+  (stream :pointer) (val :float))
+(defcfun ("al_get_audio_stream_gain" get-audio-stream-gain) :float
+  (stream :pointer))
+(defcfun ("al_set_audio_stream_gain" set-audio-stream-gain) :boolean
+  (stream :pointer) (val :float))
+(defcfun ("al_get_audio_stream_pan" get-audio-stream-pan) :float
+  (stream :pointer))
+(defcfun ("al_set_audio_stream_pan" set-audio-stream-pan) :boolean
+  (stream :pointer) (val :float))
+(defcfun ("al_get_audio_stream_playing" get-audio-stream-playing) :boolean
+  (stream :pointer))
+(defcfun ("al_set_audio_stream_playing" set-audio-stream-playing) :boolean
+  (stream :pointer) (val :float))
+(defcfun ("al_get_audio_stream_playmode" get-audio-stream-playmode) allegro-playmode
+  (stream :pointer))
+(defcfun ("al_set_audio_stream_playmode" set-audio-stream-playmode) :boolean
+  (stream :pointer) (val allegro-playmode))
+(defcfun ("al_get_audio_stream_attached" get-audio-stream-attached) :boolean
+  (stream :pointer))
+(defcfun ("al_detach_audio_stream" detach-audio-stream) :boolean
+  (stream :pointer))
+(defcfun ("al_get_audio_stream_fragment" get-audio-stream-fragment) :pointer
+  (stream :pointer))
+(defcfun ("al_set_audio_stream_fragment" set-audio-stream-fragment) :boolean
+  (stream :pointer) (val :pointer))
+(defcfun ("al_get_audio_stream_fragments" get-audio-stream-fragments) :uint
+  (stream :pointer))
+(defcfun ("al_get_available_audio_stream_fragments"
+	  get-available-audio-stream-fragments) :uint
+  (stream :pointer))
+(defcfun ("al_seek_audio_stream_secs" seek-audio-stream-secs) :boolean
+  (stream :pointer) (time :double))
+(defcfun ("al_get_audio_stream_position_secs"
+	  get-audio-stream-position-secs) :double
+  (stream :pointer))
+(defcfun ("al_get_audio_stream_length_secs" get-audio-stream-length-secs) :double
+  (stream :pointer))
+(defcfun ("al_set_audio_stream_loop_secs" set-audio-stream-loop-secs) :boolean
+  (stream :pointer) (start :double) (end :double))
 
 ;; Audio file I/O
+(defcfun ("al_register_sample_loader" register-sample-loader) :boolean
+  (ext :pointer) (loader :pointer))
+(defcfun ("al_register_sample_loader_f" register-sample-loader-f) :boolean
+  (ext :pointer) (loader :pointer))
+(defcfun ("al_register_sample_saver" register-sample-saver) :boolean
+  (ext :pointer) (saver :boolean))
+(defcfun ("al_register_sample_saver_f" register-sample-saver-f) :boolean
+  (ext :pointer) (saver :boolean))
+(defcfun ("al_register_audio_stream_loader" register-audio-stream-loader) :boolean
+  (ext :pointer) (stream-loader :pointer))
+(defcfun ("al_register_audio_stream_loader_f" register-audio-stream-loader-f)
+    :boolean
+  (ext :pointer) (stream-loader :pointer))
 (defcfun ("al_load_sample" load-sample) :pointer (filename :pointer))
+(defcfun ("al_load_sample_f" load-sample-f) :pointer (fp :pointer) (ident :pointer))
+(defcfun ("al_load_audio_stream" load-audio-stream) :pointer
+  (filename :pointer) (buffer-count :int) (samples :uint))
+(defcfun ("al_load_audio_stream_f" load-audio-stream-f) :pointer
+  (fp :pointer) (ident :pointer) (buffer-count :int) (samples :uint))
+(defcfun ("al_save_sample" save-sample) :boolean
+  (filename :pointer) (spl :pointer))
+(defcfun ("al_save_sample_f" save-sample-f) :boolean
+  (fp :pointer) (ident :pointer) (spl :pointer))
 
 ;;; Audio codecs addon
 (defcfun ("al_init_acodec_addon" init-acodec-addon) :boolean)
