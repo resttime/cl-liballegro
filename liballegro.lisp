@@ -104,6 +104,17 @@
   (x :int) (y :int) (width :int) (height :int))
 (defcfun ("al_wait_for_vsync" wait-for-vsync) :boolean)
 
+;; Display size and position
+(defcfun ("al_get_display_width" get-display-width) :int (display :pointer))
+(defcfun ("al_get_display_height" get-display-height) :int (display :pointer))
+(defcfun ("al_resize_display" resize-display) :boolean
+  (display :pointer) (width :int) (height :int))
+(defcfun ("al_acknowledge_resize" acknowledge-resize) :boolean (display :pointer))
+(defcfun ("al_get_window_position" get-window-position) :void
+  (display :pointer) (x :pointer) (y :pointer))
+(defcfun ("al_set_window_position" set-window-position) :void
+  (display :pointer) (x :int) (y :int))
+
 ;; Fullscreen display modes
 (defcstruct allegro-display-mode
   (width :int)
