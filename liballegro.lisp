@@ -904,11 +904,39 @@
 (defconstant +allegro-pi+ 3.14159265358979323846)
 
 ;;; Audio addon
+(defcenum allegro-audio-depth
+  (:allegro-audio-depth-int8      #x00)
+  (:allegro-audio-depth-int16     #x01)
+  (:allegro-audio-depth-int24     #x02)
+  (:allegro-audio-depth-float32   #x03)
+
+  (:allegro-audio-depth-unsigned  #x08)
+
+  (:allegro-audio-depth-uint8     #x08)
+  (:allegro-audio-depth-uint16    #x09)
+  (:allegro-audio-depth-uint24    #x0A))
+
+(defcenum allegro-channel-conf
+  (:allegro-channel-conf-1    #x10)
+  (:allegro-channel-conf-2    #x20)
+  (:allegro-channel-conf-3    #x30)
+  (:allegro-channel-conf-4    #x40)
+  (:allegro-channel-conf-5-1  #x51)
+  (:allegro-channel-conf-6-1  #x61)
+  (:allegro-channel-conf-7-1  #x71))
+
 ;; Setting up audio
 (defcfun ("al_install_audio" install-audio) :boolean)
 (defcfun ("al_uninstall_audio" uninstall-audio) :void)
 (defcfun ("al_is_audio_installed" is-audio-installed) :boolean)
 (defcfun ("al_reserve_samples" reserve-samples) :boolean (reserve-samples :int))
+
+;; Misc audio functions
+(defcfun ("al_get_allegro_audio_version" get-allegro-audio-version) :uint32)
+(defcfun ("al_get_audio_depth_size" get-audio-depth-size) :uint
+  (depth allegro-audio-depth))
+(defcfun ("al_get_channel_count" get-channel-count) :uint
+  (conf allegro-channel-conf))
 
 ;; Sample functions
 (defcfun ("al_play_sample" play-sample) :boolean
