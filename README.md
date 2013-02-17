@@ -42,7 +42,7 @@ Joystick - **[90%]**
 Keyboard - **[90%]**
 Memory - **[???%]**
 Mouse - **[95%]**
-Path - **[0%]**
+Path - **[95%]**
 State - **[0%]**
 System - **[10%]**
 Threads - **[0%]**
