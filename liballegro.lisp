@@ -66,6 +66,15 @@
   :allegro_can_draw_into_bitmap
   :allegro_support_separate_alpha
   :allegro_display_options_count)
+
+(defcenum allegro-display-orientation
+  :allegro-display-orientation-0-degrees
+  :allegro-display-orientation-90-degrees
+  :allegro-display-orientation-180-degrees
+  :allegro-display-orientation-270-degrees
+  :allegro-display-orientation-face-up
+  :allegro-display-orientation-face-down)
+
 ;; Display Creation
 (defcstruct allegro-display)
 
