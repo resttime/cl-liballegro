@@ -878,6 +878,28 @@
 (defcfun ("al_get_timer_event_source" get-timer-event-source) :pointer
   (timer :pointer))
 
+;;; Transformations
+(defcstruct allegro-transform)
+
+(defcfun ("al_copy_transform" copy-transform) :void (dest :pointer) (src :pointer))
+(defcfun ("al_use_transform" use-transform) :void (trans :pointer))
+(defcfun ("al_get_current_transform" get-current-transform) :pointer)
+(defcfun ("al_invert_transform" invert-transform) :void (trans :pointer))
+(defcfun ("al_check_inverse" check-inverse) :int (trans :pointer) (tol :float))
+(defcfun ("al_identity_transform" identity-transform) :void (trans :pointer))
+(defcfun ("al_build_transform" build-transform) :void
+  (trans :pointer) (x :float) (y :float) (sx :float) (sy :float) (theta :float))
+(defcfun ("al_translate_transform" translate-transform) :void
+  (trans :pointer) (x :float) (y :float))
+(defcfun ("al_rotate_transform" rotate-transform) :void
+  (trans :pointer) (theta :float))
+(defcfun ("al_scale_transform" scale-transform) :void
+  (trans :pointer) (sx :float) (sy :float))
+(defcfun ("al_transform_coordinates" transform-coordinates) :void
+  (trans :pointer) (x :float) (y :float))
+(defcfun ("al_compose_transform" compose-transform) :void
+  (trans :pointer) (other :pointer))
+
 ;;; Miscellaneous routines
 (defconstant +allegro-pi+ 3.14159265358979323846)
 

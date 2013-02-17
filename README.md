@@ -46,9 +46,9 @@ Path - **[95%]**
 State - **[95%]**
 System - **[95%]**
 Threads - **[0%]**
-Time - **[90%]**
-Timer - **[90%]**
-Transformations - **[0%]**
+Time - **[95%]**
+Timer - **[95%]**
+Transformations - **[95%]**
 UTF-8 - **[0%]**
 Miscellaneous - **[99%]**
 Platform-specific - **[0%]**
