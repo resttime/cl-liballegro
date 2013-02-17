@@ -515,9 +515,9 @@
 (defcfun ("al_is_bitmap_drawing_held" is-bitmap-drawing-held) :boolean)
 
 ;; Images I/O
-(defcfun ("al_register_bitmap_loader" register-bitmap-loader) :boolan
+(defcfun ("al_register_bitmap_loader" register-bitmap-loader) :boolean
   (extension :pointer) (loader :pointer))
-(defcfun ("al_register_bitmap_saver" register-bitmap-saver) :boolan
+(defcfun ("al_register_bitmap_saver" register-bitmap-saver) :boolean
   (extension :pointer) (saver :boolean))
 (defcfun ("al_register_bitmap_loader_f" register-bitmap-loader-f) :boolean
   (extension :pointer) (loader-f :pointer))
@@ -707,6 +707,19 @@
 
 ;;; ??? Memory ???
 
+;;; Monitor
+(defcstruct allegro-monitor-info
+  (x1 :int)
+  (y1 :int)
+  (x2 :int)
+  (y2 :int))
+
+(defcfun ("al_get_new_display_adapter" get-new-display-adapter) :int)
+(defcfun ("al_set_new_display_adapter" set-new-display-adapter) :void (adapter :int))
+(defcfun ("al_get_monitor_info" get-monitor-info) :boolean
+  (adapter :int) (info :pointer))
+(defcfun ("al_get_num_video_adapters" get-num-video-adapters) :int)
+
 ;;; Mouse
 (defstruct allegro-mouse-state)
 
@@ -730,28 +743,28 @@
 (defcfun ("al_get_mouse_event_source" get-mouse-event-source) :pointer)
 
 ;; Mouse cursors
-(defcenum allegro_system_mouse_cursor
-  :allegro_system_mouse_cursor_none         0
-  :allegro_system_mouse_cursor_default      1
-  :allegro_system_mouse_cursor_arrow        2
-  :allegro_system_mouse_cursor_busy         3
-  :allegro_system_mouse_cursor_question     4
-  :allegro_system_mouse_cursor_edit         5
-  :allegro_system_mouse_cursor_move         6
-  :allegro_system_mouse_cursor_resize_n     7
-  :allegro_system_mouse_cursor_resize_w     8
-  :allegro_system_mouse_cursor_resize_s     9
-  :allegro_system_mouse_cursor_resize_e    10
-  :allegro_system_mouse_cursor_resize_nw   11
-  :allegro_system_mouse_cursor_resize_sw   12
-  :allegro_system_mouse_cursor_resize_se   13
-  :allegro_system_mouse_cursor_resize_ne   14
-  :allegro_system_mouse_cursor_progress    15
-  :allegro_system_mouse_cursor_precision   16
-  :allegro_system_mouse_cursor_link        17
-  :allegro_system_mouse_cursor_alt_select  18
-  :allegro_system_mouse_cursor_unavailable 19
-  :allegro_num_system_mouse_cursors)
+(defcenum allegro-system-mouse-cursor
+  (:allegro-system-mouse-cursor-none         0)
+  (:allegro-system-mouse-cursor-default      1)
+  (:allegro-system-mouse-cursor-arrow        2)
+  (:allegro-system-mouse-cursor-busy         3)
+  (:allegro-system-mouse-cursor-question     4)
+  (:allegro-system-mouse-cursor-edit         5)
+  (:allegro-system-mouse-cursor-move         6)
+  (:allegro-system-mouse-cursor-resize-n     7)
+  (:allegro-system-mouse-cursor-resize-w     8)
+  (:allegro-system-mouse-cursor-resize-s     9)
+  (:allegro-system-mouse-cursor-resize-e    10)
+  (:allegro-system-mouse-cursor-resize-nw   11)
+  (:allegro-system-mouse-cursor-resize-sw   12)
+  (:allegro-system-mouse-cursor-resize-se   13)
+  (:allegro-system-mouse-cursor-resize-ne   14)
+  (:allegro-system-mouse-cursor-progress    15)
+  (:allegro-system-mouse-cursor-precision   16)
+  (:allegro-system-mouse-cursor-link        17)
+  (:allegro-system-mouse-cursor-alt-select  18)
+  (:allegro-system-mouse-cursor-unavailable 19)
+  :allegro-num-system-mouse-cursors)
 
 (defcfun ("al_create_mouse_cursor" create-mouse-cursor) :pointer
   (bmp :pointer) (x_focus :int) (y_focus :int))
@@ -765,7 +778,7 @@
 (defcfun ("al_hide_mouse_cursor" hide-mouse-cursor) :boolean (display :pointer))
 (defcfun ("al_show_mouse_cursor" show-mouse-cursor) :boolean (display :pointer))
 (defcfun ("al_grab_mouse" grab-mouse) :boolean (display :pointer))
-(defcfun ("al_ungrab_mouse" grab-mouse) :boolean)
+(defcfun ("al_ungrab_mouse" ungrab-mouse) :boolean)
 
 ;;; System
 (defcfun ("al_install_system" install-system) :boolean
