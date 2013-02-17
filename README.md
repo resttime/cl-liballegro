@@ -41,7 +41,7 @@ Graphics - **[85%]**
 Joystick - **[90%]**
 Keyboard - **[90%]**
 Memory - **[???%]**
-Mouse - **[75%]**
+Mouse - **[95%]**
 Path - **[0%]**
 State - **[0%]**
 System - **[10%]**

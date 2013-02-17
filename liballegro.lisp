@@ -730,8 +730,42 @@
 (defcfun ("al_get_mouse_event_source" get-mouse-event-source) :pointer)
 
 ;; Mouse cursors
+(defcenum allegro_system_mouse_cursor
+  :allegro_system_mouse_cursor_none         0
+  :allegro_system_mouse_cursor_default      1
+  :allegro_system_mouse_cursor_arrow        2
+  :allegro_system_mouse_cursor_busy         3
+  :allegro_system_mouse_cursor_question     4
+  :allegro_system_mouse_cursor_edit         5
+  :allegro_system_mouse_cursor_move         6
+  :allegro_system_mouse_cursor_resize_n     7
+  :allegro_system_mouse_cursor_resize_w     8
+  :allegro_system_mouse_cursor_resize_s     9
+  :allegro_system_mouse_cursor_resize_e    10
+  :allegro_system_mouse_cursor_resize_nw   11
+  :allegro_system_mouse_cursor_resize_sw   12
+  :allegro_system_mouse_cursor_resize_se   13
+  :allegro_system_mouse_cursor_resize_ne   14
+  :allegro_system_mouse_cursor_progress    15
+  :allegro_system_mouse_cursor_precision   16
+  :allegro_system_mouse_cursor_link        17
+  :allegro_system_mouse_cursor_alt_select  18
+  :allegro_system_mouse_cursor_unavailable 19
+  :allegro_num_system_mouse_cursors)
+
 (defcfun ("al_create_mouse_cursor" create-mouse-cursor) :pointer
   (bmp :pointer) (x_focus :int) (y_focus :int))
+(defcfun ("al_destroy_mouse_cursor" destroy-mouse-cursor) :void (cursor :pointer))
+(defcfun ("al_set_mouse_cursor" set-mouse-cursor) :boolean
+  (display :pointer) (cursor :pointer))
+(defcfun ("al_set_system_mouse_cursor" set-system-mouse-cursor) :boolean
+  (display :pointer) (cursor-id allegro-system-mouse-cursor))
+(defcfun ("al_get_mouse_cursor_position" get-mouse-cursor-position) :boolean
+  (ret-x :pointer) (ret-y :pointer))
+(defcfun ("al_hide_mouse_cursor" hide-mouse-cursor) :boolean (display :pointer))
+(defcfun ("al_show_mouse_cursor" show-mouse-cursor) :boolean (display :pointer))
+(defcfun ("al_grab_mouse" grab-mouse) :boolean (display :pointer))
+(defcfun ("al_ungrab_mouse" grab-mouse) :boolean)
 
 ;;; System
 (defcfun ("al_install_system" install-system) :boolean
