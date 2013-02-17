@@ -34,8 +34,8 @@ Configuration Files **[95%]**
 Display **[80%]?**
 Events - **[80%]**
 File I/O - **[5%]**
-Filesystem - **[0%]**
-Fixed point math - **[0%]**
+Filesystem - **[5%]**
+Fixed point math - **[10%]**
 Fullscreen modes - **[95%]**
 Graphics - **[50%]**
 Joystick - **[0%]**
