@@ -295,6 +295,19 @@
 
 (defcfun ("al_fopen" fopen) :pointer (path :pointer) (mode :pointer))
 
+;;; File system routines
+(defcstruct allegro-fs-entry)
+(defbitfield allegro-file-mode
+  (:allegro-filemode-read #x00001)
+  (:allegro-filemode-write)
+  (:allegro-filemode-execute)
+  (:allegro-filemode-hidden)
+  (:allegro-filemode-isfile)
+  (:allegro-filemode-isdir))
+
+(defcfun ("al_create_fs_entry" create-fs-entry) :pointer (path :pointer))
+(defcfun ("al_destroy_fs_entry" destroy-fs-entry) :void (fh :pointer))
+
 ;;; Fullscreen modes
 (defcstruct allegro-display-mode
   (width :int)
