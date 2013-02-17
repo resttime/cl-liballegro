@@ -333,6 +333,52 @@
 ;; Colors
 (defcstruct allegro-color (r :float) (g :float) (b :float) (a :float))
 
+;; Locking and pixel formats
+(defcstruct allegro-locked-region
+  (data :pointer)
+  (format :int)
+  (pitch :int)
+  (pixel-size :int))
+(defcenum allegro-pixel-format
+  (:allegro-pixel-format-any 0)
+  :allegro-pixel-format-any-no-alpha
+  :allegro-pixel-format-any-with-alpha
+  :allegro-pixel-format-any-15-no-alpha
+  :allegro-pixel-format-any-16-no-alpha
+  :allegro-pixel-format-any-16-with-alpha
+  :allegro-pixel-format-any-24-no-alpha
+  :allegro-pixel-format-any-32-no-alpha
+  :allegro-pixel-format-any-32-with-alpha
+  :allegro-pixel-format-argb-8888
+  :allegro-pixel-format-rgba-8888
+  :allegro-pixel-format-argb-4444
+  :allegro-pixel-format-rgb-888
+  :allegro-pixel-format-rgb-565
+  :allegro-pixel-format-rgb-555
+  :allegro-pixel-format-rgba-5551
+  :allegro-pixel-format-argb-1555
+  :allegro-pixel-format-abgr-8888
+  :allegro-pixel-format-xbgr-8888
+  :allegro-pixel-format-bgr-888
+  :allegro-pixel-format-bgr-565
+  :allegro-pixel-format-bgr-555
+  :allegro-pixel-format-rgbx-8888
+  :allegro-pixel-format-xrgb-8888
+  :allegro-pixel-format-abgr-f32
+  :allegro-pixel-format-abgr-8888-le
+  :allegro-pixel-format-rgba-4444
+  :allegro-num-pixel-formats)
+
+(defcfun ("al_get_pixel_size" get-pixel-size) :int (format allegro-pixel-format))
+(defcfun ("al_get_pixel_format_bits" get-pixel-format-bits) :int
+  (format allegro-pixel-format))
+(defcfun ("al_lock_bitmap" lock-bitmap) :pointer
+  (bitmap :pointer) (format allegro-pixel-format) (flags :int))
+(defcfun ("al_lock_bitmap_region" lock-bitmap-region) :pointer
+  (bitmap :pointer) (x :int) (y :int) (widht :int) (height :int)
+  (format allegro-pixel-format) (flags :int))
+(defcfun ("al_unlock_bitmap" unlock-bitmap) :void (bitmap :pointer))
+
 ;; Bitmap Creation
 (defcstruct allegro-bitmap)
 
