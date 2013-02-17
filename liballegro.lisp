@@ -813,6 +813,27 @@
 (defcfun ("al_path_cstr" path-cstr) :pointer (path :pointer) (delim :char))
 (defcfun ("al_make_path_canonical" make-path-canonical) :boolean (path :pointer))
 
+;;; State
+(defcstruct allegro-state)
+(defcenum allegro-state-flags
+  (:allegro-state-new-display-parameters  #x0001)
+  (:allegro-state-new-bitmap-parameters   #x0002)
+  (:allegro-state-display                 #x0004)
+  (:allegro-state-target-bitmap           #x0008)
+  (:allegro-state-blender                 #x0010)
+  (:allegro-state-new-file-interface      #x0020)
+  (:allegro-state-transform               #x0040)
+ 
+  (:allegro-state-bitmap                  10)
+  
+  (:allegro-state-all                     #xffff))
+
+(defcfun ("al_restore_state" restore-state) :void (state :pointer))
+(defcfun ("al_store_state" store-state) :void
+  (state :pointer) (flags allegro-state-flags))
+(defcfun ("al_get_errno" get-errno) :int)
+(defcfun ("al_set_errno" set-errno) :void (errnum :int))
+
 ;;; System
 (defcfun ("al_install_system" install-system) :boolean
   (version :int) (atexit-ptr :pointer))

@@ -43,7 +43,7 @@ Keyboard - **[90%]**
 Memory - **[???%]**
 Mouse - **[95%]**
 Path - **[95%]**
-State - **[0%]**
+State - **[95%]**
 System - **[10%]**
 Threads - **[0%]**
 Time - **[90%]**
