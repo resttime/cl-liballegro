@@ -80,11 +80,20 @@
 
 (defcfun ("al_create_display" create-display) :pointer (width :int) (height :int))
 (defcfun ("al_destroy_display" destroy-display) :void (display :pointer))
-
+(defcfun ("al_get_new_display_flags" get-new-display-flags) :int)
 (defcfun ("al_set_new_display_flags" set-new-display-flags) :void (flags :int))
-
+(defcfun ("al_get_new_display_option" get-new-display-option) :int
+  (option allegro-display-options) (importance :pointer))
 (defcfun ("al_set_new_display_option" set-new-display-option) :void
   (option allegro-display-options) (value :int) (importance :int))
+(defcfun ("al_reset_new_display_options" reset-new-display-options) :void)
+(defcfun ("al_get_new_window_position" get-new-window-position) :void
+  (x :pointer) (y :pointer))
+(defcfun ("al_set_new_window_position" set-new-window-position) :void
+  (x :int) (y :int))
+(defcfun ("al_get_new_display_refresh_rate" get-new-display-refresh-rate) :int)
+(defcfun ("al_set_new_display_refresh_rate" set-new-display-refresh-rate) :void
+  (refresh-rate :int))
 
 ;; Display Operations 
 
