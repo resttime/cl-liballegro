@@ -115,16 +115,7 @@
 (defcfun ("al_set_window_position" set-window-position) :void
   (display :pointer) (x :int) (y :int))
 
-;; Fullscreen display modes
-(defcstruct allegro-display-mode
-  (width :int)
-  (height :int)
-  (format :int)
-  (refresh-rate :int))
 
-(defcfun ("al_get_display_mode" get-display-mode) :pointer
-  (index :int) (mode :pointer))
-(defcfun ("al_get_num_display_modes" get-num-display-modes) :int)
 
 ;;; Events
 (defctype allegro-event-type :uint)
@@ -274,6 +265,17 @@
   (source :pointer))
 (defcfun ("al_set_event_source_data" set-event-source-data) :void
   (source :pointer) (data :pointer))
+
+;;; Fullscreen modes
+(defcstruct allegro-display-mode
+  (width :int)
+  (height :int)
+  (format :int)
+  (refresh-rate :int))
+
+(defcfun ("al_get_display_mode" get-display-mode) :pointer
+  (index :int) (mode :pointer))
+(defcfun ("al_get_num_display_modes" get-num-display-modes) :int)
 
 ;;; Graphics
 ;; Colors
