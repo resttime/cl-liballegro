@@ -30,8 +30,8 @@ Progress
 --------------
 **I am using unverified, estimated percentages**
 
-Configuration Files **[90%]**
-Display **[30%]?**
+Configuration Files **[95%]**
+Display **[80%]?**
 Events - **[80%]**
 File I/O - **[0%]**
 Filesystem - **[0%]**

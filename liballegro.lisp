@@ -133,6 +133,9 @@
 (defcfun ("al_set_display_icons" set-display-icons) :void
   (display :pointer) (num-icons :int) (icon :pointer))
 
+;; Screensaver
+(defcfun ("al_inhibit_screensaver" inhibit-screensaver) :boolean (inhibit :boolean))
+
 ;;; Events
 (defctype allegro-event-type :uint)
 
