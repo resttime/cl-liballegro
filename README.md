@@ -44,7 +44,7 @@ Memory - **[???%]**
 Mouse - **[95%]**
 Path - **[95%]**
 State - **[95%]**
-System - **[10%]**
+System - **[95%]**
 Threads - **[0%]**
 Time - **[90%]**
 Timer - **[90%]**

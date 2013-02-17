@@ -837,10 +837,19 @@
 ;;; System
 (defcfun ("al_install_system" install-system) :boolean
   (version :int) (atexit-ptr :pointer))
-(defcfun ("al_get_allegro_version" get-allegro-version) :uint32)
-(defun init () (install-system (get-allegro-version) (null-pointer)))
+(defmacro init () (install-system (get-allegro-version) (null-pointer)))
 (defcfun ("al_uninstall_system" uninstall-system) :void)
 (defcfun ("al_is_system_installed" is-system-installed) :boolean)
+(defcfun ("al_get_allegro_version" get-allegro-version) :uint32)
+(defcfun ("al_get_standard_path" get-standard-path) :pointer (id :int))
+(defcfun ("al_set_exe_name" set-exe-name) :void (path :pointer))
+(defcfun ("al_set_app_app" set-app-name) :void (app-name :pointer))
+(defcfun ("al_set_org_app" set-org-name) :void (org-name :pointer))
+(defcfun ("al_get_app_name" get-app-name) :pointer)
+(defcfun ("al_get_org_name" get-org-name) :pointer)
+(defcfun ("al_get_system_config" get-system-config) :pointer)
+(defcfun ("al_register_assert_handler" register-assert-handler) :void
+  (handler :pointer) (file :pointer) (func :pointer))
 
 ;;; Time
 (defcstruct allegro-timeout)
