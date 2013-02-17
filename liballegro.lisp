@@ -115,7 +115,23 @@
 (defcfun ("al_set_window_position" set-window-position) :void
   (display :pointer) (x :int) (y :int))
 
-
+;; Display settings
+(defcfun ("al_get_display_flags" get-display-flags) :int (display :pointer))
+(defcfun ("al_get_display_flag" get-display-flag) :boolean
+  (display :pointer) (flag :int) (onoff :boolean))
+(defcfun ("al_toggle_display_flag" toggle-display-flag) :boolean
+  (display :pointer) (flag :int) (onoff :boolean))
+(defcfun ("al_get_display_option" get-display-option) :int
+  (display :pointer) (option allegro-display-options))
+(defcfun ("al_get_display_format" get-display-format) :int (display :pointer))
+(defcfun ("al_get_display_refresh_rate" get-display-refresh-rate) :int
+  (display :pointer))
+(defcfun ("al_set_window_title" set-window-title) :void
+  (display :pointer) (title :pointer))
+(defcfun ("al_set_display_icon" set-display-icon) :void
+  (display :pointer) (icon :pointer))
+(defcfun ("al_set_display_icons" set-display-icons) :void
+  (display :pointer) (num-icons :int) (icon :pointer))
 
 ;;; Events
 (defctype allegro-event-type :uint)
