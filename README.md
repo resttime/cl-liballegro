@@ -36,6 +36,7 @@ Events - **[80%]**
 File I/O - **[5%]**
 Filesystem - **[0%]**
 Fixed point math - **[0%]**
+Fullscreen modes - **[95%]**
 Graphics - **[50%]**
 Joystick - **[0%]**
 Keyboard - **[60%]**
