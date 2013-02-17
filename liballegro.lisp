@@ -285,6 +285,16 @@
 (defcfun ("al_set_event_source_data" set-event-source-data) :void
   (source :pointer) (data :pointer))
 
+;;; File I/O
+(defcstruct allegro-file)
+(defcstruct alegro-file-interface)
+(defcenum allegro-seek
+  (:allegro-seek-set 0)
+  :allegro-seek-cur
+  :allegro-seek-end)
+
+(defcfun ("al_fopen" fopen) :pointer (path :pointer) (mode :pointer))
+
 ;;; Fullscreen modes
 (defcstruct allegro-display-mode
   (width :int)

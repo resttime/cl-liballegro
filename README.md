@@ -33,7 +33,7 @@ Progress
 Configuration Files **[95%]**
 Display **[80%]?**
 Events - **[80%]**
-File I/O - **[0%]**
+File I/O - **[5%]**
 Filesystem - **[0%]**
 Fixed point math - **[0%]**
 Graphics - **[50%]**
