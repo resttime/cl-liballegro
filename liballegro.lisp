@@ -395,10 +395,16 @@
   (allegro-pixel-format :int))
 
 
-;; Bitmap Properties
-
-(defcfun ("al_get_bitmap_width" get-bitmap-width) :int (bitmap :pointer))
+;; Bitmap properties
+(defcfun ("al_get_bitmap_flags" get-bitmap-flags) :int (bitmap :pointer))
+(defcfun ("al_get_bitmap_format" get-bitmap-format) :int (bitmap :pointer))
 (defcfun ("al_get_bitmap_height" get-bitmap-height) :int (bitmap :pointer))
+(defcfun ("al_get_bitmap_width" get-bitmap-width) :int (bitmap :pointer))
+
+(defcfun ("al_is_bitmap_locked" is-bitmap-locked) :boolean (bitmap :pointer))
+(defcfun ("al_is_compatible_bitmap" is-compatible-bitmap) :boolean (bitmap :pointer))
+(defcfun ("al_is_sub_bitmap" is-sub-bitmap) :boolean (bitmap :pointer))
+(defcfun ("al_get_parent_bitmap" get-parent-bitmap) :pointer (bitmap :pointer))
 
 ;; Drawing Operations
 (defcfun ("al_clear_to_color" clear-to-color) :void
