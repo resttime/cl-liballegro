@@ -387,6 +387,13 @@
   (parent :pointer) (x :int) (y :int) (w :int) (h :int))
 (defcfun ("al_clone_bitmap" clone-bitmap) :pointer (bitmap :pointer))
 (defcfun ("al_destroy_bitmap" destroy-bitmap) :void (bitmap :pointer))
+(defcfun ("al_get_new_bitmap_flags" get-new-bitmap-flags) :int)
+(defcfun ("al_get_new_bitmap_format" get-new-bitmap-format) :int)
+(defcfun ("al_set_new_bitmap_flags" set-new-bitmap-flags) :void (flags :int))
+(defcfun ("al_add_new_bitmap_flag" add-new-bitmap-flag) :void (flag :int))
+(defcfun ("al_set_new_bitmap_format" set-new-bitmap-format) :void
+  (allegro-pixel-format :int))
+
 
 ;; Bitmap Properties
 
