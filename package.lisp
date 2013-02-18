@@ -703,4 +703,34 @@
    #:get-allegro-primitives-version
    #:init-primitives-addon
    #:shutdown-primitives-addon
+
+   ;; High level drawing routines
+   #:draw-line
+   #:draw-triangle
+   #:draw-filled-triangle
+   #:draw-rectangle
+   #:draw-filled-rectangle
+   #:draw-rounded-rectangle
+   #:draw-filled-rounded-rectangle
+   #:calculate-arc
+   #:draw-pieslice
+   #:draw-filled-pieslice
+   #:draw-ellipse
+   #:draw-filled-ellipse
+   #:draw-circle
+   #:draw-filled-circle
+   #:draw-arc
+   #:draw-elliptical-arc
+   #:calculate-spline
+   #:draw-spline
+   #:calculate-ribbon
+   #:draw-ribbon
+
+   ;; Low level drawing routines
+   #:draw-prim
+   #:draw-indexed-prim
+   #:create-vertex-decl
+   #:destroy-vertex-decl
+   #:draw-soft-triangle
+   #:draw-soft-line
   ))
