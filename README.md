@@ -16,13 +16,20 @@ http://alleg.sourceforge.net/a5docs/5.0.8/
 
 Usages
 --------------
-`(al:init)`
+- `al_*` becomes `al:*`
+- Do not pass ALLEGRO_COLOR to functions, use four floats instead. (CFFI cannot pass structures by value, only pointers)
 
-`(al:uninstall-system)`
+Examples
 
-`(al:install-mouse)`
+`(al:init)` - `al_init();`
 
-`(al:draw-bitmap sprite 200 300 0)`
+`(al:uninstall-system)` - `al_uninstall_system();`
+
+`(al:install-mouse)` - `al_installmouse();`
+
+`(al:clear-to-color 1.0 0.0 0.0 1.0)` - `al_clear_to_color(some_random_allegro_color_structure);`
+
+`(al:draw-bitmap sprite 200 300 0)` - `al_draw_bitmap(sprite, 200, 300, 0);`
 
 
 
