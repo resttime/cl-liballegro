@@ -72,4 +72,4 @@ Main addon - **[???%]**
 Memfile addon - **[95%]**
 Native dialogs addon - **[95%]**
 PhysicsFS addon - **[95%]**
-Primitives addon - **[5%]**
+Primitives addon - **[90%]**
