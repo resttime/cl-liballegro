@@ -311,7 +311,7 @@
 ;;; Fixed point math
 (defctype fixed :int32)
 
-(defcfun ("al_itofix" ito-fix) fixed (x :int))
+(defcfun ("al_itofix" itofix) fixed (x :int))
 (defcfun ("al_fixtoi" fixtoi) :int (x fixed))
 (defcfun ("al_fixfloor" fixfloor) :int (x fixed))
 (defcfun ("al_fixceil" fixceil) :int (x fixed))
@@ -477,7 +477,7 @@
   (dx :float) (dy :float) (dw :float) (dh :float)
   (flags :int))
 (defcfun ("al_get_target_bitmap" get-target-bitmap) :pointer)
-(defcfun ("al_put_pixel" put-pizel) :void
+(defcfun ("al_put_pixel" put-pixel) :void
   (x :int) (y :int)
   (r :float) (g :float) (b :float) (a :float))
 (defcfun ("al_put_blended_pixel" put-blended-pixel) :void
@@ -1101,8 +1101,8 @@
 (defcfun ("al_get_audio_stream_event_source" get-sudio-stream-event-source)
     :pointer
   (stream :pointer))
-(defcfun ("al_drain_audio_stream") :void (stream :pointer))
-(defcfun ("al_rewind_audio_stream") :boolean (stream :pointer))
+(defcfun ("al_drain_audio_stream" drain-audio-stream) :void (stream :pointer))
+(defcfun ("al_rewind_audio_stream" rewind-audio-stream) :boolean (stream :pointer))
 (defcfun ("al_get_audio_stream_frequency" get-audio-stream-frequency) :uint
   (stream :pointer))
 (defcfun ("al_get_audio_stream_channels" get-audio-stream-channels)
@@ -1259,7 +1259,7 @@
 
 ;;; Primitives addon
 ;; General
-(defcfun ("al_get_allegro_primitives_version" get-alegro-primitives-version)
+(defcfun ("al_get_allegro_primitives_version" get-allegro-primitives-version)
     :uint32)
 (defcfun ("al_init_primitives_addon" init-primitives-addon) :boolean)
 (defcfun ("al_shutdown_primitives_addon" shutdown-primitives-addon) :boolean)
