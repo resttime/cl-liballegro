@@ -39,7 +39,7 @@ Progress
 
 Configuration Files **[95%]**
 Display **[80%]?**
-Events - **[80%]**
+Events - **[85%]**
 File I/O - **[5%]**
 Filesystem - **[5%]**
 Fixed point math - **[10%]**
@@ -65,7 +65,7 @@ OpenGL - **[0%]**
 Audio addon - **[95%]**
 Audio codecs - **[99%]**
 Color addon - **[0%]**
-Font addons - **[20%]**
+Font addons - **[95%]**
 Image I/O addon - **[95%]**
 Main addon - **[???%]**
 Memfile addon - **[95%]**

@@ -638,13 +638,37 @@
 
    #:init-font-addon
    #:shutdown-font-addon
+   #:load-font
+   #:destroy-font
+   #:register-font-loader
+   #:get-font-line-height
+   #:get-font-ascent
+   #:get-font-descent
+   #:get-text-width
+   #:get-ustr-width
    #:draw-text
+   #:draw-ustr
+   #:draw-justified-text
+   #:draw-justified-ustr
+   #:draw-textf
+   #:draw-justified-text
+   #:get-text-dimensions
+   #:get-ustr-dimensions
+   #:get-allegro-font-version
+
+   ;; Bitmap fonts
+   #:grab-font-from-bitmap
+   #:load-bitmap-font
+   #:create-builtin-font   
 
    ;; TTF fonts
    #:init-ttf-addon
    #:shutdown-ttf-addon
    #:load-ttf-font
    #:load-ttf-font-f
+   #:load-ttf-font-stretch
+   #:load-ttf-font-stretch-f
+   #:get-allegro-ttf-version
 
    ;;; Image I/O addon
    #:init-image-addon
