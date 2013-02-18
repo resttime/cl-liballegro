@@ -1325,7 +1325,7 @@
 
 ;; High level drawing routines
 (defcfun ("al_draw_line" draw-line) :void 
-  (x1 :float) (y1 :float) (x2 :float) (y1 :float)
+  (x1 :float) (y1 :float) (x2 :float) (y2 :float)
   (r :float) (g :float) (b :float) (a :float)
   (thickness :float))
 (defcfun ("al_draw_triangle" draw-triangle) :void 
@@ -1366,12 +1366,12 @@
   (start-theta :float) (delta-theta :float)
   (thickness :float) (num-segments :int))
 (defcfun ("al_draw_pieslice" draw-pieslice) :void 
-  (cx :float) (cy :float) (r :float)
+  (cx :float) (cy :float) (radius :float)
   (start-theta :float) (delta-theta :float)
   (r :float) (g :float) (b :float) (a :float)
   (thickness :float))
 (defcfun ("al_draw_filled_pieslice" draw-filled-pieslice) :void 
-  (cx :float) (cy :float) (r :float)
+  (cx :float) (cy :float) (radius :float)
   (start-theta :float) (delta-theta :float)
   (r :float) (g :float) (b :float) (a :float))
 (defcfun ("al_draw_ellipse" draw-ellipse) :void
@@ -1382,14 +1382,14 @@
   (cx :float) (cy :float) (rx :float) (ry :float)
   (r :float) (g :float) (b :float) (a :float))
 (defcfun ("al_draw_circle" draw-circle) :void
-  (cx :float) (cy :float) (r :float)
+  (cx :float) (cy :float) (radius :float)
   (r :float) (g :float) (b :float) (a :float)
   (thickness :float))
 (defcfun ("al_draw_filled_circle" draw-filled-circle) :void
-  (cx :float) (cy :float) (r :float)
+  (cx :float) (cy :float) (radius :float)
   (r :float) (g :float) (b :float) (a :float))
 (defcfun ("al_draw_arc" draw-arc) :void 
-  (cx :float) (cy :float) (r :float)
+  (cx :float) (cy :float) (radius :float)
   (start-theta :float) (delta-theta :float)
   (r :float) (g :float) (b :float) (a :float)
   (thickness :float))
