@@ -18,6 +18,7 @@ Usages
 --------------
 - `al_*` becomes `al:*`
 - Do not pass ALLEGRO_COLOR to functions, use four floats instead. (CFFI cannot pass structures by value, only pointers)
+- `(al:rest secs)` is `(al:rest-time secs)` instead because of symbol interference with (rest list).
 
 Examples
 
