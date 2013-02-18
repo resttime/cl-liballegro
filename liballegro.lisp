@@ -1216,3 +1216,50 @@
 (defcfun ("al_init_image_addon" init-image-addon) :boolean)
 (defcfun ("al_shutdown_image_addon" shutdown-image-addon) :void)
 (defcfun ("al_get_allegro_image_version" get-allegro-image-version) :uint32)
+
+;;; Memfile addon
+(defcfun ("al_open_memfile" open-memfile) :pointer
+  (mem :pointer) (size :int64) (mode :pointer))
+(defcfun ("al_get_allegro_memfile_version" get-allegro-memfile-version) :uint32)
+
+;;; Native dialogs support
+(defcstruct allegro-filechooser)
+(defcstruct allegro-textlog)
+
+(defcfun ("al_init_native_dialog_addon" init-native-dialog-addon) :boolean)
+(defcfun ("al_shutdown_native_dialog_addon" shutdown-native-dialog-addon) :void)
+(defcfun ("al_create_native_file_dialog" create-native-file-dialog) :pointer
+  (initial-path :pointer) (title :pointer) (patterns :pointer) (mode :int))
+(defcfun ("al_show_native_file_dialog" show-native-file-dialog) :boolean
+  (display :pointer) (dialog :pointer))
+(defcfun ("al_get_native_file_dialog_count" get-native-file-dialog-count) :int
+  (dialog :pointer))
+(defcfun ("al_get_native_file_dialog_path" get-native-file-dialog-path) :pointer
+  (dialog :pointer) (i :uint))
+(defcfun ("al_destroy_native_file_dialog" destroy-native-file-dialog) :void
+  (dialog :pointer))
+(defcfun ("al_show_native_message_box" show-native-message-box) :int
+  (display :pointer) (title :pointer) (heading :pointer)
+  (text :pointer)(buttons :pointer) (flags :int))
+(defcfun ("al_open_native_text_log" open-native-text-log) :pointer
+  (title :pointer) (flags :int))
+(defcfun ("al_close_native_text_log" close-native-text-log) :void
+  (textlog :pointer))
+(defcfun ("al_append_native_text_log" append-native-text-log) :void
+  (textlog :pointer) (format :pointer))
+(defcfun ("al_get_native_text_log_event_source" get-native-text-log-event-source)
+    :pointer
+  (textlog :pointer))
+(defcfun ("al_get_allegro_native_dialog_version" get-allegro-native-dialog-version)
+    :uint32)
+
+;;; PhysicsFS addon
+(defcfun ("al_set_physfs_file_interface" set-physfs-file-interface) :void)
+(defcfun ("al_get_allegro_physfs_version" get-allegro-physfs-version) :uint32)
+
+;;; Primitives addon
+;; General
+(defcfun ("al_get_allegro_primitives_version" get-alegro-primitives-version)
+    :uint32)
+(defcfun ("al_init_primitives_addon" init-primitives-addon) :boolean)
+(defcfun ("al_shutdown_primitives_addon" shutdown-primitives-addon) :boolean)

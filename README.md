@@ -59,9 +59,9 @@ Audio addon - **[95%]**
 Audio codecs - **[99%]**
 Color addon - **[0%]**
 Font addons - **[20%]**
-Image I/O addon - **[10%]**
-Main addon - **[0%]**
-Memfile addon - **[0%]**
-Native dialogs addon - **[0%]**
-PhysicsFS addon - **[0%]**
-Primitives addon - **[0%]**
+Image I/O addon - **[95%]**
+Main addon - **[???%]**
+Memfile addon - **[95%]**
+Native dialogs addon - **[95%]**
+PhysicsFS addon - **[95%]**
+Primitives addon - **[5%]**
