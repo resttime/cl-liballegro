@@ -61,7 +61,7 @@ UTF-8 - **[???%]**
 Miscellaneous - **[99%]**
 Platform-specific - **[???%]**
 Direct3D - **[???%]**
-OpenGL - **[0%]**
+OpenGL - **[95%]**
 
 Audio addon - **[95%]**
 Audio codecs - **[99%]**
