@@ -837,7 +837,7 @@
 ;;; System
 (defcfun ("al_install_system" install-system) :boolean
   (version :int) (atexit-ptr :pointer))
-(defmacro init () (install-system (get-allegro-version) (null-pointer)))
+(defun init () (install-system (get-allegro-version) (null-pointer)))
 (defcfun ("al_uninstall_system" uninstall-system) :void)
 (defcfun ("al_is_system_installed" is-system-installed) :boolean)
 (defcfun ("al_get_allegro_version" get-allegro-version) :uint32)
@@ -855,7 +855,7 @@
 (defcstruct allegro-timeout)
 
 (defcfun ("al_get_time" get-time) :double)
-(defmacro current-time () `(get-time))
+(defun current-time () (get-time))
 (defcfun ("al_init_timeout" init-timeout) :void
   (timeout :pointer) (seconds :double))
 (defcfun ("al_rest" rest-time) :void (seconds :double))
