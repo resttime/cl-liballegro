@@ -919,7 +919,7 @@
   (bitmap :pointer))
 (defcfun ("al_have_opengl_extension" have-opengl-extension) :boolean
   (extension :pointer))
-(defcfun ("al_get_opengl_version" get-opengl_version) :uint32)
+(defcfun ("al_get_opengl_version" get-opengl-version) :uint32)
 (defcfun ("al_get_opengl_variant" get-opengl-variant) :int)
 (defcfun ("al_set_current_opengl_context" set-current-opengl-context) :void
   (display :pointer))
