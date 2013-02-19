@@ -26,7 +26,7 @@ Examples
 
 `(al:uninstall-system)` - `al_uninstall_system();`
 
-`(al:install-mouse)` - `al_installmouse();`
+`(al:install-mouse)` - `al_install_mouse();`
 
 `(al:clear-to-color 1.0 0.0 0.0 1.0)` - `al_clear_to_color(some_random_allegro_color_structure);`
 
