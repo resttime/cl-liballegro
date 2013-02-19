@@ -489,6 +489,19 @@
    ;;; Miscellaneous routines
    #:+allegro-pi+
 
+   ;;; OpenGL
+   #:get-opengl-extension-list
+   #:get-opengl-proc-address
+   #:get-opengl-texture
+   #:get-opengl-texture-size
+   #:get-opengl-texture-position
+   #:get-opengl-texture-fbo
+   #:remove-opengl-texture-fbo
+   #:have-opengl-extension
+   #:get-opengl-version
+   #:get-opengl-variant
+   #:set-current-opengl-context
+
    ;;; Audio addon
    ;; Setting up audio
    #:install-audio
