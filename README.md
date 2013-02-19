@@ -41,8 +41,8 @@ Progress
 Configuration Files **[95%]**
 Display **[80%]?**
 Events - **[85%]**
-File I/O - **[5%]**
-Filesystem - **[5%]**
+File I/O - **[???%]**
+Filesystem - **[???%]**
 Fixed point math - **[10%]**
 Fullscreen modes - **[95%]**
 Graphics - **[85%]**
@@ -53,19 +53,19 @@ Mouse - **[95%]**
 Path - **[95%]**
 State - **[95%]**
 System - **[95%]**
-Threads - **[0%]**
+Threads - **[???%]**
 Time - **[95%]**
 Timer - **[95%]**
 Transformations - **[95%]**
-UTF-8 - **[0%]**
+UTF-8 - **[???%]**
 Miscellaneous - **[99%]**
-Platform-specific - **[0%]**
-Direct3D - **[0%]**
+Platform-specific - **[???%]**
+Direct3D - **[???%]**
 OpenGL - **[0%]**
 
 Audio addon - **[95%]**
 Audio codecs - **[99%]**
-Color addon - **[0%]**
+Color addon - **[???%]**
 Font addons - **[95%]**
 Image I/O addon - **[95%]**
 Main addon - **[???%]**
