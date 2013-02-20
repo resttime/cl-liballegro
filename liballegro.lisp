@@ -334,7 +334,7 @@
 (defcfun ("al_fixatan" fixatan) fixed (x fixed))
 (defcfun ("al_fixatan2" fixatan) fixed (y fixed) (x fixed))
 (defcfun ("al_fixsqrt" fixsqrt) fixed (x fixed))
-(defcfun ("al_fixhypot" fixhypot) fixed (x fixed))
+(defcfun ("al_fixhypot" fixhypot) fixed (x fixed) (y fixed))
 
 ;;; Fullscreen modes
 (defcstruct allegro-display-mode
