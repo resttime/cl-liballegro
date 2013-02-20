@@ -132,6 +132,21 @@
    #:fixceil
    #:ftofix
    #:fixtof
+   #:fixmul
+   #:fixdiv
+   #:fixadd
+   #:fixsub
+
+   ;; Fixed point trig
+   #:fixsin
+   #:fixcos
+   #:fixtan
+   #:fixasin
+   #:fixacos
+   #:fixatan
+   #:fixatan2
+   #:fixasqrt
+   #:fixhypot
 
    ;;; Fullscreen modes
    #:get-display-mode
