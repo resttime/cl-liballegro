@@ -332,7 +332,7 @@
 (defcfun ("al_fixasin" fixasin) fixed (x fixed))
 (defcfun ("al_fixacos" fixacos) fixed (x fixed))
 (defcfun ("al_fixatan" fixatan) fixed (x fixed))
-(defcfun ("al_fixatan2" fixatan) fixed (y fixed) (x fixed))
+(defcfun ("al_fixatan2" fixatan2) fixed (y fixed) (x fixed))
 (defcfun ("al_fixsqrt" fixsqrt) fixed (x fixed))
 (defcfun ("al_fixhypot" fixhypot) fixed (x fixed) (y fixed))
 
