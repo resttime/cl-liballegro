@@ -43,7 +43,7 @@ Display **[80%]?**
 Events - **[85%]**
 File I/O - **[???%]**
 Filesystem - **[???%]**
-Fixed point math - **[10%]**
+Fixed point math - **[95%]**
 Fullscreen modes - **[95%]**
 Graphics - **[85%]**
 Joystick - **[90%]**
