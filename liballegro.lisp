@@ -317,6 +317,24 @@
 (defcfun ("al_fixceil" fixceil) :int (x fixed))
 (defcfun ("al_ftofix" ftofix) fixed (x :double))
 (defcfun ("al_fixtof" fixtof) :double (x fixed))
+(defcfun ("al_fixmul" fixmul) fixed (x fixed) (y fixed))
+(defcfun ("al_fixdiv" fixdiv) fixed (x fixed) (y fixed))
+(defcfun ("al_fixadd" fixadd) fixed (x fixed) (y fixed))
+(defcfun ("al_fixsub" fixsub) fixed (x fixed) (y fixed))
+
+;; Fixed point trig
+(defconstant fixtorad-r 1608)
+(defconstant radtofix-r 2670177)
+
+(defcfun ("al_fixsin" fixsin) fixed (x fixed))
+(defcfun ("al_fixcos" fixcos) fixed (x fixed))
+(defcfun ("al_fixtan" fixtan) fixed (x fixed))
+(defcfun ("al_fixasin" fixasin) fixed (x fixed))
+(defcfun ("al_fixacos" fixacos) fixed (x fixed))
+(defcfun ("al_fixatan" fixatan) fixed (x fixed))
+(defcfun ("al_fixatan2" fixatan) fixed (y fixed) (x fixed))
+(defcfun ("al_fixsqrt" fixsqrt) fixed (x fixed))
+(defcfun ("al_fixhypot" fixhypot) fixed (x fixed))
 
 ;;; Fullscreen modes
 (defcstruct allegro-display-mode
