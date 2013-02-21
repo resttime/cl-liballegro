@@ -12,7 +12,7 @@ that will be organized by sections of the API reference manual.
 I hope for it to be as clean and neat as cl-opengl.
 
 This will take a while to complete...
-http://alleg.sourceforge.net/a5docs/5.0.8/
+http://alleg.sourceforge.net/a5docs/5.0.9/
 
 Usages
 --------------
