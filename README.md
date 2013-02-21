@@ -7,12 +7,16 @@ Description
 --------------
 
 This is going to be a formal CFFI of the Allegro 5 programming library
-that will be organized by sections of the API reference manual.
+that will be organized by sections of the API reference manual. This will take a while to complete...
+http://alleg.sourceforge.net/a5docs/5.0.9/
 
 I hope for it to be as clean and neat as cl-opengl.
 
-This will take a while to complete...
-http://alleg.sourceforge.net/a5docs/5.0.9/
+After writing the bindings, I'll work on separating it from CFFI.
+Then I'll write helper macros/functions for neat integration with Lisp. 
+Both of which will worked on while I create a game.
+
+
 
 Usages
 --------------
@@ -36,7 +40,10 @@ Examples
 
 Progress
 --------------
-**I am using unverified, estimated percentages**
+***I am using unverified, estimated percentages***
+
+**[???%] means I will not work on the section for the foreseeable future because I am under the impression
+that Common Lisp has more suitable implementations already or it isn't practical.**
 
 Configuration Files **[95%]**
 Display **[80%]?**
