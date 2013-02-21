@@ -43,7 +43,7 @@ Progress
 ***I am using unverified, estimated percentages***
 
 **[???%] means I will not work on the section for the foreseeable future because I am under the impression
-that Common Lisp has more suitable implementations already or it isn't practical.**
+that Common Lisp has more suitable implementations already or it just is not practical.**
 
 Configuration Files **[95%]**
 Display **[80%]?**
