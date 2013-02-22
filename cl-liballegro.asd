@@ -5,4 +5,4 @@
 	       (:file "constants" :depends-on ("package"))
 	       (:file "types" :depends-on ("package"))
 	       (:file "library" :depends-on ("package"))
-	       (:file "liballegro" :depends-on ("package"))))
+	       (:file "funcs" :depends-on ("package" "types" "constants" "library"))))
