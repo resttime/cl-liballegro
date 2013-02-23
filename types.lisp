@@ -46,14 +46,14 @@
   (button :int))
 (defcstruct allegro-keyboard-event
   (type allegro-event-type) (source :pointer) (timestamp :double)
-  (display allegro-display)
+  (display :pointer)
   (keycode :int)
   (unichar :int)
   (modifiers :uint)
   (repeat :boolean))
 (defcstruct allegro-mouse-event
   (type allegro-event-type) (source :pointer) (timestamp :double)
-  (display allegro-display)
+  (display :pointer)
   (x :int)
   (y :int)
   (z :int)

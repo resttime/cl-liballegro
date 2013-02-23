@@ -1,54 +1,7 @@
 (defpackage #:cl-liballegro
   (:use #:cl #:cffi)
   (:nicknames #:al #:liballegro :alleg)
-  (:export
-   ;;; TEMPORARY? LISP HELPER/MACROS
-   #:get-event-type
-   #:get-any-event
-   ;; Display event
-   #:get-display-event
-   #:get-display-event-type
-   #:get-display-event-x
-   #:get-display-event-y
-   #:get-display-event-width
-   #:get-display-event-height
-   #:get-display-event-orientation
-   ;; Joystick event
-   #:get-joystick-event
-   #:get-joystick-event-type
-   #:get-joystick-event-id
-   #:get-joystick-event-stick
-   #:get-joystick-event-axis
-   #:get-joystick-event-pos
-   #:get-joystick-event-button
-   ;; Keyboard event
-   #:get-keyboard-event
-   #:get-keyboard-event-type
-   #:get-keyboard-event-display
-   #:get-keyboard-event-keycode
-   #:get-keyboard-event-unichar
-   #:get-keyboard-event-modifiers
-   #:get-keyboard-event-repeat
-   ;; Mouse event
-   #:get-mouse-event
-   #:get-mouse-event-type
-   #:get-mouse-event-display
-   #:get-mouse-event-x
-   #:get-mouse-event-y
-   #:get-mouse-event-z
-   #:get-mouse-event-w
-   #:get-mouse-event-dx
-   #:get-mouse-event-dy
-   #:get-mouse-event-dz
-   #:get-mouse-event-dw
-   #:get-mouse-event-button
-   #:get-mouse-event-pressure
-   ;; Timer event
-   #:get-timer-event
-   #:get-timer-event-type
-   #:get-timer-event-count
-   
-
+  (:export 
    ;;; Configuration Files
    #:create-config
    #:destroy-config
@@ -135,7 +88,7 @@
    #:+allegro-event-display-switch-in+
    #:+allegro-event-display-switch-out+
    #:+allegro-event-display-orientation+
-
+  
    #:allegro-any-event
    #:allegro-display-event
    #:allegro-joystick-event
