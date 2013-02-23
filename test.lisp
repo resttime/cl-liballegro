@@ -4,7 +4,10 @@
   (let ((display))
    (al:init)
    (setf display (al:create-display 800 600))
-   (al:set-window-title display "Lol")
+   (al:set-window-title display "CSTRING TRANSLATING CORRECTLY")
+   (al:show-native-message-box display "CSTRING TRANSLATING CORRECTLY"
+			       "YEAH" (al:get-app-name)
+			       "OK" 0)
    (al:clear-to-color 1.0 1.0 1.0 1.0)
    (al:flip-display)
    (al:rest-time 2.0d0)
