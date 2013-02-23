@@ -118,7 +118,7 @@
   (y2 :int))
 
 ;;; Mouse
-(defstruct allegro-mouse-state)
+(defcstruct allegro-mouse-state)
 
 ;;; State
 (defcstruct allegro-state)
