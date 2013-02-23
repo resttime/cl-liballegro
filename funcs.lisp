@@ -3,26 +3,26 @@
 ;;; Configuration Files
 (defcfun ("al_create_config" create-config) :pointer)
 (defcfun ("al_destroy_config" destroy-config) :void (config :pointer))
-(defcfun ("al_load_config_file" load-config-file) :pointer (filename c-string))
+(defcfun ("al_load_config_file" load-config-file) :pointer (filename :string))
 (defcfun ("al_load_config_file_f" load-config-file-f) :pointer (file :pointer))
 (defcfun ("al_save_config_file" save-config-file) :boolean
-  (filename c-string) (config :pointer))
+  (filename :string) (config :pointer))
 (defcfun ("al_save_config_file_f" save-config-file-f) :boolean
   (file :pointer) (config :pointer))
 (defcfun ("al_add_config_section" add_config_section) :void
-  (config :pointer) (name c-string))
+  (config :pointer) (name :string))
 (defcfun ("al_add_config_comment" add_config_comment) :void
-  (config :pointer) (section c-string) (comment c-string))
-(defcfun ("al_get_config_value" get-config-value) c-string
-  (config :pointer) (section c-string) (key c-string))
+  (config :pointer) (section :string) (comment :string))
+(defcfun ("al_get_config_value" get-config-value) :string
+  (config :pointer) (section :string) (key :string))
 (defcfun ("al_set_config_value" set-config-value) :void
-  (config :pointer) (section c-string) (key c-string) (value c-string))
-(defcfun ("al_get_first_config_section" get-first-config-section) c-string
+  (config :pointer) (section :string) (key :string) (value :string))
+(defcfun ("al_get_first_config_section" get-first-config-section) :string
   (config :pointer) (iterator :pointer))
-(defcfun ("al_get_next_config_section" get-next-config-section) c-string
+(defcfun ("al_get_next_config_section" get-next-config-section) :string
   (iterator :pointer))
-(defcfun ("al_get_first_config_entry" get-first-config-entry) c-string
-  (config :pointer) (section c-string) (iterator :pointer))
+(defcfun ("al_get_first_config_entry" get-first-config-entry) :string
+  (config :pointer) (section :string) (iterator :pointer))
 (defcfun ("al_get_next_config_entry" get_next_config_entry) :pointer
   (iterator :pointer))
 (defcfun ("al_merge_config" merge-config) :pointer
@@ -81,7 +81,7 @@
 (defcfun ("al_get_display_refresh_rate" get-display-refresh-rate) :int
   (display :pointer))
 (defcfun ("al_set_window_title" set-window-title) :void
-  (display :pointer) (title c-string))
+  (display :pointer) (title :string))
 (defcfun ("al_set_display_icon" set-display-icon) :void
   (display :pointer) (icon :pointer))
 (defcfun ("al_set_display_icons" set-display-icons) :void
@@ -107,7 +107,7 @@
 (defcfun ("al_wait_for_event" wait-for-event) :void
   (queue :pointer) (ret-event :pointer))
 (defcfun ("al_wait_for_event_timed" wait-for-event-timed) :boolean
-  (queue :pointer) (ret-event :pointer) (secs :float))
+  (queue :pointer) (ret-event :pointer) (secs c-float))
 (defcfun ("al_wait_for_event_until" wait-for-event-until) :boolean
   (queue :pointer) (ret-event :pointer) (timeout :pointer))
 (defcfun ("al_init_user_event_source" init-user-event-source) :void (src :pointer))
@@ -135,8 +135,8 @@
 (defcfun ("al_fixtoi" fixtoi) :int (x fixed))
 (defcfun ("al_fixfloor" fixfloor) :int (x fixed))
 (defcfun ("al_fixceil" fixceil) :int (x fixed))
-(defcfun ("al_ftofix" ftofix) fixed (x :double))
-(defcfun ("al_fixtof" fixtof) :double (x fixed))
+(defcfun ("al_ftofix" ftofix) fixed (x c-double))
+(defcfun ("al_fixtof" fixtof) c-double (x fixed))
 (defcfun ("al_fixmul" fixmul) fixed (x fixed) (y fixed))
 (defcfun ("al_fixdiv" fixdiv) fixed (x fixed) (y fixed))
 (defcfun ("al_fixadd" fixadd) fixed (x fixed) (y fixed))
@@ -160,7 +160,7 @@
 
 ;;; Graphics
 ;; Colors
-(defcstruct allegro-color (r :float) (g :float) (b :float) (a :float))
+(defcstruct allegro-color (r c-float) (g c-float) (b c-float) (a c-float))
 
 ;; Locking and pixel formats
 (defcfun ("al_get_pixel_size" get-pixel-size) :int (format allegro-pixel-format))
@@ -200,81 +200,81 @@
 
 ;; Drawing Operations
 (defcfun ("al_clear_to_color" clear-to-color) :void
-  (r :float) (g :float) (b :float) (a :float))
+  (r c-float) (g c-float) (b c-float) (a c-float))
 (defcfun ("al_draw_bitmap" draw-bitmap) :void
-  (bitmap :pointer) (dx :float) (dy :float) (flags :int))
+  (bitmap :pointer) (dx c-float) (dy c-float) (flags :int))
 (defcfun ("al_draw_tinted_bitmap" draw-tinted-bitmap) :void
   (bitmap :pointer)
-  (r :float) (g :float) (b :float) (a :float)
-  (dx :float) (dy :float)
+  (r c-float) (g c-float) (b c-float) (a c-float)
+  (dx c-float) (dy c-float)
   (flags :int))
 (defcfun ("al_draw_bitmap_region" draw-bitmap-region) :void
   (bitmap :pointer)
-  (sx :float) (sy :float) (sw :float) (sh :float) (dx :float (dy :float))
+  (sx c-float) (sy c-float) (sw c-float) (sh c-float) (dx c-float (dy c-float))
   (flags :int))
 (defcfun ("al_draw_tinted_bitmap_region" draw-tinted-bitmap-region) :void
   (bitmap :pointer)
-  (r :float) (g :float) (b :float) (a :float)
-  (sx :float) (sy :float) (sw :float) (sh :float) (dx :float (dy :float))
+  (r c-float) (g c-float) (b c-float) (a c-float)
+  (sx c-float) (sy c-float) (sw c-float) (sh c-float) (dx c-float (dy c-float))
   (flags :int))
 (defcfun ("al_draw_pixel" draw-pixel) :void
-  (x :float) (y :float)
-  (r :float) (g :float) (b :float) (a :float))
+  (x c-float) (y c-float)
+  (r c-float) (g c-float) (b c-float) (a c-float))
 (defcfun ("al_draw_rotated_bitmap" draw-rotated-bitmap) :void
   (bitmap :pointer)
-  (cx :float) (cy :float)
-  (dx :float) (dy :float)
-  (angle :float)
+  (cx c-float) (cy c-float)
+  (dx c-float) (dy c-float)
+  (angle c-float)
   (flags :int))
 (defcfun ("al_draw_tinted_rotated_bitmap" draw-tinted-rotated-bitmap) :void
   (bitmap :pointer)
-  (r :float) (g :float) (b :float) (a :float)
-  (cx :float) (cy :float)
-  (dx :float) (dy :float)
-  (angle :float)
+  (r c-float) (g c-float) (b c-float) (a c-float)
+  (cx c-float) (cy c-float)
+  (dx c-float) (dy c-float)
+  (angle c-float)
   (flags :int))
 (defcfun ("al_draw_scaled_rotated_bitmap" draw-scaled-rotated-bitmap) :void
   (bitmap :pointer)
-  (cx :float) (cy :float)
-  (dx :float) (dy :float)
-  (xscale :float) (yscale :float)
-  (angle :float)
+  (cx c-float) (cy c-float)
+  (dx c-float) (dy c-float)
+  (xscale c-float) (yscale c-float)
+  (angle c-float)
   (flags :int))
 (defcfun ("al_draw_tinted_scaled_rotated_bitmap" draw-tinted-scaled-rotated-bitmap)
     :void
   (bitmap :pointer)
-  (r :float) (g :float) (b :float) (a :float)
-  (cx :float) (cy :float)
-  (dx :float) (dy :float)
-  (xscale :float) (yscale :float)
-  (angle :float)
+  (r c-float) (g c-float) (b c-float) (a c-float)
+  (cx c-float) (cy c-float)
+  (dx c-float) (dy c-float)
+  (xscale c-float) (yscale c-float)
+  (angle c-float)
   (flags :int))
 (defcfun ("al_draw_tinted_scaled_rotated_bitmap_region"
 	  draw-tinted-scaled-rotated-bitmap-region) :void
-  (sx :float) (sy :float) (sw :float) (sh :float)
+  (sx c-float) (sy c-float) (sw c-float) (sh c-float)
   (bitmap :pointer)
-  (r :float) (g :float) (b :float) (a :float)
-  (cx :float) (cy :float)
-  (dx :float) (dy :float)
-  (xscale :float) (yscale :float)
-  (angle :float)
+  (r c-float) (g c-float) (b c-float) (a c-float)
+  (cx c-float) (cy c-float)
+  (dx c-float) (dy c-float)
+  (xscale c-float) (yscale c-float)
+  (angle c-float)
   (flags :int))
 (defcfun ("al_draw_scaled_bitmap" draw-scaled-bitmap) :void
-  (sx :float) (sy :float) (sw :float) (sh :float)
-  (dx :float) (dy :float) (dw :float) (dh :float)
+  (sx c-float) (sy c-float) (sw c-float) (sh c-float)
+  (dx c-float) (dy c-float) (dw c-float) (dh c-float)
   (flags :int))
 (defcfun ("al_draw_tinted_scaled_bitmap" draw-tinted-scaled-bitmap) :void
-  (r :float) (g :float) (b :float) (a :float)
-  (sx :float) (sy :float) (sw :float) (sh :float)
-  (dx :float) (dy :float) (dw :float) (dh :float)
+  (r c-float) (g c-float) (b c-float) (a c-float)
+  (sx c-float) (sy c-float) (sw c-float) (sh c-float)
+  (dx c-float) (dy c-float) (dw c-float) (dh c-float)
   (flags :int))
 (defcfun ("al_get_target_bitmap" get-target-bitmap) :pointer)
 (defcfun ("al_put_pixel" put-pixel) :void
   (x :int) (y :int)
-  (r :float) (g :float) (b :float) (a :float))
+  (r c-float) (g c-float) (b c-float) (a c-float))
 (defcfun ("al_put_blended_pixel" put-blended-pixel) :void
   (x :int) (y :int)
-  (r :float) (g :float) (b :float) (a :float))
+  (r c-float) (g c-float) (b c-float) (a c-float))
 (defcfun ("al_set_target_bitmap" set-target-bitmap) :void (bitmap :pointer))
 (defcfun ("al_set_target_backbuffer" set-target-backbuffer) :void (display :pointer))
 (defcfun ("al_get_current_display" get-current-display) :pointer)
@@ -300,7 +300,7 @@
 
 ;; Graphics utility functions
 (defcfun ("al_convert_mask_to_alpha" convert-mask-to-alpha) :void
-  (bitmap :pointer) (r :float) (g :float) (b :float) (a :float))
+  (bitmap :pointer) (r c-float) (g c-float) (b c-float) (a c-float))
 
 ;; Deferred drawing
 (defcfun ("al_hold_bitmap_drawing" hold-bitmap-drawing) :void (hold :boolean))
@@ -308,19 +308,19 @@
 
 ;; Images I/O
 (defcfun ("al_register_bitmap_loader" register-bitmap-loader) :boolean
-  (extension c-string) (loader :pointer))
+  (extension :string) (loader :pointer))
 (defcfun ("al_register_bitmap_saver" register-bitmap-saver) :boolean
-  (extension c-string) (saver :boolean))
+  (extension :string) (saver :boolean))
 (defcfun ("al_register_bitmap_loader_f" register-bitmap-loader-f) :boolean
-  (extension c-string) (loader-f :pointer))
+  (extension :string) (loader-f :pointer))
 (defcfun ("al_register_bitmap_saver_f" register-bitmap-saver-f) :boolean
-  (extension c-string) (loader-f :pointer))
-(defcfun ("al_load_bitmap" load-bitmap) :pointer (filename c-string))
-(defcfun ("al_load_bitmap_f" load-bitmap-f) :pointer (fp :pointer) (ident c-string))
+  (extension :string) (loader-f :pointer))
+(defcfun ("al_load_bitmap" load-bitmap) :pointer (filename :string))
+(defcfun ("al_load_bitmap_f" load-bitmap-f) :pointer (fp :pointer) (ident :string))
 (defcfun ("al_save_bitmap" save-bitmap) :boolean
-  (filename c-string) (bitmap :pointer))
+  (filename :string) (bitmap :pointer))
 (defcfun ("al_save_bitmap_f" save-bitmap-f) :boolean
-  (fp :pointer) (ident c-string) (bitmap :pointer))
+  (fp :pointer) (ident :string) (bitmap :pointer))
 
 ;;; Joystick
 (defcfun ("al_install_joystick" install-joystick) :boolean)
@@ -331,12 +331,12 @@
 (defcfun ("al_get_joystick" get-joystick) :pointer (num :int))
 (defcfun ("al_release_joystick" release-joystick) :void (joy :pointer))
 (defcfun ("al_get_joystick_active" get-joystick-active) :boolean (joy :pointer))
-(defcfun ("al_get_joystick_name" get-joystick-name) c-string (joy :pointer))
-(defcfun ("al_get_joystick_stick_name" get-joystick-stick-name) c-string
+(defcfun ("al_get_joystick_name" get-joystick-name) :string (joy :pointer))
+(defcfun ("al_get_joystick_stick_name" get-joystick-stick-name) :string
   (joy :pointer) (stick :int))
-(defcfun ("al_get_joystick_axis_name" get-joystick-axis-name) c-string
+(defcfun ("al_get_joystick_axis_name" get-joystick-axis-name) :string
   (joy :pointer) (stick :int) (axis :int))
-(defcfun ("al_get_joystick_button_name" get-joystick-button-name) c-string
+(defcfun ("al_get_joystick_button_name" get-joystick-button-name) :string
   (joy :pointer) (button :int))
 (defcfun ("al_get_joystick_stick_flags" get-joystick-stick-flags) :int
   (joy :pointer) (stick :int))
@@ -355,7 +355,7 @@
 (defcfun ("al_uninstall_keyboard" uninstall-keyboard) :void)
 (defcfun ("al_get_keyboard_state" get-keyboard-state) :void (ret-state :pointer))
 (defcfun ("al_key_down" key-down) :boolean (state :pointer) (keycode :int))
-(defcfun ("al_keycode_to_name" keycode-to-name) c-string (keycode :int))
+(defcfun ("al_keycode_to_name" keycode-to-name) :string (keycode :int))
 (defcfun ("al_set_keyboard_leds" set-keyboard-leds) :boolean (leds :int))
 (defcfun ("al_get_keyboard_event_source" get-keyboard-event-source) :pointer)
 
@@ -404,37 +404,37 @@
 (defcfun ("al_ungrab_mouse" ungrab-mouse) :boolean)
 
 ;;; Path
-(defcfun ("al_create_path" create-path) :pointer (str c-string))
+(defcfun ("al_create_path" create-path) :pointer (str :string))
 (defcfun ("al_create_path_for_directory" create-path-for-directory) :pointer
-  (str c-string))
+  (str :string))
 (defcfun ("al_destroy_path" destroy-path) :void (path :pointer))
 (defcfun ("al_clone_path" clone-path) :pointer (path :pointer))
 (defcfun ("al_join_paths" join-paths) :boolean (path :pointer) (tail :pointer))
 (defcfun ("al_rebase_path" rebase-path) :boolean (heard :pointer) (tail :pointer))
-(defcfun ("al_get_path_drive" get-path-drive) c-string (path :pointer))
+(defcfun ("al_get_path_drive" get-path-drive) :string (path :pointer))
 (defcfun ("al_get_path_num_components" get-path-num-components) :int (path :pointer))
-(defcfun ("al_get_path_component" get-path-component) c-string
+(defcfun ("al_get_path_component" get-path-component) :string
   (path :pointer) (i :int))
-(defcfun ("al_get_path_tail" get-path-tail) c-string (path :pointer))
-(defcfun ("al_get_path_filename" get-path-filename) c-string (path :pointer))
-(defcfun ("al_get_path_basename" get-path-basename) c-string (path :pointer))
-(defcfun ("al_get_path_extension" get-path-extension) c-string (path :pointer))
+(defcfun ("al_get_path_tail" get-path-tail) :string (path :pointer))
+(defcfun ("al_get_path_filename" get-path-filename) :string (path :pointer))
+(defcfun ("al_get_path_basename" get-path-basename) :string (path :pointer))
+(defcfun ("al_get_path_extension" get-path-extension) :string (path :pointer))
 (defcfun ("al_set_path_drive" set-path-drive) :void
-  (path :pointer) (drive c-string))
+  (path :pointer) (drive :string))
 (defcfun ("al_append_path_component" append-path-component) :void
-  (path :pointer) (s c-string))
+  (path :pointer) (s :string))
 (defcfun ("al_insert_path_component" insert-path-component) :void
-  (path :pointer) (i :int) (s c-string))
+  (path :pointer) (i :int) (s :string))
 (defcfun ("al_replace_path_component" replace-path-component) :void
-  (path :pointer) (i :int) (s c-string))
+  (path :pointer) (i :int) (s :string))
 (defcfun ("al_remove_path_component" remove-path-component) :void
   (path :pointer) (i :int))
 (defcfun ("al_drop_path_tail" drop-path-tail) :void (path :pointer))
 (defcfun ("al_set_path_filename" set-path-filename) :void
-  (path :pointer) (filename c-string))
+  (path :pointer) (filename :string))
 (defcfun ("al_set_path_extension" set-path-extension) :boolean
-  (path :pointer) (extension c-string))
-(defcfun ("al_path_cstr" path-cstr) c-string (path :pointer) (delim :char))
+  (path :pointer) (extension :string))
+(defcfun ("al_path_cstr" path-cstr) :string (path :pointer) (delim :char))
 (defcfun ("al_make_path_canonical" make-path-canonical) :boolean (path :pointer))
 
 ;;; State
@@ -452,24 +452,24 @@
 (defcfun ("al_is_system_installed" is-system-installed) :boolean)
 (defcfun ("al_get_allegro_version" get-allegro-version) :uint32)
 (defcfun ("al_get_standard_path" get-standard-path) :pointer (id :int))
-(defcfun ("al_set_exe_name" set-exe-name) :void (path c-string))
-(defcfun ("al_set_app_name" set-app-name) :void (app-name c-string))
-(defcfun ("al_set_org_name" set-org-name) :void (org-name c-string))
-(defcfun ("al_get_app_name" get-app-name) c-string)
-(defcfun ("al_get_org_name" get-org-name) c-string)
+(defcfun ("al_set_exe_name" set-exe-name) :void (path :string))
+(defcfun ("al_set_app_name" set-app-name) :void (app-name :string))
+(defcfun ("al_set_org_name" set-org-name) :void (org-name :string))
+(defcfun ("al_get_app_name" get-app-name) :string)
+(defcfun ("al_get_org_name" get-org-name) :string)
 (defcfun ("al_get_system_config" get-system-config) :pointer)
 (defcfun ("al_register_assert_handler" register-assert-handler) :void
-  (handler :pointer) (file c-string) (func c-string))
+  (handler :pointer) (file :string) (func :string))
 
 ;;; Time
-(defcfun ("al_get_time" get-time) :double)
+(defcfun ("al_get_time" get-time) c-double)
 (defun current-time () (get-time))
 (defcfun ("al_init_timeout" init-timeout) :void
-  (timeout :pointer) (seconds :double))
-(defcfun ("al_rest" rest-time) :void (seconds :double))
+  (timeout :pointer) (seconds c-double))
+(defcfun ("al_rest" rest-time) :void (seconds c-double))
 
 ;;; Timer
-(defcfun ("al_create_timer" create-timer) :pointer (speed-secs :double))
+(defcfun ("al_create_timer" create-timer) :pointer (speed-secs c-double))
 (defcfun ("al_start_timer" start-timer) :void (timer :pointer))
 (defcfun ("al_stop_timer" stop-timer) :void (timer :pointer))
 (defcfun ("al_get_timer_started" get-timer-started) :boolean (timer :pointer))
@@ -479,9 +479,9 @@
   (timer :pointer) (new-count :int64))
 (defcfun ("al_add_timer_count" add-timer-count) :void
   (timer :pointer) (diff :int64))
-(defcfun ("al_get_timer_speed" get-timer-speed) :double (timer :pointer))
+(defcfun ("al_get_timer_speed" get-timer-speed) c-double (timer :pointer))
 (defcfun ("al_set_timer_speed" set-timer-speed) :void
-  (timer :pointer) (new-speed-secs :double))
+  (timer :pointer) (new-speed-secs c-double))
 (defcfun ("al_get_timer_event_source" get-timer-event-source) :pointer
   (timer :pointer))
 
@@ -490,18 +490,18 @@
 (defcfun ("al_use_transform" use-transform) :void (trans :pointer))
 (defcfun ("al_get_current_transform" get-current-transform) :pointer)
 (defcfun ("al_invert_transform" invert-transform) :void (trans :pointer))
-(defcfun ("al_check_inverse" check-inverse) :int (trans :pointer) (tol :float))
+(defcfun ("al_check_inverse" check-inverse) :int (trans :pointer) (tol c-float))
 (defcfun ("al_identity_transform" identity-transform) :void (trans :pointer))
 (defcfun ("al_build_transform" build-transform) :void
-  (trans :pointer) (x :float) (y :float) (sx :float) (sy :float) (theta :float))
+  (trans :pointer) (x c-float) (y c-float) (sx c-float) (sy c-float) (theta c-float))
 (defcfun ("al_translate_transform" translate-transform) :void
-  (trans :pointer) (x :float) (y :float))
+  (trans :pointer) (x c-float) (y c-float))
 (defcfun ("al_rotate_transform" rotate-transform) :void
-  (trans :pointer) (theta :float))
+  (trans :pointer) (theta c-float))
 (defcfun ("al_scale_transform" scale-transform) :void
-  (trans :pointer) (sx :float) (sy :float))
+  (trans :pointer) (sx c-float) (sy c-float))
 (defcfun ("al_transform_coordinates" transform-coordinates) :void
-  (trans :pointer) (x :float) (y :float))
+  (trans :pointer) (x c-float) (y c-float))
 (defcfun ("al_compose_transform" compose-transform) :void
   (trans :pointer) (other :pointer))
 
@@ -510,7 +510,7 @@
 ;;; OpenGL
 (defcfun ("al_get_opengl_extension_list" get-opengl-extension-list) :pointer)
 (defcfun ("al_get_opengl_proc_address" get-opengl-proc-address) :pointer
-  (name c-string))
+  (name :string))
 (defcfun ("al_get_opengl_texture" get-opengl-texture) :uint (bitmap :pointer))
 (defcfun ("al_get_opengl_texture_size" get-opengl-texture-size) :void
   (bitmap :pointer) (width :pointer) (height :pointer))
@@ -521,7 +521,7 @@
 (defcfun ("al_remove_opengl_texture_fbo" remove-opengl-texture-fbo) :uint
   (bitmap :pointer))
 (defcfun ("al_have_opengl_extension" have-opengl-extension) :boolean
-  (extension c-string))
+  (extension :string))
 (defcfun ("al_get_opengl_version" get-opengl-version) :uint32)
 (defcfun ("al_get_opengl_variant" get-opengl-variant) :int)
 (defcfun ("al_set_current_opengl_context" set-current-opengl-context) :void
@@ -573,7 +573,7 @@
 (defcfun ("al_destroy_sample" destroy-sample) :void (spl :pointer))
 (defcfun ("al_play_sample" play-sample) :boolean
   (spl :pointer)
-  (gain :float) (pan :float) (speed :float)
+  (gain c-float) (pan c-float) (speed c-float)
   (playmode :uint)
   (ret-id :pointer))
 (defcfun ("al_stop_sample" stop-sample) :void (spl-id :pointer))
@@ -609,29 +609,29 @@
   (spl :pointer))
 (defcfun ("al_set_sample_instance_position" set-sample-instance-position) :boolean
   (spl :pointer) (val :uint))
-(defcfun ("al_get_sample_instance_speed" get-sample-instance-speed) :float
+(defcfun ("al_get_sample_instance_speed" get-sample-instance-speed) c-float
   (spl :pointer))
 (defcfun ("al_set_sample_instance_speed" set-sample-instance-speed) :boolean
-  (spl :pointer) (val :float))
-(defcfun ("al_get_sample_instance_gain" get-sample-instance-gain) :float
+  (spl :pointer) (val c-float))
+(defcfun ("al_get_sample_instance_gain" get-sample-instance-gain) c-float
   (spl :pointer))
 (defcfun ("al_set_sample_instance_gain" set-sample-instance-gain) :boolean
-  (spl :pointer) (val :float))
-(defcfun ("al_get_sample_instance_pan" get-sample-instance-pan) :float
+  (spl :pointer) (val c-float))
+(defcfun ("al_get_sample_instance_pan" get-sample-instance-pan) c-float
   (spl :pointer))
 (defcfun ("al_set_sample_instance_pan" set-sample-instance-pan) :boolean
-  (spl :pointer) (val :float))
-(defcfun ("al_get_sample_instance_time" get-sample-instance-time) :float
+  (spl :pointer) (val c-float))
+(defcfun ("al_get_sample_instance_time" get-sample-instance-time) c-float
   (spl :pointer))
 (defcfun ("al_get_sample_instance_playmode" get-sample-instance-playmode)
     allegro-playmode
   (spl :pointer))
 (defcfun ("al_set_sample_instance_playmode" set-sample-instance-playmode) :boolean
-  (spl :pointer) (val :float))
+  (spl :pointer) (val c-float))
 (defcfun ("al_get_sample_instance_playing" get-sample-instance-playing) :boolean
   (spl :pointer))
 (defcfun ("al_set_sample_instance_playing" set-sample-instance-playing) :boolean
-  (spl :pointer) (val :float))
+  (spl :pointer) (val c-float))
 (defcfun ("al_get_sample_instance_attached" get-sample-instance-attached) :boolean
   (spl :pointer))
 (defcfun ("al_detach_sample_instance" detach-sample-instance) :boolean
@@ -660,10 +660,10 @@
   (mixer :pointer))
 (defcfun ("al_get_mixer_depth" get-mixer-depth) allegro-audio-depth
   (mixer :pointer))
-(defcfun ("al_get_mixer_gain" get-mixer-gain) :float
+(defcfun ("al_get_mixer_gain" get-mixer-gain) c-float
   (mixer :pointer))
 (defcfun ("al_set_mixer_gain" set-mixer-gain) :boolean
-  (mixer :pointer) (new-gain :float))
+  (mixer :pointer) (new-gain c-float))
 (defcfun ("al_get_mixer_quality" get-mixer-quality) allegro-mixer-quality
   (mixer :pointer))
 (defcfun ("al_set_mixer_quality" set-mixer-quality) :boolean
@@ -697,22 +697,22 @@
   (stream :pointer))
 (defcfun ("al_get_audio_stream_length" get-audio-stream-length) :uint
   (stream :pointer))
-(defcfun ("al_get_audio_stream_speed" get-audio-stream-speed) :float
+(defcfun ("al_get_audio_stream_speed" get-audio-stream-speed) c-float
   (stream :pointer))
 (defcfun ("al_set_audio_stream_speed" set-audio-stream-speed) :boolean
-  (stream :pointer) (val :float))
-(defcfun ("al_get_audio_stream_gain" get-audio-stream-gain) :float
+  (stream :pointer) (val c-float))
+(defcfun ("al_get_audio_stream_gain" get-audio-stream-gain) c-float
   (stream :pointer))
 (defcfun ("al_set_audio_stream_gain" set-audio-stream-gain) :boolean
-  (stream :pointer) (val :float))
-(defcfun ("al_get_audio_stream_pan" get-audio-stream-pan) :float
+  (stream :pointer) (val c-float))
+(defcfun ("al_get_audio_stream_pan" get-audio-stream-pan) c-float
   (stream :pointer))
 (defcfun ("al_set_audio_stream_pan" set-audio-stream-pan) :boolean
-  (stream :pointer) (val :float))
+  (stream :pointer) (val c-float))
 (defcfun ("al_get_audio_stream_playing" get-audio-stream-playing) :boolean
   (stream :pointer))
 (defcfun ("al_set_audio_stream_playing" set-audio-stream-playing) :boolean
-  (stream :pointer) (val :float))
+  (stream :pointer) (val c-float))
 (defcfun ("al_get_audio_stream_playmode" get-audio-stream-playmode) allegro-playmode
   (stream :pointer))
 (defcfun ("al_set_audio_stream_playmode" set-audio-stream-playmode) :boolean
@@ -731,39 +731,39 @@
 	  get-available-audio-stream-fragments) :uint
   (stream :pointer))
 (defcfun ("al_seek_audio_stream_secs" seek-audio-stream-secs) :boolean
-  (stream :pointer) (time :double))
+  (stream :pointer) (time c-double))
 (defcfun ("al_get_audio_stream_position_secs"
-	  get-audio-stream-position-secs) :double
+	  get-audio-stream-position-secs) c-double
   (stream :pointer))
-(defcfun ("al_get_audio_stream_length_secs" get-audio-stream-length-secs) :double
+(defcfun ("al_get_audio_stream_length_secs" get-audio-stream-length-secs) c-double
   (stream :pointer))
 (defcfun ("al_set_audio_stream_loop_secs" set-audio-stream-loop-secs) :boolean
-  (stream :pointer) (start :double) (end :double))
+  (stream :pointer) (start c-double) (end c-double))
 
 ;; Audio file I/O
 (defcfun ("al_register_sample_loader" register-sample-loader) :boolean
-  (ext c-string) (loader :pointer))
+  (ext :string) (loader :pointer))
 (defcfun ("al_register_sample_loader_f" register-sample-loader-f) :boolean
-  (ext c-string) (loader :pointer))
+  (ext :string) (loader :pointer))
 (defcfun ("al_register_sample_saver" register-sample-saver) :boolean
-  (ext c-string) (saver :boolean))
+  (ext :string) (saver :boolean))
 (defcfun ("al_register_sample_saver_f" register-sample-saver-f) :boolean
-  (ext c-string) (saver :boolean))
+  (ext :string) (saver :boolean))
 (defcfun ("al_register_audio_stream_loader" register-audio-stream-loader) :boolean
-  (ext c-string) (stream-loader :pointer))
+  (ext :string) (stream-loader :pointer))
 (defcfun ("al_register_audio_stream_loader_f" register-audio-stream-loader-f)
     :boolean
-  (ext c-string) (stream-loader :pointer))
-(defcfun ("al_load_sample" load-sample) :pointer (filename c-string))
-(defcfun ("al_load_sample_f" load-sample-f) :pointer (fp :pointer) (ident c-string))
+  (ext :string) (stream-loader :pointer))
+(defcfun ("al_load_sample" load-sample) :pointer (filename :string))
+(defcfun ("al_load_sample_f" load-sample-f) :pointer (fp :pointer) (ident :string))
 (defcfun ("al_load_audio_stream" load-audio-stream) :pointer
-  (filename c-string) (buffer-count :int) (samples :uint))
+  (filename :string) (buffer-count :int) (samples :uint))
 (defcfun ("al_load_audio_stream_f" load-audio-stream-f) :pointer
-  (fp :pointer) (ident c-string) (buffer-count :int) (samples :uint))
+  (fp :pointer) (ident :string) (buffer-count :int) (samples :uint))
 (defcfun ("al_save_sample" save-sample) :boolean
-  (filename c-string) (spl :pointer))
+  (filename :string) (spl :pointer))
 (defcfun ("al_save_sample_f" save-sample-f) :boolean
-  (fp :pointer) (ident c-string) (spl :pointer))
+  (fp :pointer) (ident :string) (spl :pointer))
 
 ;;; Audio codecs addon
 (defcfun ("al_init_acodec_addon" init-acodec-addon) :boolean)
@@ -774,53 +774,53 @@
 (defcfun ("al_init_font_addon" init-font-addon) :void)
 (defcfun ("al_shutdown_font_addon" shutdown-font-addon) :void)
 (defcfun ("al_load_font" load-font) :pointer
-  (filename c-string) (size :int) (flags :int))
+  (filename :string) (size :int) (flags :int))
 (defcfun ("al_destroy_font" destroy-font) :void (f :pointer))
 (defcfun ("al_register_font_loader" register-font-loader) :boolean
-    (extension c-string) (load-font :pointer))
+    (extension :string) (load-font :pointer))
 (defcfun ("al_get_font_line_height" get-font-line-height) :int (f :pointer))
 (defcfun ("al_get_font_ascent" get-font-ascent) :int (f :pointer))
 (defcfun ("al_get_font_descent" get-font-descent) :int (f :pointer))
-(defcfun ("al_get_text_width" get-text-width) :int (f :pointer) (str c-string))
+(defcfun ("al_get_text_width" get-text-width) :int (f :pointer) (str :string))
 (defcfun ("al_get_ustr_width" get-ustr-width) :int (f :pointer) (ustr :pointer))
 (defcfun ("al_draw_text" draw-text) :void
   (font :pointer)
-  (r :float) (g :float) (b :float) (a :float)
-  (x :float) (y :float)
+  (r c-float) (g c-float) (b c-float) (a c-float)
+  (x c-float) (y c-float)
   (flags :int)
-  (text c-string))
+  (text :string))
 (defcfun ("al_draw_ustr" draw-ustr) :void
   (font :pointer)
-  (r :float) (g :float) (b :float) (a :float)
-  (x :float) (y :float)
+  (r c-float) (g c-float) (b c-float) (a c-float)
+  (x c-float) (y c-float)
   (flags :int)
   (ustr :pointer))
 (defcfun ("al_draw_justified_text" draw-justified-text) :void
   (font :pointer)
-  (r :float) (g :float) (b :float) (a :float)
-  (x1 :float) (x2 :float) (y :float) (diff :float)
+  (r c-float) (g c-float) (b c-float) (a c-float)
+  (x1 c-float) (x2 c-float) (y c-float) (diff c-float)
   (flags :int)
-  (text c-string))
+  (text :string))
 (defcfun ("al_draw_justified_ustr" draw-justified-ustr) :void
   (font :pointer)
-  (r :float) (g :float) (b :float) (a :float)
-  (x1 :float) (x2 :float) (y :float) (diff :float)
+  (r c-float) (g c-float) (b c-float) (a c-float)
+  (x1 c-float) (x2 c-float) (y c-float) (diff c-float)
   (flags :int)
   (ustr :pointer))
 (defcfun ("al_draw_textf" draw-textf) :void
   (font :pointer)
-  (r :float) (g :float) (b :float) (a :float)
-  (x :float) (y :float)
+  (r c-float) (g c-float) (b c-float) (a c-float)
+  (x c-float) (y c-float)
   (flags :int)
-  (format c-string))
+  (format :string))
 (defcfun ("al_draw_justified_textf" draw-justified-textf) :void
   (font :pointer)
-  (r :float) (g :float) (b :float) (a :float)
-  (x1 :float) (x2 :float) (y :float) (diff :float)
+  (r c-float) (g c-float) (b c-float) (a c-float)
+  (x1 c-float) (x2 c-float) (y c-float) (diff c-float)
   (flags :int)
-  (format c-string))
+  (format :string))
 (defcfun ("al_get_text_dimensions" get-text-dimensions) :void
-  (f :pointer) (text c-string)
+  (f :pointer) (text :string)
   (bbx :pointer) (bby :pointer)
   (bbw :pointer) (bbh :pointer))
 (defcfun ("al_get_ustr_dimensions" get-ustr-dimensions) :void
@@ -832,20 +832,20 @@
 ;; Bitmap fonts
 (defcfun ("al_grab_font_from_bitmap" grab-font-from-bitmap) :pointer
   (bmp :pointer) (ranges-n :int) (range :pointer))
-(defcfun ("al_load_bitmap_font" load-bitmap-font) :pointer (fname c-string))
+(defcfun ("al_load_bitmap_font" load-bitmap-font) :pointer (fname :string))
 (defcfun ("al_create_builtin_font" create-builtin-font) :pointer)
 
 ;; TTF fonts
 (defcfun ("al_init_ttf_addon" init-ttf-addon) :boolean)
 (defcfun ("al_shutdown_ttf_addon" shutdown-ttf-addon) :void)
 (defcfun ("al_load_ttf_font" load-ttf-font) :pointer
-  (filename c-string) (size :int) (flags :int))
+  (filename :string) (size :int) (flags :int))
 (defcfun ("al_load_ttf_font_f" load-ttf-font-f) :pointer
-  (file :pointer) (filename c-string) (size :int) (flags :int))
+  (file :pointer) (filename :string) (size :int) (flags :int))
 (defcfun ("al_load_ttf_font_stretch" load-ttf-font-stretch) :pointer
-  (filename c-string) (w :int) (h :int) (flags :int))
+  (filename :string) (w :int) (h :int) (flags :int))
 (defcfun ("al_load_ttf_font_stretch_f" load-ttf-font-stretch-f) :pointer
-  (file :pointer) (filename c-string) (w :int) (h :int) (flags :int))
+  (file :pointer) (filename :string) (w :int) (h :int) (flags :int))
 (defcfun ("al_get_allegro_ttf_version" get-allegro-ttf-version) :uint32)
 
 ;;; Image I/O addon
@@ -862,24 +862,24 @@
 (defcfun ("al_init_native_dialog_addon" init-native-dialog-addon) :boolean)
 (defcfun ("al_shutdown_native_dialog_addon" shutdown-native-dialog-addon) :void)
 (defcfun ("al_create_native_file_dialog" create-native-file-dialog) :pointer
-  (initial-path c-string) (title c-string) (patterns c-string) (mode :int))
+  (initial-path :string) (title :string) (patterns :string) (mode :int))
 (defcfun ("al_show_native_file_dialog" show-native-file-dialog) :boolean
   (display :pointer) (dialog :pointer))
 (defcfun ("al_get_native_file_dialog_count" get-native-file-dialog-count) :int
   (dialog :pointer))
-(defcfun ("al_get_native_file_dialog_path" get-native-file-dialog-path) c-string
+(defcfun ("al_get_native_file_dialog_path" get-native-file-dialog-path) :string
   (dialog :pointer) (i :uint))
 (defcfun ("al_destroy_native_file_dialog" destroy-native-file-dialog) :void
   (dialog :pointer))
 (defcfun ("al_show_native_message_box" show-native-message-box) :int
-  (display :pointer) (title c-string) (heading c-string)
-  (text c-string) (buttons c-string) (flags :int))
+  (display :pointer) (title :string) (heading :string)
+  (text :string) (buttons :string) (flags :int))
 (defcfun ("al_open_native_text_log" open-native-text-log) :pointer
-  (title c-string) (flags :int))
+  (title :string) (flags :int))
 (defcfun ("al_close_native_text_log" close-native-text-log) :void
   (textlog :pointer))
 (defcfun ("al_append_native_text_log" append-native-text-log) :void
-  (textlog :pointer) (format c-string))
+  (textlog :pointer) (format :string))
 (defcfun ("al_get_native_text_log_event_source" get-native-text-log-event-source)
     :pointer
   (textlog :pointer))
@@ -899,94 +899,94 @@
 
 ;; High level drawing routines
 (defcfun ("al_draw_line" draw-line) :void 
-  (x1 :float) (y1 :float) (x2 :float) (y2 :float)
-  (r :float) (g :float) (b :float) (a :float)
-  (thickness :float))
+  (x1 c-float) (y1 c-float) (x2 c-float) (y2 c-float)
+  (r c-float) (g c-float) (b c-float) (a c-float)
+  (thickness c-float))
 (defcfun ("al_draw_triangle" draw-triangle) :void 
-  (x1 :float) (y1 :float) 
-  (x2 :float) (y2 :float) 
-  (x3 :float) (y3 :float)
-  (r :float) (g :float) (b :float) (a :float)
-  (thickness :float))
+  (x1 c-float) (y1 c-float) 
+  (x2 c-float) (y2 c-float) 
+  (x3 c-float) (y3 c-float)
+  (r c-float) (g c-float) (b c-float) (a c-float)
+  (thickness c-float))
 (defcfun ("al_draw_filled_triangle" draw-filled-triangle) :void 
-  (x1 :float) (y1 :float) 
-  (x2 :float) (y2 :float) 
-  (x3 :float) (y3 :float)
-  (r :float) (g :float) (b :float) (a :float))
+  (x1 c-float) (y1 c-float) 
+  (x2 c-float) (y2 c-float) 
+  (x3 c-float) (y3 c-float)
+  (r c-float) (g c-float) (b c-float) (a c-float))
 (defcfun ("al_draw_rectangle" draw-rectangle) :void 
-  (x1 :float) (y1 :float) 
-  (x2 :float) (y2 :float) 
-  (r :float) (g :float) (b :float) (a :float)
-  (thickness :float))
+  (x1 c-float) (y1 c-float) 
+  (x2 c-float) (y2 c-float) 
+  (r c-float) (g c-float) (b c-float) (a c-float)
+  (thickness c-float))
 (defcfun ("al_draw_filled_rectangle" draw-filled-rectangle) :void 
-  (x1 :float) (y1 :float) 
-  (x2 :float) (y2 :float) 
-  (r :float) (g :float) (b :float) (a :float))
+  (x1 c-float) (y1 c-float) 
+  (x2 c-float) (y2 c-float) 
+  (r c-float) (g c-float) (b c-float) (a c-float))
 (defcfun ("al_draw_rounded_rectangle" draw-rounded-rectangle) :void 
-  (x1 :float) (y1 :float) 
-  (x2 :float) (y2 :float) 
-  (rx :float) (ry :float) 
-  (r :float) (g :float) (b :float) (a :float)
-  (thickness :float))
+  (x1 c-float) (y1 c-float) 
+  (x2 c-float) (y2 c-float) 
+  (rx c-float) (ry c-float) 
+  (r c-float) (g c-float) (b c-float) (a c-float)
+  (thickness c-float))
 (defcfun ("al_draw_filled_rounded_rectangle" draw-filled-rounded-rectangle) :void 
-  (x1 :float) (y1 :float) 
-  (x2 :float) (y2 :float) 
-  (rx :float) (ry :float) 
-  (r :float) (g :float) (b :float) (a :float))
+  (x1 c-float) (y1 c-float) 
+  (x2 c-float) (y2 c-float) 
+  (rx c-float) (ry c-float) 
+  (r c-float) (g c-float) (b c-float) (a c-float))
 (defcfun ("al_calculate_arc" calculate-arc) :void
   (dest :pointer) (stride :int) 
-  (cx :float) (cy :float)
-  (rx :float) (ry :float)
-  (start-theta :float) (delta-theta :float)
-  (thickness :float) (num-segments :int))
+  (cx c-float) (cy c-float)
+  (rx c-float) (ry c-float)
+  (start-theta c-float) (delta-theta c-float)
+  (thickness c-float) (num-segments :int))
 (defcfun ("al_draw_pieslice" draw-pieslice) :void 
-  (cx :float) (cy :float) (radius :float)
-  (start-theta :float) (delta-theta :float)
-  (r :float) (g :float) (b :float) (a :float)
-  (thickness :float))
+  (cx c-float) (cy c-float) (radius c-float)
+  (start-theta c-float) (delta-theta c-float)
+  (r c-float) (g c-float) (b c-float) (a c-float)
+  (thickness c-float))
 (defcfun ("al_draw_filled_pieslice" draw-filled-pieslice) :void 
-  (cx :float) (cy :float) (radius :float)
-  (start-theta :float) (delta-theta :float)
-  (r :float) (g :float) (b :float) (a :float))
+  (cx c-float) (cy c-float) (radius c-float)
+  (start-theta c-float) (delta-theta c-float)
+  (r c-float) (g c-float) (b c-float) (a c-float))
 (defcfun ("al_draw_ellipse" draw-ellipse) :void
-  (cx :float) (cy :float) (rx :float) (ry :float)
-  (r :float) (g :float) (b :float) (a :float)
-  (thickness :float))
+  (cx c-float) (cy c-float) (rx c-float) (ry c-float)
+  (r c-float) (g c-float) (b c-float) (a c-float)
+  (thickness c-float))
 (defcfun ("al_draw_filled_ellipse" draw-filled-ellipse) :void
-  (cx :float) (cy :float) (rx :float) (ry :float)
-  (r :float) (g :float) (b :float) (a :float))
+  (cx c-float) (cy c-float) (rx c-float) (ry c-float)
+  (r c-float) (g c-float) (b c-float) (a c-float))
 (defcfun ("al_draw_circle" draw-circle) :void
-  (cx :float) (cy :float) (radius :float)
-  (r :float) (g :float) (b :float) (a :float)
-  (thickness :float))
+  (cx c-float) (cy c-float) (radius c-float)
+  (r c-float) (g c-float) (b c-float) (a c-float)
+  (thickness c-float))
 (defcfun ("al_draw_filled_circle" draw-filled-circle) :void
-  (cx :float) (cy :float) (radius :float)
-  (r :float) (g :float) (b :float) (a :float))
+  (cx c-float) (cy c-float) (radius c-float)
+  (r c-float) (g c-float) (b c-float) (a c-float))
 (defcfun ("al_draw_arc" draw-arc) :void 
-  (cx :float) (cy :float) (radius :float)
-  (start-theta :float) (delta-theta :float)
-  (r :float) (g :float) (b :float) (a :float)
-  (thickness :float))
+  (cx c-float) (cy c-float) (radius c-float)
+  (start-theta c-float) (delta-theta c-float)
+  (r c-float) (g c-float) (b c-float) (a c-float)
+  (thickness c-float))
 (defcfun ("al_draw_elliptical_arc" draw-elliptical-arc) :void 
-  (cx :float) (cy :float) (rx :float) (ry :float)
-  (start-theta :float) (delta-theta :float)
-  (r :float) (g :float) (b :float) (a :float)
-  (thickness :float))
+  (cx c-float) (cy c-float) (rx c-float) (ry c-float)
+  (start-theta c-float) (delta-theta c-float)
+  (r c-float) (g c-float) (b c-float) (a c-float)
+  (thickness c-float))
 (defcfun ("al_calculate_spline" calculate-spline) :void
   (dest :pointer) (stride :int) (points :pointer)
-  (thickness :float) (num-segments :int))
+  (thickness c-float) (num-segments :int))
 (defcfun ("al_draw_spline" draw-spline) :void
   (points :pointer)
-  (r :float) (g :float) (b :float) (a :float)
-  (thickness :float))
+  (r c-float) (g c-float) (b c-float) (a c-float)
+  (thickness c-float))
 (defcfun ("al_calculate_ribbon" calculate-ribbon) :void
   (dest :pointer) (dest-stride :int) 
   (points :pointer) (points-stride :int)
-  (thickness :float) (num-segments :int))
+  (thickness c-float) (num-segments :int))
 (defcfun ("al_draw_ribbon" draw-ribbon) :void
   (points :pointer) (points-stride :int)
-  (r :float) (g :float) (b :float) (a :float)
-  (thickness :float) (num-segments :int))
+  (r c-float) (g c-float) (b c-float) (a c-float)
+  (thickness c-float) (num-segments :int))
 
 ;; Low level drawing routines
 (defcfun ("al_draw_prim" draw-prim) :int 

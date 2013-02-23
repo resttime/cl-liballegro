@@ -1,17 +1,23 @@
 (in-package #:cl-liballegro)
 
 ;;; Default
-(define-foreign-type c-string ()
+(define-foreign-type c-float ()
   ()
-  (:actual-type :pointer)
-  (:simple-parser c-string))
-(defmethod translate-to-foreign (string (type c-string))
-  (foreign-string-alloc string))
-(defmethod translate-from-foreign (pointer (type c-string))
-  (foreign-string-to-lisp pointer))
-(defmethod free-translated-object (pointer (type c-string) param)
-  (declare (ignore param))
-  (foreign-string-free pointer))
+  (:actual-type :float)
+  (:simple-parser c-float))
+(defmethod translate-to-foreign (value (type c-float)) (float value 0f0))
+
+(define-foreign-type c-double ()
+  ()
+  (:actual-type :double)
+  (:simple-parser c-double))
+(defmethod translate-to-foreign (value (type c-double)) (float value 0d0))
+
+(define-foreign-type c-int ()
+  ()
+  (:actual-type :int)
+  (:simple-parser c-int))
+(defmethod translate-to-foreign (value (type c-int)) (truncate value))
 
 ;;; Configuration Files
 (defcstruct allegro-config)

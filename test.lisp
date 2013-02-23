@@ -8,8 +8,8 @@
    (al:show-native-message-box display "CSTRING TRANSLATING CORRECTLY"
 			       "YEAH" (al:get-app-name)
 			       "OK" 0)
-   (al:clear-to-color 1.0 1.0 1.0 1.0)
+   (al:clear-to-color 1 1.0 1.0 1.0)
    (al:flip-display)
-   (al:rest-time 2.0d0)
+   (al:rest-time 2)
    (al:destroy-display display)
    (al:uninstall-system)))
