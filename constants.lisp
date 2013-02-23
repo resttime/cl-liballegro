@@ -117,8 +117,8 @@
   
 ;;; Fixed point math
 ;; Fixed point trig
-(defconstant fixtorad-r 1608)
-(defconstant radtofix-r 2670177)
+(defconstant +fixtorad-r+ 1608)
+(defconstant +radtofix-r+ 2670177)
 
 ;;; Graphics
 ;; Locking and pixel formats

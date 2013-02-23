@@ -574,7 +574,7 @@
 (defcfun ("al_play_sample" play-sample) :boolean
   (spl :pointer)
   (gain c-float) (pan c-float) (speed c-float)
-  (playmode :uint)
+  (playmode allegro-playmode)
   (ret-id :pointer))
 (defcfun ("al_stop_sample" stop-sample) :void (spl-id :pointer))
 (defcfun ("al_stop_samples" stop-samples) :void)

@@ -2,8 +2,54 @@
   (:use #:cl #:cffi)
   (:nicknames #:al #:liballegro :alleg)
   (:export
+   ;;; TEMPORARY? LISP HELPER/MACROS
+   #:get-event-type
+   #:get-any-event
+   ;; Display event
+   #:get-display-event
+   #:get-display-event-type
+   #:get-display-event-x
+   #:get-display-event-y
+   #:get-display-event-width
+   #:get-display-event-height
+   #:get-display-event-orientation
+   ;; Joystick event
+   #:get-joystick-event
+   #:get-joystick-event-type
+   #:get-joystick-event-id
+   #:get-joystick-event-stick
+   #:get-joystick-event-axis
+   #:get-joystick-event-pos
+   #:get-joystick-event-button
+   ;; Keyboard event
+   #:get-keyboard-event
+   #:get-keyboard-event-type
+   #:get-keyboard-event-display
+   #:get-keyboard-event-keycode
+   #:get-keyboard-event-unichar
+   #:get-keyboard-event-modifiers
+   #:get-keyboard-event-repeat
+   ;; Mouse event
+   #:get-mouse-event
+   #:get-mouse-event-type
+   #:get-mouse-event-display
+   #:get-mouse-event-x
+   #:get-mouse-event-y
+   #:get-mouse-event-z
+   #:get-mouse-event-w
+   #:get-mouse-event-dx
+   #:get-mouse-event-dy
+   #:get-mouse-event-dz
+   #:get-mouse-event-dw
+   #:get-mouse-event-button
+   #:get-mouse-event-pressure
+   ;; Timer event
+   #:get-timer-event
+   #:get-timer-event-type
+   #:get-timer-event-count
    
-   ;; Configuration Files
+
+   ;;; Configuration Files
    #:create-config
    #:destroy-config
    #:load-config-file
@@ -562,7 +608,7 @@
    #:play-sample-instance
    #:stop-sample-instance
    #:get-sample-instance-channels
-   #:get-sample-nstance-depth
+   #:get-sample-instance-depth
    #:get-sample-instance-frequency
    #:get-sample-instance-length
    #:set-sample-instance-length
@@ -575,7 +621,7 @@
    #:get-sample-instance-pan
    #:set-sample-instance-pan
    #:get-sample-instance-time
-   #:get-sample-instnace-playmode
+   #:get-sample-instance-playmode
    #:set-sample-instance-playmode
    #:get-sample-instance-playing
    #:set-sample-instance-playing
@@ -609,13 +655,13 @@
 
    ;; Stream functions
    #:create-audio-stream
-   #:destroy-audio-steram
+   #:destroy-audio-stream
    #:get-audio-stream-event-source
    #:drain-audio-stream
    #:rewind-audio-stream
    #:get-audio-stream-frequency
    #:get-audio-stream-channels
-   #:get-audio-stram-depth
+   #:get-audio-stream-depth
    #:get-audio-stream-length
    #:get-audio-stream-speed
    #:set-audio-strema-speed
@@ -623,8 +669,8 @@
    #:set-audio-stream-gain
    #:get-audio-stream-pan
    #:set-audio-stream-pan
-   #:get-audio-stram-playing
-   #:set-audio-stram-playing
+   #:get-audio-stream-playing
+   #:set-audio-stream-playing
    #:get-audio-stream-playmode
    #:set-audio-stream-playmode
    #:get-audio-stream-attached
@@ -761,4 +807,4 @@
    #:destroy-vertex-decl
    #:draw-soft-triangle
    #:draw-soft-line
-  ))
+   ))
