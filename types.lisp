@@ -1,10 +1,22 @@
 (in-package #:cl-liballegro)
 
+;;; Default
+(define-foreign-type c-string ()
+  ()
+  (:actual-type :pointer)
+  (:simple-parser c-string))
+(defmethod translate-to-foreign (string (type c-string))
+  (foreign-string-alloc string))
+(defmethod translate-from-foreign (pointer (type c-string))
+  (foreign-string-to-lisp pointer))
+(defmethod free-translated-object (pointer (type c-string) param)
+  (declare (ignore param))
+  (foreign-string-free pointer))
+
 ;;; Configuration Files
 (defcstruct allegro-config)
 
 ;;; Display
-;; Display Creation
 (defcstruct allegro-display)
 
 ;;; Events
