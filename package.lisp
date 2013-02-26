@@ -152,6 +152,8 @@
    #:get-num-display-modes
    
    ;;; Graphics
+   ;; Color
+
    ;; Locking and pixel formats
    #:get-pixel-size
    #:get-pixel-format-bits

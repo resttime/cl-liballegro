@@ -160,7 +160,6 @@
 
 ;;; Graphics
 ;; Colors
-(defcstruct allegro-color (r c-float) (g c-float) (b c-float) (a c-float))
 
 ;; Locking and pixel formats
 (defcfun ("al_get_pixel_size" get-pixel-size) :int (format allegro-pixel-format))
