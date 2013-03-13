@@ -160,6 +160,8 @@
 
 ;;; Graphics
 ;; Colors
+(defcfun ("al_map_rgb" map-rgb) allegro-color
+  (r :int) (g :int) (b :int))
 
 ;; Locking and pixel formats
 (defcfun ("al_get_pixel_size" get-pixel-size) :int (format allegro-pixel-format))

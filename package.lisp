@@ -2,7 +2,7 @@
   (:use #:cl #:cffi)
   (:nicknames #:al #:liballegro :alleg)
   (:export 
-   ;;; Configuration Files
+;;; Configuration Files
    #:create-config
    #:destroy-config
    #:load-config-file
@@ -21,7 +21,7 @@
    #:merge-config
    #:merge-config-into
 
-   ;;; Display
+;;; Display
    ;; Display Creation
    #:create-display
    #:destroy-display
@@ -65,7 +65,7 @@
    ;; Screensaver
    #:inhibit-screensaver
    
-   ;;; Events
+;;; Events
    #:+allegro-event-joystick-axis+
    #:+allegro-event-joystick-button-down+
    #:+allegro-event-joystick-button-up+
@@ -117,14 +117,14 @@
    #:get-event-source-data
    #:set-event-source-date
 
-   ;;; File I/O
+;;; File I/O
    #:fopen
 
-   ;;; File system routines
+;;; File system routines
    #:create-fs-entry
    #:destroy-fs-entry
 
-   ;;; Fixed point math
+;;; Fixed point math
    #:itofix
    #:fixtoi
    #:fixfloor
@@ -147,12 +147,13 @@
    #:fixasqrt
    #:fixhypot
 
-   ;;; Fullscreen modes
+;;; Fullscreen modes
    #:get-display-mode
    #:get-num-display-modes
    
-   ;;; Graphics
+;;; Graphics
    ;; Color
+   #:map-rgb
 
    ;; Locking and pixel formats
    #:get-pixel-size
@@ -231,7 +232,7 @@
    #:save-bitmap
    #:save-bitmap-f
 
-   ;;; Joystick
+;;; Joystick
    #:install-joystick
    #:unisntall-joystick
    #:is-joystick-installed
@@ -251,7 +252,7 @@
    #:get-joystick-state
    #:get-joystick-event-source
    
-   ;;; Keyboard
+;;; Keyboard
    ;; Key codes
    #:+allegro-key-a+
    #:+allegro-key-b+
@@ -390,13 +391,13 @@
    #:set-keyboard-leds
    #:get-keyboard-event-source
 
-   ;;; Monitor
+;;; Monitor
    #:get-new-display-adapter
    #:set-new-display-adapter
    #:get-monitor-info
    #:get-num-video-adapters
    
-   ;;; Mouse
+;;; Mouse
    #:install-mouse
    #:is-mouse-installed
    #:uninstall-mouse
@@ -422,7 +423,7 @@
    #:grab-mouse
    #:ungrab-mouse
    
-   ;;; Path
+;;; Path
    #:create-path
    #:create-path-for-directory
    #:destroy-path
@@ -447,13 +448,13 @@
    #:path-cstr
    #:make-path-canonical
 
-   ;;; State
+;;; State
    #:restore-state
    #:store-state
    #:get-errno
    #:set-errno
 
-   ;;; System
+;;; System
    #:install-system
    #:init
    #:get-allegro-version
@@ -469,13 +470,13 @@
    #:get-system-config
    #:register-assert-handler
 
-   ;;; Time
+;;; Time
    #:get-time
    #:current-time
    #:init-timeout
    #:rest-time
 
-   ;;; Timer
+;;; Timer
    #:create-timer
    #:start-timer
    #:stop-timer
@@ -488,7 +489,7 @@
    #:set-timer-speed
    #:get-timer-event-source
 
-   ;;; Transformations
+;;; Transformations
    #:copy-transform
    #:use-transform
    #:get-current-transform
@@ -502,10 +503,10 @@
    #:transform-coordinates
    #:compose-transform
    
-   ;;; Miscellaneous routines
+;;; Miscellaneous routines
    #:+allegro-pi+
 
-   ;;; OpenGL
+;;; OpenGL
    #:get-opengl-extension-list
    #:get-opengl-proc-address
    #:get-opengl-texture
@@ -518,7 +519,7 @@
    #:get-opengl-variant
    #:set-current-opengl-context
 
-   ;;; Audio addon
+;;; Audio addon
    ;; Setting up audio
    #:install-audio
    #:uninstall-audio
@@ -653,11 +654,11 @@
    #:save-sample
    #:save-sample-f
 
-   ;;; Audio codecs addon
+;;; Audio codecs addon
    #:init-acodec-addon
    #:get-allegro-acodec-version
 
-   ;;; Font addons
+;;; Font addons
    ;; General font routines
    #:+allegro-align-left+
    #:+allegro-align-centre+
@@ -699,16 +700,16 @@
    #:load-ttf-font-stretch-f
    #:get-allegro-ttf-version
 
-   ;;; Image I/O addon
+;;; Image I/O addon
    #:init-image-addon
    #:shutdown-image-addon
    #:get-allegro-image-version
 
-   ;;; Memfile addon
+;;; Memfile addon
    #:open-memfile
    #:get-allegro-memfile-version
 
-   ;;; Native dialogs support
+;;; Native dialogs support
    #:init-native-dialog-addon
    #:shutdown-native-dialog-addon
    #:create-native-file-dialog
@@ -723,11 +724,11 @@
    #:get-native-text-log-event-source
    #:get-allegro-native-dialog-version
 
-   ;;; PhysicsFS addon
+;;; PhysicsFS addon
    #:set-physfs-file-interface
    #:get-allegro-physfs-version
 
-   ;;; Primitives addon
+;;; Primitives addon
    ;; General
    #:get-allegro-primitives-version
    #:init-primitives-addon

@@ -106,6 +106,9 @@
   (refresh-rate :int))
   
 ;;; Graphics
+;; Colors
+(defcstruct allegro-color (r :float) (g :float) (b :float) (a :float))
+
 ;; Bitmap Creation
 (defcstruct allegro-bitmap)
 
