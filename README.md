@@ -21,10 +21,11 @@ Usages
 3. `(al:rest secs)` is `(al:rest-time secs)` instead because of symbol interference with (rest list).
 
 ```cl
+;;;; test.lisp
+;;; Creates a white background display window and waits 2 seconds before closing.
 (ql:quickload "cl-liballegro")               ; Load the system
 
 (defvar display)                             ; Make a variable that holds the ALLEGRO_DISPLAY pointer
-
 (defun main ()
   (al:init)                                  ; al_init();
   (setf display (al:create-display 800 600)) ; display = al_create_display(800, 600);
