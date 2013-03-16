@@ -21,23 +21,25 @@ Both of which will worked on while I create a game.
 Usages
 --------------
 - `al_*` becomes `al:*`
-- Do not pass ALLEGRO_COLOR to functions, use four floats instead. (CFFI cannot pass structures by value, only pointers)
+- Do not pass ALLEGRO_COLOR to functions, use four numbers instead. (CFFI cannot pass structures by value, only pointers)
 - `(al:rest secs)` is `(al:rest-time secs)` instead because of symbol interference with (rest list).
 
-Examples
+Example:
+<code>
+(ql:quickload "cl-liballegro") ; Load the system
 
-`(al:init)` - `al_init();`
+(defvar display) ; Make a variable that holds the ALLEGRO_DISPLAY pointer
 
-`(al:uninstall-system)` - `al_uninstall_system();`
-
-`(al:install-mouse)` - `al_install_mouse();`
-
-`(al:clear-to-color 1.0 0.0 0.0 1.0)` - `al_clear_to_color(some_random_allegro_color_structure);`
-
-`(al:draw-bitmap sprite 200 300 0)` - `al_draw_bitmap(sprite, 200, 300, 0);`
-
-
-
+(defun main ()
+  (al:init) ; al_init();
+  (setf display (al:create-display 800 600)) ; display = al_create_display(800, 600);
+  (al:clear-to-color 1 1.0 1.0 1.0) ; al_clear_to_color(...);// Not using the ALLEGRO_COLOR
+  (al:flip-display) ; al_flip_display();
+  (al:rest-time 2) ; al_rest();
+  (al:destroy-display display) ; al_destroy_display(display);
+  (al:uninstall-system)) ; al_uninstall_system();
+</code>
+  
 Progress
 --------------
 ***I am using unverified, estimated percentages***
