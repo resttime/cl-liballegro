@@ -1,4 +1,4 @@
-(require "cl-liballegro")
+(ql:quickload "cl-liballegro")
 
 (defpackage #:game
   (:use :cl :cffi)
