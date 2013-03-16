@@ -1,8 +1,5 @@
 cl-liballegro
 ==========
-
-`(require "cl-liballegro") ; ASDF system working`
-
 Description
 --------------
 
@@ -20,9 +17,9 @@ Both of which will worked on while I create a game.
 
 Usages
 --------------
-- `al_*` becomes `al:*`
-- Do not pass ALLEGRO_COLOR to functions, use four numbers instead. (CFFI cannot pass structures by value, only pointers)
-- `(al:rest secs)` is `(al:rest-time secs)` instead because of symbol interference with (rest list).
+1. `al_*` becomes `al:*`
+2. Do not pass ALLEGRO_COLOR to functions, use four numbers instead. (CFFI cannot pass structures by value, only pointers)
+3. `(al:rest secs)` is `(al:rest-time secs)` instead because of symbol interference with (rest list).
 
 Example:
 ```cl
