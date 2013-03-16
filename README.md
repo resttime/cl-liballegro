@@ -35,7 +35,7 @@ Example:
   (setf display (al:create-display 800 600)) ; display = al_create_display(800, 600);
   (al:clear-to-color 1 1.0 1.0 1.0)          ; al_clear_to_color(...); // Not using an ALLEGRO_COLOR structure
   (al:flip-display)                          ; al_flip_display();
-  (al:rest-time 2)                           ; al_rest();
+  (al:rest-time 2)                           ; al_rest(2);
   (al:destroy-display display)               ; al_destroy_display(display);
   (al:uninstall-system))                     ; al_uninstall_system();
 ```
