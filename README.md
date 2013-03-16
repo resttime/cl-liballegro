@@ -25,7 +25,7 @@ Usages
 - `(al:rest secs)` is `(al:rest-time secs)` instead because of symbol interference with (rest list).
 
 Example:
-<code>
+```commonlisp
 (ql:quickload "cl-liballegro") ; Load the system
 
 (defvar display) ; Make a variable that holds the ALLEGRO_DISPLAY pointer
@@ -38,7 +38,7 @@ Example:
   (al:rest-time 2) ; al_rest();
   (al:destroy-display display) ; al_destroy_display(display);
   (al:uninstall-system)) ; al_uninstall_system();
-</code>
+```
   
 Progress
 --------------
