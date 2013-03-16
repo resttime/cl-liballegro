@@ -13,15 +13,11 @@ After writing the bindings, I'll work on separating it from CFFI.
 Then I'll write helper macros/functions for neat integration with Lisp. 
 Both of which will worked on while I create a game.
 
-
-
 Usages
 --------------
 1. `al_*` becomes `al:*`
 2. Do not pass ALLEGRO_COLOR to functions, use four numbers instead. (CFFI cannot pass structures by value, only pointers)
 3. `(al:rest secs)` is `(al:rest-time secs)` instead because of symbol interference with (rest list).
-
-Example:
 ```cl
 (ql:quickload "cl-liballegro")               ; Load the system
 
@@ -36,7 +32,7 @@ Example:
   (al:destroy-display display)               ; al_destroy_display(display);
   (al:uninstall-system))                     ; al_uninstall_system();
 ```
-  
+
 Progress
 --------------
 ***I am using unverified, estimated percentages***
