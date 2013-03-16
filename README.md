@@ -33,7 +33,7 @@ Example:
 (defun main ()
   (al:init) ; al_init();
   (setf display (al:create-display 800 600)) ; display = al_create_display(800, 600);
-  (al:clear-to-color 1 1.0 1.0 1.0) ; al_clear_to_color(...);// Not using the ALLEGRO_COLOR
+  (al:clear-to-color 1 1.0 1.0 1.0) ; al_clear_to_color(...); // Not using an ALLEGRO_COLOR structure
   (al:flip-display) ; al_flip_display();
   (al:rest-time 2) ; al_rest();
   (al:destroy-display display) ; al_destroy_display(display);
