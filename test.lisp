@@ -1,4 +1,4 @@
-(require "cl-liballegro")
+(ql:quickload "cl-liballegro")
 
 (defvar display)
 
