@@ -1,0 +1,185 @@
+(defpackage :projectile-demo
+  (:use :common-lisp :allegro :cffi)
+  (:export "MAIN"))
+
+(in-package :projectile-demo)
+
+(defclass object ()
+  ((bitmap      :accessor bitmap)
+   (bitmap-path :accessor bitmap-path :initarg :bitmap-path :initform "")
+   (x           :accessor x           :initarg :x :initform 0.0)
+   (y           :accessor y           :initarg :y :initform 0.0)
+   (dx          :accessor dx          :initarg :dx :initform 0.0)
+   (dy          :accessor dy          :initarg :dy :initform 0.0)
+   (ax           :accessor ax         :initarg :ax :initform 0.0)
+   (ay           :accessor ay         :initarg :ay :initform 0.0)))
+
+(defmethod initialize-instance :after ((obj object) &key)
+  (setf (bitmap obj)
+	(al-load-bitmap (foreign-string-alloc (bitmap-path obj)))))
+
+(defclass key-state ()
+  ((right-key :accessor right-key :initform nil)
+   (up-key :accessor up-key :initform nil)
+   (down-key :accessor down-key :initform nil)
+   (left-key :accessor left-key :initform nil)
+   (space-key :accessor space-key :initform nil)))
+
+(defclass hero (object)
+  ((jumping :accessor jumping :initform nil)
+   (attacking :accessor attacking :initform nil )))
+(defclass bullet (object)
+  ((bitmap-path :initform "bullet.png")))
+
+(defparameter *game-running* t)
+(defparameter *window-width* 800)
+(defparameter *window-height* 600)
+(defparameter *fps* 125)
+(defparameter *timer-dt* (/ 1.0d0 *fps*)) 
+(defparameter *dt* (coerce *timer-dt* 'single-float))
+
+(defparameter *object-list* (list))
+(defparameter *key-state* (make-instance 'key-state))
+
+(defvar *display* (null-pointer))
+(defvar *event-queue* (null-pointer))
+(defvar *update-game-event-timer* (null-pointer))
+
+(defun get-event-type (ev)
+  (foreign-slot-value ev 'allegro-event 'type))
+
+(defgeneric update-object (obj))
+(defmethod update-object ((obj hero))
+  (with-slots (x y dx dy ax ay jumping attacking) obj
+    (if (right-key *key-state*)
+	(incf x (* 100.0 *dt*)))
+    (if (left-key *key-state*)
+	(decf x (* *dt* 100.0)))
+    (when (and (up-key *key-state*) (not (jumping obj)))
+      (setf (jumping obj) t)
+      (setf dy -200))
+    (if (space-key *key-state*)
+	(unless (attacking obj)
+	  (setf (attacking obj) t)
+	  (push (make-instance 'bullet :x x :y y :dx 300.0 :ay 600.0) *object-list*))
+	(setf (attacking obj) nil))
+    (incf dx (* ax *dt*))
+    (incf x (* dx *dt*))
+    (incf dy (* ay *dt*))
+    (incf y (* dy *dt*))
+    (when (>= y (- *window-height* 52.0))
+      (setf y (- *window-height* 52.0))
+      (setf (jumping obj) nil))
+    (if (<= x 0.0)
+	(setf x 0.0))
+    (if (>= x (- *window-width* 36.0))
+	(setf x (- *window-width* 36.0)))))
+(defmethod update-object ((obj bullet))
+  (with-slots (x y dx dy ax ay) obj
+    (incf dy (* ay *dt*))
+    (incf y (* dy *dt*))
+    (incf dx (* ax *dt*))
+    (incf x (* dx *dt*))
+    (if (>= y 600.0)
+	(setf *object-list* (remove obj *object-list*)))
+    (if (>= x 800.0)
+	(setf *object-list* (remove obj *object-list*)))))
+(defmethod update-object ((obj object))
+  (with-slots (x y dx dy ax ay) obj
+    (incf dx (* ax *dt*))
+    (incf x (* dx *dt*))
+    (if (<= x 0.0)
+	(setf dx 500.0))))
+
+(defgeneric draw-object (obj))
+(defmethod draw-object ((obj object))
+  (al-draw-bitmap (bitmap obj) (x obj) (y obj) 0))
+
+(defun is-keyboard-event? (event-type)
+  (if (or (= +allegro-event-key-up+ event-type)
+	  (= +allegro-event-key-down+ event-type))
+      t
+      nil))
+(defun is-event-display-close? (event-type)
+  (if (= event-type +allegro-event-display-close+)
+      t
+      nil))
+
+(defun keyboard-event-handler (event-type keycode)
+  (if (= event-type +allegro-event-key-down+)
+      (cond ((= keycode +allegro-key-right+) (setf (right-key *key-state*) t))
+	    ((= keycode +allegro-key-left+) (setf (left-key *key-state*) t))
+	    ((= keycode +allegro-key-up+) (setf (up-key *key-state*) t))
+	    ((= keycode +allegro-key-down+) (setf (down-key *key-state*) t))
+	    ((= keycode +allegro-key-space+) (setf (space-key *key-state*) t)))
+      (cond ((= keycode +allegro-key-right+) (setf (right-key *key-state*) nil))
+	    ((= keycode +allegro-key-left+) (setf (left-key *key-state*) nil))
+	    ((= keycode +allegro-key-up+) (setf (up-key *key-state*) nil))
+	    ((= keycode +allegro-key-down+) (setf (down-key *key-state*) nil))
+	    ((= keycode +allegro-key-space+) (setf (space-key *key-state*) nil)))))
+
+(defun update-game ()
+  (loop for obj in *object-list* do
+       (update-object obj)))
+
+(defun display-game ()
+  (al-clear-to-color 1.0 1.0 1.0 1.0)
+  (loop for obj in *object-list* do
+       (draw-object obj))
+  (al-flip-display))
+
+(defun game-loop ()
+  (with-allegro-event-loop ev
+    (cond ((is-keyboard-event? event-type)
+	   (keyboard-event-handler event-type keycode))
+	  ((is-event-display-close? event-type)
+	   (setf *game-running* nil)))))
+
+(defun initialize-allegro ()
+  (al-init)
+  (al-init-image-addon)
+  (al-init-font-addon)
+  (al-install-audio)
+  (al-init-acodec-addon)
+  (al-init-primitives-addon)
+  (al-install-keyboard)
+  (al-install-mouse))
+
+(defun initialize-display ()
+  (setf *display* (al-create-display *window-width* *window-height*))
+  (al-clear-to-color 0.0 0.0 0.0 1.0)
+  (al-flip-display))
+
+(defun initialize-events ()
+  (setf *update-game-event-timer* (al-create-timer *timer-dt*))
+  (setf *event-queue* (al-create-event-queue))
+  (al-register-event-source *event-queue*
+			    (al-get-display-event-source *display*))
+  (al-register-event-source *event-queue*
+			    (al-get-timer-event-source *update-game-event-timer*))
+  (al-register-event-source *event-queue*
+			    (al-get-keyboard-event-source))
+  (al-start-timer *update-game-event-timer*))
+
+(defun initialize-game ()
+  (setf *game-running* t)
+  (initialize-allegro)
+  (initialize-display)
+  (initialize-events)
+  (setf *object-list* (list (make-instance 'object :ax -200.0 :bitmap-path "test.png")
+			    (make-instance 'object :y 100.0 :ax -400.0 :bitmap-path "test.png")
+			    (make-instance 'hero
+					   :ay 500.0
+					   :y (- *window-height* 52.0)
+					   :bitmap-path "test.png"))))
+
+(defun shutdown-game ()
+  (al-destroy-timer *update-game-event-timer*)
+  (al-destroy-display *display*)
+  (al-destroy-event-queue *event-queue*)
+  (al-uninstall-system))
+
+(defun main ()
+  (initialize-game)
+  (game-loop)
+  (shutdown-game))
