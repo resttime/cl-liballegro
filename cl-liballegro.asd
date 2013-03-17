@@ -8,4 +8,6 @@
 	     (:file "constants" :depends-on ("package"))
 	     (:file "library" :depends-on ("package"))
 	     (:file "types" :depends-on ("package"))
-	     (:file "funcs" :depends-on ("package" "types" "constants"))))))
+	     (:file "funcs" :depends-on ("package" "types" "constants"))
+	     ;; Wrapper
+	     (:file "wrapper" :depends-on ("package" "types" "constants" "funcs"))))))
