@@ -1,6 +1,6 @@
 (defpackage #:cl-liballegro
   (:use #:cl #:cffi)
-  (:nicknames #:al #:liballegro :alleg)
+  (:nicknames #:al #:liballegro)
   (:export 
 ;;; Configuration Files
    #:create-config
