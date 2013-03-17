@@ -36,6 +36,48 @@ Usages
   (al:uninstall-system))                     ; al_uninstall_system();
 ```
 
+FAQ
+--------------
+1. **How do I `(ql:quickload "cl-liballegro")` from any location?**
+ * Either add the path to your asdf by putting this line to your ~/.sbclrc file *(remember to change '\' -> '/')*: 
+```common-lisp
+(push #p"/path/to/cl-liballegro/" asdf:*central-registry*)
+```
+ * Or copy cl-liballegro to /path/to/quicklisp/local-projects/cl-liballegro
+ 
+2. **Why can't my program find the DLL?**
+
+ There are path problems in Windows because the DLL files (which contain all the functions the CFFI calls upon) 
+ doesn't have a default location unlike in Unix environments. When the library loads in Windows, **it will look for 
+ the DLL in the current folder of the FILE.LISP that evaluates `(ql:quickload "cl-liballegro")`** This means you must 
+ have a copy of the DLL file in the directory of FILE.LISP, not in the cl-liballegro directory unless the FILE.LISP is 
+ in there. SLIME however, likes to change the default search folder to the one Emacs is in when it starts.
+
+ **SBCL Only** - `Open Windows command prompt in the folder that contains both the DLL and game.lisp`
+```
+sbcl.exe
+(load "game.lisp")                      ; File contains (ql:quickload "cl-liballegro")
+```
+
+ **Emacs + SLIME**
+```
+C-x C-f /path/to/Desktop/file9.lisp
+M-x slime
+C-x C-f /path/to/Desktop/game/game.lisp ; File contains (ql:quickload "cl-liballegro")
+C-c C-l                                 ; Looks for the DLL at /path/to/Desktop/allegro.dll
+```
+```
+C-x C-f /path/to/Desktop/file9.lisp
+C-x C-f /path/to/Desktop/game/game.lisp ; File contains (ql:quickload "cl-liballegro")
+M-x slime
+C-c C-l                                 ; Looks for the DLL at /path/to/Desktop/game/allegro.dll
+```
+```
+M-x slime
+C-x C-f /path/to/Desktop/game/game.lisp ; File contains (ql:quickload "cl-liballegro")
+C-c C-l                                 ; Looks for the DLL at /whatever/default/emacs/directory/allegro.dll
+```
+
 Progress
 --------------
 ***I am using unverified, estimated percentages***
