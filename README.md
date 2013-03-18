@@ -40,7 +40,7 @@ FAQ
 --------------
 1. **How do I `(ql:quickload "cl-liballegro")` from any location?**
  * Either add the path to your asdf by putting this line to your ~/.sbclrc file *(remember to change '\' -> '/')*: 
-```common-lisp
+```
 (push #p"/path/to/cl-liballegro/" asdf:*central-registry*)
 ```
  * Or copy cl-liballegro to /path/to/quicklisp/local-projects/cl-liballegro
