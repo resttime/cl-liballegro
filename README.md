@@ -48,15 +48,15 @@ FAQ
 2. **Why can't my program find the DLL?**
 
  There are path problems in Windows because the DLL files (which contain all the functions the CFFI calls upon) 
- doesn't have a default location unlike in Unix environments. When the library loads in Windows, **it will look for 
- the DLL in the current folder of the FILE.LISP that evaluates `(ql:quickload "cl-liballegro")`** This means you must 
+ doesn't have a default location unlike in Unix environments. When the library loads in Windows, ***it will look for 
+ the DLL in the current folder of the FILE.LISP that evaluates `(ql:quickload "cl-liballegro")`*** This means you must 
  have a copy of the DLL file in the directory of FILE.LISP, not in the cl-liballegro directory unless the FILE.LISP is 
  in there. SLIME however, likes to change the default search folder to the one Emacs is in when it starts.
 
- **SBCL Only** - `Open Windows command prompt in the folder that contains both the DLL and game.lisp`
+ **SBCL Only** - `Open command prompt in the folder that contains both the DLL and game.lisp`
 ```
-sbcl.exe
-(load "game.lisp")                      ; File contains (ql:quickload "cl-liballegro")
+> sbcl
+> (load "game.lisp")                      ; File contains (ql:quickload "cl-liballegro")
 ```
 
  **Emacs + SLIME**
