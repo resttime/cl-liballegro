@@ -1,6 +1,6 @@
 cl-liballegro
 ==========
-***It's usable! Pseudo support for the ALLEGRO_COLOR will be available in the future with my wrapper.***
+***It's usable! Pseudo support for the ALLEGRO_COLOR structure will be available in the future with my wrapper.***
 Description
 --------------
 
