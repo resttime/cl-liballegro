@@ -107,7 +107,6 @@
   
 ;;; Graphics
 ;; Colors
-(defcstruct allegro-color (r :float) (g :float) (b :float) (a :float))
 
 ;; Locking and Pixel Formats
 (defcstruct allegro-locked-region
