@@ -1,7 +1,7 @@
 (in-package #:cl-liballegro)
 
 (define-foreign-library wrapper
-  (:windows "wrapper.dll"))
+  (t "wrapper.dll"))
 (use-foreign-library wrapper)
 
 ;;; Graphics
