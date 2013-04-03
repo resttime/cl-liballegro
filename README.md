@@ -33,11 +33,12 @@ Usages
    (a :accessor a :initarg :a)))
 ```
 
-**Example**
+Examples
+--------------
 
-Check out the "Demos" folder for more detailed implementations.
-
-This repository will contain the most recent usages: https://github.com/resttime/cl-allegro-game
+1. Check out [Demos](Demos).
+2. Check out [cl-allegro-game](https://github.com/resttime/cl-allegro-game) for my most recent use of the library.
+I recommend looking at my use of hash tables to create an Entity Component System and handle input events, it is very efficient.
 
 ```cl
 ;;;; test.lisp
@@ -97,12 +98,14 @@ C-x C-f /path/to/Desktop/game/game.lisp ; File contains (ql:quickload "cl-liball
 C-c C-l                                 ; Looks for the DLL at /whatever/default/emacs/directory/allegro.dll
 ```
 
-Progress
+Progress (It is very usable)
 --------------
 ***I am using unverified, estimated percentages***
 
-**[???%] means I will not work on the section for the foreseeable future because I am under the impression
-that Common Lisp has more suitable implementations already or it just is not practical.**
+**[???%] means I will not work on the section in the foreseeable future because I am under the impression
+that Common Lisp has more suitable implementations or it just is not practical.**
+
+**[95%] means it's pretty much done**
 
 Configuration Files **[95%]**
 Display **[80%]?**
