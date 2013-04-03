@@ -35,6 +35,10 @@ Usages
 
 **Example**
 
+Check out the "Demos" folder for more detailed implementations.
+
+This repository will contain the most recent usages: https://github.com/resttime/cl-allegro-game
+
 ```cl
 ;;;; test.lisp
 ;;; Creates a white background display window and waits 2 seconds before closing.
