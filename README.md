@@ -2,6 +2,8 @@ cl-liballegro
 ==========
 ***It's usable!***
 
+***Feel free to raise an issue to request a feature or for me to work on something***
+
 ***Pseudo support for the ALLEGRO_COLOR structure will be available in the future with my wrapper.*** 
 ***`(al:get-pixel bitmap x y)` works by returning a Common Lisp class. Scroll down to Usages for more info.***
 Description
