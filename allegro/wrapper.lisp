@@ -6,11 +6,7 @@
 
 ;;; Graphics
 ;; Color
-(defclass allegro-color ()
-  ((r :accessor r :initarg :r)
-   (g :accessor g :initarg :g)
-   (b :accessor b :initarg :b)
-   (a :accessor a :initarg :a)))
+(defstruct allegro-color r g b a)
 (defcstruct allegro-color-ptr
   (r :float)
   (g :float)
@@ -23,7 +19,7 @@
 (defmethod translate-from-foreign (pointer (type c-allegro-color))
   (with-foreign-slots ((r g b a) pointer allegro-color-ptr)
     (foreign-free pointer)
-    (make-instance 'allegro-color :r r :g g :b b :a a)))
+    (make-allegro-color :r r :g g :b b :a a)))
 
 (defcfun ("lisp_al_map_rgb" map-rgb) c-allegro-color (r :uchar) (g :uchar) (b :uchar))
 (defcfun ("lisp_al_map_rgb_f" map-rgb-f) c-allegro-color
