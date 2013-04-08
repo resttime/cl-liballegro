@@ -107,7 +107,7 @@ that Common Lisp has more suitable implementations or it just is not practical.*
 
 Configuration Files **[95%]**
 Display **[80%]?**
-Events - **[85%]**
+Events - **[90%]**
 File I/O - **[???%]**
 Filesystem - **[???%]**
 Fixed point math - **[95%]**
