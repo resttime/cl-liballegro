@@ -5,7 +5,7 @@ cl-liballegro
 ***Feel free to raise an issue to request a feature or for me to work on something***
 
 ***Pseudo support for the ALLEGRO_COLOR structure will be available in the future with my wrapper.*** 
-***`(al:get-pixel bitmap x y)` works by returning a Common Lisp class. Scroll down to Usages for more info.***
+***`(al:get-pixel bitmap x y)` works by returning a Common Lisp struct. Scroll down to Usages for more info.***
 Description
 --------------
 
@@ -24,15 +24,11 @@ Usages
 1. `al_*` becomes `al:*`
 2. Do not pass ALLEGRO_COLOR to functions, use four numbers instead. (CFFI cannot pass structures by value, only pointers)
 3. `(al:rest secs)` is `(al:rest-time secs)` instead because of symbol interference with (rest list).
-4. `(al:get-pixel bitmap x y)` returns a Common Lisp class instead of an ALLEGRO_COLOR structure.
+4. `(al:get-pixel bitmap x y)` returns a Common Lisp structure instead of an ALLEGRO_COLOR structure.
  
 ```cl
-;;; (al:get-pixel bitmap x y) returns this class
-(defclass allegro-color ()
-  ((r :accessor r :initarg :r)
-   (g :accessor g :initarg :g)
-   (b :accessor b :initarg :b)
-   (a :accessor a :initarg :a)))
+;;; (al:get-pixel bitmap x y) returns this structure
+(defstruct allegro-color r g b a)
 ```
 
 Examples
