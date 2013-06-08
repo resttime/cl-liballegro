@@ -22,9 +22,10 @@ Both of which will worked on while I create a game.
 Usages
 --------------
 1. `al_*` becomes `al:*`
-2. Do not pass ALLEGRO_COLOR to functions, use four numbers instead. (CFFI cannot pass structures by value, only pointers)
+2. Do not pass ALLEGRO_COLOR to functions, use four numbers instead. (CFFI cannot pass structures by value)
 3. `(al:rest secs)` is `(al:rest-time secs)` instead because of symbol interference with (rest list).
 4. `(al:get-pixel bitmap x y)` returns a Common Lisp structure instead of an ALLEGRO_COLOR structure.
+5. `allegro_*` is removed mostly
  
 ```cl
 ;;; (al:get-pixel bitmap x y) returns this structure
