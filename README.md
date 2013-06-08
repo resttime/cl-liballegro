@@ -34,24 +34,24 @@ Usages
 Examples
 --------------
 
-1. Check out [Demos](Demos).
-2. Check out [cl-allegro-game](https://github.com/resttime/cl-allegro-game) for my most recent use of the library.
-I recommend looking at my use of hash tables to create an Entity Component System and handle input events, it is very efficient.
+No new demos yet
 
 ```cl
 ;;;; test.lisp
 ;;; Creates a white background display window and waits 2 seconds before closing.
-(ql:quickload "cl-liballegro")               ; Load the system
+(ql:quickload "cl-liballegro")                       ; Load the system
 
-(defvar display)                             ; Make a variable that holds the ALLEGRO_DISPLAY pointer
+(defvar display)                                     ; Make a variable that holds the ALLEGRO_DISPLAY pointer
 (defun main ()
-  (al:init)                                  ; al_init();
-  (setf display (al:create-display 800 600)) ; display = al_create_display(800, 600);
-  (al:clear-to-color 1 1.0 1.0 1.0)          ; al_clear_to_color(...); // Not using an ALLEGRO_COLOR structure
-  (al:flip-display)                          ; al_flip_display();
-  (al:rest-time 2)                           ; al_rest(2);
-  (al:destroy-display display)               ; al_destroy_display(display);
-  (al:uninstall-system))                     ; al_uninstall_system();
+  (al:init)                                          ; al_init();
+  (al:set-new-display-flags '(:windowed :resizable)) ; al_set_new_display_flags(ALLEGRO_WINDOWED | ALLEGRO_RESIZABLE);
+  (al:set-new-display-option :vsync 1 :require)      ; al_set_new_display_option(ALLEGRO_VSYNC, 1, ALLEGRO_REQUIRE);
+  (setf display (al:create-display 800 600))         ; display = al_create_display(800, 600);
+  (al:clear-to-color 1 1.0 1.0 1.0)                  ; al_clear_to_color(...); // Not using an ALLEGRO_COLOR structure
+  (al:flip-display)                                  ; al_flip_display();
+  (al:rest-time 2)                                   ; al_rest(2);
+  (al:destroy-display display)                       ; al_destroy_display(display);
+  (al:uninstall-system))                             ; al_uninstall_system();
 ```
 
 FAQ
