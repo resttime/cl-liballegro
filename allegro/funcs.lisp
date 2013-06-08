@@ -34,12 +34,12 @@
 ;; Display Creation
 (defcfun ("al_create_display" create-display) :pointer (width :int) (height :int))
 (defcfun ("al_destroy_display" destroy-display) :void (display :pointer))
-(defcfun ("al_get_new_display_flags" get-new-display-flags) :int)
-(defcfun ("al_set_new_display_flags" set-new-display-flags) :void (flags :int))
+(defcfun ("al_get_new_display_flags" get-new-display-flags) display-flags)
+(defcfun ("al_set_new_display_flags" set-new-display-flags) :void (flags display-flags))
 (defcfun ("al_get_new_display_option" get-new-display-option) :int
-  (option allegro-display-options) (importance :pointer))
+  (option display-options) (importance :pointer))
 (defcfun ("al_set_new_display_option" set-new-display-option) :void
-  (option allegro-display-options) (value :int) (importance :int))
+  (option display-options) (value :int) (importance importance))
 (defcfun ("al_reset_new_display_options" reset-new-display-options) :void)
 (defcfun ("al_get_new_window_position" get-new-window-position) :void
   (x :pointer) (y :pointer))
@@ -49,11 +49,12 @@
 (defcfun ("al_set_new_display_refresh_rate" set-new-display-refresh-rate) :void
   (refresh-rate :int))
 
-;; Display Operations 
+
+;; Display Operations
 (defcfun ("al_get_display_event_source" get-display-event-source) :pointer
   (display :pointer))
 (defcfun ("al_get_backbuffer" get-backbuffer) :pointer (display :pointer))
-(defcfun ("al_flip_display" flip-display) :void)
+(defcfun ("al_flip_display" flip-display) :void) 
 (defcfun ("al_update_display_region" update-display-region) :void
   (x :int) (y :int) (width :int) (height :int))
 (defcfun ("al_wait_for_vsync" wait-for-vsync) :boolean)
@@ -68,26 +69,30 @@
   (display :pointer) (x :pointer) (y :pointer))
 (defcfun ("al_set_window_position" set-window-position) :void
   (display :pointer) (x :int) (y :int))
-
+  
 ;; Display settings
-(defcfun ("al_get_display_flags" get-display-flags) :int (display :pointer))
+(defcfun ("al_get_display_flags" get-display-flags) display-flags (display :pointer))
+(defcfun ("al_set_display_flag" set-display-flag) :boolean
+  (display :pointer) (flag display-flags) (onoff :boolean))
 (defcfun ("al_get_display_flag" get-display-flag) :boolean
   (display :pointer) (flag :int) (onoff :boolean))
 (defcfun ("al_toggle_display_flag" toggle-display-flag) :boolean
-  (display :pointer) (flag :int) (onoff :boolean))
+  (display :pointer) (flag display-flags) (onoff :boolean))
 (defcfun ("al_get_display_option" get-display-option) :int
-  (display :pointer) (option allegro-display-options))
-(defcfun ("al_get_display_format" get-display-format) :int (display :pointer))
+  (display :pointer) (option display-options))
+(defcfun ("al_get_display_format" get-display-format) pixel-format (display :pointer))
 (defcfun ("al_get_display_refresh_rate" get-display-refresh-rate) :int
+  (display :pointer))
+(defcfun ("al_get_display_orientation" get-display-orientation) display-orientation
   (display :pointer))
 (defcfun ("al_set_window_title" set-window-title) :void
   (display :pointer) (title :string))
 (defcfun ("al_set_display_icon" set-display-icon) :void
   (display :pointer) (icon :pointer))
 (defcfun ("al_set_display_icons" set-display-icons) :void
-  (display :pointer) (num-icons :int) (icon :pointer))
+  (display :pointer) (num-icons :int) (icons :pointer))
 
-;; Screensaver
+ ;; Screensaver
 (defcfun ("al_inhibit_screensaver" inhibit-screensaver) :boolean (inhibit :boolean))
 
 ;;; Events
@@ -121,16 +126,7 @@
 (defcfun ("al_set_event_source_data" set-event-source-data) :void
   (source :pointer) (data :pointer))
 
-;;; File I/O
-(defcfun ("al_fopen" fopen) :pointer (path :pointer) (mode :pointer))
-
-;;; File system routines
-(defcfun ("al_create_fs_entry" create-fs-entry) :pointer (path :pointer))
-(defcfun ("al_destroy_fs_entry" destroy-fs-entry) :void (fh :pointer))
-
 ;;; Fixed point math
-(defctype fixed :int32)
-
 (defcfun ("al_itofix" itofix) fixed (x :int))
 (defcfun ("al_fixtoi" fixtoi) :int (x fixed))
 (defcfun ("al_fixfloor" fixfloor) :int (x fixed))
@@ -162,14 +158,14 @@
 ;; Colors
 
 ;; Locking and pixel formats
-(defcfun ("al_get_pixel_size" get-pixel-size) :int (format allegro-pixel-format))
+(defcfun ("al_get_pixel_size" get-pixel-size) :int (format pixel-format))
 (defcfun ("al_get_pixel_format_bits" get-pixel-format-bits) :int
-  (format allegro-pixel-format))
+  (format pixel-format))
 (defcfun ("al_lock_bitmap" lock-bitmap) :pointer
-  (bitmap :pointer) (format allegro-pixel-format) (flags :int))
+  (bitmap :pointer) (format pixel-format) (flags locking-flags))
 (defcfun ("al_lock_bitmap_region" lock-bitmap-region) :pointer
-  (bitmap :pointer) (x :int) (y :int) (widht :int) (height :int)
-  (format allegro-pixel-format) (flags :int))
+  (bitmap :pointer) (x :int) (y :int) (width :int) (height :int)
+  (format pixel-format) (flags locking-flags))
 (defcfun ("al_unlock_bitmap" unlock-bitmap) :void (bitmap :pointer))
 
 ;; Bitmap Creation
@@ -178,17 +174,17 @@
   (parent :pointer) (x :int) (y :int) (w :int) (h :int))
 (defcfun ("al_clone_bitmap" clone-bitmap) :pointer (bitmap :pointer))
 (defcfun ("al_destroy_bitmap" destroy-bitmap) :void (bitmap :pointer))
-(defcfun ("al_get_new_bitmap_flags" get-new-bitmap-flags) :int)
-(defcfun ("al_get_new_bitmap_format" get-new-bitmap-format) :int)
-(defcfun ("al_set_new_bitmap_flags" set-new-bitmap-flags) :void (flags :int))
-(defcfun ("al_add_new_bitmap_flag" add-new-bitmap-flag) :void (flag :int))
+(defcfun ("al_get_new_bitmap_flags" get-new-bitmap-flags) bitmap-flags)
+(defcfun ("al_get_new_bitmap_format" get-new-bitmap-format) pixel-format)
+(defcfun ("al_set_new_bitmap_flags" set-new-bitmap-flags) :void (flags bitmap-flags))
+(defcfun ("al_add_new_bitmap_flag" add-new-bitmap-flag) :void (flag bitmap-flags))
 (defcfun ("al_set_new_bitmap_format" set-new-bitmap-format) :void
-  (allegro-pixel-format :int))
+  (pixel-format pixel-format))
 
 
 ;; Bitmap properties
-(defcfun ("al_get_bitmap_flags" get-bitmap-flags) :int (bitmap :pointer))
-(defcfun ("al_get_bitmap_format" get-bitmap-format) :int (bitmap :pointer))
+(defcfun ("al_get_bitmap_flags" get-bitmap-flags) bitmap-flags (bitmap :pointer))
+(defcfun ("al_get_bitmap_format" get-bitmap-format) pixel-format (bitmap :pointer))
 (defcfun ("al_get_bitmap_height" get-bitmap-height) :int (bitmap :pointer))
 (defcfun ("al_get_bitmap_width" get-bitmap-width) :int (bitmap :pointer))
 
@@ -201,21 +197,21 @@
 (defcfun ("al_clear_to_color" clear-to-color) :void
   (r c-float) (g c-float) (b c-float) (a c-float))
 (defcfun ("al_draw_bitmap" draw-bitmap) :void
-  (bitmap :pointer) (dx c-float) (dy c-float) (flags :int))
+  (bitmap :pointer) (dx c-float) (dy c-float) (flags draw-flags))
 (defcfun ("al_draw_tinted_bitmap" draw-tinted-bitmap) :void
   (bitmap :pointer)
   (r c-float) (g c-float) (b c-float) (a c-float)
   (dx c-float) (dy c-float)
-  (flags :int))
+  (flags draw-flags))
 (defcfun ("al_draw_bitmap_region" draw-bitmap-region) :void
   (bitmap :pointer)
   (sx c-float) (sy c-float) (sw c-float) (sh c-float) (dx c-float (dy c-float))
-  (flags :int))
+  (flags draw-flags))
 (defcfun ("al_draw_tinted_bitmap_region" draw-tinted-bitmap-region) :void
   (bitmap :pointer)
   (r c-float) (g c-float) (b c-float) (a c-float)
   (sx c-float) (sy c-float) (sw c-float) (sh c-float) (dx c-float (dy c-float))
-  (flags :int))
+  (flags draw-flags))
 (defcfun ("al_draw_pixel" draw-pixel) :void
   (x c-float) (y c-float)
   (r c-float) (g c-float) (b c-float) (a c-float))
@@ -224,21 +220,21 @@
   (cx c-float) (cy c-float)
   (dx c-float) (dy c-float)
   (angle c-float)
-  (flags :int))
+  (flags draw-flags))
 (defcfun ("al_draw_tinted_rotated_bitmap" draw-tinted-rotated-bitmap) :void
   (bitmap :pointer)
   (r c-float) (g c-float) (b c-float) (a c-float)
   (cx c-float) (cy c-float)
   (dx c-float) (dy c-float)
   (angle c-float)
-  (flags :int))
+  (flags draw-flags))
 (defcfun ("al_draw_scaled_rotated_bitmap" draw-scaled-rotated-bitmap) :void
   (bitmap :pointer)
   (cx c-float) (cy c-float)
   (dx c-float) (dy c-float)
   (xscale c-float) (yscale c-float)
   (angle c-float)
-  (flags :int))
+  (flags draw-flags))
 (defcfun ("al_draw_tinted_scaled_rotated_bitmap" draw-tinted-scaled-rotated-bitmap)
     :void
   (bitmap :pointer)
@@ -247,7 +243,7 @@
   (dx c-float) (dy c-float)
   (xscale c-float) (yscale c-float)
   (angle c-float)
-  (flags :int))
+  (flags draw-flags))
 (defcfun ("al_draw_tinted_scaled_rotated_bitmap_region"
 	  draw-tinted-scaled-rotated-bitmap-region) :void
   (sx c-float) (sy c-float) (sw c-float) (sh c-float)
@@ -257,16 +253,16 @@
   (dx c-float) (dy c-float)
   (xscale c-float) (yscale c-float)
   (angle c-float)
-  (flags :int))
+  (flags draw-flags))
 (defcfun ("al_draw_scaled_bitmap" draw-scaled-bitmap) :void
   (sx c-float) (sy c-float) (sw c-float) (sh c-float)
   (dx c-float) (dy c-float) (dw c-float) (dh c-float)
-  (flags :int))
+  (flags draw-flags))
 (defcfun ("al_draw_tinted_scaled_bitmap" draw-tinted-scaled-bitmap) :void
   (r c-float) (g c-float) (b c-float) (a c-float)
   (sx c-float) (sy c-float) (sw c-float) (sh c-float)
   (dx c-float) (dy c-float) (dw c-float) (dh c-float)
-  (flags :int))
+  (flags draw-flags))
 (defcfun ("al_get_target_bitmap" get-target-bitmap) :pointer)
 (defcfun ("al_put_pixel" put-pixel) :void
   (x :int) (y :int)
@@ -338,7 +334,7 @@
 (defcfun ("al_get_joystick_button_name" get-joystick-button-name) :string
   (joy :pointer) (button :int))
 (defcfun ("al_get_joystick_stick_flags" get-joystick-stick-flags) :int
-  (joy :pointer) (stick :int))
+  (joy :pointer) (stick joyflags))
 (defcfun ("al_get_joystick_num_sticks" get-joystick-num-sticks) :int (joy :pointer))
 (defcfun ("al_get_joystick_num_axes" get-joystick-num-axes) :int
   (joy :pointer) (stick :int))
@@ -394,7 +390,7 @@
 (defcfun ("al_set_mouse_cursor" set-mouse-cursor) :boolean
   (display :pointer) (cursor :pointer))
 (defcfun ("al_set_system_mouse_cursor" set-system-mouse-cursor) :boolean
-  (display :pointer) (cursor-id allegro-system-mouse-cursor))
+  (display :pointer) (cursor-id system-mouse-cursor))
 (defcfun ("al_get_mouse_cursor_position" get-mouse-cursor-position) :boolean
   (ret-x :pointer) (ret-y :pointer))
 (defcfun ("al_hide_mouse_cursor" hide-mouse-cursor) :boolean (display :pointer))
@@ -439,7 +435,7 @@
 ;;; State
 (defcfun ("al_restore_state" restore-state) :void (state :pointer))
 (defcfun ("al_store_state" store-state) :void
-  (state :pointer) (flags allegro-state-flags))
+  (state :pointer) (flags state-flags))
 (defcfun ("al_get_errno" get-errno) :int)
 (defcfun ("al_set_errno" set-errno) :void (errnum :int))
 
@@ -450,7 +446,7 @@
 (defcfun ("al_uninstall_system" uninstall-system) :void)
 (defcfun ("al_is_system_installed" is-system-installed) :boolean)
 (defcfun ("al_get_allegro_version" get-allegro-version) :uint32)
-(defcfun ("al_get_standard_path" get-standard-path) :pointer (id :int))
+(defcfun ("al_get_standard_path" get-standard-path) :pointer (id path-id))
 (defcfun ("al_set_exe_name" set-exe-name) :void (path :string))
 (defcfun ("al_set_app_name" set-app-name) :void (app-name :string))
 (defcfun ("al_set_org_name" set-org-name) :void (org-name :string))
@@ -522,7 +518,7 @@
 (defcfun ("al_have_opengl_extension" have-opengl-extension) :boolean
   (extension :string))
 (defcfun ("al_get_opengl_version" get-opengl-version) :uint32)
-(defcfun ("al_get_opengl_variant" get-opengl-variant) :int)
+(defcfun ("al_get_opengl_variant" get-opengl-variant) opengl-variant)
 (defcfun ("al_set_current_opengl_context" set-current-opengl-context) :void
   (display :pointer))
 
@@ -536,13 +532,13 @@
 ;; Misc audio functions
 (defcfun ("al_get_allegro_audio_version" get-allegro-audio-version) :uint32)
 (defcfun ("al_get_audio_depth_size" get-audio-depth-size) :uint
-  (depth allegro-audio-depth))
+  (depth audio-depth))
 (defcfun ("al_get_channel_count" get-channel-count) :uint
-  (conf allegro-channel-conf))
+  (conf channel-conf))
 
 ;; Voice functions
 (defcfun ("al_create_voice" create-voice) :pointer
-  (freq :uint) (depth allegro-audio-depth) (chan-conf allegro-channel-conf))
+  (freq :uint) (depth audio-depth) (chan-conf channel-conf))
 (defcfun ("al_destroy_voice" destory-voice) :void (voice :pointer))
 (defcfun ("al_detach_voice" detach-voice) :void (voice :pointer))
 (defcfun ("al_attach_audio_stream_to_voice" attach-audio-stream-to-voice) :boolean
@@ -553,9 +549,9 @@
     :boolean
   (spl :pointer) (voice :pointer))
 (defcfun ("al_get_voice_frequency" get-voice-frequency) :uint (voice :pointer))
-(defcfun ("al_get_voice_channels" get-voice-channels) allegro-channel-conf
+(defcfun ("al_get_voice_channels" get-voice-channels) channel-conf
   (voice :pointer))
-(defcfun ("al_get_voice_depth" get-voice-depth) allegro-audio-depth
+(defcfun ("al_get_voice_depth" get-voice-depth) audio-depth
   (voice :pointer))
 (defcfun ("al_get_voice_playing" get-voice-playing) :boolean (voice :pointer))
 (defcfun ("al_set_voice_playing" set-voice-playing) :boolean
@@ -566,20 +562,20 @@
 
 ;; Sample functions
 (defcfun ("al_create_sample" create-sample) :pointer
-  (buf :pointer) (samples :uint) (freq :uint)
-  (depth allegro-audio-depth) (chan-conf allegro-channel-conf)
+  (buf :pointer) (sample :uint) (freq :uint)
+  (depth audio-depth) (chan-conf channel-conf)
   (free-buf :boolean))
 (defcfun ("al_destroy_sample" destroy-sample) :void (spl :pointer))
 (defcfun ("al_play_sample" play-sample) :boolean
   (spl :pointer)
   (gain c-float) (pan c-float) (speed c-float)
-  (playmode allegro-playmode)
+  (playmode playmode)
   (ret-id :pointer))
 (defcfun ("al_stop_sample" stop-sample) :void (spl-id :pointer))
 (defcfun ("al_stop_samples" stop-samples) :void)
-(defcfun ("al_get_sample_channels" get-sample-channels) allegro-channel-conf
+(defcfun ("al_get_sample_channels" get-sample-channels) channel-conf
   (spl :pointer))
-(defcfun ("al_get_sample_depth" get-sample-depth) allegro-audio-depth
+(defcfun ("al_get_sample_depth" get-sample-depth) audio-depth
   (spl :pointer))
 (defcfun ("al_get_sample_frequency" get-sample-frequency) :uint (spl :pointer))
 (defcfun ("al_get_sample_length" get-sample-length) :uint (spl :pointer))
@@ -593,10 +589,10 @@
 (defcfun ("al_play_sample_instance" play-sample-instance) :boolean (spl :pointer))
 (defcfun ("al_stop_sample_instance" stop-sample-instance) :boolean (spl :pointer))
 (defcfun ("al_get_sample_instance_channels" get-sample-instance-channels)
-    allegro-channel-conf
+    channel-conf
   (spl :pointer))
 (defcfun ("al_get_sample_instance_depth" get-sample-instance-depth)
-    allegro-audio-depth
+    audio-depth
   (spl :pointer))
 (defcfun ("al_get_sample_instance_frequency" get-sample-instance-frequency) :uint
   (spt :pointer))
@@ -623,14 +619,14 @@
 (defcfun ("al_get_sample_instance_time" get-sample-instance-time) c-float
   (spl :pointer))
 (defcfun ("al_get_sample_instance_playmode" get-sample-instance-playmode)
-    allegro-playmode
+    playmode
   (spl :pointer))
 (defcfun ("al_set_sample_instance_playmode" set-sample-instance-playmode) :boolean
-  (spl :pointer) (val c-float))
+  (spl :pointer) (val playmode))
 (defcfun ("al_get_sample_instance_playing" get-sample-instance-playing) :boolean
   (spl :pointer))
 (defcfun ("al_set_sample_instance_playing" set-sample-instance-playing) :boolean
-  (spl :pointer) (val c-float))
+  (spl :pointer) (val :boolean))
 (defcfun ("al_get_sample_instance_attached" get-sample-instance-attached) :boolean
   (spl :pointer))
 (defcfun ("al_detach_sample_instance" detach-sample-instance) :boolean
@@ -640,7 +636,7 @@
 
 ;; Mixer functions
 (defcfun ("al_create_mixer" create-mixer) :pointer
-  (freq :uint) (depth allegro-audio-depth) (chan-conf allegro-channel-conf))
+  (freq :uint) (depth audio-depth) (chan-conf channel-conf))
 (defcfun ("al_destroy_mixer" destroy-mixer) :void (mixer :pointer))
 (defcfun ("al_get_default_mixer" get-default-mixer) :pointer)
 (defcfun ("al_set_default_mixer" set-default-mixer) :boolean (mixer :pointer))
@@ -655,18 +651,18 @@
 (defcfun ("al_get_mixer_frequency" get-mixer-frequency) :uint (mixer :pointer))
 (defcfun ("al_set_mixer_frequency" set-mixer-frequency) :boolean
   (mixer :pointer) (val :uint))
-(defcfun ("al_get_mixer_channels" get-mixer-channels) allegro-channel-conf
+(defcfun ("al_get_mixer_channels" get-mixer-channels) channel-conf
   (mixer :pointer))
-(defcfun ("al_get_mixer_depth" get-mixer-depth) allegro-audio-depth
+(defcfun ("al_get_mixer_depth" get-mixer-depth) audio-depth
   (mixer :pointer))
 (defcfun ("al_get_mixer_gain" get-mixer-gain) c-float
   (mixer :pointer))
 (defcfun ("al_set_mixer_gain" set-mixer-gain) :boolean
   (mixer :pointer) (new-gain c-float))
-(defcfun ("al_get_mixer_quality" get-mixer-quality) allegro-mixer-quality
+(defcfun ("al_get_mixer_quality" get-mixer-quality) mixer-quality
   (mixer :pointer))
 (defcfun ("al_set_mixer_quality" set-mixer-quality) :boolean
-  (mixer :pointer) (new-quality allegro-mixer-quality))
+  (mixer :pointer) (new-quality mixer-quality))
 (defcfun ("al_get_mixer_playing" get-mixer-playing) :boolean
   (mixer :pointer))
 (defcfun ("al_set_mixer_playing" set-mixer-playing) :boolean
@@ -680,7 +676,7 @@
 ;; Stream functions
 (defcfun ("al_create_audio_stream" create-audio-stream) :pointer
   (fragment-count :uint) (frag-samples :uint) (freq :uint)
-  (depth allegro-audio-depth) (chan-conf allegro-channel-conf))
+  (depth audio-depth) (chan-conf channel-conf))
 (defcfun ("al_destroy_audio_stream" destroy-audio-stream) :void (stream :pointer))
 (defcfun ("al_get_audio_stream_event_source" get-sudio-stream-event-source)
     :pointer
@@ -690,9 +686,9 @@
 (defcfun ("al_get_audio_stream_frequency" get-audio-stream-frequency) :uint
   (stream :pointer))
 (defcfun ("al_get_audio_stream_channels" get-audio-stream-channels)
-    allegro-channel-conf
+    channel-conf
   (stream :pointer))
-(defcfun ("al_get_audio_stream_depth" get-audio-stream-depth) allegro-audio-depth
+(defcfun ("al_get_audio_stream_depth" get-audio-stream-depth) audio-depth
   (stream :pointer))
 (defcfun ("al_get_audio_stream_length" get-audio-stream-length) :uint
   (stream :pointer))
@@ -712,10 +708,10 @@
   (stream :pointer))
 (defcfun ("al_set_audio_stream_playing" set-audio-stream-playing) :boolean
   (stream :pointer) (val c-float))
-(defcfun ("al_get_audio_stream_playmode" get-audio-stream-playmode) allegro-playmode
+(defcfun ("al_get_audio_stream_playmode" get-audio-stream-playmode) playmode
   (stream :pointer))
 (defcfun ("al_set_audio_stream_playmode" set-audio-stream-playmode) :boolean
-  (stream :pointer) (val allegro-playmode))
+  (stream :pointer) (val playmode))
 (defcfun ("al_get_audio_stream_attached" get-audio-stream-attached) :boolean
   (stream :pointer))
 (defcfun ("al_detach_audio_stream" detach-audio-stream) :boolean
@@ -756,9 +752,9 @@
 (defcfun ("al_load_sample" load-sample) :pointer (filename :string))
 (defcfun ("al_load_sample_f" load-sample-f) :pointer (fp :pointer) (ident :string))
 (defcfun ("al_load_audio_stream" load-audio-stream) :pointer
-  (filename :string) (buffer-count :int) (samples :uint))
+  (filename :string) (buffer-count :int) (sample :uint))
 (defcfun ("al_load_audio_stream_f" load-audio-stream-f) :pointer
-  (fp :pointer) (ident :string) (buffer-count :int) (samples :uint))
+  (fp :pointer) (ident :string) (buffer-count :int) (sample :uint))
 (defcfun ("al_save_sample" save-sample) :boolean
   (filename :string) (spl :pointer))
 (defcfun ("al_save_sample_f" save-sample-f) :boolean
@@ -861,7 +857,7 @@
 (defcfun ("al_init_native_dialog_addon" init-native-dialog-addon) :boolean)
 (defcfun ("al_shutdown_native_dialog_addon" shutdown-native-dialog-addon) :void)
 (defcfun ("al_create_native_file_dialog" create-native-file-dialog) :pointer
-  (initial-path :string) (title :string) (patterns :string) (mode :int))
+  (initial-path :string) (title :string) (patterns :string) (modes filechooser-modes))
 (defcfun ("al_show_native_file_dialog" show-native-file-dialog) :boolean
   (display :pointer) (dialog :pointer))
 (defcfun ("al_get_native_file_dialog_count" get-native-file-dialog-count) :int
@@ -872,7 +868,7 @@
   (dialog :pointer))
 (defcfun ("al_show_native_message_box" show-native-message-box) :int
   (display :pointer) (title :string) (heading :string)
-  (text :string) (buttons :string) (flags :int))
+  (text :string) (buttons :string) (flags messagebox-flags))
 (defcfun ("al_open_native_text_log" open-native-text-log) :pointer
   (title :string) (flags :int))
 (defcfun ("al_close_native_text_log" close-native-text-log) :void

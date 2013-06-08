@@ -1,8 +1,9 @@
 #ifndef __al_included_allegro5_display_h
 #define __al_included_allegro5_display_h
 
-#include "allegro5/color.h"
 #include "allegro5/bitmap.h"
+#include "allegro5/color.h"
+#include "allegro5/events.h"
 
 #ifdef __cplusplus
    extern "C" {
@@ -87,33 +88,6 @@ enum ALLEGRO_DISPLAY_ORIENTATION
 typedef struct ALLEGRO_DISPLAY ALLEGRO_DISPLAY;
 
 
-/* Type: ALLEGRO_DISPLAY_MODE
- */
-typedef struct ALLEGRO_DISPLAY_MODE
-{
-   int width;
-   int height;
-   int format;
-   int refresh_rate;
-} ALLEGRO_DISPLAY_MODE;
-
-
-/* Type: ALLEGRO_MONITOR_INFO
- */
-typedef struct ALLEGRO_MONITOR_INFO
-{
-   int x1;
-   int y1;
-   int x2;
-   int y2;
-} ALLEGRO_MONITOR_INFO;
-
-
-enum {
-   ALLEGRO_DEFAULT_DISPLAY_ADAPTER = -1
-};
-
-
 AL_FUNC(void, al_set_new_display_refresh_rate, (int refresh_rate));
 AL_FUNC(void, al_set_new_display_flags, (int flags));
 AL_FUNC(int,  al_get_new_display_refresh_rate, (void));
@@ -141,23 +115,14 @@ AL_FUNC(void, al_flip_display,       (void));
 AL_FUNC(void, al_update_display_region, (int x, int y, int width, int height));
 AL_FUNC(bool, al_is_compatible_bitmap, (ALLEGRO_BITMAP *bitmap));
 
-AL_FUNC(int, al_get_num_display_modes, (void));
-AL_FUNC(ALLEGRO_DISPLAY_MODE*, al_get_display_mode, (int index,
-        ALLEGRO_DISPLAY_MODE *mode));
-
 AL_FUNC(bool, al_wait_for_vsync, (void));
 
 AL_FUNC(ALLEGRO_EVENT_SOURCE *, al_get_display_event_source, (ALLEGRO_DISPLAY *display));
 
-/* Primitives */
-AL_FUNC(void, al_clear_to_color, (ALLEGRO_COLOR color));
-AL_FUNC(void, al_draw_pixel, (float x, float y, ALLEGRO_COLOR color));
-
 AL_FUNC(void, al_set_display_icon, (ALLEGRO_DISPLAY *display, ALLEGRO_BITMAP *icon));
+AL_FUNC(void, al_set_display_icons, (ALLEGRO_DISPLAY *display, int num_icons, ALLEGRO_BITMAP *icons[]));
 
 /* Stuff for multihead/window management */
-AL_FUNC(int, al_get_num_video_adapters, (void));
-AL_FUNC(bool, al_get_monitor_info, (int adapter, ALLEGRO_MONITOR_INFO *info));
 AL_FUNC(int, al_get_new_display_adapter, (void));
 AL_FUNC(void, al_set_new_display_adapter, (int adapter));
 AL_FUNC(void, al_set_new_window_position, (int x, int y));

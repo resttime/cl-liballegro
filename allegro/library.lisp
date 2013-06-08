@@ -1,7 +1,7 @@
 (in-package #:cl-liballegro)
 
 (define-foreign-library liballegro
-  (:windows "allegro-5.0.8-monolith-mt.dll")
+  (:windows "allegro-5.0.9-monolith-mt.dll")
   (:unix (:default "liballegro")))
 (use-foreign-library liballegro)
 

@@ -19,40 +19,34 @@
   (:simple-parser c-int))
 (defmethod translate-to-foreign (value (type c-int)) (truncate value))
 
-;;; Configuration Files
-(defcstruct allegro-config)
-
-;;; Display
-(defcstruct allegro-display)
-
 ;;; Events
-(defctype allegro-event-type :uint)
+(defctype event-type :uint)
 
-(defcstruct allegro-any-event
-  (type allegro-event-type) (source :pointer) (timestamp :double))
-(defcstruct allegro-display-event
-  (type allegro-event-type) (source :pointer) (timestamp :double)
+(defcstruct any-event
+  (type event-type) (source :pointer) (timestamp :double))
+(defcstruct display-event
+  (type event-type) (source :pointer) (timestamp :double)
   (x :int)
   (y :int)
   (width :int)
   (height :int)
   (orientation :int))
-(defcstruct allegro-joystick-event
-  (type allegro-event-type) (source :pointer) (timestamp :double)
+(defcstruct joystick-event
+  (type event-type) (source :pointer) (timestamp :double)
   (id :pointer)
   (stick :int)
   (axis :int)
   (pos :float)
   (button :int))
-(defcstruct allegro-keyboard-event
-  (type allegro-event-type) (source :pointer) (timestamp :double)
+(defcstruct keyboard-event
+  (type event-type) (source :pointer) (timestamp :double)
   (display :pointer)
   (keycode :int)
   (unichar :int)
   (modifiers :uint)
   (repeat :boolean))
-(defcstruct allegro-mouse-event
-  (type allegro-event-type) (source :pointer) (timestamp :double)
+(defcstruct mouse-event
+  (type event-type) (source :pointer) (timestamp :double)
   (display :pointer)
   (x :int)
   (y :int)
@@ -64,42 +58,42 @@
   (dw :int)
   (button :uint)
   (pressure :float))
-(defcstruct allegro-timer-event
-  (type allegro-event-type) (source :pointer) (timestamp :double)
+(defcstruct timer-event
+  (type event-type) (source :pointer) (timestamp :double)
   (count :int64)
   (error :double))
-(defcstruct allegro-user-event
-  (type allegro-event-type) (source :pointer) (timestamp :double)
+(defcstruct user-event
+  (type event-type) (source :pointer) (timestamp :double)
   (--internal--descr :pointer) 
   (data1 (:pointer :int))
   (data2 (:pointer :int))
   (data3 (:pointer :int))
   (data4 (:pointer :int)))
-(defcunion allegro-event
-  (type allegro-event-type)
-  (any allegro-any-event)
-  (display allegro-display-event)
-  (joystick allegro-joystick-event)
-  (keyboard allegro-keyboard-event)
-  (mouse allegro-mouse-event)
-  (timer allegro-timer-event)
-  (user allegro-user-event))
+(defcunion event
+  (type event-type)
+  (any any-event)
+  (display display-event)
+  (joystick joystick-event)
+  (keyboard keyboard-event)
+  (mouse mouse-event)
+  (timer timer-event)
+  (user user-event))
 
-(defcstruct (allegro-event-source :size 128))
-(defcstruct allegro-event-queue)
+(defcstruct (event-source :size 128))
+(defcstruct event-queue)
 
 ;;; File I/O
-(defcstruct allegro-file)
+(defcstruct file)
 (defcstruct alegro-file-interface)
 
 ;;; File system routines
-(defcstruct allegro-fs-entry)
+(defcstruct fs-entry)
 
 ;;; Fixed point math
 (defctype fixed :int32)
 
 ;;; Fullscreen modes
-(defcstruct allegro-display-mode
+(defcstruct display-mode
   (width :int)
   (height :int)
   (format :int)
@@ -109,14 +103,14 @@
 ;; Colors
 
 ;; Locking and Pixel Formats
-(defcstruct allegro-locked-region
+(defcstruct locked-region
   (data :pointer)
   (format :int)
   (pitch :int)
   (pixel-size :int))
 
 ;; Bitmap Creation
-(defcstruct allegro-bitmap
+(defcstruct bitmap
   (vt :pointer)
   (display :pointer)
   (format :int)
@@ -134,8 +128,8 @@
   (lock-w :int)
   (lock-h :int)
   (lock-flags :int)
-  ;(locked-region allegro-locked-region)
-  ;(transform allegro-transform)
+  ;(locked-region locked-region)
+  ;(transform transform)
   (parent :pointer)
   (xofs :int)
   (yofs :int)
@@ -144,43 +138,43 @@
   (preserve-texture :boolean))
 
 ;;; Joystick
-(defcstruct allegro-joystick)
-(defcstruct allegro-joystick-state)
+(defcstruct joystick)
+(defcstruct joystick-state)
 
 ;;; Keyboard
-(defcstruct allegro-keyboard-state)
+(defcstruct keyboard-state)
 
 ;;; Monitor
-(defcstruct allegro-monitor-info
+(defcstruct monitor-info
   (x1 :int)
   (y1 :int)
   (x2 :int)
   (y2 :int))
 
 ;;; Mouse
-(defcstruct allegro-mouse-state)
+(defcstruct mouse-state)
 
 ;;; State
-(defcstruct allegro-state)
+(defcstruct state)
 
 ;;; Time
-(defcstruct allegro-timeout)
+(defcstruct timeout)
 
 ;;; Timer
-(defcstruct allegro-timer)
+(defcstruct timer)
 
 ;;; Transformations
-(defcstruct allegro-transform)
+(defcstruct transform)
 
 ;;; Audio addon
-(defcstruct allegro-mixer)
+(defcstruct mixer)
 
-(defcstruct allegro-audio-stream)
-(defcstruct allegro-voice)
+(defcstruct audio-stream)
+(defcstruct voice)
 
 ;;; Font addons
-(defcstruct allegro-font)
+(defcstruct font)
 
 ;;; Native dialogs support
-(defcstruct allegro-filechooser)
-(defcstruct allegro-textlog)
+(defcstruct filechooser)
+(defcstruct textlog)
