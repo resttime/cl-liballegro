@@ -1,6 +1,5 @@
 cl-liballegro
 ==========
-***It's usable!***
 
 ***Feel free to raise an issue to request a feature or for me to work on something***
 
@@ -10,22 +9,19 @@ Description
 --------------
 
 This is going to be a formal CFFI of the Allegro 5 programming library
-that will be organized by sections of the API reference manual. This will take a while to complete...
+that will be organized by sections of the API reference manual:
 http://alleg.sourceforge.net/a5docs/5.0.9/
 
 I hope for it to be as clean and neat as cl-opengl.
 
-After writing the bindings, I'll work on separating it from CFFI.
-Then I'll write helper macros/functions for neat integration with Lisp. 
-Both of which will worked on while I create a game.
 
 Usages
 --------------
 1. `al_*` becomes `al:*`
-2. Do not pass ALLEGRO_COLOR to functions, use four numbers instead. (CFFI cannot pass structures by value)
-3. `(al:rest secs)` is `(al:rest-time secs)` instead because of symbol interference with (rest list).
-4. `(al:get-pixel bitmap x y)` returns a Common Lisp structure instead of an ALLEGRO_COLOR structure.
-5. `allegro_*` is removed mostly
+2. Do not pass ALLEGRO_COLOR to functions, use four numbers instead.
+3. `(al:rest secs)` is `(al:rest-time secs)` because of symbol interference with (rest list).
+4. `allegro_*` is removed in many places
+5. Many enums are shortened (check cl-liballegro/callegro/constants.lisp)
  
 ```cl
 ;;; (al:get-pixel bitmap x y) returns this structure
@@ -97,47 +93,27 @@ C-x C-f /path/to/Desktop/game/game.lisp ; File contains (ql:quickload "cl-liball
 C-c C-l                                 ; Looks for the DLL at /whatever/default/emacs/directory/allegro.dll
 ```
 
-Progress (It is very usable)
+Progress 
 --------------
-***I am using unverified, estimated percentages***
 
-**[???%] means I will not work on the section in the foreseeable future because I am under the impression
-that Common Lisp has more suitable implementations or it just is not practical.**
+**[???%] means I will not work on the section because I am under the impression
+that Common Lisp has more suitable implementations or it just is not practical. 
+Feel free to explain otherwise and I'll listen.**
 
-**[95%] means it's pretty much done**
-
-Configuration Files **[95%]**
-Display **[80%]?**
-Events - **[90%]**
 File I/O - **[???%]**
-Filesystem - **[???%]**
-Fixed point math - **[95%]**
-Fullscreen modes - **[95%]**
-Graphics - **[85%]**
-Joystick - **[90%]**
-Keyboard - **[90%]**
-Memory - **[???%]**
-Mouse - **[95%]**
-Path - **[95%]**
-State - **[95%]**
-System - **[95%]**
-Threads - **[???%]**
-Time - **[95%]**
-Timer - **[95%]**
-Transformations - **[95%]**
-UTF-8 - **[???%]**
-Miscellaneous - **[99%]**
-Platform-specific - **[???%]**
-Direct3D - **[???%]**
-OpenGL - **[95%]**
 
-Audio addon - **[95%]**
-Audio codecs - **[99%]**
+Filesystem - **[???%]**
+
+Memory - **[???%]**
+
+Threads - **[???%]**
+
+UTF-8 - **[???%]**
+
+Platform-specific - **[???%]**
+
+Direct3D - **[???%]**
+
 Color addon - **[???%]**
-Font addons - **[95%]**
-Image I/O addon - **[95%]**
+
 Main addon - **[???%]**
-Memfile addon - **[95%]**
-Native dialogs addon - **[95%]**
-PhysicsFS addon - **[95%]**
-Primitives addon - **[90%]**
