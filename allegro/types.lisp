@@ -20,7 +20,7 @@
 (defmethod translate-to-foreign (value (type c-int)) (truncate value))
 
 ;;; Events
-(defctype event-type :uint)
+(defctype event-type event-types)
 
 (defcstruct any-event
   (type event-type) (source :pointer) (timestamp :double))
@@ -71,13 +71,13 @@
   (data4 (:pointer :int)))
 (defcunion event
   (type event-type)
-  (any any-event)
-  (display display-event)
-  (joystick joystick-event)
-  (keyboard keyboard-event)
-  (mouse mouse-event)
-  (timer timer-event)
-  (user user-event))
+  (any (:struct any-event))
+  (display (:struct display-event))
+  (joystick (:struct joystick-event))
+  (keyboard (:struct keyboard-event))
+  (mouse (:struct mouse-event))
+  (timer (:struct timer-event))
+  (user (:struct user-event)))
 
 (defcstruct (event-source :size 128))
 (defcstruct event-queue)
