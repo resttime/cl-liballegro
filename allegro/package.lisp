@@ -66,37 +66,37 @@
    #:inhibit-screensaver
    
 ;;; Events
-   #:+allegro-event-joystick-axis+
-   #:+allegro-event-joystick-button-down+
-   #:+allegro-event-joystick-button-up+
-   #:+allegro-event-joystick-configuration+
-   #:+allegro-event-key-down+
-   #:+allegro-event-key-char+
-   #:+allegro-event-key-up+
-   #:+allegro-event-mouse-axes+
-   #:+allegro-event-mouse-button-down+
-   #:+allegro-event-mouse-button-up+
-   #:+allegro-event-mouse-enter-display+
-   #:+allegro-event-mouse-leave-display+
-   #:+allegro-event-mouse-warped+
-   #:+allegro-event-timer+
-   #:+allegro-event-display-expose+
-   #:+allegro-event-display-resize+
-   #:+allegro-event-display-close+
-   #:+allegro-event-display-lost+
-   #:+allegro-event-display-found+
-   #:+allegro-event-display-switch-in+
-   #:+allegro-event-display-switch-out+
-   #:+allegro-event-display-orientation+
+   #:event-joystick-axis
+   #:event-joystick-button-down
+   #:event-joystick-button-up
+   #:event-joystick-configuration
+   #:event-key-down
+   #:event-key-char
+   #:event-key-up
+   #:event-mouse-axes
+   #:event-mouse-button-down
+   #:event-mouse-button-up
+   #:event-mouse-enter-display
+   #:event-mouse-leave-display
+   #:event-mouse-warped
+   #:event-timer
+   #:event-display-expose
+   #:event-display-resize
+   #:event-display-close
+   #:event-display-lost
+   #:event-display-found
+   #:event-display-switch-in
+   #:event-display-switch-out
+   #:event-display-orientation
   
-   #:allegro-any-event
-   #:allegro-display-event
-   #:allegro-joystick-event
-   #:allegro-keyboard-event
-   #:allegro-mouse-event
-   #:allegro-timer-event
-   #:allegro-user-event
-   #:allegro-event
+   #:any-event
+   #:display-event
+   #:joystick-event
+   #:keyboard-event
+   #:mouse-event
+   #:timer-event
+   #:user-event
+   #:event
 
    #:create-event-queue
    #:destroy-event-queue
@@ -254,133 +254,133 @@
    
 ;;; Keyboard
    ;; Key codes
-   #:+allegro-key-a+
-   #:+allegro-key-b+
-   #:+allegro-key-c+
-   #:+allegro-key-d+
-   #:+allegro-key-e+
-   #:+allegro-key-f+
-   #:+allegro-key-g+
-   #:+allegro-key-h+
-   #:+allegro-key-i+
-   #:+allegro-key-j+
-   #:+allegro-key-k+
-   #:+allegro-key-l+
-   #:+allegro-key-m+
-   #:+allegro-key-n+
-   #:+allegro-key-o+
-   #:+allegro-key-p+
-   #:+allegro-key-q+
-   #:+allegro-key-r+
-   #:+allegro-key-s+
-   #:+allegro-key-t+
-   #:+allegro-key-u+
-   #:+allegro-key-v+
-   #:+allegro-key-w+
-   #:+allegro-key-x+
-   #:+allegro-key-y+
-   #:+allegro-key-z+
+   #:key-a
+   #:key-b
+   #:key-c
+   #:key-d
+   #:key-e
+   #:key-f
+   #:key-g
+   #:key-h
+   #:key-i
+   #:key-j
+   #:key-k
+   #:key-l
+   #:key-m
+   #:key-n
+   #:key-o
+   #:key-p
+   #:key-q
+   #:key-r
+   #:key-s
+   #:key-t
+   #:key-u
+   #:key-v
+   #:key-w
+   #:key-x
+   #:key-y
+   #:key-z
 
-   #:+allegro-key-0+
-   #:+allegro-key-1+
-   #:+allegro-key-2+
-   #:+allegro-key-3+
-   #:+allegro-key-4+
-   #:+allegro-key-5+
-   #:+allegro-key-6+
-   #:+allegro-key-7+
-   #:+allegro-key-8+
-   #:+allegro-key-9+
+   #:key-0
+   #:key-1
+   #:key-2
+   #:key-3
+   #:key-4
+   #:key-5
+   #:key-6
+   #:key-7
+   #:key-8
+   #:key-9
 
-   #:+allegro-key-pad-0+
-   #:+allegro-key-pad-1+
-   #:+allegro-key-pad-2+
-   #:+allegro-key-pad-3+
-   #:+allegro-key-pad-4+
-   #:+allegro-key-pad-5+
-   #:+allegro-key-pad-6+
-   #:+allegro-key-pad-7+
-   #:+allegro-key-pad-8+
-   #:+allegro-key-pad-9+
+   #:key-pad-0
+   #:key-pad-1
+   #:key-pad-2
+   #:key-pad-3
+   #:key-pad-4
+   #:key-pad-5
+   #:key-pad-6
+   #:key-pad-7
+   #:key-pad-8
+   #:key-pad-9
 
-   #:+allegro-key-f1+
-   #:+allegro-key-f2+
-   #:+allegro-key-f3+
-   #:+allegro-key-f4+
-   #:+allegro-key-f5+
-   #:+allegro-key-f6+
-   #:+allegro-key-f7+
-   #:+allegro-key-f8+
-   #:+allegro-key-f9+
-   #:+allegro-key-f10+
-   #:+allegro-key-f11+
-   #:+allegro-key-f12+
+   #:key-f1
+   #:key-f2
+   #:key-f3
+   #:key-f4
+   #:key-f5
+   #:key-f6
+   #:key-f7
+   #:key-f8
+   #:key-f9
+   #:key-f10
+   #:key-f11
+   #:key-f12
 
-   #:+allegro-key-escape+
-   #:+allegro-key-tilde+
-   #:+allegro-key-minus+
-   #:+allegro-key-equals+
-   #:+allegro-key-backspace+
-   #:+allegro-key-tab+
-   #:+allegro-key-openbrace+
-   #:+allegro-key-closebrace+
-   #:+allegro-key-enter+
-   #:+allegro-key-semicolon+
-   #:+allegro-key-quote+
-   #:+allegro-key-backslash+
-   #:+allegro-key-backslash2+
-   #:+allegro-key-comma+
-   #:+allegro-key-fullstop+
-   #:+allegro-key-slash+
-   #:+allegro-key-space+
+   #:key-escape
+   #:key-tilde
+   #:key-minus
+   #:key-equals
+   #:key-backspace
+   #:key-tab
+   #:key-openbrace
+   #:key-closebrace
+   #:key-enter
+   #:key-semicolon
+   #:key-quote
+   #:key-backslash
+   #:key-backslash2
+   #:key-comma
+   #:key-fullstop
+   #:key-slash
+   #:key-space
 
-   #:+allegro-key-insert+
-   #:+allegro-key-delete+
-   #:+allegro-key-home+
-   #:+allegro-key-end+
-   #:+allegro-key-pgup+
-   #:+allegro-key-pgdn+
-   #:+allegro-key-left+
-   #:+allegro-key-right+
-   #:+allegro-key-up+
-   #:+allegro-key-down+
+   #:key-insert
+   #:key-delete
+   #:key-home
+   #:key-end
+   #:key-pgup
+   #:key-pgdn
+   #:key-left
+   #:key-right
+   #:key-up
+   #:key-down
 
-   #:+allegro-key-pad-slash+
-   #:+allegro-key-pad-asterisk+
-   #:+allegro-key-pad-minus+
-   #:+allegro-key-pad-plus+
-   #:+allegro-key-pad-delete+
-   #:+allegro-key-pad-enter+
+   #:key-pad-slash
+   #:key-pad-asterisk
+   #:key-pad-minus
+   #:key-pad-plus
+   #:key-pad-delete
+   #:key-pad-enter
 
-   #:+allegro-key-printscreen+
-   #:+allegro-key-pause+
+   #:key-printscreen
+   #:key-pause
    
-   #:+allegro-key-modifiers
-   #:+allegro-key-lshift+
-   #:+allegro-key-rshift+
-   #:+allegro-key-lctrl+
-   #:+allegro-key-rctrl+
-   #:+allegro-key-alt+
-   #:+allegro-key-altgr+
-   #:+allegro-key-lwin+
-   #:+allegro-key-rwin+
-   #:+allegro-key-menu+
-   #:+allegro-key-scrolllock+
-   #:+allegro-key-numlock+
-   #:+allegro-key-capslock+
+   #:key-modifiers
+   #:key-lshift
+   #:key-rshift
+   #:key-lctrl
+   #:key-rctrl
+   #:key-alt
+   #:key-altgr
+   #:key-lwin
+   #:key-rwin
+   #:key-menu
+   #:key-scrolllock
+   #:key-numlock
+   #:key-capslock
    
    ;;Keyboard modifier flags
-   #:+allegro-keymod-shift+
-   #:+allegro-keymod-ctrl+
-   #:+allegro-keymod-alt+
-   #:+allegro-keymod-lwin+
-   #:+allegro-keymod-rwin+
-   #:+allegro-keymod-menu+
-   #:+allegro-keymod-altgr+
-   #:+allegro-keymod-command+
-   #:+allegro-keymod-scrolllock+
-   #:+allegro-keymod-numlock+
-   #:+allegro-keymod-capslock+
+   #:keymod-shift
+   #:keymod-ctrl
+   #:keymod-alt
+   #:keymod-lwin
+   #:keymod-rwin
+   #:keymod-menu
+   #:keymod-altgr
+   #:keymod-command
+   #:keymod-scrolllock
+   #:keymod-numlock
+   #:keymod-capslock
    
    #:install-keyboard
    #:is-keyboard-installed
@@ -504,7 +504,7 @@
    #:compose-transform
    
 ;;; Miscellaneous routines
-   #:+allegro-pi+
+   #:+pi+
 
 ;;; OpenGL
    #:get-opengl-extension-list
@@ -514,7 +514,7 @@
    #:get-opengl-texture-position
    #:get-opengl-texture-fbo
    #:remove-opengl-texture-fbo
-   #:have-opengl-extension
+   #:have-opengln-extension
    #:get-opengl-version
    #:get-opengl-variant
    #:set-current-opengl-context
@@ -660,11 +660,11 @@
 
 ;;; Font addons
    ;; General font routines
-   #:+allegro-align-left+
-   #:+allegro-align-centre+
-   #:+allegro-align-center+
-   #:+allegro-align-right+
-   #:+allegro-align-integer+
+   #:align-left
+   #:align-centre
+   #:align-center
+   #:align-right
+   #:align-integer
 
    #:init-font-addon
    #:shutdown-font-addon
