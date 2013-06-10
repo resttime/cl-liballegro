@@ -3,8 +3,17 @@
   (:nicknames #:al #:liballegro)
   (:export 
 ;;; Higher level Lisp API
-   ;; CLOS type
+   ;; CLOS type and slots
    #:system
+   #:width
+   #:height
+   #:title
+   #:display-flags
+   #:display-options
+   #:event-queue
+   #:display
+   #:event
+   #:system-running-p
    ;; Generic Initialization Methods
    #:initialize-event-queue
    #:initialize-display
