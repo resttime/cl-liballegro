@@ -41,9 +41,9 @@
 (defcstruct keyboard-event
   (type event-type) (source :pointer) (timestamp :double)
   (display :pointer)
-  (keycode :int)
+  (keycode keycodes)
   (unichar :int)
-  (modifiers :uint)
+  (modifiers keymods)
   (repeat :boolean))
 (defcstruct mouse-event
   (type event-type) (source :pointer) (timestamp :double)

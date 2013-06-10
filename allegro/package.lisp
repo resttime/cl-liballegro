@@ -2,6 +2,45 @@
   (:use #:cl #:cffi)
   (:nicknames #:al #:liballegro)
   (:export 
+;;; Higher level Lisp API
+   ;; CLOS type
+   #:system
+   ;; Generic Initialization Methods
+   #:initialize-event-queue
+   #:initialize-display
+   #:initialize-mouse
+   #:initialize-keyboard
+   ;; Generic Event Handler Methods
+   #:joystick-axis-handler
+   #:joystick-button-down-handler
+   #:joystick-button-up-handler
+   #:joystick-configuration-handler
+   #:key-down-handler
+   #:key-char-handler
+   #:key-up-handler
+   #:mouse-axis-handler
+   #:mouse-button-down-handler
+   #:mouse-button-up-handler
+   #:mouse-enter-display-handler
+   #:mouse-leave-display-handler
+   #:mouse-warped-handler
+   #:timer-handler
+   #:display-expose-handler
+   #:display-resize-handler
+   #:display-close-handler
+   #:display-lost-handler
+   #:display-found-handler
+   #:display-switch-in-handler
+   #:display-switch-out-handler
+   #:display-switch-orientation-handler
+   #:event-handler
+   ;; Generic Event Processer
+   #:process-event-queue
+   ;; Generic System Loop
+   #:system-loop
+   ;; Generic System Runner
+   #:run-system
+   
 ;;; Configuration Files
    #:create-config
    #:destroy-config
