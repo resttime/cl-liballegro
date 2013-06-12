@@ -12,7 +12,12 @@
   ((event-queue :accessor event-queue)
    (display :accessor display)
    (event :reader event :initform (cffi:foreign-alloc '(:union al:event)))
-   (system-loop-running-p :accessor system-loop-running-p :initform t)))
+   (system-loop-running-p :accessor system-loop-running-p :initform t)
+   (system-time :accessor system-time)
+   (new-time :accessor new-time)
+   (frame-time :accessor frame-time)
+   (accumulator :accessor accumulator :initform 0.0)
+   (logic-fps :accessor logic-fps :initarg :logic-fps :initform 30)))
 
 ;;; Generic Initializations
 (defgeneric initialize-event-queue (sys))
@@ -116,14 +121,32 @@
   (loop while (al:get-next-event (event-queue sys) (event sys)) do
        (event-handler sys)))
 
+
+
+(defgeneric update (sys))
+(defmethod update ((sys system)))
+(defgeneric render (sys))
+(defmethod render ((sys system)))
+
 (defgeneric system-loop (sys))
 (defmethod system-loop ((sys system))
-  (sleep 0.01667)
-  (process-event-queue sys))
+  (with-slots (system-time new-time frame-time accumulator logic-fps) sys
+    (setf new-time (get-time))
+    (setf frame-time (- new-time system-time))
+    (if (> frame-time (/ 1.0 logic-fps))
+	(setf frame-time (/ 1.0 logic-fps)))
+    (setf system-time new-time)
+    (incf accumulator frame-time)
+    (loop while (>= accumulator (/ 1.0 logic-fps)) do
+	 (process-event-queue sys)
+	 (update sys)
+	 (decf accumulator (/ 1.0 logic-fps)))
+    (render sys)))
 
 (defun run-system (sys)
   (sb-ext:gc :full t)
   (al:init)
+  (setf (system-time sys) (al:get-time))
   (al:init-image-addon)
   (al:init-font-addon)
   (al:init-ttf-addon)

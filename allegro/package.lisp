@@ -14,6 +14,13 @@
    #:display
    #:event
    #:system-loop-running-p
+   #:system-time
+   #:new-time
+   #:frame-time
+   #:accumulator
+   #:logic-fps
+   #:update
+   #:render
    ;; Generic Initialization Methods
    #:initialize-event-queue
    #:initialize-display
