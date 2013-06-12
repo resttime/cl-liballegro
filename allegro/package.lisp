@@ -13,7 +13,7 @@
    #:event-queue
    #:display
    #:event
-   #:system-running-p
+   #:system-loop-running-p
    ;; Generic Initialization Methods
    #:initialize-event-queue
    #:initialize-display

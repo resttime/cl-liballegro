@@ -12,7 +12,7 @@
   ((event-queue :accessor event-queue)
    (display :accessor display)
    (event :reader event :initform (cffi:foreign-alloc '(:union al:event)))
-   (system-running-p :accessor system-running-p :initform t)))
+   (system-loop-running-p :accessor system-loop-running-p :initform t)))
 
 ;;; Generic Initializations
 (defgeneric initialize-event-queue (sys))
@@ -131,7 +131,7 @@
   (initialize-display sys)
   (initialize-mouse sys)
   (initialize-keyboard sys)
-  (loop while (system-running-p sys) do
+  (loop while (system-loop-running-p sys) do
        (system-loop sys))
   (al:destroy-display (display sys))
   (al:destroy-event-queue (event-queue sys))
