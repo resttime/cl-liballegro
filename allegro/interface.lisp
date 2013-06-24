@@ -128,22 +128,25 @@
 (defgeneric render (sys))
 (defmethod render ((sys system)))
 
+
 (defgeneric system-loop (sys))
 (defmethod system-loop ((sys system))
   (with-slots (system-time new-time frame-time accumulator logic-fps) sys
-    (setf new-time (get-time))
-    (setf frame-time (- new-time system-time))
-    (if (> frame-time (/ 1.0 logic-fps))
-	(setf frame-time (/ 1.0 logic-fps)))
-    (setf system-time new-time)
-    (incf accumulator frame-time)
-    (loop while (>= accumulator (/ 1.0 logic-fps)) do
-	 (process-event-queue sys)
-	 (update sys)
-	 (decf accumulator (/ 1.0 logic-fps)))
-    (render sys)))
+    (loop while (system-loop-running-p sys) do
+	 (setf new-time (get-time))
+	 (setf frame-time (- new-time system-time))
+	 (if (> frame-time (/ 1.0 logic-fps))
+	     (setf frame-time (/ 1.0 logic-fps)))
+	 (setf system-time new-time)
+	 (incf accumulator frame-time)
+	 (loop while (>= accumulator (/ 1.0 logic-fps)) do
+	      (process-event-queue sys)
+	      (update sys)
+	      (decf accumulator (/ 1.0 logic-fps)))
+	 (render sys))))
 
-(defun run-system (sys)
+(defgeneric initialize-system (sys))
+(defmethod initialize-system ((sys system))
   (sb-ext:gc :full t)
   (al:init)
   (setf (system-time sys) (al:get-time))
@@ -153,12 +156,12 @@
   (initialize-event-queue sys)
   (initialize-display sys)
   (initialize-mouse sys)
-  (initialize-keyboard sys)
-  (loop while (system-loop-running-p sys) do
-       (system-loop sys))
+  (initialize-keyboard sys))
+
+(defun run-system (sys)
+  (initialize-system sys)
+  (system-loop sys)
   (al:destroy-display (display sys))
   (al:destroy-event-queue (event-queue sys))
   (cffi:foreign-free (event sys)))
-
-
 
