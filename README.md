@@ -1,10 +1,4 @@
-cl-liballegro
-==========
 
-***Feel free to raise an issue to request a feature or for me to work on something***
-
-***Pseudo support for the ALLEGRO_COLOR structure will be available in the future with my wrapper.*** 
-***`(al:get-pixel bitmap x y)` works by returning a Common Lisp struct. Scroll down to Usages for more info.***
 Description
 --------------
 
@@ -21,17 +15,19 @@ Usages
 2. Do not pass ALLEGRO_COLOR to functions, use four numbers instead.
 3. `(al:rest secs)` is `(al:rest-time secs)` because of symbol interference with (rest list).
 4. `allegro_*` is removed in many places
-5. Many enums are shortened (check cl-liballegro/callegro/constants.lisp)
+5. Many enums are shortened check [constants.lisp](cl-liballegro/allegro/constants.lisp) if you need help finding them
  
+***Feel free to raise an issue to request a feature or for me to work on something***
+
+***Pseudo support for the ALLEGRO_COLOR structure will be available in the future with my wrapper.*** 
+***`(al:get-pixel bitmap x y)` works by returning a Common Lisp struct.***
 ```cl
 ;;; (al:get-pixel bitmap x y) returns this structure
 (defstruct allegro-color r g b a)
 ```
 
-Examples
+Example
 --------------
-
-No new demos yet
 
 ```cl
 ;;;; test.lisp
@@ -96,24 +92,16 @@ C-c C-l                                 ; Looks for the DLL at /whatever/default
 Progress 
 --------------
 
-**[???%] means I will not work on the section because I am under the impression
+**I won't work on the following sections because I am under the impression
 that Common Lisp has more suitable implementations or it just is not practical. 
 Feel free to explain otherwise and I'll listen.**
 
-File I/O - **[???%]**
-
-Filesystem - **[???%]**
-
-Memory - **[???%]**
-
-Threads - **[???%]**
-
-UTF-8 - **[???%]**
-
-Platform-specific - **[???%]**
-
-Direct3D - **[???%]**
-
-Color addon - **[???%]**
-
-Main addon - **[???%]**
+* File I/O 
+* Filesystem 
+* Memory 
+* Threads 
+* UTF-8
+* Platform-specific
+* Direct3D 
+* Color addon 
+* Main addon 
