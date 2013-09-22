@@ -5,7 +5,7 @@
 (defvar display)                             ; Make a variable that holds the ALLEGRO_DISPLAY pointer
 (defun main ()
   (al:init)                                  ; al_init();
-  (al:set-new-display-flags '(:windowed :resizable)) ; al_set_new_display_flags(ALLEGRO_WINDOWED | ALLEGRO_RESIZABLE);
+  (al:set-new-display-flags '(:windowed :resizable :opengl)) ; al_set_new_display_flags(ALLEGRO_WINDOWED | ALLEGRO_RESIZABLE);
   (al:set-new-display-option :vsync 1 :require) ; al_set_new_display_option(ALLEGRO_VSYNC, 1, ALLEGRO_REQUIRE);
   (setf display (al:create-display 800 600)) ; display = al_create_display(800, 600);
   (al:clear-to-color 1 1.0 1.0 1.0)          ; al_clear_to_color(...); // Not using an ALLEGRO_COLOR structure

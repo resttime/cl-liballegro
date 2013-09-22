@@ -20,7 +20,7 @@
 (defmethod translate-to-foreign (value (type c-int)) (truncate value))
 
 ;;; Events
-(defctype event-type event-types)
+(defctype event-type :uint)
 
 (defcstruct any-event
   (type event-type) (source :pointer) (timestamp :double))
@@ -101,6 +101,11 @@
   
 ;;; Graphics
 ;; Colors
+(defcstruct color
+  (r :float)
+  (g :float)
+  (b :float)
+  (a :float))
 
 ;; Locking and Pixel Formats
 (defcstruct locked-region

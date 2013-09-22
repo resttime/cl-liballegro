@@ -156,6 +156,22 @@
 
 ;;; Graphics
 ;; Colors
+(defcfun ("al_map_rgb" map-rgb) (:struct color)
+  (r :uchar) (g :uchar) (b :uchar))
+(defcfun ("al_map_rgb-f" map-rgb-f) (:struct color)
+  (r c-float) (g c-float) (b c-float))
+(defcfun ("al_map_rgba" map-rgba) (:struct color)
+  (r :uchar) (g :uchar) (b :uchar) (a :uchar))
+(defcfun ("al_map_rgba_f" map-rgba-f) (:struct color)
+  (r c-float) (g c-float) (b c-float) (a c-float))
+(defcfun ("al_unmap_rgb" unmap-rgb) (:struct color)
+  (r :pointer) (g :pointer) (b :pointer) (a :pointer))
+(defcfun ("al_unmap_rgb-f" unmap-rgb-f) (:struct color)
+  (r :pointer) (g :pointer) (b :pointer))
+(defcfun ("al_unmap_rgba" unmap-rgba) (:struct color)
+  (r :pointer) (g :pointer) (b :pointer) (a :pointer))
+(defcfun ("al_unmap_rgba_f" unmap-rgba-f) (:struct color)
+  (r :pointer) (g :pointer) (b :pointer) (a :pointer))
 
 ;; Locking and pixel formats
 (defcfun ("al_get_pixel_size" get-pixel-size) :int (format pixel-format))
@@ -194,8 +210,7 @@
 (defcfun ("al_get_parent_bitmap" get-parent-bitmap) :pointer (bitmap :pointer))
 
 ;; Drawing Operations
-(defcfun ("al_clear_to_color" clear-to-color) :void
-  (r c-float) (g c-float) (b c-float) (a c-float))
+(defcfun ("al_clear_to_color" clear-to-color) :void (:struct color))
 (defcfun ("al_draw_bitmap" draw-bitmap) :void
   (bitmap :pointer) (dx c-float) (dy c-float) (flags draw-flags))
 (defcfun ("al_draw_tinted_bitmap" draw-tinted-bitmap) :void
