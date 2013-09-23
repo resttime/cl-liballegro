@@ -1,10 +1,11 @@
+#BIG CHANGES INCOMING
 
 Description
 --------------
 
 This is going to be a formal CFFI of the Allegro 5 programming library
 that will be organized by sections of the API reference manual:
-http://alleg.sourceforge.net/a5docs/5.0.9/
+http://alleg.sourceforge.net/a5docs/5.0.10/
 
 I hope for it to be as clean and neat as cl-opengl.
 
