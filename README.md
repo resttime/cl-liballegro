@@ -7,8 +7,6 @@ http://alleg.sourceforge.net/a5docs/5.0.10/
 
 I hope for it to be as clean and neat as cl-opengl.
 
-[Webpage](http://resttime.github.io/cl-liballegro)
-
 
 Usages
 --------------
