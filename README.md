@@ -73,4 +73,3 @@ Feel free to explain otherwise and I'll listen.**
 * Memory 
 * Threads 
 * UTF-8
-* Main addon 
