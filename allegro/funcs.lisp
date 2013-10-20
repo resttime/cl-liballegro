@@ -517,6 +517,16 @@
 
 ;;; Miscellaneous routines
 
+;;; Platform-specific
+;; Windows
+(defcfun ("al_get_win_window_handle" get-win-window-handle) :pointer (display :pointer))
+;; Mac OS X
+(defcfun ("al_osx_get_window" osx-get-window) :pointer (display :pointer))
+;; iPhone
+(defcfun ("al_iphone_program_has_halted" iphone-program-has-halted) :void)
+(defcfun ("al_iphone_override_screen_scale" iphone-override-screen-scale) :void
+  (scale c-float))
+
 ;;; Direct3D
 (defcfun ("al_get_d3d_device" get-d3d-device) :pointer (display :pointer))
 (defcfun ("al_get_d3d_system_texture" get-d3d-system-texture) :pointer (bitmap :pointer))
