@@ -778,6 +778,10 @@
 ;;; Audio codecs addon
 (defcfun ("al_init_acodec_addon" init-acodec-addon) :boolean)
 (defcfun ("al_get_allegro_acodec_version" get-allegro-acodec-version) :uint32)
+
+;;; Color addon
+(defcfun ("al_color_cmyk" color-cymk) (:struct color)
+  (c c-float) (m c-float) (y c-float) (k c-float))
 (defcfun ("al_color_cmyk_to_rgb" color-cmyk-to-rgb) :void
   (cyan c-float) (magenta c-float) (yellow c-float) (key c-float)
   (red :pointer) (green :pointer) (blue :pointer))
@@ -819,10 +823,6 @@
   (y c-float) (u c-float) (v c-float)
   (red :pointer) (green :pointer) (blue :pointer))
 (defcfun ("al_get_allegro_color_version" get-allegro-color-version) :uint32)
-
-;;; Color addon
-(defcfun ("al_color_cmyk" color-cymk) (:struct color)
-  (c c-float) (m c-float) (y c-float) (k c-float))
 
 ;;; Font addons
 ;; General font routinues
