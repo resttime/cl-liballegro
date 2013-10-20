@@ -1,0 +1,13 @@
+(ql:quickload "cl-liballegro")
+
+(defvar display)
+(defun main ()
+  (al:init)
+  (al:set-new-display-flags '(:windowed :resizable :opengl))
+  (al:set-new-display-option :vsync 1 :require)
+  (setf display (al:create-display 800 600))
+  (al:clear-to-color (al:map-rgb 100 100 100))
+  (al:flip-display)
+  (al:rest-time 2)
+  (al:destroy-display display)
+  (al:uninstall-system))

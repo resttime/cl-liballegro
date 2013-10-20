@@ -163,7 +163,7 @@
 (defcfun ("al_map_rgba" map-rgba) (:struct color)
   (r :uchar) (g :uchar) (b :uchar) (a :uchar))
 (defcfun ("al_map_rgba_f" map-rgba-f) (:struct color)
-  (r c-float) (g c-float) (b c-float) (a c-float))
+  (color (:struct color)))
 (defcfun ("al_unmap_rgb" unmap-rgb) (:struct color)
   (r :pointer) (g :pointer) (b :pointer) (a :pointer))
 (defcfun ("al_unmap_rgb-f" unmap-rgb-f) (:struct color)
@@ -210,12 +210,12 @@
 (defcfun ("al_get_parent_bitmap" get-parent-bitmap) :pointer (bitmap :pointer))
 
 ;; Drawing Operations
-(defcfun ("al_clear_to_color" clear-to-color) :void (:struct color))
+(defcfun ("al_clear_to_color" clear-to-color) :void (color (:struct color)))
 (defcfun ("al_draw_bitmap" draw-bitmap) :void
   (bitmap :pointer) (dx c-float) (dy c-float) (flags draw-flags))
 (defcfun ("al_draw_tinted_bitmap" draw-tinted-bitmap) :void
   (bitmap :pointer)
-  (r c-float) (g c-float) (b c-float) (a c-float)
+  (color (:struct color))
   (dx c-float) (dy c-float)
   (flags draw-flags))
 (defcfun ("al_draw_bitmap_region" draw-bitmap-region) :void
@@ -224,12 +224,12 @@
   (flags draw-flags))
 (defcfun ("al_draw_tinted_bitmap_region" draw-tinted-bitmap-region) :void
   (bitmap :pointer)
-  (r c-float) (g c-float) (b c-float) (a c-float)
+  (color (:struct color))
   (sx c-float) (sy c-float) (sw c-float) (sh c-float) (dx c-float (dy c-float))
   (flags draw-flags))
 (defcfun ("al_draw_pixel" draw-pixel) :void
   (x c-float) (y c-float)
-  (r c-float) (g c-float) (b c-float) (a c-float))
+  (color (:struct color)))
 (defcfun ("al_draw_rotated_bitmap" draw-rotated-bitmap) :void
   (bitmap :pointer)
   (cx c-float) (cy c-float)
@@ -238,7 +238,7 @@
   (flags draw-flags))
 (defcfun ("al_draw_tinted_rotated_bitmap" draw-tinted-rotated-bitmap) :void
   (bitmap :pointer)
-  (r c-float) (g c-float) (b c-float) (a c-float)
+  (color (:struct color))
   (cx c-float) (cy c-float)
   (dx c-float) (dy c-float)
   (angle c-float)
@@ -253,7 +253,7 @@
 (defcfun ("al_draw_tinted_scaled_rotated_bitmap" draw-tinted-scaled-rotated-bitmap)
     :void
   (bitmap :pointer)
-  (r c-float) (g c-float) (b c-float) (a c-float)
+  (color (:struct color))
   (cx c-float) (cy c-float)
   (dx c-float) (dy c-float)
   (xscale c-float) (yscale c-float)
@@ -263,7 +263,7 @@
 	  draw-tinted-scaled-rotated-bitmap-region) :void
   (sx c-float) (sy c-float) (sw c-float) (sh c-float)
   (bitmap :pointer)
-  (r c-float) (g c-float) (b c-float) (a c-float)
+  (color (:struct color))
   (cx c-float) (cy c-float)
   (dx c-float) (dy c-float)
   (xscale c-float) (yscale c-float)
@@ -274,17 +274,17 @@
   (dx c-float) (dy c-float) (dw c-float) (dh c-float)
   (flags draw-flags))
 (defcfun ("al_draw_tinted_scaled_bitmap" draw-tinted-scaled-bitmap) :void
-  (r c-float) (g c-float) (b c-float) (a c-float)
+  (color (:struct color))
   (sx c-float) (sy c-float) (sw c-float) (sh c-float)
   (dx c-float) (dy c-float) (dw c-float) (dh c-float)
   (flags draw-flags))
 (defcfun ("al_get_target_bitmap" get-target-bitmap) :pointer)
 (defcfun ("al_put_pixel" put-pixel) :void
   (x :int) (y :int)
-  (r c-float) (g c-float) (b c-float) (a c-float))
+  (color (:struct color)))
 (defcfun ("al_put_blended_pixel" put-blended-pixel) :void
   (x :int) (y :int)
-  (r c-float) (g c-float) (b c-float) (a c-float))
+  (color (:struct color)))
 (defcfun ("al_set_target_bitmap" set-target-bitmap) :void (bitmap :pointer))
 (defcfun ("al_set_target_backbuffer" set-target-backbuffer) :void (display :pointer))
 (defcfun ("al_get_current_display" get-current-display) :pointer)
@@ -310,7 +310,7 @@
 
 ;; Graphics utility functions
 (defcfun ("al_convert_mask_to_alpha" convert-mask-to-alpha) :void
-  (bitmap :pointer) (r c-float) (g c-float) (b c-float) (a c-float))
+  (bitmap :pointer) (color (:struct color)))
 
 ;; Deferred drawing
 (defcfun ("al_hold_bitmap_drawing" hold-bitmap-drawing) :void (hold :boolean))
@@ -795,37 +795,37 @@
 (defcfun ("al_get_ustr_width" get-ustr-width) :int (f :pointer) (ustr :pointer))
 (defcfun ("al_draw_text" draw-text) :void
   (font :pointer)
-  (r c-float) (g c-float) (b c-float) (a c-float)
+  (color (:struct color))
   (x c-float) (y c-float)
   (flags :int)
   (text :string))
 (defcfun ("al_draw_ustr" draw-ustr) :void
   (font :pointer)
-  (r c-float) (g c-float) (b c-float) (a c-float)
+  (color (:struct color))
   (x c-float) (y c-float)
   (flags :int)
   (ustr :pointer))
 (defcfun ("al_draw_justified_text" draw-justified-text) :void
   (font :pointer)
-  (r c-float) (g c-float) (b c-float) (a c-float)
+  (color (:struct color))
   (x1 c-float) (x2 c-float) (y c-float) (diff c-float)
   (flags :int)
   (text :string))
 (defcfun ("al_draw_justified_ustr" draw-justified-ustr) :void
   (font :pointer)
-  (r c-float) (g c-float) (b c-float) (a c-float)
+  (color (:struct color))
   (x1 c-float) (x2 c-float) (y c-float) (diff c-float)
   (flags :int)
   (ustr :pointer))
 (defcfun ("al_draw_textf" draw-textf) :void
   (font :pointer)
-  (r c-float) (g c-float) (b c-float) (a c-float)
+  (color (:struct color))
   (x c-float) (y c-float)
   (flags :int)
   (format :string))
 (defcfun ("al_draw_justified_textf" draw-justified-textf) :void
   (font :pointer)
-  (r c-float) (g c-float) (b c-float) (a c-float)
+  (color (:struct color))
   (x1 c-float) (x2 c-float) (y c-float) (diff c-float)
   (flags :int)
   (format :string))
@@ -910,39 +910,39 @@
 ;; High level drawing routines
 (defcfun ("al_draw_line" draw-line) :void 
   (x1 c-float) (y1 c-float) (x2 c-float) (y2 c-float)
-  (r c-float) (g c-float) (b c-float) (a c-float)
+  (color (:struct color))
   (thickness c-float))
 (defcfun ("al_draw_triangle" draw-triangle) :void 
   (x1 c-float) (y1 c-float) 
   (x2 c-float) (y2 c-float) 
   (x3 c-float) (y3 c-float)
-  (r c-float) (g c-float) (b c-float) (a c-float)
+  (color (:struct color))
   (thickness c-float))
 (defcfun ("al_draw_filled_triangle" draw-filled-triangle) :void 
   (x1 c-float) (y1 c-float) 
   (x2 c-float) (y2 c-float) 
   (x3 c-float) (y3 c-float)
-  (r c-float) (g c-float) (b c-float) (a c-float))
+  (color (:struct color)))
 (defcfun ("al_draw_rectangle" draw-rectangle) :void 
   (x1 c-float) (y1 c-float) 
   (x2 c-float) (y2 c-float) 
-  (r c-float) (g c-float) (b c-float) (a c-float)
+  (color (:struct color))
   (thickness c-float))
 (defcfun ("al_draw_filled_rectangle" draw-filled-rectangle) :void 
   (x1 c-float) (y1 c-float) 
   (x2 c-float) (y2 c-float) 
-  (r c-float) (g c-float) (b c-float) (a c-float))
+  (color (:struct color)))
 (defcfun ("al_draw_rounded_rectangle" draw-rounded-rectangle) :void 
   (x1 c-float) (y1 c-float) 
   (x2 c-float) (y2 c-float) 
   (rx c-float) (ry c-float) 
-  (r c-float) (g c-float) (b c-float) (a c-float)
+  (color (:struct color))
   (thickness c-float))
 (defcfun ("al_draw_filled_rounded_rectangle" draw-filled-rounded-rectangle) :void 
   (x1 c-float) (y1 c-float) 
   (x2 c-float) (y2 c-float) 
   (rx c-float) (ry c-float) 
-  (r c-float) (g c-float) (b c-float) (a c-float))
+  (color (:struct color)))
 (defcfun ("al_calculate_arc" calculate-arc) :void
   (dest :pointer) (stride :int) 
   (cx c-float) (cy c-float)
@@ -952,42 +952,42 @@
 (defcfun ("al_draw_pieslice" draw-pieslice) :void 
   (cx c-float) (cy c-float) (radius c-float)
   (start-theta c-float) (delta-theta c-float)
-  (r c-float) (g c-float) (b c-float) (a c-float)
+  (color (:struct color))
   (thickness c-float))
 (defcfun ("al_draw_filled_pieslice" draw-filled-pieslice) :void 
   (cx c-float) (cy c-float) (radius c-float)
   (start-theta c-float) (delta-theta c-float)
-  (r c-float) (g c-float) (b c-float) (a c-float))
+  (color (:struct color)))
 (defcfun ("al_draw_ellipse" draw-ellipse) :void
   (cx c-float) (cy c-float) (rx c-float) (ry c-float)
-  (r c-float) (g c-float) (b c-float) (a c-float)
+  (color (:struct color))
   (thickness c-float))
 (defcfun ("al_draw_filled_ellipse" draw-filled-ellipse) :void
   (cx c-float) (cy c-float) (rx c-float) (ry c-float)
-  (r c-float) (g c-float) (b c-float) (a c-float))
+  (color (:struct color)))
 (defcfun ("al_draw_circle" draw-circle) :void
   (cx c-float) (cy c-float) (radius c-float)
-  (r c-float) (g c-float) (b c-float) (a c-float)
+  (color (:struct color))
   (thickness c-float))
 (defcfun ("al_draw_filled_circle" draw-filled-circle) :void
   (cx c-float) (cy c-float) (radius c-float)
-  (r c-float) (g c-float) (b c-float) (a c-float))
+  (color (:struct color)))
 (defcfun ("al_draw_arc" draw-arc) :void 
   (cx c-float) (cy c-float) (radius c-float)
   (start-theta c-float) (delta-theta c-float)
-  (r c-float) (g c-float) (b c-float) (a c-float)
+  (color (:struct color))
   (thickness c-float))
 (defcfun ("al_draw_elliptical_arc" draw-elliptical-arc) :void 
   (cx c-float) (cy c-float) (rx c-float) (ry c-float)
   (start-theta c-float) (delta-theta c-float)
-  (r c-float) (g c-float) (b c-float) (a c-float)
+  (color (:struct color))
   (thickness c-float))
 (defcfun ("al_calculate_spline" calculate-spline) :void
   (dest :pointer) (stride :int) (points :pointer)
   (thickness c-float) (num-segments :int))
 (defcfun ("al_draw_spline" draw-spline) :void
   (points :pointer)
-  (r c-float) (g c-float) (b c-float) (a c-float)
+  (color (:struct color))
   (thickness c-float))
 (defcfun ("al_calculate_ribbon" calculate-ribbon) :void
   (dest :pointer) (dest-stride :int) 
@@ -995,7 +995,7 @@
   (thickness c-float) (num-segments :int))
 (defcfun ("al_draw_ribbon" draw-ribbon) :void
   (points :pointer) (points-stride :int)
-  (r c-float) (g c-float) (b c-float) (a c-float)
+  (color (:struct color))
   (thickness c-float) (num-segments :int))
 
 ;; Low level drawing routines
