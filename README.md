@@ -15,7 +15,7 @@ Usages
 1. `al_*` becomes `al:*`
 2. `(al:rest secs)` is `(al:rest-time secs)` because of symbol interference with (rest list).
 3. `allegro_*` is removed in many places
-4. Many enums are shortened check [constants.lisp](cl-liballegro/allegro/constants.lisp) if you need help finding them
+4. Many enums are shortened check [constants.lisp](allegro/constants.lisp) if you need help finding them
  
 ***Feel free to raise an issue to request a feature or for me to work on something***
 
