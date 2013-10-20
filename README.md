@@ -1,5 +1,3 @@
-#allegro_color is now supported
-
 Description
 --------------
 
