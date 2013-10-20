@@ -74,5 +74,4 @@ Feel free to explain otherwise and I'll listen.**
 * Threads 
 * UTF-8
 * Platform-specific
-* Direct3D 
 * Main addon 
