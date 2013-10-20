@@ -75,5 +75,4 @@ Feel free to explain otherwise and I'll listen.**
 * UTF-8
 * Platform-specific
 * Direct3D 
-* Color addon 
 * Main addon 
