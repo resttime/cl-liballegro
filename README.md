@@ -6,6 +6,7 @@ that will be organized by sections of the API reference manual:
 http://alleg.sourceforge.net/a5docs/5.0.10/
 
 I hope for it to be as clean and neat as cl-opengl.
+Seriously, check out the source code in allegro and compare it to the API reference manual linked above.
 
 
 Usages

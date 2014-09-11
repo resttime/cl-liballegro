@@ -216,5 +216,3 @@ pip-log.txt
 
 #SBCL
 *.fasl
-
-allegro-wrapper-lib/include
