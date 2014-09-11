@@ -11,9 +11,10 @@ I hope for it to be as clean and neat as cl-opengl.
 Usages
 --------------
 1. `al_*` becomes `al:*`
-2. `(al:rest secs)` is `(al:rest-time secs)` because of symbol interference with (rest list).
+2. `(al:rest secs)` is `(al:rest-time secs)` because of symbol interference with #'cl:rest.
 3. `allegro_*` is removed in many places
-4. Many enums are shortened check [constants.lisp](allegro/constants.lisp) if you need help finding them
+4. Many enums are shortened, check [constants.lisp](allegro/constants.lisp) if you need help finding them.
+5. Anything that requires or returns an allegro_color structure likely has a different usage.
  
 ***Feel free to raise an issue to request a feature or for me to work on something***
 
@@ -61,6 +62,8 @@ C-c C-l                                 ; Looks for the DLL at /whatever/default
 
 Progress 
 --------------
+Everything is pretty much added.
+One might require some familiarity with cffi to use the most out of the bindings. For now.
 
 **I won't work on the following sections because I am under the impression
 that Common Lisp has more suitable implementations or it just is not practical. 
