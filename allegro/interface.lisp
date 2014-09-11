@@ -2,8 +2,8 @@
 (in-package #:cl-liballegro)
 
 (defclass display-settings ()
-  ((width :initarg :width :reader width)
-   (height :initarg :height :reader height)
+  ((width :initform 800 :initarg :width :reader width)
+   (height :initform 600 :initarg :height :reader height)
    (title :initarg :title :initform "" :reader title)
    (display-flags :initarg :display-flags :initform 0 :reader display-flags)
    (display-options :initarg :display-options :initform '() :reader display-options)))
@@ -70,7 +70,10 @@
 (defmethod joystick-button-down-handler ((sys system)))
 (defmethod joystick-button-up-handler ((sys system)))
 (defmethod joystick-configuration-handler ((sys system)))
-(defmethod key-down-handler ((sys system)))
+(defmethod key-down-handler ((sys system))
+  (print (cffi:foreign-slot-value (al:event sys)
+				  '(:struct al:keyboard-event)
+				  'al::keycode)))
 (defmethod key-char-handler ((sys system)))
 (defmethod key-up-handler ((sys system)))
 (defmethod mouse-axis-handler ((sys system)))
@@ -81,9 +84,10 @@
 (defmethod mouse-warped-handler ((sys system)))
 (defmethod timer-handler ((sys system)))
 (defmethod display-expose-handler ((sys system)))
-(defmethod display-resize-handler ((sys system)))
+(defmethod display-resize-handler ((sys system))
+  (al:acknowledge-resize (display sys)))
 (defmethod display-close-handler ((sys system))
-  (setf (system-running-p sys) nil))
+  (setf (system-loop-running-p sys) nil))
 (defmethod display-lost-handler ((sys system)))
 (defmethod display-found-handler ((sys system)))
 (defmethod display-switch-in-handler ((sys system)))
@@ -121,13 +125,12 @@
   (loop while (al:get-next-event (event-queue sys) (event sys)) do
        (event-handler sys)))
 
-
-
 (defgeneric update (sys))
 (defmethod update ((sys system)))
 (defgeneric render (sys))
-(defmethod render ((sys system)))
-
+(defmethod render ((sys system))
+  (al:clear-to-color 0 0 0)
+  (al:flip-display))
 
 (defgeneric system-loop (sys))
 (defmethod system-loop ((sys system))

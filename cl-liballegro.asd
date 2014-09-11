@@ -14,6 +14,7 @@
 		      ((:file "configuration-files")
 		       (:file "display")
 		       (:file "events")
+			   (:file "file-io")
 		       (:file "fixed-point-math")
 		       (:file "fullscreen-modes")
 		       (:file "graphics")

@@ -121,6 +121,8 @@
    #:inhibit-screensaver
    
 ;;; Events
+   #:event-types
+   
    #:event-joystick-axis
    #:event-joystick-button-down
    #:event-joystick-button-up
@@ -174,6 +176,7 @@
 
 ;;; File I/O
    #:fopen
+   #:fclose
 
 ;;; File system routines
    #:create-fs-entry
@@ -208,7 +211,12 @@
    
 ;;; Graphics
    ;; Color
-   #:map-rgb
+   #:color
+   #:make-color
+   #:color-r
+   #:color-g
+   #:color-b
+   #:color-a
 
    ;; Locking and pixel formats
    #:get-pixel-size
