@@ -1,13 +1,45 @@
 (defsystem cl-liballegro
   :description "Allegro game programming library bindings."
-  :depends-on (cffi cffi-libffi)
+  :depends-on (cffi)
+  :serial t
   :components
   ((:module "allegro"
 	    :components
 	    ((:file "package")
-	     (:file "constants" :depends-on ("package"))
-	     (:file "library" :depends-on ("package"))
-	     (:file "types" :depends-on ("package"))
-	     (:file "funcs" :depends-on ("package" "types" "constants"))
+	     (:file "constants")
+	     (:file "library" )
+	     (:file "types")
+	     (:module "ffi-functions"
+		      :components
+		      ((:file "configuration-files")
+		       (:file "display")
+		       (:file "events")
+		       (:file "fixed-point-math")
+		       (:file "fullscreen-modes")
+		       (:file "graphics")
+		       (:file "joystick")
+		       (:file "keyboard")
+		       (:file "monitor")
+		       (:file "mouse")
+		       (:file "path")
+		       (:file "state")
+		       (:file "system")
+		       (:file "time")
+		       (:file "timer")
+		       (:file "transformations")
+		       (:file "platform-specific")
+		       (:file "direct3d")
+		       (:file "opengl")
+		       (:module "addons"
+				:components
+				((:file "audio")
+				 (:file "audio-codecs")
+				 (:file "color")
+				 (:file "font")
+				 (:file "image-io")
+				 (:file "memfile")
+				 (:file "native-dialogs")
+				 (:file "physicsfs")
+				 (:file "primatives")))))
 	     ;; Higher Level Lisp API
-	     (:file "interface" :depends-on ("package" "types" "constants" "funcs"))))))
+	     (:file "interface")))))
