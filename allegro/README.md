@@ -1,13 +1,19 @@
-package.lisp: Defines the package and exports usable symbols.
+Folders
+-------------------------
 
-library.lisp: Defines the library and loads it into memory.
+**ffi-functions:** All the functions are defined in here.
 
-constants.lisp: All constants, enums, and flags will be found here.
+**interface:** This is where you will find the Lisp interface you can use.
 
-types.lisp: All types that the library uses will be found here.
+Files
+--------------------------
 
-types-accessors.lisp: Functions that can help access data in the types.
+**package.lisp:** Defines the package and exports usable symbols.
 
-ffi-functions: All the functions are defined in here.
+**library.lisp:** Defines the library and loads it into memory.
 
-interface: This is where you will find the Lisp interface you can use.
+**constants.lisp:** All constants, enums, and flags will be found here.
+
+**types.lisp:** All types that the library uses will be found here.
+
+**types-accessors.lisp:** Functions that can help access data in the types.
