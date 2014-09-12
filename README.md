@@ -1,12 +1,14 @@
+![alt logo](http://alleg.sourceforge.net/images/logo.png)
+
 Description
 --------------
 
-This is going to be a formal CFFI of the Allegro 5 programming library
-that will be organized by sections of the API reference manual:
-http://alleg.sourceforge.net/a5docs/5.0.10/
+This is going to be a formal CFFI of the [Allegro 5 game programming library](http://alleg.sourceforge.net/)
 
 I hope for it to be as clean and neat as cl-opengl.
-Seriously, check out the source code in allegro and compare it to the API reference manual linked above.
+
+Check out the source code in [allegro](allegro) and compare it to the 
+[API reference](http://alleg.sourceforge.net/a5docs/5.0.10/).
 
 
 Usages
@@ -15,7 +17,8 @@ Usages
 2. `(al:rest secs)` is `(al:rest-time secs)` because of symbol interference with #'cl:rest.
 3. `allegro_*` is removed in many places
 4. Many enums are shortened, check [constants.lisp](allegro/constants.lisp) if you need help finding them.
-5. Anything that requires or returns an allegro_color structure likely has a different usage.
+5. Many other type names have changed too, chec [types.lisp](allegro/types.lisp) if you need help finding them.
+6. Anything that requires or returns an allegro_color structure likely has a different usage.
  
 ***Feel free to raise an issue to request a feature or for me to work on something***
 
