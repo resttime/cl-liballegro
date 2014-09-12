@@ -29,6 +29,20 @@ TODO
 3. Get the restart-cases working so users can recover from screwing up. (Also check out handler-case?)
 4. Think about whether to use (al:uninstall-system) to cleanup or not.
 
+Functionality
+--------------
+Everything is pretty much added.
+One might require some familiarity with cffi to use the most out of the bindings. (For now)
+
+**I won't work on the following sections because I am under the impression
+that Common Lisp has more suitable implementations or it just is not practical. 
+Feel free to explain otherwise and I'll listen.**
+
+* File I/O 
+* Filesystem 
+* Memory 
+* Threads 
+* UTF-8
 
 FAQ
 --------------
@@ -39,7 +53,7 @@ FAQ
 ```
  * Or copy cl-liballegro to /path/to/quicklisp/local-projects/cl-liballegro
  
-2. **Why can't my program find the DLL?**
+2. **Why can't my program find the DLL in Windows?**
 
  There are path problems in Windows because the DLL files (which contain all the functions the CFFI calls upon) 
  doesn't have a default location unlike in Unix environments. When the library loads in Windows, ***it will look for 
@@ -71,18 +85,3 @@ M-x slime
 C-x C-f /path/to/Desktop/game/game.lisp ; File contains (ql:quickload "cl-liballegro")
 C-c C-l                                 ; Looks for the DLL at /whatever/default/emacs/directory/allegro.dll
 ```
-
-Functionality
---------------
-Everything is pretty much added.
-One might require some familiarity with cffi to use the most out of the bindings. (For now)
-
-**I won't work on the following sections because I am under the impression
-that Common Lisp has more suitable implementations or it just is not practical. 
-Feel free to explain otherwise and I'll listen.**
-
-* File I/O 
-* Filesystem 
-* Memory 
-* Threads 
-* UTF-8
