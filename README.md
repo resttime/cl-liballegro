@@ -19,6 +19,14 @@ Usages
  
 ***Feel free to raise an issue to request a feature or for me to work on something***
 
+TODO
+--------------
+1. Look over lisp interface design again. Might have to ditch the generic methods because of 2. & 3.
+2. Go over unwind-protect to ensure things safely get deleted.
+3. Get the restart-cases working so users can recover from screwing up. (Also check out handler-case?)
+4. Think about whether to use (al:uninstall-system) to cleanup or not.
+
+
 FAQ
 --------------
 1. **How do I `(ql:quickload "cl-liballegro")` from any location?**
@@ -61,10 +69,10 @@ C-x C-f /path/to/Desktop/game/game.lisp ; File contains (ql:quickload "cl-liball
 C-c C-l                                 ; Looks for the DLL at /whatever/default/emacs/directory/allegro.dll
 ```
 
-Progress 
+Functionality
 --------------
 Everything is pretty much added.
-One might require some familiarity with cffi to use the most out of the bindings. For now.
+One might require some familiarity with cffi to use the most out of the bindings. (For now)
 
 **I won't work on the following sections because I am under the impression
 that Common Lisp has more suitable implementations or it just is not practical. 

@@ -19,6 +19,15 @@
   (:simple-parser c-int))
 (defmethod translate-to-foreign (value (type c-int)) (truncate value))
 
+(define-foreign-type c-ptr ()
+  ()
+  (:actual-type :pointer)
+  (:simple-parser c-ptr))
+(defmethod translate-to-foreign (value (type c-ptr))
+  (if (or (eq value 0) (eq value nil))
+      (null-pointer)
+      value))
+
 ;;; Events
 (defctype event-type event-types)
 
