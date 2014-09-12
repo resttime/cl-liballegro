@@ -43,4 +43,6 @@
 				 (:file "physicsfs")
 				 (:file "primatives")))))
 	     ;; Higher Level Lisp API
-	     (:file "interface")))))
+	     (:module "interface"
+		      :components
+		      ((:file "interface")))))))
