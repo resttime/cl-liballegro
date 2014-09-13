@@ -3,11 +3,11 @@
 Description
 --------------
 
-This is going to be a formal CFFI of the [Allegro 5 game programming library](http://alleg.sourceforge.net/)
+Interface and bindings to the [Allegro 5 game programming library](http://alleg.sourceforge.net/)
 
 I hope for it to be as clean and neat as cl-opengl.
 
-Check out the how the [bindings' source code](allegro) is organized and compare it to the 
+Check out how the [bindings' source code](allegro) is organized and compare it to the 
 [API reference](http://alleg.sourceforge.net/a5docs/5.0.10/).
 
 
