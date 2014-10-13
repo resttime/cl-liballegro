@@ -156,7 +156,7 @@
 
 (defgeneric initialize-system (sys))
 (defmethod initialize-system ((sys system))
-  (sb-ext:gc :full t)
+  (trivial-garbage:gc :full t)
   (al:init)
   (setf (system-time sys) (al:get-time))
   (al:init-image-addon)

@@ -1,6 +1,6 @@
 (defsystem cl-liballegro
   :description "Allegro game programming library bindings."
-  :depends-on (cffi)
+  :depends-on (cffi trivial-garbage)
   :serial t
   :components
   ((:module "allegro"
