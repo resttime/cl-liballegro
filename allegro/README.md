@@ -3,7 +3,7 @@ Folders
 
 **ffi-functions:** All the functions of allegro are defined in here.
 
-**interface:** This is where you will find the Lisp interface you can use.
+**interface:** This is where you will find the OPTIONAL Lisp interface you can use.
 
 Files
 --------------------------
