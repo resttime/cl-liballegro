@@ -8,7 +8,7 @@
 (defcfun ("al_fwrite" fwrite) :uint (file :pointer) (ptr :pointer) (size :uint))
 (defcfun ("al_fflush" fflush) :boolean (file :pointer))
 (defcfun ("al_ftell" ftell) :uint64 (file :pointer))
-(defcfun ("al_fseek" fseek) :boolean (file :pointer) (offset :uint64) (whence :int))
+(defcfun ("al_fseek" fseek) :boolean (file :pointer) (offset :uint64) (whence seek))
 (defcfun ("al_feof" feof) :boolean (file :pointer))
 (defcfun ("al_ferror" ferror) :boolean (file :pointer))
 (defcfun ("al_fclearerr" fclearerr) :void (file :pointer))

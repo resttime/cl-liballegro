@@ -158,6 +158,12 @@
   (:display-switch-out 46)
   (:display-orientation 47))
   
+;;; File I/O
+(defcenum seek
+  (:seek-set 0)
+  (:seek-cur)
+  (:seek-end))
+
 ;;; Fixed point math
 ;; Fixed point trig
 (defconstant fixtorad-r 1608)
