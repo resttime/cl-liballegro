@@ -24,7 +24,7 @@
   (:actual-type :pointer)
   (:simple-parser c-ptr))
 (defmethod translate-to-foreign (value (type c-ptr))
-  (if (or (eq value 0) (eq value nil))
+  (if (or (eql value 0) (eq value nil))
       (null-pointer)
       value))
 
@@ -110,11 +110,11 @@
   
 ;;; Graphics
 ;; Colors
-(defstruct color
-  (r 0.0 :type float)
-  (g 0.0 :type float)
-  (b 0.0 :type float)
-  (a 0.0 :type float))
+(defcstruct color
+  (r :float)
+  (g :float)
+  (b :float)
+  (a :float))
 
 ;; Locking and Pixel Formats
 (defcstruct locked-region

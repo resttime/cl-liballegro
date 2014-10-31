@@ -2,21 +2,21 @@
 
 ;;; Graphics
 ;; Colors
-(defcfun ("al_map_rgb" map-rgb) :pointer
+(defcfun ("al_map_rgb" map-rgb) (:struct color)
   (r :uchar) (g :uchar) (b :uchar))
-(defcfun ("al_map_rgb-f" map-rgb-f) :pointer
+(defcfun ("al_map_rgb-f" map-rgb-f) (:struct color)
   (r c-float) (g c-float) (b c-float))
-(defcfun ("al_map_rgba" map-rgba) :pointer
+(defcfun ("al_map_rgba" map-rgba) (:struct color)
   (r :uchar) (g :uchar) (b :uchar) (a :uchar))
-(defcfun ("al_map_rgba_f" map-rgba-f) :pointer
-  (color :pointer))
-(defcfun ("al_unmap_rgb" unmap-rgb) :pointer
+(defcfun ("al_map_rgba_f" map-rgba-f) (:struct color)
+  (r c-float) (g c-float) (b c-float) (a c-float))
+(defcfun ("al_unmap_rgb" unmap-rgb) (:struct color)
   (r :pointer) (g :pointer) (b :pointer) (a :pointer))
-(defcfun ("al_unmap_rgb-f" unmap-rgb-f) :pointer
+(defcfun ("al_unmap_rgb-f" unmap-rgb-f) (:struct color)
   (r :pointer) (g :pointer) (b :pointer))
-(defcfun ("al_unmap_rgba" unmap-rgba) :pointer
+(defcfun ("al_unmap_rgba" unmap-rgba) (:struct color)
   (r :pointer) (g :pointer) (b :pointer) (a :pointer))
-(defcfun ("al_unmap_rgba_f" unmap-rgba-f) :pointer
+(defcfun ("al_unmap_rgba_f" unmap-rgba-f) (:struct color)
   (r :pointer) (g :pointer) (b :pointer) (a :pointer))
 
 ;; Locking and pixel formats
@@ -43,13 +43,12 @@
 (defcfun ("al_set_new_bitmap_format" set-new-bitmap-format) :void
   (pixel-format pixel-format))
 
-
 ;; Bitmap properties
 (defcfun ("al_get_bitmap_flags" get-bitmap-flags) bitmap-flags (bitmap :pointer))
 (defcfun ("al_get_bitmap_format" get-bitmap-format) pixel-format (bitmap :pointer))
 (defcfun ("al_get_bitmap_height" get-bitmap-height) :int (bitmap :pointer))
 (defcfun ("al_get_bitmap_width" get-bitmap-width) :int (bitmap :pointer))
-(defcfun ("al_get_pixel") :pointer (bitmap :pointer) (x c-int) (y c-int))
+(defcfun ("al_get_pixel") (:struct color) (bitmap :pointer) (x c-int) (y c-int))
 (defcfun ("al_is_bitmap_locked" is-bitmap-locked) :boolean (bitmap :pointer))
 (defcfun ("al_is_compatible_bitmap" is-compatible-bitmap) :boolean (bitmap :pointer))
 (defcfun ("al_is_sub_bitmap" is-sub-bitmap) :boolean (bitmap :pointer))
@@ -57,12 +56,12 @@
 
 ;; Drawing Operations
 (defcfun ("al_clear_to_color" clear-to-color) :void
-  (r c-float) (g c-float) (b c-float))
+  (color (:struct color)))
 (defcfun ("al_draw_bitmap" draw-bitmap) :void
   (bitmap :pointer) (dx c-float) (dy c-float) (flags draw-flags))
 (defcfun ("al_draw_tinted_bitmap" draw-tinted-bitmap) :void
   (bitmap :pointer)
-  (color :pointer)
+  (color (:struct color))
   (dx c-float) (dy c-float)
   (flags draw-flags))
 (defcfun ("al_draw_bitmap_region" draw-bitmap-region) :void
@@ -71,12 +70,12 @@
   (flags draw-flags))
 (defcfun ("al_draw_tinted_bitmap_region" draw-tinted-bitmap-region) :void
   (bitmap :pointer)
-  (color :pointer)
+  (color (:struct color))
   (sx c-float) (sy c-float) (sw c-float) (sh c-float) (dx c-float (dy c-float))
   (flags draw-flags))
 (defcfun ("al_draw_pixel" draw-pixel) :void
   (x c-float) (y c-float)
-  (color :pointer))
+  (color (:struct color)))
 (defcfun ("al_draw_rotated_bitmap" draw-rotated-bitmap) :void
   (bitmap :pointer)
   (cx c-float) (cy c-float)
@@ -85,7 +84,7 @@
   (flags draw-flags))
 (defcfun ("al_draw_tinted_rotated_bitmap" draw-tinted-rotated-bitmap) :void
   (bitmap :pointer)
-  (color :pointer)
+  (color (:struct color))
   (cx c-float) (cy c-float)
   (dx c-float) (dy c-float)
   (angle c-float)
@@ -100,7 +99,7 @@
 (defcfun ("al_draw_tinted_scaled_rotated_bitmap" draw-tinted-scaled-rotated-bitmap)
     :void
   (bitmap :pointer)
-  (color :pointer)
+  (color (:struct color))
   (cx c-float) (cy c-float)
   (dx c-float) (dy c-float)
   (xscale c-float) (yscale c-float)
@@ -110,7 +109,7 @@
 	  draw-tinted-scaled-rotated-bitmap-region) :void
   (sx c-float) (sy c-float) (sw c-float) (sh c-float)
   (bitmap :pointer)
-  (color :pointer)
+  (color (:struct color))
   (cx c-float) (cy c-float)
   (dx c-float) (dy c-float)
   (xscale c-float) (yscale c-float)
@@ -121,17 +120,17 @@
   (dx c-float) (dy c-float) (dw c-float) (dh c-float)
   (flags draw-flags))
 (defcfun ("al_draw_tinted_scaled_bitmap" draw-tinted-scaled-bitmap) :void
-  (color :pointer)
+  (color (:struct color))
   (sx c-float) (sy c-float) (sw c-float) (sh c-float)
   (dx c-float) (dy c-float) (dw c-float) (dh c-float)
   (flags draw-flags))
 (defcfun ("al_get_target_bitmap" get-target-bitmap) :pointer)
 (defcfun ("al_put_pixel" put-pixel) :void
   (x :int) (y :int)
-  (color :pointer))
+  (color (:struct color)))
 (defcfun ("al_put_blended_pixel" put-blended-pixel) :void
   (x :int) (y :int)
-  (color :pointer))
+  (color (:struct color)))
 (defcfun ("al_set_target_bitmap" set-target-bitmap) :void (bitmap :pointer))
 (defcfun ("al_set_target_backbuffer" set-target-backbuffer) :void (display :pointer))
 (defcfun ("al_get_current_display" get-current-display) :pointer)
@@ -157,7 +156,7 @@
 
 ;; Graphics utility functions
 (defcfun ("al_convert_mask_to_alpha" convert-mask-to-alpha) :void
-  (bitmap :pointer) (color :pointer))
+  (bitmap :pointer) (color (:struct color)))
 
 ;; Deferred drawing
 (defcfun ("al_hold_bitmap_drawing" hold-bitmap-drawing) :void (hold :boolean))

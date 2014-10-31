@@ -212,11 +212,14 @@
 ;;; Graphics
    ;; Color
    #:color
-   #:make-color
-   #:color-r
-   #:color-g
-   #:color-b
-   #:color-a
+   #:map-rgb
+   #:map-rgb-f
+   #:map-rgba
+   #:map-rgba-f
+   #:unmap-rgb
+   #:unmap-rgb-f
+   #:unmap-rgba
+   #:unmap-rgba-f
 
    ;; Locking and pixel formats
    #:get-pixel-size
