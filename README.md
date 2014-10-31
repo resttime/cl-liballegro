@@ -38,11 +38,9 @@ TODO
 Functionality
 --------------
 Everything is pretty much added.
-One might require some familiarity with cffi to use the most out of the bindings. (For now)
 
-**I won't work on the following sections because I am under the impression
-that Common Lisp has more suitable implementations or it just is not practical. (Might eventually
-do it for completeness though)
+**I won't work on the following sections because Common Lisp has more suitable implementations.
+(Might eventually do it for completeness though)
 Feel free to explain otherwise and I'll listen.**
 
 * Filesystem 
