@@ -10,6 +10,10 @@ I hope for it to be as clean and neat as cl-opengl.
 Check out how the [bindings' source code](allegro) is organized and compare it to the 
 [API reference](http://alleg.sourceforge.net/a5docs/5.0.10/).
 
+Requirements
+--------------
+1. You need both the libffi and allegro5 libraries
+2. Right now, the only CFFI that works with passing structures by value is MINE. Go clone my fork of CFFI and replace the cffi/libffi/functions.lisp with [this one](https://github.com/cffi/cffi/raw/80c93bb1af07884b6901cd30530f38ac03f49c35/libffi/functions.lisp). The commit right after it breaks the ability to pass structures by value.
 
 Usages
 --------------
@@ -19,7 +23,8 @@ Usages
 4. Type names have changed too, check [types.lisp](allegro/types.lisp) if you need help finding them.
 5. Also check [type-accessors.lisp](allegro/type-accessors.lisp) on how to get to the slot values.
 6. I've got a neat lispy interface [here](allegro/interface/interface.lisp)
- 
+7. Everything else is pretty much 1-to-1
+
 ***Feel free to raise an issue to request a feature or for me to work on something***
 
 TODO
