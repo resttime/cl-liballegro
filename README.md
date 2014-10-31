@@ -15,10 +15,10 @@ Usages
 --------------
 1. `al_*` becomes `al:*`
 2. `(al:rest secs)` is `(al:rest-time secs)` because of symbol interference with #'cl:rest.
-3. `allegro_*` is removed in many places
-4. Many enums are shortened, check [constants.lisp](allegro/constants.lisp) if you need help finding them.
-5. Many other type names have changed too, chec [types.lisp](allegro/types.lisp) if you need help finding them.
-6. Anything that requires or returns an allegro_color structure likely has a different usage.
+3. Enums/constants are shortened, check [constants.lisp](allegro/constants.lisp) if you need help finding them.
+4. Type names have changed too, check [types.lisp](allegro/types.lisp) if you need help finding them.
+5. Also check [type-accessors.lisp](allegro/type-accessors.lisp) on how to get to the slot values.
+6. I've got a neat lispy interface [here](allegro/interface/interface.lisp)
  
 ***Feel free to raise an issue to request a feature or for me to work on something***
 
