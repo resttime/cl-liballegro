@@ -1,0 +1,1 @@
+The allegro5 DLL is actually of 5.1 and not 5.0 like the rest. Keep that in mind if you run into any problems.

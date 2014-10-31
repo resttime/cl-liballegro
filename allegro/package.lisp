@@ -57,6 +57,26 @@
    ;; Generic System Runner
    #:run-system
    
+;;; Type Accessors
+   #:event-type-of
+   #:event-struct-type-of
+   #:cffi-event-struct-type-of
+   #:display-of
+   #:x-of
+   #:y-of
+   #:button-of
+   #:id-of
+   #:stick-of
+   #:axis-of
+   #:pos-of
+   #:width-of
+   #:height-of
+   #:orientation-of
+   #:keycode-of
+   #:unichar-of
+   #:modifiers-of
+   #:reapeat-of
+   
 ;;; Configuration Files
    #:create-config
    #:destroy-config
