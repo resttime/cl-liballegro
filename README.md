@@ -13,7 +13,8 @@ Check out how the [bindings' source code](allegro) is organized and compare it t
 Requirements
 --------------
 1. You need both the libffi and allegro5 libraries
-2. Right now, the only CFFI that works with passing structures by value is MINE. Go clone my fork of CFFI and replace the cffi/libffi/functions.lisp with [this one](https://github.com/cffi/cffi/raw/80c93bb1af07884b6901cd30530f38ac03f49c35/libffi/functions.lisp). The commit right after it breaks the ability to pass structures by value.
+2. Right now, the only CFFI that works on the Windows platform is MINE. Go clone my fork of CFFI
+3. Replace ```cffi/libffi/functions.lisp``` with [this one](https://github.com/cffi/cffi/raw/80c93bb1af07884b6901cd30530f38ac03f49c35/libffi/functions.lisp). The commit right after it breaks the ability to pass structures by value.
 
 Usages
 --------------
