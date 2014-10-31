@@ -176,8 +176,44 @@
 
 ;;; File I/O
    #:fopen
+   #:fopen-interface
+   #:fopen-slice
    #:fclose
+   #:fread
+   #:fwrite
+   #:fflush
+   #:ftell
+   #:fseek
+   #:feof
+   #:ferror
+   #:fclearerr
+   #:fungetc
+   #:fsize
+   #:fgetc
+   #:fputc
+   #:fread16le
+   #:fread16be
+   #:fwrite16le
+   #:fwrite16be
+   #:fread32le
+   #:fread32be
+   #:fwrite32le
+   #:fwrite32be
+   #:fgets
+   #:fget-ustr
+   #:fputs
 
+   ;; Standard I/O specific routines
+   #:fopen-fd
+   #:make-temp-file
+   
+   ;; Alternative file streams
+   #:set-new-file-interface
+   #:set-standard-file-interface
+   #:get-new-file-interface
+   #:create-file-handle
+   #:get-file-userdata
+   
 ;;; File system routines
    #:create-fs-entry
    #:destroy-fs-entry
