@@ -39,7 +39,6 @@ that Common Lisp has more suitable implementations or it just is not practical. 
 do it for completeness though)
 Feel free to explain otherwise and I'll listen.**
 
-* File I/O 
 * Filesystem 
 * Memory 
 * Threads 
