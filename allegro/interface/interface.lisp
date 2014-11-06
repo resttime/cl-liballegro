@@ -134,7 +134,7 @@
 (defmethod update ((sys system)))
 (defgeneric render (sys))
 (defmethod render ((sys system))
-  (al:clear-to-color 0 0 0)
+  (al:clear-to-color (al:map-rgb 0 0 0))
   (al:flip-display))
 
 (defgeneric system-loop (sys))
@@ -168,6 +168,7 @@
   (initialize-display sys)
   (initialize-mouse sys)
   (initialize-keyboard sys))
+
 
 (defun run-system (sys)
   (initialize-system sys)

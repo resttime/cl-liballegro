@@ -1,22 +1,22 @@
 (ql:quickload "cl-liballegro")
 (ql:quickload "cl-opengl")
 
-
 (defparameter *vert-shader*
   "#version 330 core
 
    layout(location = 0) in vec3 vertexPosition_modelspace;
 
-   void main() {
+   void main() { 
        gl_Position.xyz = vertexPosition_modelspace;
-       gl_Position.w = 1.0;
+       gl_Position.w = 1.0; 
    }")
 (defparameter *frag-shader*
   "#version 330 core
+
    out vec3 color;
 
    void main() {
-       color = vec3(0.5,0.5,0.5);
+       color = vec3(0.5,0.5,0.5); 
    }")
 
 (defclass game (al:system)
@@ -26,16 +26,33 @@
    (fragment-shader :accessor fragment-shader)
    (program :accessor program))
   (:default-initargs
-   :width 300 :height 300
-   :title "YEAH"
+   :width 1024 :height 768
+   :title "Tutorial 2"
    :logic-fps 1
    :display-flags '(:opengl :opengl-3-0)
-   :display-options '((:sample-buffers 1 :suggest)
-		      (:samples 8 :suggest))))
+   :display-options '((:sample-buffers 1 :require)
+		      (:samples 8 :require))))
+
+(defgeneric load-shaders (sys &key vertex fragment))
+(defmethod load-shaders ((sys game) &key vertex fragment)
+  (let ((vs (gl:create-shader :vertex-shader))
+	(fs (gl:create-shader :fragment-shader)))
+    (setf (vertex-shader sys) vs)
+    (setf (fragment-shader sys) fs)
+    (gl:shader-source vs vertex)
+    (gl:compile-shader vs)
+    (gl:shader-source fs fragment)
+    (gl:compile-shader fs)
+    (setf (program sys) (gl:create-program))
+    (gl:attach-shader (program sys) vs)
+    (gl:attach-shader (program sys) fs)
+    ;; (print (gl:get-shader-info-log vs))
+    ;; (print (gl:get-shader-info-log fs))
+    (gl:link-program (program sys))))
 
 (defmethod al:system-loop :before ((sys game))
-  (setf (vao sys) (gl:gen-vertex-arrays 1))
   (setf (vb sys) (gl:gen-buffers 1))
+  (setf (vao sys) (gl:gen-vertex-arrays 1))
   (gl:bind-vertex-array (first (vao sys)))
   (gl:bind-buffer :array-buffer (first (vb sys)))
   (let ((vert-data #(-1.0 -1.0 0.0
@@ -46,23 +63,8 @@
       (setf (gl:glaref arr i) (aref vert-data i))) 
     (gl:buffer-data :array-buffer :static-draw arr)
     (gl:free-gl-array arr))
-  (let ((vs (gl:create-shader :vertex-shader))
-	(fs (gl:create-shader :fragment-shader)))
-    (setf (vertex-shader sys) vs)
-    (setf (fragment-shader sys) fs)
-    (gl:shader-source vs *vert-shader*)
-    (gl:compile-shader vs)
-    (gl:shader-source fs *frag-shader*)
-    (gl:compile-shader fs)
-    (setf (program sys) (gl:create-program))
-    (gl:attach-shader (program sys) vs)
-    (gl:attach-shader (program sys) fs)
-    (print (gl:get-shader-info-log vs))
-    (print (gl:get-shader-info-log fs))
-    (gl:link-program (program sys))))
+  (load-shaders sys :vertex *vert-shader* :fragment *frag-shader*))
 
-(defmethod al:update ((sys game))
-  (print 'one-logic-fps))
 (defmethod al:render ((sys game))
   (gl:clear-color 0.0 0.0 0.0 1.0)
   (gl:clear :color-buffer-bit)
