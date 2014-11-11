@@ -173,6 +173,3 @@
 
 (defun main ()
   (al:run-system (make-instance 'game)))
-
-;;;; Run this after 
-					;(setf (shader-dict *system*) (kit.gl.shader:compile-shader-dictionary (dict all-shaders)))

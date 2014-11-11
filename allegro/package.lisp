@@ -61,21 +61,33 @@
    #:event-type-of
    #:event-struct-type-of
    #:cffi-event-struct-type-of
+   ;; Shared Event Accessors
    #:display-of
    #:x-of
    #:y-of
    #:button-of
+   ;; Joystick Events
    #:id-of
    #:stick-of
    #:axis-of
    #:pos-of
+   ;; Display Events
    #:width-of
    #:height-of
    #:orientation-of
+   ;; Keyboard Events
    #:keycode-of
    #:unichar-of
    #:modifiers-of
-   #:reapeat-of
+   #:repeat-of
+   ;; Mouse Events
+   #:z-of
+   #:w-of
+   #:dx-of
+   #:dy-of
+   #:dz-of
+   #:dw-of
+   #:pressure-of
    
 ;;; Configuration Files
    #:create-config

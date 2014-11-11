@@ -28,9 +28,9 @@
       :display-switch-out 
       :display-switch-orientation) :display-event)))
 (defun cffi-event-struct-type-of (event)
-  (list :struct (find-symbol (string (event-struct-type-of event)))))
+  (list :struct (find-symbol (string (event-struct-type-of event)) 'cl-liballegro)))
 
-;;; Shared Events
+;;; Shared Event Accessors
 (defun display-of (event)
   "Used for both keyboard and mouse events."
   (cffi:foreign-slot-value event (cffi-event-struct-type-of event) 'al::display))
@@ -74,3 +74,19 @@
 			   'al::modifiers))
 (defun repeat-of (keyboard-event)
   (cffi:foreign-slot-value keyboard-event '(:struct al:keyboard-event) 'al::repeat))
+
+;;; Mouse Events
+(defun z-of (mouse-event)
+  (cffi:foreign-slot-value mouse-event '(:struct al:mouse-event) 'al::z))
+(defun w-of (mouse-event)
+  (cffi:foreign-slot-value mouse-event '(:struct al:mouse-event) 'al::w))
+(defun dx-of (mouse-event)
+  (cffi:foreign-slot-value mouse-event '(:struct al:mouse-event) 'al::dx))
+(defun dy-of (mouse-event)
+  (cffi:foreign-slot-value mouse-event '(:struct al:mouse-event) 'al::dy))
+(defun dz-of (mouse-event)
+  (cffi:foreign-slot-value mouse-event '(:struct al:mouse-event) 'al::dz))
+(defun dw-of (mouse-event)
+  (cffi:foreign-slot-value mouse-event '(:struct al:mouse-event) 'al::dw))
+(defun pressure-of (mouse-event)
+  (cffi:foreign-slot-value mouse-event '(:struct al:mouse-event) 'al::pressure))

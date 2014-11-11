@@ -140,19 +140,20 @@
 (defgeneric system-loop (sys))
 (defmethod system-loop ((sys system))
   (with-slots (system-time new-time frame-time accumulator logic-fps) sys
-    (loop while (system-loop-running-p sys)
-       do
-	 (setf new-time (get-time))
-	 (setf frame-time (- new-time system-time))
-	 (when (> frame-time (/ 1.0 logic-fps))
-	   (setf frame-time (/ 1.0 logic-fps)))
-	 (setf system-time new-time)
-	 (incf accumulator frame-time)
-	 (loop while (>= accumulator (/ 1.0 logic-fps)) do
-	      (process-event-queue sys)
-	      (update sys)
-	      (decf accumulator (/ 1.0 logic-fps)))
-	 (render sys))))
+    (let ((lpt (/ 1.0 logic-fps)))
+      (loop while (system-loop-running-p sys)
+	 do
+	   (setf new-time (get-time))
+	   (setf frame-time (- new-time system-time))
+	   (when (> frame-time lpt)
+	     (setf frame-time lpt))
+	   (setf system-time new-time)
+	   (incf accumulator frame-time)
+	   (loop while (>= accumulator lpt) do
+		(process-event-queue sys)
+		(update sys)
+		(decf accumulator lpt))
+	   (render sys)))))
 
 (defgeneric initialize-system (sys))
 (defmethod initialize-system ((sys system))
