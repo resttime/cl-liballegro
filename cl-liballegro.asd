@@ -3,7 +3,7 @@
   :depends-on (cffi cffi-libffi trivial-garbage)
   :serial t
   :components
-  ((:module "allegro"
+  ((:module "src"
 	    :components
 	    ((:file "package")
 	     (:file "constants")
@@ -15,7 +15,7 @@
 		      ((:file "configuration-files")
 		       (:file "display")
 		       (:file "events")
-			   (:file "file-io")
+		       (:file "file-io")
 		       (:file "fixed-point-math")
 		       (:file "fullscreen-modes")
 		       (:file "graphics")
