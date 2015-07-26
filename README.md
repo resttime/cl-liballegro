@@ -13,7 +13,6 @@ Check out how the [bindings' source code](allegro) is organized and compare it t
 Requirements
 --------------
 1. You need both the libffi and allegro5 libraries
-2. Requires the CFFI version on/after November 5, 2014
 
 Usages
 --------------
