@@ -10,9 +10,9 @@ I hope for it to be as clean and neat as cl-opengl.
 Check out how the [bindings' source code](allegro) is organized and compare it to the 
 [API reference](http://alleg.sourceforge.net/a5docs/5.0.10/).
 
-Requirements
---------------
-1. You need both the libffi and allegro5 libraries
+External Requirements
+---------------------
+libffi
 
 Usages
 --------------
