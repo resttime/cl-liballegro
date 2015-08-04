@@ -1,5 +1,6 @@
 (defsystem cl-liballegro
-  :description "Allegro game programming library bindings."
+  :description "Allegro 5 game programming library bindings for Common Lisp"
+  :license "Allegro 5 - http://alleg.sourceforge.net/license.html"
   :depends-on (cffi cffi-libffi trivial-garbage)
   :serial t
   :components
