@@ -1,5 +1,6 @@
 ![alt logo](http://alleg.sourceforge.net/images/logo.png)
 
+[![Quicklisp](http://quickdocs.org/badge/cl-liballegro.svg)](http://quickdocs.org/cl-liballegro/)
 Description
 --------------
 
@@ -10,11 +11,11 @@ I hope for it to be as clean and neat as cl-opengl.
 Check out how the [bindings' source code](allegro) is organized and compare it to the 
 [API reference](http://alleg.sourceforge.net/a5docs/5.0.10/).
 
-Extra Requirements
+Requires
 ------------------
 libffi
 
-Usages
+Usage
 --------------
 1. `al_*` becomes `al:*`
 2. `(al:rest secs)` is `(al:rest-time secs)` because of symbol interference with #'cl:rest.
@@ -48,14 +49,7 @@ Feel free to explain otherwise and I'll listen.**
 
 FAQ
 --------------
-1. **How do I `(ql:quickload "cl-liballegro")` from any location?**
- * Either add the path to your asdf by putting this line to your ~/.sbclrc file *(remember to change '\' -> '/')*: 
-```
-(push #p"/path/to/cl-liballegro/" asdf:*central-registry*)
-```
- * Or copy cl-liballegro to /path/to/quicklisp/local-projects/cl-liballegro
- 
-2. **Why can't my program find the DLL in Windows?**
+**Why can't my program find the DLL in Windows?**
 
  There are path problems in Windows because the DLL files (which contain all the functions the CFFI calls upon) 
  doesn't have a default location unlike in Unix environments. When the library loads in Windows, ***it will look for 
