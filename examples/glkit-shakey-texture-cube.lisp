@@ -1,7 +1,6 @@
 (ql:quickload "cl-liballegro")
 (ql:quickload "cl-opengl")
 (ql:quickload "glkit")
-(ql:quickload "cl-ode")
 
 (kit.gl.shader:defdict all-shaders ()
   (kit.gl.shader:shader vertex :vertex-shader "
@@ -109,7 +108,6 @@
 			  0.667969  ,(1- 0.671889)
 			  1.000004  ,(1- 0.671847)
 			  0.667979  ,(1- 0.335851)))
-(defclass physics-)
 
 (defclass game (al:system)
   ((vao :accessor vao)
@@ -155,7 +153,7 @@
   
   (setf (shader-dict sys) (kit.gl.shader:compile-shader-dictionary (kit.gl.shader:dict all-shaders))) 
   
-  (setf (texture sys) (al:get-opengl-texture (al:load-bitmap "uv.jpg")))
+  (setf (texture sys) (al:get-opengl-texture (al:load-bitmap "~/Pictures/test.png")))
   
   (add-buffer-data sys *cube-data*)
   (add-buffer-data sys *uv-data*)
