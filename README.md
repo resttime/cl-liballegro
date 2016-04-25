@@ -9,7 +9,7 @@ Interface and bindings to the [Allegro 5 game programming library](http://alleg.
 I hope for it to be as clean and neat as cl-opengl.
 
 Check out how the [bindings' source code](https://github.com/resttime/cl-liballegro/tree/master/src) is organized and compare it to the 
-[API reference](http://alleg.sourceforge.net/a5docs/5.0.10/).
+[API reference](http://alleg.sourceforge.net/a5docs/5.2.0/).
 
 Requires
 ------------------
@@ -36,7 +36,7 @@ TODO
 
 Functionality
 --------------
-Everything is pretty much added.
+Currently missing haptic, shader, and the video streaming addon.
 
 **I won't work on the following sections because Common Lisp has more suitable implementations.
 (Might eventually do it for completeness though)
