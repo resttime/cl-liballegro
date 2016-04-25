@@ -8,8 +8,12 @@
   (r c-float) (g c-float) (b c-float))
 (defcfun ("al_map_rgba" map-rgba) (:struct color)
   (r :uchar) (g :uchar) (b :uchar) (a :uchar))
+(defcfun ("al_premul_rgba" premul-rgba) (:struct color)
+  (r :uchar) (g :uchar) (b :uchar) (a :uchar))
 (defcfun ("al_map_rgba_f" map-rgba-f) (:struct color)
   (r c-float) (g c-float) (b c-float) (a c-float))
+(defcfun ("al_premul_rgba_f" premul-rgba_f) (:struct color)
+  (r :uchar) (g :uchar) (b :uchar) (a :uchar))
 (defcfun ("al_unmap_rgb" unmap-rgb) (:struct color)
   (r :pointer) (g :pointer) (b :pointer) (a :pointer))
 (defcfun ("al_unmap_rgb-f" unmap-rgb-f) (:struct color)
@@ -23,18 +27,28 @@
 (defcfun ("al_get_pixel_size" get-pixel-size) :int (format pixel-format))
 (defcfun ("al_get_pixel_format_bits" get-pixel-format-bits) :int
   (format pixel-format))
+(defcfun ("al_get_pixel_block_size" get-pixel-block-size) :int (format pixel-format))
+(defcfun ("al_get_pixel_block_width" get-pixel-block-width) :int (format pixel-format))
+(defcfun ("al_get_pixel_block_height" get-pixel-block-height) :int (format pixel-format))
 (defcfun ("al_lock_bitmap" lock-bitmap) :pointer
   (bitmap :pointer) (format pixel-format) (flags locking-flags))
 (defcfun ("al_lock_bitmap_region" lock-bitmap-region) :pointer
   (bitmap :pointer) (x :int) (y :int) (width :int) (height :int)
   (format pixel-format) (flags locking-flags))
 (defcfun ("al_unlock_bitmap" unlock-bitmap) :void (bitmap :pointer))
+(defcfun ("al_lock_bitmap_blocked" lock-bitmap-blocked) :pointer
+  (bitmap :pointer) (flags locking-flags))
+(defcfun ("al_lock_bitmap_region_blocked" lock-bitmap-region-blocked) :pointer
+  (bitmap :pointer) (x-block :int) (y-block :int) (width-block :int) (height-block :int)
+  (flags locking-flags))
 
 ;; Bitmap Creation
 (defcfun ("al_create_bitmap" create-bitmap) :pointer (w :int) (h :int))
 (defcfun ("al_create_sub_bitmap" create-sub-bitmap) :pointer
   (parent :pointer) (x :int) (y :int) (w :int) (h :int))
 (defcfun ("al_clone_bitmap" clone-bitmap) :pointer (bitmap :pointer))
+(defcfun ("al_convert_bitmap" convert-bitmap) :void (bitmap :pointer))
+(defcfun ("al_convert_memory_bitmaps" convert-memory-bitmaps) :void)
 (defcfun ("al_destroy_bitmap" destroy-bitmap) :void (bitmap :pointer))
 (defcfun ("al_get_new_bitmap_flags" get-new-bitmap-flags) bitmap-flags)
 (defcfun ("al_get_new_bitmap_format" get-new-bitmap-format) pixel-format)
@@ -48,15 +62,20 @@
 (defcfun ("al_get_bitmap_format" get-bitmap-format) pixel-format (bitmap :pointer))
 (defcfun ("al_get_bitmap_height" get-bitmap-height) :int (bitmap :pointer))
 (defcfun ("al_get_bitmap_width" get-bitmap-width) :int (bitmap :pointer))
-(defcfun ("al_get_pixel") (:struct color) (bitmap :pointer) (x c-int) (y c-int))
+(defcfun ("al_get_pixel" get-pixel) (:struct color) (bitmap :pointer) (x c-int) (y c-int))
 (defcfun ("al_is_bitmap_locked" is-bitmap-locked) :boolean (bitmap :pointer))
 (defcfun ("al_is_compatible_bitmap" is-compatible-bitmap) :boolean (bitmap :pointer))
 (defcfun ("al_is_sub_bitmap" is-sub-bitmap) :boolean (bitmap :pointer))
 (defcfun ("al_get_parent_bitmap" get-parent-bitmap) :pointer (bitmap :pointer))
+(defcfun ("al_get_bitmap_x" get-bitmap-x) :int (bitmap :pointer))
+(defcfun ("al_get_bitmap_y" get-bitmap-y) :int (bitmap :pointer))
+(defcfun ("al_reparent_bitmap" reparent-bitmap) :void
+  (bitmap :pointer) (parent :pointer) (x c-int) (y c-int) (w c-int) (h c-int))
+
 
 ;; Drawing Operations
-(defcfun ("al_clear_to_color" clear-to-color) :void
-  (color (:struct color)))
+(defcfun ("al_clear_to_color" clear-to-color) :void (color (:struct color)))
+(defcfun ("al_clear_depth_buffer" clear-depth-buffer) :void (z c-float))
 (defcfun ("al_draw_bitmap" draw-bitmap) :void
   (bitmap :pointer) (dx c-float) (dy c-float) (flags draw-flags))
 (defcfun ("al_draw_tinted_bitmap" draw-tinted-bitmap) :void
@@ -107,8 +126,8 @@
   (flags draw-flags))
 (defcfun ("al_draw_tinted_scaled_rotated_bitmap_region"
 	  draw-tinted-scaled-rotated-bitmap-region) :void
-  (sx c-float) (sy c-float) (sw c-float) (sh c-float)
   (bitmap :pointer)
+  (sx c-float) (sy c-float) (sw c-float) (sh c-float)
   (color (:struct color))
   (cx c-float) (cy c-float)
   (dx c-float) (dy c-float)
@@ -116,10 +135,12 @@
   (angle c-float)
   (flags draw-flags))
 (defcfun ("al_draw_scaled_bitmap" draw-scaled-bitmap) :void
+  (bitmap :pointer)
   (sx c-float) (sy c-float) (sw c-float) (sh c-float)
   (dx c-float) (dy c-float) (dw c-float) (dh c-float)
   (flags draw-flags))
 (defcfun ("al_draw_tinted_scaled_bitmap" draw-tinted-scaled-bitmap) :void
+  (bitmap :pointer)
   (color (:struct color))
   (sx c-float) (sy c-float) (sw c-float) (sh c-float)
   (dx c-float) (dy c-float) (dw c-float) (dh c-float)
@@ -141,6 +162,8 @@
 (defcfun ("al_get_separate_blender" get-separate-blender) :void
   (op :pointer) (src :pointer) (dst :pointer)
   (alpha-op :pointer) (alpha-src :pointer) (alpha-dst :pointer))
+(defcfun ("al_get_blend_color" get-blend-color) (:struct color))
+(defcfun ("al_set_blend_color" get-blend-color) :void (color (:struct color)))
 (defcfun ("al_set_blender" set-blender) :void
   (op :int) (src :int) (dst :int))
 (defcfun ("al_set_separate_blender" set-separate-blender) :void
@@ -172,8 +195,20 @@
 (defcfun ("al_register_bitmap_saver_f" register-bitmap-saver-f) :boolean
   (extension :string) (loader-f :pointer))
 (defcfun ("al_load_bitmap" load-bitmap) :pointer (filename :string))
+(defcfun ("al_load_bitmap_flags" load-bitmap-flags) :pointer
+  (filename :string) (flags bitmap-loader-flags))
 (defcfun ("al_load_bitmap_f" load-bitmap-f) :pointer (fp :pointer) (ident :string))
+(defcfun ("al_load_bitmap_flags_f" load-bitmap-flags-f) :pointer
+  (fp :pointer) (ident :string) (flags bitmap-loader-flags))
 (defcfun ("al_save_bitmap" save-bitmap) :boolean
   (filename :string) (bitmap :pointer))
 (defcfun ("al_save_bitmap_f" save-bitmap-f) :boolean
   (fp :pointer) (ident :string) (bitmap :pointer))
+(defcfun ("al_register_bitmap_identifier" register-bitmap-identifier) :bool
+  (extension :string) (identifier :bool))
+(defcfun ("al_identify_bitmap" identify-bitmap) :string (filename :string))
+(defcfun ("al_identify_bitmap_f" identify-bitmap-f) :string (fp :string))
+
+;; Render State
+(defcfun ("al_set_render_state" set-render-state) :void
+  (state render-state) (value c-int))

@@ -137,12 +137,19 @@
   (:force-locking #x0004)
   (:no-preserve-texture #x0008)
   (:alpha-test #x0010)
-  (:-internal-opengl #x0020)
+  (:internal-opengl #x0020)
   (:min-linear #x0040)
   (:mag-linear #x0080)
   (:mipmap #x0100)
   (:no-premultiplied-alpha #x0200)
-  (:video-bitmap #x0400))
+  (:video-bitmap #x0400)
+  (:convert-bitmap #x1000))
+
+;; Loader flags
+(defbitfield bitmap-loader-flags
+  (:keep-bitmap-format #x0002)
+  (:no-premultiplied-alpha #x0200)
+  (:keep-index #x0800))
 
 ;; Flags for blitting functions
 (defbitfield draw-flags
@@ -182,18 +189,56 @@
   :abgr-f32
   :abgr-8888-le
   :rgba-4444
+  :single-channel-8
+  :compressed-rgba-dxt1
+  :compressed-rgba-dxt3
+  :compressed-rgba-dxt5
   :num-pixel-formats)
 (defcenum blend-mode
   :zero
   :one
   :alpha
-  :inverse-alpha)
+  :inverse-alpha
+  :src-color
+  :dest-color
+  :inverse-src-color
+  :inverse-dest-color
+  :const-color
+  :inverse-cons-color
+  :num-blend-modes)
 (defcenum blend-operations
   :add
   :src-minus-dest
   :dest-minus-src
   :num-blend-operations)
-  
+
+(defcenum render-state
+  (:alpha-test #x0010)
+  :write-mask
+  :depth-test
+  :depth-function
+  :alpha-function
+  :alpha-test-value)
+
+(defcenum render-function
+  :never
+  :always
+  :less
+  :equal
+  :less-equal
+  :greater
+  :not-equal
+  :greater-equal)
+
+(defbitfield write-mask-flags
+  :red
+  :green
+  :blue
+  :alpha
+  :depth
+  (:rgb #x0007) ; RED | GREEN | BLUE
+  (:rgba #x000F)) ; RGB | ALPHA
+
 ;;; Joystick
 (defcenum joyflags
   (:digital #x01)
