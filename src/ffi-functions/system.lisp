@@ -15,4 +15,8 @@
 (defcfun ("al_get_org_name" get-org-name) :string)
 (defcfun ("al_get_system_config" get-system-config) :pointer)
 (defcfun ("al_register_assert_handler" register-assert-handler) :void
-  (handler :pointer) (file :string) (func :string))
+  (handler :pointer))
+(defcfun ("al_register_trace_handler" register-trace-handler) :void
+  (handler :pointer))
+(defcfun ("al_get_cpu_count" get-cpu-count) :int)
+(defcfun ("al_get_ram_size" get-ram-size) :int)

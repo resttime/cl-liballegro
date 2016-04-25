@@ -239,6 +239,28 @@
   (:rgb #x0007) ; RED | GREEN | BLUE
   (:rgba #x000F)) ; RGB | ALPHA
 
+;;; Haptic
+(defbitfield haptic-constants
+  :rumble
+  :periodic
+  :constant
+  :spring
+  :friction
+  :damper
+  :inertia
+  :ramp
+  :square
+  :triangle
+  :sine
+  :saw-up
+  :saw-down
+  :custom
+  :gain
+  :angle
+  :raduis
+  :azimuth
+  :autocenter)
+
 ;;; Joystick
 (defcenum joyflags
   (:digital #x01)

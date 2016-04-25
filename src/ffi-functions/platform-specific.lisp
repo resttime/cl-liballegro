@@ -3,6 +3,10 @@
 ;;; Platform-specific
 ;; Windows
 (defcfun ("al_get_win_window_handle" get-win-window-handle) :pointer (display :pointer))
+(defcfun ("al_win_add_window_callback" win-add-window-callback) :boolean
+  (display :pointer) (callback :pointer) (userdata :pointer))
+(defcfun ("al_win_remove_window_callback" win-remove-window-callback) :boolean
+  (display :pointer) (callback :pointer) (userdata :pointer))
 ;; Mac OS X
 (defcfun ("al_osx_get_window" osx-get-window) :pointer (display :pointer))
 ;; iPhone

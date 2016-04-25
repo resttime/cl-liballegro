@@ -19,6 +19,9 @@
   (w :int))
 (defcfun ("al_set_mouse_axis" set-mouse-axis) :boolean (which :int) (value :int))
 (defcfun ("al_get_mouse_event_source" get-mouse-event-source) :pointer)
+(defcfun ("al_set_mouse_wheel_precision" set-mouse-wheel-precision) :void
+  (precision :int))
+(defcfun ("al_get_mouse_wheel_precision" get-mouse-wheel-precision) :int)
 
 ;; Mouse cursors
 (defcfun ("al_create_mouse_cursor" create-mouse-cursor) :pointer

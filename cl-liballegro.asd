@@ -22,15 +22,18 @@
 			 (:file "fixed-point-math")
 			 (:file "fullscreen-modes")
 			 (:file "graphics")
+                         (:file "haptic")
 			 (:file "joystick")
 			 (:file "keyboard")
 			 (:file "monitor")
 			 (:file "mouse")
 			 (:file "path")
+                         (:file "shader")
 			 (:file "state")
 			 (:file "system")
 			 (:file "time")
 			 (:file "timer")
+                         (:file "touch-input")
 			 (:file "transformations")
 			 (:file "platform-specific")
 			 (:file "direct3d")
@@ -45,7 +48,8 @@
 				   (:file "memfile")
 				   (:file "native-dialogs")
 				   (:file "physicsfs")
-				   (:file "primatives")))))
+				   (:file "primatives")
+                                   (:file "video-streaming")))))
 	       ;; Higher Level Lisp API
 	       (:module "interface"
 			:components
