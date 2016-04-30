@@ -163,7 +163,7 @@
   (op :pointer) (src :pointer) (dst :pointer)
   (alpha-op :pointer) (alpha-src :pointer) (alpha-dst :pointer))
 (defcfun ("al_get_blend_color" get-blend-color) (:struct color))
-(defcfun ("al_set_blend_color" get-blend-color) :void (color (:struct color)))
+(defcfun ("al_set_blend_color" set-blend-color) :void (color (:struct color)))
 (defcfun ("al_set_blender" set-blender) :void
   (op :int) (src :int) (dst :int))
 (defcfun ("al_set_separate_blender" set-separate-blender) :void
