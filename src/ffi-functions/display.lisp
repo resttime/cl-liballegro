@@ -44,10 +44,6 @@
 (defcfun ("al_get_display_flags" get-display-flags) display-flags (display :pointer))
 (defcfun ("al_set_display_flag" set-display-flag) :boolean
   (display :pointer) (flag display-flags) (onoff :boolean))
-(defcfun ("al_get_display_flag" get-display-flag) :boolean
-  (display :pointer) (flag :int) (onoff :boolean))
-(defcfun ("al_toggle_display_flag" toggle-display-flag) :boolean
-  (display :pointer) (flag display-flags) (onoff :boolean))
 (defcfun ("al_get_display_option" get-display-option) :int
   (display :pointer) (option display-options))
 (defcfun ("al_get_display_format" get-display-format) pixel-format (display :pointer))

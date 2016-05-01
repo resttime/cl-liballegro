@@ -9,7 +9,7 @@
 (defcfun ("al_get_mouse_state" get-mouse-state) :void (ret-state :pointer))
 (defcfun ("al_get_mouse_state_axis" get-mouse-state-axis) :int
   (state :pointer) (axis :int))
-(defcfun ("al_get_mouse_button_down" get-mouse-button-down) :boolean
+(defcfun ("al_mouse_button_down" mouse-button-down) :boolean
   (state :pointer) (button :int))
 (defcfun ("al_set_mouse_xy" set-mouse-xy) :boolean
   (display :pointer) (x :int) (y :int))
