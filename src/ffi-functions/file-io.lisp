@@ -2,7 +2,7 @@
 
 (defcfun ("al_fopen" fopen) :pointer (path :string) (mode :string))
 (defcfun ("al_fopen_interface" fopen-interface) :pointer (drv :pointer) (path :string) (mode :string))
-(defcfun ("al_fopen_slice" fopen-slice) :pointer (file :pointer ) (size :uint) (mode :string))
+(defcfun ("al_fopen_slice" fopen-slice) :pointer (file :pointer) (size :uint) (mode :string))
 (defcfun ("al_fclose" fclose) :void (file :pointer))
 (defcfun ("al_fread" fread) :uint (file :pointer) (ptr :pointer) (size :uint))
 (defcfun ("al_fwrite" fwrite) :uint (file :pointer) (ptr :pointer) (size :uint))

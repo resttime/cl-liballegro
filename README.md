@@ -1,5 +1,6 @@
 ![alt logo](http://alleg.sourceforge.net/images/logo.png)
 
+[![Quicklisp](http://quickdocs.org/badge/cl-liballegro.svg)](http://quickdocs.org/cl-liballegro/)
 Description
 --------------
 
@@ -7,21 +8,21 @@ Interface and bindings to the [Allegro 5 game programming library](http://alleg.
 
 I hope for it to be as clean and neat as cl-opengl.
 
-Check out how the [bindings' source code](allegro) is organized and compare it to the 
-[API reference](http://alleg.sourceforge.net/a5docs/5.0.10/).
+Check out how the [bindings' source code](https://github.com/resttime/cl-liballegro/tree/master/src) is organized and compare it to the 
+[API reference](http://alleg.sourceforge.net/a5docs/5.2.0/).
 
-Extra Requirements
+Requires
 ------------------
 libffi
 
-Usages
+Usage
 --------------
 1. `al_*` becomes `al:*`
 2. `(al:rest secs)` is `(al:rest-time secs)` because of symbol interference with #'cl:rest.
-3. Enums/constants are shortened, check [constants.lisp](allegro/constants.lisp) if you need help finding them.
-4. Type names have changed too, check [types.lisp](allegro/types.lisp) if you need help finding them.
-5. Also check [type-accessors.lisp](allegro/type-accessors.lisp) on how to get to the slot values.
-6. I've got a neat lispy interface [here](allegro/interface/interface.lisp)
+3. Enums/constants are shortened, check [constants.lisp](https://github.com/resttime/cl-liballegro/tree/master/src/constants.lisp) if you need help finding them.
+4. Type names have changed too, check [types.lisp](https://github.com/resttime/cl-liballegro/tree/master/src/types.lisp) if you need help finding them.
+5. Also check [type-accessors.lisp](https://github.com/resttime/cl-liballegro/tree/master/src/type-accessors.lisp) on how to get to the slot values.
+6. I've got a neat lispy interface [here](https://github.com/resttime/cl-liballegro/tree/master/src/interface/interface.lisp)
 7. Everything else is pretty much 1-to-1
 
 ***Feel free to raise an issue to request a feature or for me to work on something***
@@ -35,7 +36,7 @@ TODO
 
 Functionality
 --------------
-Everything is pretty much added.
+Currently missing haptic, shader, and the video streaming addon.
 
 **I won't work on the following sections because Common Lisp has more suitable implementations.
 (Might eventually do it for completeness though)
@@ -48,14 +49,7 @@ Feel free to explain otherwise and I'll listen.**
 
 FAQ
 --------------
-1. **How do I `(ql:quickload "cl-liballegro")` from any location?**
- * Either add the path to your asdf by putting this line to your ~/.sbclrc file *(remember to change '\' -> '/')*: 
-```
-(push #p"/path/to/cl-liballegro/" asdf:*central-registry*)
-```
- * Or copy cl-liballegro to /path/to/quicklisp/local-projects/cl-liballegro
- 
-2. **Why can't my program find the DLL in Windows?**
+**Why can't my program find the DLL in Windows?**
 
  There are path problems in Windows because the DLL files (which contain all the functions the CFFI calls upon) 
  doesn't have a default location unlike in Unix environments. When the library loads in Windows, ***it will look for 

@@ -1,7 +1,7 @@
 (in-package #:cl-liballegro)
 
 (define-foreign-library liballegro
-  (:windows "allegro-5.0.10-monolith-mt.dll")
+  (:windows "allegro_monolith-5.2.dll")
   (:unix (:default "liballegro")))
 (use-foreign-library liballegro)
 
@@ -44,3 +44,7 @@
 (define-foreign-library liballegro-ttf
   (:unix (:default "liballegro_ttf")))
 (use-foreign-library liballegro-ttf)
+
+(define-foreign-library liballegro-video
+    (:unix (:default "liballegro_video")))
+(use-foreign-library liballegro-video)

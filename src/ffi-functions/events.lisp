@@ -7,6 +7,11 @@
   (queue :pointer) (source :pointer))
 (defcfun ("al_unregister_event_source" unregister-event-source) :void
   (queue :pointer) (source :pointer))
+(defcfun ("al_is_event_source_registered" is-event-source-registered) :bool
+  (queue :pointer) (source :pointer))
+(defcfun ("al_pause_event_queue" pause-event-queue) :void
+  (queue :pointer) (pause :bool))
+(defcfun ("al_is_event_queue_paused" is-event-queue-paused) :bool (queue :pointer))
 (defcfun ("al_is_event_queue_empty" is-event-queue-empty) :boolean (queue :pointer))
 (defcfun ("al_get_next_event" get-next-event) :boolean
   (queue :pointer) (ret-event :pointer))

@@ -71,6 +71,15 @@
   (type event-type) (source :pointer) (timestamp :double)
   (count :int64)
   (error :double))
+(defcstruct touch-event
+  (type event-type) (source :pointer) (timestamp :double)
+  (display :pointer)
+  (id :int)
+  (x :int)
+  (y :int)
+  (dx :int)
+  (dy :int)
+  (primary :bool))
 (defcstruct user-event
   (type event-type) (source :pointer) (timestamp :double)
   (--internal--descr :pointer) 
@@ -86,6 +95,7 @@
   (keyboard (:struct keyboard-event))
   (mouse (:struct mouse-event))
   (timer (:struct timer-event))
+  (touch (:struct touch-event))
   (user (:struct user-event)))
 
 (defcstruct (event-source :size 128))

@@ -39,13 +39,19 @@
   (display :pointer) (x :pointer) (y :pointer))
 (defcfun ("al_set_window_position" set-window-position) :void
   (display :pointer) (x :int) (y :int))
-  
+(defcfun ("al_get_window_constraints" get-window-constraints) :bool
+  (display :pointer) (min-w :pointer) (min-h :pointer) (max-w :pointer) (max-h :pointer))
+(defcfun ("al_set_window_constraints" set-window-constraints) :bool
+  (display :pointer) (min-w :pointer) (min-h :pointer) (max-w :pointer) (max-h :pointer))
+
 ;; Display settings
 (defcfun ("al_get_display_flags" get-display-flags) display-flags (display :pointer))
 (defcfun ("al_set_display_flag" set-display-flag) :boolean
   (display :pointer) (flag display-flags) (onoff :boolean))
 (defcfun ("al_get_display_option" get-display-option) :int
   (display :pointer) (option display-options))
+(defcfun ("al_set_display_option" set-display-option) :void
+  (display :pointer) (option display-options) (value :int))
 (defcfun ("al_get_display_format" get-display-format) pixel-format (display :pointer))
 (defcfun ("al_get_display_refresh_rate" get-display-refresh-rate) :int
   (display :pointer))
@@ -53,10 +59,22 @@
   (display :pointer))
 (defcfun ("al_set_window_title" set-window-title) :void
   (display :pointer) (title :string))
+(defcfun ("al_set_new_window_title" set-new-window-title) :void
+  (title :string))
+(defcfun ("al_get_new_window_title" get-new-window-title) :string)
 (defcfun ("al_set_display_icon" set-display-icon) :void
   (display :pointer) (icon :pointer))
 (defcfun ("al_set_display_icons" set-display-icons) :void
   (display :pointer) (num-icons :int) (icons :pointer))
 
- ;; Screensaver
+;; Drawing halts
+(defcfun ("al_acknowledge_drawing_halt" acknowledge-drawing-halt) :void (display :pointer))
+(defcfun ("al_acknowledge_drawing_resume" acknowledge-drawing-resume) :void (display :pointer))
+
+;; Screensaver
 (defcfun ("al_inhibit_screensaver" inhibit-screensaver) :boolean (inhibit :boolean))
+
+;; Clipboard
+(defcfun ("al_get_clipboard_text" get-clipboard-text) :string (display :pointer))
+(defcfun ("al_set_clipboard_text" set-clipboard-text) :bool (display :pointer) (text :string))
+(defcfun ("al_clipboard_has_text" clipboard-has-text) :bool (display :pointer))

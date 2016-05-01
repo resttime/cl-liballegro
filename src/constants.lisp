@@ -2,18 +2,23 @@
 ;;; Display
 ;; Flags
 (defbitfield display-flags
-    :windowed
-    :fullscreen
-    :opengl
-    :direct3d-internal
-    :resizable
-    :frameless
-    (:noframe 32)
-    :generate-expose-events
-    :opengl-3-0
-    :opengl-forward-compatible
-    :fullscreen-window
-    :minimized)
+  :windowed
+  :fullscreen
+  :opengl
+  :direct3d-internal
+  :resizable
+  :frameless
+  (:noframe 32)
+  :generate-expose-events
+  :opengl-3-0
+  :opengl-forward-compatible
+  :fullscreen-window
+  :minimized
+  :programmable-pipeline
+  :gtk-toplevel-internal
+  :maximized
+  :opengl-es-profile)
+
 ;; Display Options
 (defcenum display-options
   :red-size
@@ -47,6 +52,10 @@
   :support-npot-bitmap
   :can-draw-into-bitmap
   :support-separate-alpha
+  :auto-convert-bitmaps
+  :supported-orientations
+  :opengl-major-version
+  :opengl-minor-version
   :display-options-count)
 
 ;; Importance
@@ -57,12 +66,18 @@
 
 ;; Display Orientation
 (defcenum display-orientation
-  :0-degrees
-  :90-degrees
-  :180-degrees
-  :270-degrees
-  :face-up
-  :face-down)
+  (:unknown 0)
+  (:0-degrees 1)
+  (:90-degrees 2)
+  (:180-degrees 4)
+  (:270-degrees 8)
+  (:portrait 5)
+  (:landscape 10)
+  (:all 15)
+  (:face-up 16)
+  (:face-down 32))
+
+(defconstant +new-window-title-max-size+ 255)
 
 ;;; Events
 (defcenum event-types
@@ -70,16 +85,20 @@
   (:joystick-button-down 2)
   (:joystick-button-up 3)
   (:joystick-configuration 4)
+  
   (:key-down 10)
   (:key-char 11)
   (:key-up 12)
+  
   (:mouse-axis 20)
   (:mouse-button-down 21)
   (:mouse-button-up 22)
   (:mouse-enter-display 23)
   (:mouse-leave-display 24)
   (:mouse-warped 25)
+  
   (:timer 30)
+  
   (:display-expose 40)
   (:display-resize 41)
   (:display-close 42)
@@ -87,7 +106,17 @@
   (:display-found 44)
   (:display-switch-in 45)
   (:display-switch-out 46)
-  (:display-orientation 47))
+  (:display-orientation 47)
+  (:display-halt-drawing 48)
+  (:display-resume-drawing 49)
+
+  (:touch-begin 50)
+  (:touch-end 51)
+  (:touch-move 52)
+  (:touch-cancel 53)
+   
+  (:display-connected 60)
+  (:display-disconnected 61))
   
 ;;; File I/O
 (defcenum seek
@@ -108,12 +137,19 @@
   (:force-locking #x0004)
   (:no-preserve-texture #x0008)
   (:alpha-test #x0010)
-  (:-internal-opengl #x0020)
+  (:internal-opengl #x0020)
   (:min-linear #x0040)
   (:mag-linear #x0080)
   (:mipmap #x0100)
   (:no-premultiplied-alpha #x0200)
-  (:video-bitmap #x0400))
+  (:video-bitmap #x0400)
+  (:convert-bitmap #x1000))
+
+;; Loader flags
+(defbitfield bitmap-loader-flags
+  (:keep-bitmap-format #x0002)
+  (:no-premultiplied-alpha #x0200)
+  (:keep-index #x0800))
 
 ;; Flags for blitting functions
 (defbitfield draw-flags
@@ -153,18 +189,78 @@
   :abgr-f32
   :abgr-8888-le
   :rgba-4444
+  :single-channel-8
+  :compressed-rgba-dxt1
+  :compressed-rgba-dxt3
+  :compressed-rgba-dxt5
   :num-pixel-formats)
 (defcenum blend-mode
   :zero
   :one
   :alpha
-  :inverse-alpha)
+  :inverse-alpha
+  :src-color
+  :dest-color
+  :inverse-src-color
+  :inverse-dest-color
+  :const-color
+  :inverse-cons-color
+  :num-blend-modes)
 (defcenum blend-operations
   :add
   :src-minus-dest
   :dest-minus-src
   :num-blend-operations)
-  
+
+(defcenum render-state
+  (:alpha-test #x0010)
+  :write-mask
+  :depth-test
+  :depth-function
+  :alpha-function
+  :alpha-test-value)
+
+(defcenum render-function
+  :never
+  :always
+  :less
+  :equal
+  :less-equal
+  :greater
+  :not-equal
+  :greater-equal)
+
+(defbitfield write-mask-flags
+  :red
+  :green
+  :blue
+  :alpha
+  :depth
+  (:rgb #x0007) ; RED | GREEN | BLUE
+  (:rgba #x000F)) ; RGB | ALPHA
+
+;;; Haptic
+(defbitfield haptic-constants
+  :rumble
+  :periodic
+  :constant
+  :spring
+  :friction
+  :damper
+  :inertia
+  :ramp
+  :square
+  :triangle
+  :sine
+  :saw-up
+  :saw-down
+  :custom
+  :gain
+  :angle
+  :raduis
+  :azimuth
+  :autocenter)
+
 ;;; Joystick
 (defcenum joyflags
   (:digital #x01)
