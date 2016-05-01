@@ -9,9 +9,10 @@
   (bitmap :pointer) (width :pointer) (height :pointer))
 (defcfun ("al_get_opengl_texture_position" get-opengl-texture-position) :void
   (bitmap :pointer) (u :pointer) (v :pointer))
-(defcfun ("al_get_opengl_texture_fbo" get-opengl-texture-fbo) :uint
+(defcfun ("al_get_opengl_program_object" get-opengl-program-object) :uint (shader :pointer))
+(defcfun ("al_get_opengl_fbo" get-opengl-fbo) :uint
   (bitmap :pointer))
-(defcfun ("al_remove_opengl_texture_fbo" remove-opengl-texture-fbo) :uint
+(defcfun ("al_remove_opengl_fbo" remove-opengl-fbo) :uint
   (bitmap :pointer))
 (defcfun ("al_have_opengl_extension" have-opengl-extension) :boolean
   (extension :string))

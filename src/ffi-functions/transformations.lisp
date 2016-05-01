@@ -39,11 +39,11 @@
   (leftright c-float) (bottom c-float) (f c-float))
 (defcfun ("al_translate_transform_3d" translate-transform-3d) :void
   (trans :pointer) (x c-float) (y c-float) (z c-float))
-(defcfun ("al_translate_scale_3d" translate-scale-3d) :void
+(defcfun ("al_scale_transform_3d" scale-transform-3d) :void
   (trans :pointer) (sx c-float) (sy c-float) (sz c-float))
-(defcfun ("al_rotate_transform_3d" translate-transform-3d) :void
+(defcfun ("al_rotate_transform_3d" rotate-transform-3d) :void
   (trans :pointer) (x c-float) (y c-float) (z c-float) (angle c-float))
-(defcfun ("al_horizontal_share_transform" horizontal-share-transform) :void
+(defcfun ("al_horizontal_shear_transform" horizontal-shear-transform) :void
   (trans :pointer) (theta :float))
-(defcfun ("al_vertical_share_transform" vertical-share-transform) :void
+(defcfun ("al_vertical_shear_transform" vertical-shear-transform) :void
   (trans :pointer) (theta :float))
