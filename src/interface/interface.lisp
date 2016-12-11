@@ -173,7 +173,10 @@
 
 (defun run-system (sys)
   (initialize-system sys)
-  (unwind-protect (system-loop sys)
+  (unwind-protect
+       #-sbcl (system-loop system)
+       #+sbcl(sb-int:with-float-traps-masked (:invalid :inexact :overflow :underflow)
+               (system-loop sys))
     (al:destroy-display (display sys))
     (al:destroy-event-queue (event-queue sys))
     (al:stop-samples)
