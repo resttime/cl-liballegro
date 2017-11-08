@@ -6,18 +6,33 @@
   (:actual-type :float)
   (:simple-parser c-float))
 (defmethod translate-to-foreign (value (type c-float)) (float value 0f0))
+(defmethod translate-into-foreign-memory (value (type c-float) pointer)
+  (translate-into-foreign-memory (float value 0f0)
+                                 (make-instance 'cffi::foreign-built-in-type
+                                                :type-keyword :float)
+                                 pointer))
 
 (define-foreign-type c-double ()
   ()
   (:actual-type :double)
   (:simple-parser c-double))
 (defmethod translate-to-foreign (value (type c-double)) (float value 0d0))
+(defmethod translate-into-foreign-memory (value (type c-double) pointer)
+  (translate-into-foreign-memory (float value 0d0)
+                                 (make-instance 'cffi::foreign-built-in-type
+                                                :type-keyword :double)
+                                 pointer))
 
 (define-foreign-type c-int ()
   ()
   (:actual-type :int)
   (:simple-parser c-int))
 (defmethod translate-to-foreign (value (type c-int)) (truncate value))
+(defmethod translate-into-foreign-memory (value (type c-int) pointer)
+  (translate-into-foreign-memory (truncate value)
+                                 (make-instance 'cffi::foreign-built-in-type
+                                                :type-keyword :int)
+                                 pointer))
 
 (define-foreign-type c-ptr ()
   ()
@@ -27,6 +42,13 @@
   (if (or (eql value 0) (eq value nil))
       (null-pointer)
       value))
+(defmethod translate-into-foreign-memory (value (type c-ptr) pointer)
+  (translate-into-foreign-memory (if (or (eql value 0) (eq value nil))
+                                     (null-pointer)
+                                     value)
+                                 (make-instance 'cffi::foreign-built-in-type
+                                                :type-keyword :pointer)
+                                 pointer))
 
 ;;; Events
 (defctype event-type event-types)
@@ -82,7 +104,7 @@
   (primary :bool))
 (defcstruct user-event
   (type event-type) (source :pointer) (timestamp :double)
-  (--internal--descr :pointer) 
+  (--internal--descr :pointer)
   (data1 (:pointer :int))
   (data2 (:pointer :int))
   (data3 (:pointer :int))
@@ -117,7 +139,7 @@
   (height :int)
   (format :int)
   (refresh-rate :int))
-  
+
 ;;; Graphics
 ;; Colors
 (defcstruct color
