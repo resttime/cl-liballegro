@@ -8,7 +8,7 @@ Interface and bindings to the [Allegro 5 game programming library](http://alleg.
 
 I hope for it to be as clean and neat as cl-opengl.
 
-Check out how the [bindings' source code](https://github.com/resttime/cl-liballegro/tree/master/src) is organized and compare it to the 
+Check out how the [bindings' source code](https://github.com/resttime/cl-liballegro/tree/master/src) is organized and compare it to the
 [API reference](http://alleg.sourceforge.net/a5docs/5.2.0/).
 
 Requires
@@ -24,37 +24,31 @@ Usage
 5. Also check [type-accessors.lisp](https://github.com/resttime/cl-liballegro/tree/master/src/type-accessors.lisp) on how to get to the slot values.
 6. I've got a neat lispy interface [here](https://github.com/resttime/cl-liballegro/tree/master/src/interface/interface.lisp)
 7. Everything else is pretty much 1-to-1
+8. Examples exist if you get lost
 
 ***Feel free to raise an issue to request a feature or for me to work on something***
 
-TODO
---------------
-1. Look over lisp interface design again. Might have to ditch the generic methods because of 2. & 3.
-2. Go over unwind-protect to ensure things safely get deleted.
-3. Get the restart-cases working so users can recover from screwing up. (Also check out handler-case?)
-4. Think about whether to use (al:uninstall-system) to cleanup or not.
-
 Functionality
 --------------
-Currently missing haptic, shader, and the video streaming addon.
+Complete but missing haptic, shader, and the video streaming addon.
 
 **I won't work on the following sections because Common Lisp has more suitable implementations.
 (Might eventually do it for completeness though)
 Feel free to explain otherwise and I'll listen.**
 
-* Filesystem 
-* Memory 
-* Threads 
+* Filesystem
+* Memory
+* Threads
 * UTF-8
 
 FAQ
 --------------
 **Why can't my program find the DLL in Windows?**
 
- There are path problems in Windows because the DLL files (which contain all the functions the CFFI calls upon) 
- doesn't have a default location unlike in Unix environments. When the library loads in Windows, ***it will look for 
- the DLL in the current folder of the FILE.LISP that evaluates `(ql:quickload "cl-liballegro")`*** This means you must 
- have a copy of the DLL file in the directory of FILE.LISP, not in the cl-liballegro directory unless the FILE.LISP is 
+ There are path problems in Windows because the DLL files (which contain all the functions the CFFI calls upon)
+ doesn't have a default location unlike in Unix environments. When the library loads in Windows, ***it will look for
+ the DLL in the current folder of the FILE.LISP that evaluates `(ql:quickload "cl-liballegro")`*** This means you must
+ have a copy of the DLL file in the directory of FILE.LISP, not in the cl-liballegro directory unless the FILE.LISP is
  in there. SLIME however, likes to change the default search folder to the one Emacs is in when it starts.
 
  **SBCL Only** - `Open command prompt in the folder that contains both the DLL and game.lisp`
