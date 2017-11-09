@@ -7,7 +7,7 @@
   (:simple-parser c-float))
 (defmethod translate-to-foreign (value (type c-float)) (float value 0f0))
 (defmethod translate-into-foreign-memory (value (type c-float) pointer)
-  (translate-into-foreign-memory (float value 0f0)
+  (translate-into-foreign-memory (translate-to-foreign value type)
                                  (make-instance 'cffi::foreign-built-in-type
                                                 :type-keyword :float)
                                  pointer))
@@ -18,7 +18,7 @@
   (:simple-parser c-double))
 (defmethod translate-to-foreign (value (type c-double)) (float value 0d0))
 (defmethod translate-into-foreign-memory (value (type c-double) pointer)
-  (translate-into-foreign-memory (float value 0d0)
+  (translate-into-foreign-memory (translate-to-foreign value type)
                                  (make-instance 'cffi::foreign-built-in-type
                                                 :type-keyword :double)
                                  pointer))
@@ -29,7 +29,7 @@
   (:simple-parser c-int))
 (defmethod translate-to-foreign (value (type c-int)) (truncate value))
 (defmethod translate-into-foreign-memory (value (type c-int) pointer)
-  (translate-into-foreign-memory (truncate value)
+  (translate-into-foreign-memory (translate-to-foreign value type)
                                  (make-instance 'cffi::foreign-built-in-type
                                                 :type-keyword :int)
                                  pointer))
@@ -43,9 +43,7 @@
       (null-pointer)
       value))
 (defmethod translate-into-foreign-memory (value (type c-ptr) pointer)
-  (translate-into-foreign-memory (if (or (eql value 0) (eq value nil))
-                                     (null-pointer)
-                                     value)
+  (translate-into-foreign-memory (translate-to-foreign value type)
                                  (make-instance 'cffi::foreign-built-in-type
                                                 :type-keyword :pointer)
                                  pointer))
