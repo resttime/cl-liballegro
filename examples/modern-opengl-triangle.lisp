@@ -2,21 +2,22 @@
 (ql:quickload "cl-opengl")
 
 (defparameter *vert-shader*
-  "#version 330 core
+  "#version 300 es
 
    layout(location = 0) in vec3 vertexPosition_modelspace;
 
-   void main() { 
+   void main() {
        gl_Position.xyz = vertexPosition_modelspace;
-       gl_Position.w = 1.0; 
+       gl_Position.w = 1.0;
    }")
 (defparameter *frag-shader*
-  "#version 330 core
+  "#version 300 es
+   precision highp float;
 
    out vec3 color;
 
    void main() {
-       color = vec3(0.5,0.5,0.5); 
+       color = vec3(0.5,0.5,0.5);
    }")
 
 (defclass game (al:system)
@@ -26,12 +27,13 @@
    (fragment-shader :accessor fragment-shader)
    (program :accessor program))
   (:default-initargs
-   :width 1024 :height 768
+   :width 800 :height 600
    :title "Tutorial 2"
    :logic-fps 1
    :display-flags '(:opengl :opengl-3-0)
-   :display-options '((:sample-buffers 1 :require)
-		      (:samples 8 :require))))
+   :display-options '((:sample-buffers 1 :suggest)
+        	      (:samples 8 :suggest))
+   ))
 
 (defgeneric load-shaders (sys &key vertex fragment))
 (defmethod load-shaders ((sys game) &key vertex fragment)
@@ -43,11 +45,11 @@
     (gl:compile-shader vs)
     (gl:shader-source fs fragment)
     (gl:compile-shader fs)
+    ;;(print (gl:get-shader-info-log vs))
+    ;;(print (gl:get-shader-info-log fs))
     (setf (program sys) (gl:create-program))
     (gl:attach-shader (program sys) vs)
     (gl:attach-shader (program sys) fs)
-    ;; (print (gl:get-shader-info-log vs))
-    ;; (print (gl:get-shader-info-log fs))
     (gl:link-program (program sys))))
 
 (defmethod al:system-loop :before ((sys game))
@@ -60,12 +62,14 @@
 		     0.0 1.0 0.0))
 	(arr (gl:alloc-gl-array :float 9)))
     (dotimes (i (length vert-data))
-      (setf (gl:glaref arr i) (aref vert-data i))) 
+      (setf (gl:glaref arr i) (aref vert-data i)))
     (gl:buffer-data :array-buffer :static-draw arr)
     (gl:free-gl-array arr))
-  (load-shaders sys :vertex *vert-shader* :fragment *frag-shader*))
+  (format t "OpenGL Version: 0x~x~%" (al:get-opengl-version))
+  (format t "OpenGL Variant: ~a~%" (al:get-opengl-variant)))
 
 (defmethod al:render ((sys game))
+  (load-shaders sys :vertex *vert-shader* :fragment *frag-shader*)
   (gl:clear-color 0.0 0.0 0.0 1.0)
   (gl:clear :color-buffer-bit)
   (gl:matrix-mode :projection)
@@ -81,4 +85,3 @@
 
 (defun main ()
   (al:run-system (make-instance 'game)))
-

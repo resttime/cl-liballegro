@@ -182,4 +182,3 @@
     (al:stop-samples)
     (cffi:foreign-free (event sys))
     (al:uninstall-system)))
-
