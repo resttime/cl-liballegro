@@ -2,9 +2,10 @@
 (ql:quickload "cl-opengl")
 (ql:quickload "glkit")
 
-(kit.gl.shader:defdict all-shaders ()
+(kit.gl.shader:defdict *all-shaders* ()
   (kit.gl.shader:shader vertex :vertex-shader "
-   #version 330 core
+   #version 300 es
+   precision highp float;
 
    layout(location = 0) in vec3 vertexPosition_modelspace;
    layout(location = 1) in vec2 vertexUV;
@@ -13,13 +14,14 @@
 
    uniform mat4 MVP;
 
-   void main() { 
+   void main() {
        gl_Position = MVP * vec4(vertexPosition_modelspace, 1);
        UV = vertexUV;
    }")
 
   (kit.gl.shader:shader fragment :fragment-shader "
-   #version 330 core
+   #version 300 es
+   precision highp float;
 
    in vec2 UV;
 
@@ -35,41 +37,41 @@
 			 (:fragment-shader fragment)))
 (defparameter *cube-data* #(
 			    -1.0  -1.0  -1.0
-			    -1.0  -1.0   1.0  
+			    -1.0  -1.0   1.0
 			    -1.0   1.0   1.0
-			    1.0   1.0  -1.0 
-			    -1.0  -1.0  -1.0  
-			    -1.0   1.0  -1.0 
-			    1.0  -1.0   1.0  
-			    -1.0  -1.0  -1.0  
-			    1.0  -1.0  -1.0  
-			    1.0   1.0  -1.0  
-			    1.0  -1.0  -1.0  
-			    -1.0  -1.0  -1.0  
-			    -1.0  -1.0  -1.0  
-			    -1.0   1.0   1.0  
-			    -1.0   1.0  -1.0  
-			    1.0  -1.0   1.0  
-			    -1.0  -1.0   1.0  
-			    -1.0  -1.0  -1.0  
-			    -1.0   1.0   1.0  
-			    -1.0  -1.0   1.0  
-			    1.0  -1.0   1.0  
-			    1.0   1.0   1.0  
-			    1.0  -1.0  -1.0  
-			    1.0   1.0  -1.0  
-			    1.0  -1.0  -1.0  
-			    1.0   1.0   1.0  
-			    1.0  -1.0   1.0  
-			    1.0   1.0   1.0  
-			    1.0   1.0  -1.0  
-			    -1.0   1.0  -1.0  
-			    1.0   1.0   1.0  
-			    -1.0   1.0  -1.0  
-			    -1.0   1.0   1.0  
-			    1.0   1.0   1.0  
-			    -1.0   1.0   1.0  
-			    1.0  -1.0   1.0 
+			    1.0   1.0  -1.0
+			    -1.0  -1.0  -1.0
+			    -1.0   1.0  -1.0
+			    1.0  -1.0   1.0
+			    -1.0  -1.0  -1.0
+			    1.0  -1.0  -1.0
+			    1.0   1.0  -1.0
+			    1.0  -1.0  -1.0
+			    -1.0  -1.0  -1.0
+			    -1.0  -1.0  -1.0
+			    -1.0   1.0   1.0
+			    -1.0   1.0  -1.0
+			    1.0  -1.0   1.0
+			    -1.0  -1.0   1.0
+			    -1.0  -1.0  -1.0
+			    -1.0   1.0   1.0
+			    -1.0  -1.0   1.0
+			    1.0  -1.0   1.0
+			    1.0   1.0   1.0
+			    1.0  -1.0  -1.0
+			    1.0   1.0  -1.0
+			    1.0  -1.0  -1.0
+			    1.0   1.0   1.0
+			    1.0  -1.0   1.0
+			    1.0   1.0   1.0
+			    1.0   1.0  -1.0
+			    -1.0   1.0  -1.0
+			    1.0   1.0   1.0
+			    -1.0   1.0  -1.0
+			    -1.0   1.0   1.0
+			    1.0   1.0   1.0
+			    -1.0   1.0   1.0
+			    1.0  -1.0   1.0
 			    ))
 (defparameter *uv-data* `#(
 			  0.000059  ,(1- 0.000004)
@@ -115,12 +117,12 @@
    (texture :accessor texture)
    (shader-dict :accessor shader-dict))
   (:default-initargs
-   :width 1024 :height 768
+   :width 800 :height 600
    :title "Shakey Texture Cube"
    :logic-fps 30
    :display-flags '(:opengl :opengl-3-0)
-   :display-options '((:sample-buffers 1 :require)
-		      (:samples 8 :require))))
+   :display-options '((:sample-buffers 1 :suggest)
+		      (:samples 8 :suggest))))
 
 (defun model-view-projection-matrix ()
   (let ((view (kit.glm:perspective-matrix 45 1024/768 0.1 100))
@@ -144,40 +146,46 @@
     (setf (vb sys) (append (vb sys) new-buffer))))
 
 (defmethod al:system-loop :before ((sys game))
-  (gl:clear-color 0.0 0.0 0.0 1.0)
-  (gl:enable :depth-test)
-  (gl:depth-func :less)
-  
-  (setf (vao sys) (gl:gen-vertex-arrays 1))
-  (gl:bind-vertex-array (first (vao sys)))
-  
-  (setf (shader-dict sys) (kit.gl.shader:compile-shader-dictionary (kit.gl.shader:dict all-shaders))) 
-  
-  (setf (texture sys) (al:get-opengl-texture (al:load-bitmap "~/Pictures/test.png")))
-  
-  (add-buffer-data sys *cube-data*)
-  (add-buffer-data sys *uv-data*)
-  
-  (gl:bind-texture :texture-2d (texture sys))
-  (gl:tex-parameter :texture-2d :texture-mag-filter :linear)
-  (gl:tex-parameter :texture-2d :texture-min-filter :linear-mipmap-linear)
-  (gl:tex-parameter :texture-2d :texture-wrap-s :repeat)
-  (gl:tex-parameter :texture-2d :texture-wrap-t :repeat)
-  (gl:generate-mipmap :texture-2d))
+  (let ((texture-path (namestring (asdf:system-relative-pathname
+                                   "cl-liballegro" "examples/test.png"))))
+    (gl:clear-color 0.0 0.0 0.0 1.0)
+    (gl:enable :depth-test)
+    (gl:depth-func :less)
+
+    (setf (vao sys) (gl:gen-vertex-arrays 1))
+
+    (gl:bind-vertex-array (first (vao sys)))
+
+    (setf (shader-dict sys)
+          (kit.gl.shader:compile-shader-dictionary (kit.gl.shader:dict *all-shaders*)))
+
+    (setf (texture sys)
+          (al:get-opengl-texture (al:load-bitmap texture-path)))
+
+    (add-buffer-data sys *cube-data*)
+    (add-buffer-data sys *uv-data*)
+
+    (gl:bind-texture :texture-2d (texture sys))
+    (gl:tex-parameter :texture-2d :texture-mag-filter :linear)
+    (gl:tex-parameter :texture-2d :texture-min-filter :linear-mipmap-linear)
+    (gl:tex-parameter :texture-2d :texture-wrap-s :repeat)
+    (gl:tex-parameter :texture-2d :texture-wrap-t :repeat)
+    (gl:generate-mipmap :texture-2d)))
 
 (defmethod al:render ((sys game))
   (gl:clear :color-buffer-bit :depth-buffer-bit)
   (kit.gl.shader:use-program (shader-dict sys) :simple-prog)
-  (kit.gl.shader:uniform-matrix (shader-dict sys) :mvp 4 (vector (model-view-projection-matrix)))
-  
+  (kit.gl.shader:uniform-matrix (shader-dict sys) :mvp 4
+                                (vector (model-view-projection-matrix)))
+
   (gl:active-texture :texture0)
   (gl:bind-texture :texture-2d (texture sys))
   (kit.gl.shader:uniformi (shader-dict sys) "textureSampler" 0)
-  
+
   (gl:enable-vertex-attrib-array 0)
   (gl:bind-buffer :array-buffer (first (vb sys)))
   (gl:vertex-attrib-pointer 0 3 :float :false 0 (cffi:null-pointer))
-  
+
   (gl:enable-vertex-attrib-array 1)
   (gl:bind-buffer :array-buffer (second (vb sys)))
   (gl:vertex-attrib-pointer 1 2 :float :false 0 (cffi:null-pointer))
