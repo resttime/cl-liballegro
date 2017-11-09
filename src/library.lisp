@@ -8,7 +8,7 @@
 
 (define-foreign-library liballegro-main
   (:unix (:or "liballegro_main.so.5.2.2" "liballegro_main.so.5.0"))
-  (t (:default "liballegro")))
+  (t (:default "liballegro_main")))
 (use-foreign-library liballegro-main)
 
 (define-foreign-library liballegro-acodec
