@@ -85,20 +85,20 @@
   (:joystick-button-down 2)
   (:joystick-button-up 3)
   (:joystick-configuration 4)
-  
+
   (:key-down 10)
   (:key-char 11)
   (:key-up 12)
-  
+
   (:mouse-axis 20)
   (:mouse-button-down 21)
   (:mouse-button-up 22)
   (:mouse-enter-display 23)
   (:mouse-leave-display 24)
   (:mouse-warped 25)
-  
+
   (:timer 30)
-  
+
   (:display-expose 40)
   (:display-resize 41)
   (:display-close 42)
@@ -114,10 +114,10 @@
   (:touch-end 51)
   (:touch-move 52)
   (:touch-cancel 53)
-   
+
   (:display-connected 60)
   (:display-disconnected 61))
-  
+
 ;;; File I/O
 (defcenum seek
   (:seek-set 0)
@@ -130,7 +130,7 @@
 (defconstant +radtofix-r+ 2670177)
 
 ;;; Graphics
-;; Bitmap flags 
+;; Bitmap flags
 (defbitfield bitmap-flags
   (:memory-bitmap #x0001)
   (:keep-bitmap-format #x0002)
@@ -265,7 +265,7 @@
 (defcenum joyflags
   (:digital #x01)
   (:analogue #x02))
-  
+
 ;;; Keyboard
 ;; Keycodes
 (defcenum keycodes
@@ -371,12 +371,12 @@
   (:circumflex 100)
   (:colon2 101)
   (:kanji 102)
-  (:pad_equals 103)  
-  (:backquote 104)	
-  (:semicolon2 105)	
-  (:command 106)	
+  (:pad_equals 103)
+  (:backquote 104)
+  (:semicolon2 105)
+  (:command 106)
   (:unknown 107)
-  
+
   (:modifiers 215)
   (:lshift 215)
   (:rshift 216)
@@ -430,7 +430,7 @@
   (:alt-select  18)
   (:unavailable 19)
   :num-system-mouse-cursors)
- 
+
 ;;; State
 (defbitfield state-flags
   (:new-display-parameters  #x0001)
@@ -440,11 +440,11 @@
   (:blender                 #x0010)
   (:new-file-interface      #x0020)
   (:transform               #x0040)
- 
+
   (:bitmap                  10)
-  
+
   (:all                     #xffff))
-  
+
 ;;; System
 (defcenum path-id
   :resources-path
@@ -497,9 +497,9 @@
   (:once    #x100)
   (:loop    #x101)
   (:bidir   #x102)
-  (:-stream-once    #x103)  
+  (:-stream-once    #x103)
   (:-stream-onedir  #x104))
-  
+
 ;;; Font
 (defcenum align-flags
   (:left 0)
@@ -511,7 +511,7 @@
 (defbitfield ttf-flags
   :no-kerning
   :monochrome
-  :no-autohint) 
+  :no-autohint)
 
 ;;; Native Dialogs
 (defbitfield filechooser-modes
@@ -528,3 +528,9 @@
   (:ok-cancel 4)
   (:yes-no 8)
   (:question 16))
+
+;;; Video Streaming
+(defcenum video-position-type
+  :actual
+  :video-decode
+  :audio-decode)

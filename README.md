@@ -30,7 +30,7 @@ Usage
 
 Functionality
 --------------
-Complete but missing haptic, shader, and the video streaming addon.
+Complete but missing haptic, touch input, shader, and the video streaming addon.
 
 **I won't work on the following sections because Common Lisp has more suitable implementations.
 (Might eventually do it for completeness though)
