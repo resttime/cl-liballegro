@@ -120,16 +120,16 @@
    :width 800 :height 600
    :title "Shakey Texture Cube"
    :logic-fps 30
-   :display-flags '(:opengl :opengl-3-0)
+   :display-flags '(:opengl :opengl-3-0 :resizable)
    :display-options '((:sample-buffers 1 :suggest)
 		      (:samples 8 :suggest))))
 
-(defun model-view-projection-matrix ()
-  (let ((view (kit.glm:perspective-matrix 45 1024/768 0.1 100))
+(defun model-view-projection-matrix (width height)
+  (let ((view (kit.glm:perspective-matrix 45 (/ width height) 0.1 100))
 	(projection (kit.glm:look-at
-		     (kit.glm:vec (* 3.0 (cos (/ (get-internal-real-time) 200)))
-				  (* 3.0 (cos (/ (get-internal-real-time) 200)))
-				  (* 3.0 (sin (/ (get-internal-real-time) 200))))
+		     (kit.glm:vec (+ 3 (* 3.0 (cos (/ (get-internal-real-time) 300))))
+				  (1+ (* 3.0 (cos (/ (get-internal-real-time) 200))))
+				  (+ 3 (* 3.0 (sin (/ (get-internal-real-time) 1000)))))
 		     (kit.glm:vec 0.0 0.0 0.0)
 		     (kit.glm:vec 0.0 1.0 0.0))))
     (kit.glm:matrix* kit.glm:+identity-matrix+ view projection)))
@@ -175,8 +175,10 @@
 (defmethod al:render ((sys game))
   (gl:clear :color-buffer-bit :depth-buffer-bit)
   (kit.gl.shader:use-program (shader-dict sys) :simple-prog)
-  (kit.gl.shader:uniform-matrix (shader-dict sys) :mvp 4
-                                (vector (model-view-projection-matrix)))
+  (kit.gl.shader:uniform-matrix
+   (shader-dict sys) :mvp 4
+   (vector (model-view-projection-matrix (al:get-display-width (al:display sys))
+                                         (al:get-display-height (al:display sys)))))
 
   (gl:active-texture :texture0)
   (gl:bind-texture :texture-2d (texture sys))
