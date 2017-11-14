@@ -15,7 +15,6 @@
      (:file "constants")
      (:file "library" )
      (:file "types")
-     (:file "type-accessors")
      (:module "ffi-functions"
       :components
       ((:file "configuration-files")

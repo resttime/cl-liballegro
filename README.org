@@ -16,7 +16,19 @@ libffi
 2. `(al:rest secs)` is `(al:rest-time secs)` because of symbol interference with #'cl:rest.
 3. Enums/constants are shortened, check [[https://github.com/resttime/cl-liballegro/tree/master/src/constants.lisp][constants.lisp]] if you need help finding them.
 4. Type names have changed too, check [[https://github.com/resttime/cl-liballegro/tree/master/src/types.lisp][types.lisp]] if you need help finding them.
-5. Also check [[https://github.com/resttime/cl-liballegro/tree/master/src/type-accessors.lisp][type-accessors.lisp]] on how to get to the slot values.
+5. To access slots from a C struct, you can use CFFI:MEM-REF create a plist
+ #+BEGIN_SRC lisp
+   (defcstruct display-mode
+     (width :int)
+     (height :int)
+     (format :int)
+     (refresh-rate :int))
+
+   (with-foreign-object (test '(:struct display-mode))
+     (let ((plist (mem-ref test '(:struct display-mode))))
+       (print plist)
+       (print (getf plist 'width))))
+ #+END_SRC
 6. I've got a neat lispy interface [[https://github.com/resttime/cl-liballegro/tree/master/src/interface/interface.lisp][here]]
 7. Everything else is pretty much 1-to-1
 8. Examples exist if you get lost

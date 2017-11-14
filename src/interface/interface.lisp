@@ -170,7 +170,6 @@
   (initialize-mouse sys)
   (initialize-keyboard sys))
 
-
 (defun run-system (sys)
   (initialize-system sys)
   (unwind-protect

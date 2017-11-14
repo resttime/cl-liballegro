@@ -17,8 +17,9 @@
   (al:flip-display))
 
 (defmethod al:key-down-handler ((sys window))
-  (print (previous-key sys))
-  (setf (previous-key sys) (al:keycode-of (al:event sys))))
+  (let ((keyboard (cffi:mem-ref (al:event sys) '(:struct al:keyboard-event))))
+    (print (getf keyboard 'al::keycode))
+    (setf (previous-key sys) (getf keyboard 'al::keycode))))
 
 (defun main ()
   (al:run-system (make-instance 'window)))
