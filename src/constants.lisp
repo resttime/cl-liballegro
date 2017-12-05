@@ -295,6 +295,7 @@
   (:x 24)
   (:y 25)
   (:z 26)
+
   (:0 27)
   (:1 28)
   (:2 29)
@@ -305,6 +306,7 @@
   (:7 34)
   (:8 35)
   (:9 36)
+
   (:pad-0 37)
   (:pad-1 38)
   (:pad-2 39)
@@ -315,6 +317,7 @@
   (:pad-7 44)
   (:pad-8 45)
   (:pad-9 46)
+
   (:f1 47)
   (:f2 48)
   (:f3 49)
@@ -327,6 +330,7 @@
   (:f10 56)
   (:f11 57)
   (:f12 58)
+
   (:escape 59)
   (:tilde 60)
   (:minus 61)
@@ -344,6 +348,7 @@
   (:fullstop 73)
   (:slash 74)
   (:space 75)
+
   (:insert 76)
   (:delete 77)
   (:home 78)
@@ -354,14 +359,17 @@
   (:right 83)
   (:up 84)
   (:down 85)
+
   (:pad-slash 86)
   (:pad-asterisk 87)
   (:pad-minus 88)
   (:pad-plus 89)
   (:pad-delete 90)
   (:pad-enter 91)
+
   (:printscreen 92)
   (:pause 93)
+
   (:abnt-c1 94)
   (:yen 95)
   (:kana 96)
@@ -371,11 +379,13 @@
   (:circumflex 100)
   (:colon2 101)
   (:kanji 102)
+
   (:pad_equals 103)
   (:backquote 104)
   (:semicolon2 105)
   (:command 106)
-  (:unknown 107)
+
+  (:unknown 128)
 
   (:modifiers 215)
   (:lshift 215)
@@ -390,6 +400,7 @@
   (:scrolllock 224)
   (:numlock 225)
   (:capslock 226)
+
   (:key-max 227))
 
 ;; Keyboard modifier flags
@@ -404,9 +415,17 @@
   (:command #x00080)
   (:scrolllock #x00100)
   (:numlock #x00200)
-  (:capslock #x00400))
+  (:capslock #x00400)
+  (:INALTSEQ #x00800)
+  (:ACCENT1 #x01000)
+  (:ACCENT2 #x02000)
+  (:ACCENT3 #x04000)
+  (:ACCENT4 #x08000))
 
 ;;; Mouse
+(defconstant +mouse-max-extra-axes+ 4
+  "Allow up to four extra axes for future expansion.")
+
 ;; Mouse cursors
 (defcenum system-mouse-cursor
   (:none         0)

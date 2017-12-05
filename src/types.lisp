@@ -186,7 +186,20 @@
 (defcstruct joystick-state)
 
 ;;; Keyboard
-(defcstruct keyboard-state)
+(defcstruct keyboard-state
+  (display :pointer)
+  (--key-down--internal--
+   :uint :count #.(floor (/ (+ (foreign-enum-value 'keycodes :key-max) 31)
+                            32))))
+
+(defmacro with-keyboard-state (state &body body)
+  `(with-foreign-object (,state '(:struct keyboard-state))
+     ,@body))
+
+(defmacro with-current-keyboard-state (state &body body)
+  `(with-keyboard-state ,state
+     (al:get-keyboard-state ,state)
+     ,@body))
 
 ;;; Monitor
 (defcstruct monitor-info
@@ -196,7 +209,24 @@
   (y2 :int))
 
 ;;; Mouse
-(defcstruct mouse-state)
+(defcstruct mouse-state
+  (x :int)
+  (y :int)
+  (z :int)
+  (w :int)
+  (more-axis :int :count #.+mouse-max-extra-axes+)
+  (buttons :int)
+  (pressure :float)
+  (display :pointer))
+
+(defmacro with-mouse-state (state &body body)
+  `(with-foreign-object (,state '(:struct mouse-state))
+     ,@body))
+
+(defmacro with-current-mouse-state (state &body body)
+  `(with-mouse-state ,state
+     (al:get-mouse-state ,state)
+     ,@body))
 
 ;;; State
 (defcstruct state)

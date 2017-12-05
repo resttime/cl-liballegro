@@ -1,7 +1,7 @@
 (defpackage #:cl-liballegro
   (:use #:cl #:cffi)
   (:nicknames #:al #:liballegro)
-  (:export 
+  (:export
 ;;; Higher level Lisp API
    ;; CLOS type and slots
    #:system
@@ -56,7 +56,7 @@
    #:system-loop
    ;; Generic System Runner
    #:run-system
-   
+
 ;;; Type Accessors
    #:event-type-of
    #:event-struct-type-of
@@ -88,7 +88,7 @@
    #:dz-of
    #:dw-of
    #:pressure-of
-   
+
 ;;; Configuration Files
    #:create-config
    #:destroy-config
@@ -114,7 +114,7 @@
    #:destroy-display
    #:set-new-display-flags
    #:get-new-display-flags
-   #:set-new-display-flags 
+   #:set-new-display-flags
    #:set-new-display-option
    #:set-new-display-option
    #:reset-new-display-options
@@ -122,7 +122,7 @@
    #:set-new-window-position
    #:get-new-display-refresh-rate
    #:set-new-display-refresh-rate
-   
+
    ;; Display Operations
    #:get-display-event-source
    #:get-backbuffer
@@ -151,10 +151,10 @@
 
    ;; Screensaver
    #:inhibit-screensaver
-   
+
 ;;; Events
    #:event-types
-   
+
    #:event-joystick-axis
    #:event-joystick-button-down
    #:event-joystick-button-up
@@ -177,7 +177,7 @@
    #:event-display-switch-in
    #:event-display-switch-out
    #:event-display-orientation
-  
+
    #:any-event
    #:display-event
    #:joystick-event
@@ -238,14 +238,14 @@
    ;; Standard I/O specific routines
    #:fopen-fd
    #:make-temp-file
-   
+
    ;; Alternative file streams
    #:set-new-file-interface
    #:set-standard-file-interface
    #:get-new-file-interface
    #:create-file-handle
    #:get-file-userdata
-   
+
 ;;; File system routines
    #:create-fs-entry
    #:destroy-fs-entry
@@ -276,7 +276,7 @@
 ;;; Fullscreen modes
    #:get-display-mode
    #:get-num-display-modes
-   
+
 ;;; Graphics
    ;; Color
    #:color
@@ -295,7 +295,7 @@
    #:lock-bitmap
    #:lock-bitmap-region
    #:unlock-butmap
-   
+
    ;; Bitmap Creation
    #:create-bitmap
    #:create-sub-bitmap
@@ -355,7 +355,7 @@
    ;; Deferred drawing
    #:hold-bitmap-drawing
    #:is-bitmap-drawing-held
-   
+
    ;; Images I/O
    #:register-bitmap-loader
    #:resiter-bitmap-saver
@@ -385,7 +385,7 @@
    #:get-joystick-num-buttons
    #:get-joystick-state
    #:get-joystick-event-source
-   
+
 ;;; Keyboard
    ;; Key codes
    #:key-a
@@ -488,7 +488,7 @@
 
    #:key-printscreen
    #:key-pause
-   
+
    #:key-modifiers
    #:key-lshift
    #:key-rshift
@@ -502,7 +502,7 @@
    #:key-scrolllock
    #:key-numlock
    #:key-capslock
-   
+
    ;;Keyboard modifier flags
    #:keymod-shift
    #:keymod-ctrl
@@ -515,7 +515,7 @@
    #:keymod-scrolllock
    #:keymod-numlock
    #:keymod-capslock
-   
+
    #:install-keyboard
    #:is-keyboard-installed
    #:uninstall-keyboard
@@ -525,12 +525,15 @@
    #:set-keyboard-leds
    #:get-keyboard-event-source
 
+   ;; Keyboard state functions
+   #:with-keyboard-state
+   #:with-current-keyboard-state
 ;;; Monitor
    #:get-new-display-adapter
    #:set-new-display-adapter
    #:get-monitor-info
    #:get-num-video-adapters
-   
+
 ;;; Mouse
    #:install-mouse
    #:is-mouse-installed
@@ -556,7 +559,20 @@
    #:show-mouse-cursor
    #:grab-mouse
    #:ungrab-mouse
-   
+
+   ;; Mouse state
+   #:mouse-state
+   #:x
+   #:y
+   #:z
+   #:w
+   #:mouse-axis
+   #:buttons
+   #:pressure
+   #:display
+
+   #:with-mouse-state
+   #:with-current-mouse-state
 ;;; Path
    #:create-path
    #:create-path-for-directory
@@ -636,7 +652,7 @@
    #:scale-transform
    #:transform-coordinates
    #:compose-transform
-   
+
 ;;; Miscellaneous routines
    #:+pi+
 
@@ -773,7 +789,7 @@
    #:get-audio-stream-position-secs
    #:get-audio-stream-length-secs
    #:set-audio-stream-loop-secs
-   
+
    ;; Audio file I/O
    #:register-sample-loader
    #:register-sample-loader-f
@@ -823,7 +839,7 @@
    ;; Bitmap fonts
    #:grab-font-from-bitmap
    #:load-bitmap-font
-   #:create-builtin-font   
+   #:create-builtin-font
 
    ;; TTF fonts
    #:init-ttf-addon
