@@ -2,7 +2,7 @@
 (asdf:defsystem cl-liballegro
   :description "Allegro 5 game programming library bindings for Common Lisp"
   :license "Allegro 5 - http://alleg.sourceforge.net/license.html"
-  :version "0.2.2"
+  :version "0.2.3"
   :author "resttime"
   :depends-on (:cffi
                :cffi-libffi
@@ -14,7 +14,27 @@
     ((:file "package")
      (:file "constants")
      (:file "library" )
-     (:file "types")
+     (:module "types"
+      :components
+      ((:file "events")
+       (:file "file-io")
+       (:file "fixed-point-math")
+       (:file "fullscreen-modes")
+       (:file "graphics")
+       (:file "joystick")
+       (:file "keyboard")
+       (:file "monitor")
+       (:file "mouse")
+       (:file "state")
+       (:file "time")
+       (:file "timer")
+       (:file "transformations")
+       (:file "types")
+       (:module "addons"
+        :components
+        ((:file "audio")
+         (:file "font")
+         (:file "native-dialogs")))))
      (:module "ffi-functions"
       :components
       ((:file "configuration-files")
