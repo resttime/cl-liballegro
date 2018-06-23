@@ -12,8 +12,28 @@
   ((:module "src"
     :components
     ((:file "package")
-     (:file "constants")
-     (:file "library" )
+     (:file "library")
+     (:module "constants"
+      :components
+      ((:file "display")
+       (:file "events")
+       (:file "file-io")
+       (:file "fixed-point-math")
+       (:file "graphics")
+       (:file "haptic")
+       (:file "joystick")
+       (:file "keyboard")
+       (:file "misc")
+       (:file "mouse")
+       (:file "opengl")
+       (:file "state")
+       (:file "system")
+       (:module "addons"
+        :components
+        ((:file "audio")
+         (:file "font")
+         (:file "native-dialogs")
+         (:file "video-streaming")))))
      (:module "types"
       :components
       ((:file "events")
