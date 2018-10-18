@@ -3,10 +3,10 @@
 * cl-liballegro
 [[http://quickdocs.org/badge/cl-liballegro.svg]]
 
-Interface and bindings to the [[http://alleg.sourceforge.net/][Allegro 5 game programming library]]
+Interface and bindings to the [[https://liballeg.org/][Allegro 5 game programming library]]
 
 Check out how the [[https://github.com/resttime/cl-liballegro/tree/master/src][bindings' source code]] is organized and compare it to
-the [[http://alleg.sourceforge.net/a5docs/5.2.0/][API reference]].
+the [[https://liballeg.org/a5docs/trunk/][API reference]].
 
 * Requires
 libffi
