@@ -1,7 +1,7 @@
 [[http://liballeg.org/images/logo.png]]
 
 * cl-liballegro
-[[http://quickdocs.org/badge/sketch.svg]]
+[[http://quickdocs.org/badge/cl-liballegro.svg]]
 
 Interface and bindings to the [[http://alleg.sourceforge.net/][Allegro 5 game programming library]]
 
