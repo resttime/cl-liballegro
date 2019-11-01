@@ -49,8 +49,8 @@
 (define-foreign-library liballegro-physfs
   (:unix (:or "liballegro_physfs.so.5.2.2" "liballegro_physfs.so.5.2"))
   (t (:default "liballegro_physfs")))
-(handler-case (use-foreign-library liballegro-phyfs)
-  (error (condition) (print "phyfs library not found") condition))
+(handler-case (use-foreign-library liballegro-physfs)
+  (error (condition) (print "physfs library not found") condition))
 
 (define-foreign-library liballegro-primitives
   (:unix (:or "liballegro_primitives.so.5.2.2" "liballegro_primitives.so.5.2"))
