@@ -294,7 +294,7 @@
    #:get-pixel-format-bits
    #:lock-bitmap
    #:lock-bitmap-region
-   #:unlock-butmap
+   #:unlock-bitmap
 
    ;; Bitmap Creation
    #:create-bitmap
