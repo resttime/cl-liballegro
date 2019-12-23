@@ -85,12 +85,12 @@
   (flags draw-flags))
 (defcfun ("al_draw_bitmap_region" draw-bitmap-region) :void
   (bitmap :pointer)
-  (sx c-float) (sy c-float) (sw c-float) (sh c-float) (dx c-float (dy c-float))
+  (sx c-float) (sy c-float) (sw c-float) (sh c-float) (dx c-float) (dy c-float)
   (flags draw-flags))
 (defcfun ("al_draw_tinted_bitmap_region" draw-tinted-bitmap-region) :void
   (bitmap :pointer)
   (color (:struct color))
-  (sx c-float) (sy c-float) (sw c-float) (sh c-float) (dx c-float (dy c-float))
+  (sx c-float) (sy c-float) (sw c-float) (sh c-float) (dx c-float) (dy c-float)
   (flags draw-flags))
 (defcfun ("al_draw_pixel" draw-pixel) :void
   (x c-float) (y c-float)
