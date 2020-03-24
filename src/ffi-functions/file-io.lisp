@@ -11,6 +11,7 @@
 (defcfun ("al_fseek" fseek) :boolean (file :pointer) (offset :uint64) (whence seek))
 (defcfun ("al_feof" feof) :boolean (file :pointer))
 (defcfun ("al_ferror" ferror) :boolean (file :pointer))
+(defcfun ("al_ferrmsg" ferrmsg) :string (file :pointer))
 (defcfun ("al_fclearerr" fclearerr) :void (file :pointer))
 (defcfun ("al_fungetc" fungetc) :int (file :pointer) (c :int))
 (defcfun ("al_fsize" fsize) :uint64 (file :pointer)) 
