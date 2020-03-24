@@ -218,6 +218,7 @@
    #:fseek
    #:feof
    #:ferror
+   #:ferrmsg
    #:fclearerr
    #:fungetc
    #:fsize
