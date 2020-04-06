@@ -641,6 +641,8 @@
    #:get-timer-event-source
 
 ;;; Transformations
+   #:transform
+
    #:copy-transform
    #:use-transform
    #:get-current-transform

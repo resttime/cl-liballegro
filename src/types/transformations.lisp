@@ -1,3 +1,4 @@
 (in-package :cl-liballegro)
 
-(defcstruct transform)
+(defcstruct transform
+  (m (:pointer :float)))
