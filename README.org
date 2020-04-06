@@ -29,7 +29,7 @@ libffi
        (print plist)
        (print (getf plist 'width))))
  #+END_SRC
-6. I've got a neat lispy interface [[https://github.com/resttime/cl-liballegro/tree/master/src/interface/interface.lisp][here]]
+6. I've got a neat OPTIONAl lispy interface [[https://github.com/resttime/cl-liballegro/tree/master/src/interface/interface.lisp][here]]
 7. Everything else is pretty much 1-to-1
 8. Examples exist if you get lost
 
