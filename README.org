@@ -1,8 +1,6 @@
 [[http://liballeg.org/images/logo.png]]
 
 * cl-liballegro
-[[http://quickdocs.org/badge/cl-liballegro.svg]]
-
 Interface and bindings to the [[https://liballeg.org/][Allegro 5 game programming library]]
 
 Check out how the [[https://github.com/resttime/cl-liballegro/tree/master/src][bindings' source code]] is organized and compare it to
