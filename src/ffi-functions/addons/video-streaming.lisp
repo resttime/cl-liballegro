@@ -1,6 +1,7 @@
 (in-package #:cl-liballegro)
 
 (defcfun ("al_init_video_addon" init-video-addon) :bool)
+(defcfun ("al_is_video_addon_initialized" is-init-video-addon-initialized) :bool)
 (defcfun ("al_shutdown_video_addon" shutdown-video-addon) :void)
 (defcfun ("al_get_allegro_video_version" get-allegro-video-version) :uint32)
 (defcfun ("al_open_video" open-video) :pointer (filename :string))
