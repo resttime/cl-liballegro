@@ -47,3 +47,6 @@
                                  (make-instance 'cffi::foreign-built-in-type
                                                 :type-keyword :pointer)
                                  pointer))
+
+(defctype time_t :long)
+(defctype off_t :int)

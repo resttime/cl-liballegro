@@ -1,0 +1,26 @@
+(in-package #:cl-liballegro)
+
+(defcstruct fs-entry)
+
+;; Alternatic filesystem functions
+(defcstruct fs-interface
+  (fs-create-entry :pointer)
+  (fs-destroy-entry :pointer)
+  (fs-entry-name :pointer)
+  (fs-update-entry :pointer)
+  (fs-entry-mode :pointer)
+  (fs-entry-atime :pointer)
+  (fs-entry-mtime :pointer)
+  (fs-entry-ctime :pointer)
+  (fs-entry-size :pointer)
+  (fs-entry-exists :pointer)
+  (fs-remove-entry :pointer)
+  (fs-open-directory :pointer)
+  (fs-read-directory :pointer)
+  (fs-close-directory :pointer)
+  (fs-filename-exists :pointer)
+  (fs-remove-filename :pointer)
+  (fs-get-current-directory :pointer)
+  (fs-change-directory :pointer)
+  (fs-make-directory :pointer)
+  (fs-open-file :pointer))

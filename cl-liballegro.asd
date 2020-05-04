@@ -18,6 +18,7 @@
       ((:file "display")
        (:file "events")
        (:file "file-io")
+       (:file "filesystem")
        (:file "fixed-point-math")
        (:file "graphics")
        (:file "haptic")
@@ -39,6 +40,7 @@
      (:module "types"
       :components
       ((:file "events")
+       (:file "filesystem")
        (:file "file-io")
        (:file "fixed-point-math")
        (:file "fullscreen-modes")
@@ -66,6 +68,7 @@
        (:file "display")
        (:file "events")
        (:file "file-io")
+       (:file "filesystem")
        (:file "fixed-point-math")
        (:file "fullscreen-modes")
        (:file "graphics")
