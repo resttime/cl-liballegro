@@ -39,7 +39,6 @@ Pretty much complete except:
 
 *I won't work on the following sections because Common Lisp has more
 suitable implementations unless there's a usecase or I'm bored.*
- * Filesystem
  * Memory
  * Threads
  * UTF-8
