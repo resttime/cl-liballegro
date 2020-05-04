@@ -367,6 +367,39 @@
    #:save-bitmap
    #:save-bitmap-f
 
+;;; Haptic
+   #:install-haptic
+   #:uninstall-haptic
+   #:is-haptic-installed
+   #:is-mouse-haptic
+   #:is-keyboard-haptic
+   #:is-display-haptic
+   #:is-joystick-haptic
+   #:is-touch-input-haptic
+   #:get-haptic-from-mouse
+   #:get-haptic-from-keyboard
+   #:get-haptic-from-display
+   #:get-haptic-from-joystick
+   #:get-haptic-from-touch-input
+   #:release-haptic
+   #:is-haptic-active
+   #:get-haptic-capabilities
+   #:is-haptic-capable
+   #:set-haptic-gain
+   #:get-haptic-gain
+   #:set-haptic-autocenter
+   #:get-haptic-autocenter
+   #:get-max-haptic-effects
+   #:is-haptic-effect-ok
+   #:upload-haptic-effect
+   #:play-haptic-effect
+   #:upload-and-play-haptic-effect
+   #:stop-haptic-effect
+   #:is-haptic-effect-playing
+   #:get-haptic-effect-duration
+   #:release-haptic-effect
+   #:rumble-haptic
+
 ;;; Joystick
    #:install-joystick
    #:unisntall-joystick

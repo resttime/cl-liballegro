@@ -43,6 +43,7 @@
        (:file "fixed-point-math")
        (:file "fullscreen-modes")
        (:file "graphics")
+       (:file "haptic")
        (:file "joystick")
        (:file "keyboard")
        (:file "monitor")
