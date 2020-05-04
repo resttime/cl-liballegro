@@ -2,7 +2,7 @@
 (asdf:defsystem cl-liballegro
   :description "Allegro 5 game programming library bindings for Common Lisp"
   :license "Allegro 5 - https://liballeg.org/license.html"
-  :version "0.2.7"
+  :version "0.2.8"
   :author "resttime"
   :depends-on (:cffi
                :cffi-libffi
@@ -26,6 +26,7 @@
        (:file "misc")
        (:file "mouse")
        (:file "opengl")
+       (:file "touch-input")
        (:file "state")
        (:file "system")
        (:module "addons"
@@ -48,6 +49,7 @@
        (:file "state")
        (:file "time")
        (:file "timer")
+       (:file "touch-input")
        (:file "transformations")
        (:file "types")
        (:module "addons"

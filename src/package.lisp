@@ -640,6 +640,16 @@
    #:set-timer-speed
    #:get-timer-event-source
 
+;;; Touch input
+   #:install-touch-input
+   #:uninstall-touch-input
+   #:is-touch-input-installed
+   #:get-touch-input-state
+   #:set-mouse-emulation-mode
+   #:get-mouse-emulation-mode
+   #:get-touch-input-event-source
+   #:get-touch-input-mouse-emulation-event-source
+
 ;;; Transformations
    #:transform
 
