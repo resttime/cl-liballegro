@@ -599,6 +599,24 @@
    #:path-cstr
    #:make-path-canonical
 
+;;; Shader
+   #:create-shader
+   #:attach-shader-source
+   #:attach-shader-source-file
+   #:build-shader
+   #:get-shader-log
+   #:get-shader-platform
+   #:use-shader
+   #:destroy-shader
+   #:set-shader-sampler
+   #:set-shader-matrix
+   #:set-shader-int
+   #:set-shader-float
+   #:set-shader-bool
+   #:set-shader-int-vector
+   #:set-shader-float-vector
+   #:get-default-shader-source
+
 ;;; State
    #:restore-state
    #:store-state
