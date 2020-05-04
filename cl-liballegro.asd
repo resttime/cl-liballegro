@@ -82,6 +82,7 @@
        (:file "timer")
        (:file "touch-input")
        (:file "transformations")
+       (:file "misc")
        (:file "platform-specific")
        (:file "direct3d")
        (:file "opengl")

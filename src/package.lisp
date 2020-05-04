@@ -719,6 +719,7 @@
 
 ;;; Miscellaneous routines
    #:+pi+
+   #:run-main
 
 ;;; OpenGL
    #:get-opengl-extension-list
