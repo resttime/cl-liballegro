@@ -4,6 +4,9 @@
   "Use macro for easier versioning.  Debug using MACROEXPAND-1"
   `(define-foreign-library ,(intern (string-upcase lib))
      (:windows ,(concatenate 'string (subseq lib 3) "-5.2.dll"))
+     (:darwin (:or ,(concatenate 'string lib ".5.2.6.dylib")
+                   ,(concatenate 'string lib ".5.2.dylib")
+                   ,(concatenate 'string lib ".dylib")))
      (:unix (:or ,(concatenate 'string lib ".so.5.2.6")
                  ,(concatenate 'string lib ".so.5.2")
                  ,(concatenate 'string lib ".so")))
@@ -19,9 +22,6 @@
 
 (define-allegro-library "liballegro")
 (use-foreign-library liballegro)
-
-(define-allegro-library "liballegro_main")
-(use-foreign-library liballegro_main)
 
 (define-allegro-library "liballegro_acodec")
 (use-foreign-library liballegro_acodec)
