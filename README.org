@@ -34,11 +34,10 @@ libffi
 *Feel free to raise an issue to request a feature or for me to work on something*
 
 * Functionality
-Complete but missing haptic.
+Pretty much complete except:
 
 *I won't work on the following sections because Common Lisp has more
-suitable implementations.* (Might eventually do it for completeness
-though) *Feel free to explain otherwise and I'll listen.*
+suitable implementations unless there's a usecase or I'm bored.*
  * Filesystem
  * Memory
  * Threads
