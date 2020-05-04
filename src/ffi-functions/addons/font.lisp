@@ -43,13 +43,15 @@
   (color (:struct color))
   (x c-float) (y c-float)
   (flags :int)
-  (format :string))
+  (format :string)
+  &rest)
 (defcfun ("al_draw_justified_textf" draw-justified-textf) :void
   (font :pointer)
   (color (:struct color))
   (x1 c-float) (x2 c-float) (y c-float) (diff c-float)
   (flags :int)
-  (format :string))
+  (format :string)
+  &rest)
 (defcfun ("al_get_text_dimensions" get-text-dimensions) :void
   (f :pointer) (text :string)
   (bbx :pointer) (bby :pointer)
