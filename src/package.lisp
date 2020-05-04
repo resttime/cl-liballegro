@@ -916,4 +916,25 @@
    #:destroy-vertex-decl
    #:draw-soft-triangle
    #:draw-soft-line
+
+;;; Video streaming addon
+   ;; Functions
+   #:init-video-addon
+   #:is-init-video-addon-initialized
+   #:shutdown-video-addon
+   #:get-allegro-video-version
+   #:open-video
+   #:close-video
+   #:start-video
+   #:start-video-with-voice
+   #:get-video-event-source
+   #:set-video-playing
+   #:is-video-playing
+   #:get-video-audio-rate
+   #:get-video-fps
+   #:get-video-scaled-width
+   #:get-video-scaled-height
+   #:get-video-frame
+   #:get-video-position
+   #:set-seek-video
    ))
