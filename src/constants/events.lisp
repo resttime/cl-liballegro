@@ -36,5 +36,11 @@
   (:touch-cancel 53)
 
   (:display-connected 60)
-  (:display-disconnected 61))
+  (:display-disconnected 61)
+
+  ;; Video event type (addon)
+  (:video-frame-show 550)
+  (:video-finished 551)
+  (:-video-seek 552)
+  )
 
