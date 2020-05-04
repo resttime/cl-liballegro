@@ -34,7 +34,7 @@ libffi
 *Feel free to raise an issue to request a feature or for me to work on something*
 
 * Functionality
-Complete but missing haptic, touch input, and shader.
+Complete but missing haptic and shader.
 
 *I won't work on the following sections because Common Lisp has more
 suitable implementations.* (Might eventually do it for completeness
