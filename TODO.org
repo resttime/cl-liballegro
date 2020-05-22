@@ -1,6 +1,0 @@
-* TODO Think about a new lisp interface with unwind-protect and restart-cases
-* TODO Foreign library and initialization at runtime
-* TODO Haptic
-* TODO Touch Input
-* TODO Shader
-* TODO Video Streaming (Add the events and structs)
