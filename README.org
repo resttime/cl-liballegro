@@ -7,13 +7,13 @@ Check out how the [[https://github.com/resttime/cl-liballegro/tree/master/src][b
 the [[https://liballeg.org/a5docs/trunk/][API reference]].
 
 * Requires
-libffi
+[[https://sourceware.org/libffi/][libffi]]
 
 * Usage
 1. `al_*` becomes `al:*`
 2. `(al:rest secs)` is `(al:rest-time secs)` because of symbol interference with #'cl:rest.
-3. Enums/constants are shortened, check [[https://github.com/resttime/cl-liballegro/tree/master/src/constants.lisp][constants.lisp]] if you need help finding them.
-4. Type names have changed too, check [[https://github.com/resttime/cl-liballegro/tree/master/src/types.lisp][types.lisp]] if you need help finding them.
+3. Enums/constants are shortened, check [[https://github.com/resttime/cl-liballegro/tree/master/src/constants][constants]] if you need help finding them.
+4. Type names have changed too, check [[https://github.com/resttime/cl-liballegro/tree/master/src/types][types]] if you need help finding them.
 5. To access slots from a C struct, you can use CFFI:MEM-REF create a plist
  #+BEGIN_SRC lisp
    (defcstruct display-mode
@@ -27,7 +27,7 @@ libffi
        (print plist)
        (print (getf plist 'width))))
  #+END_SRC
-6. I've got a neat OPTIONAl lispy interface [[https://github.com/resttime/cl-liballegro/tree/master/src/interface/interface.lisp][here]]
+6. I've got a neat *OPTIONAL* lispy interface [[https://github.com/resttime/cl-liballegro/tree/master/src/interface/interface.lisp][here]] which provides an entire fixed timestep game loop
 7. Everything else is pretty much 1-to-1
 8. If you're getting crashes on MacOS, put all your code into [[https://common-lisp.net/project/cffi/manual/html_node/defcallback.html][callback]] and pass it to [[https://www.allegro.cc/manual/5/al_run_main][al:run-main]].
 9. Examples exist if you get lost
