@@ -86,3 +86,6 @@ M-x slime
 C-x C-f /path/to/Desktop/game/game.lisp
 C-c C-l
 #+END_SRC
+
+* License
+Allegro 5 - https://liballeg.org/license.html
