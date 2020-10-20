@@ -88,4 +88,4 @@ C-c C-l
 #+END_SRC
 
 * License
-Allegro 5 - https://liballeg.org/license.html
+Project under zlib license
