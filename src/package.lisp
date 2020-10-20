@@ -774,7 +774,7 @@
    #:get-sample-data
 
    ;; Sample instance functions
-   #:create-smaple-instance
+   #:create-sample-instance
    #:destroy-sample-instance
    #:play-sample-instance
    #:stop-sample-instance
