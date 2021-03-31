@@ -10,8 +10,8 @@ the [[https://liballeg.org/a5docs/trunk/][API reference]].
 [[https://sourceware.org/libffi/][libffi]]
 
 * Usage
-1. `al_*` becomes `al:*`
-2. `(al:rest secs)` is `(al:rest-time secs)` because of symbol interference with #'cl:rest.
+1. ~al_*~ becomes ~al:*~
+2. ~(al:rest secs)~ is ~(al:rest-time secs)~ because of symbol interference with #'cl:rest.
 3. Enums/constants are shortened, check [[https://github.com/resttime/cl-liballegro/tree/master/src/constants][constants]] if you need help finding them.
 4. Type names have changed too, check [[https://github.com/resttime/cl-liballegro/tree/master/src/types][types]] if you need help finding them.
 5. To access slots from a C struct, you can use CFFI:MEM-REF create a plist
@@ -44,6 +44,9 @@ suitable implementations unless there's a usecase or I'm bored.*
  * UTF-8
 
 * FAQ
+** (More found under gh-pages branch)
+https://resttime.github.io/cl-liballegro/
+
 ** Why can't my program find the DLL in Windows?
 
 There are path problems in Windows because the DLL files (which
