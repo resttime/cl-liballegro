@@ -6,7 +6,9 @@
   :author "resttime"
   :depends-on (:cffi
                :cffi-libffi
-               :trivial-garbage)
+               :trivial-garbage
+               :trivial-main-thread
+               :float-features)
   :serial t
   :components
   ((:module "src"
