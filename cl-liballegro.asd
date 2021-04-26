@@ -58,6 +58,7 @@
        (:file "timer")
        (:file "touch-input")
        (:file "transformations")
+       (:file "utf-8")
        (:file "types")
        (:module "addons"
         :components
@@ -87,6 +88,7 @@
        (:file "timer")
        (:file "touch-input")
        (:file "transformations")
+       (:file "utf-8")
        (:file "misc")
        (:file "platform-specific")
        (:file "direct3d")
