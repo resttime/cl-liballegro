@@ -41,7 +41,6 @@ Pretty much complete except:
 suitable implementations unless there's a usecase or I'm bored.*
  * Memory
  * Threads
- * UTF-8
 
 * FAQ
 ** (More found under gh-pages branch)
