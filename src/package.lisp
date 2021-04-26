@@ -717,6 +717,105 @@
    #:transform-coordinates
    #:compose-transform
 
+;;; UTF-8
+   #:ustr
+   #:ustr-info
+
+   ;; Creating and destroying strings
+   #:ustr-new
+   #:ustr-new-from-buffer
+   #:ustr-newf
+   #:ustr-free
+   #:cstr
+   #:ustr_to_buffer
+   #:cstr_dup
+   #:ustr_dup
+   #:ustr_dup_substr
+
+   ;; Predefined strings
+   #:ustr_empty_string
+
+   ;; Creating strings by referencing other data
+   #:ref_cstr
+   #:ref_buffer
+   #:ref_ustr
+
+   ;; Sizes and offsets
+   #:ustr_size
+   #:ustr_length
+   #:ustr_offset
+   #:ustr_next
+   #:ustr_prev
+
+   ;; Getting code points
+   #:ustr_get
+   #:ustr_get_next
+   #:ustr_prev_get
+
+   ;; Inserting into strings
+   #:ustr_insert
+   #:ustr_insert_cstr
+   #:ustr_insert_chr
+
+   ;; Appending to strings
+   #:ustr_append
+   #:ustr_append_cstr
+   #:ustr_append_chr
+   #:ustr_appendf
+
+   ;; Removing parts of strings
+   #:ustr_remove_chr
+   #:ustr_remove_range
+   #:ustr_truncate
+   #:ustr_ltrim_ws
+   #:ustr_rtrim_ws
+   #:ustr_trim_ws
+
+   ;; Assigning one string to another
+   #:ustr_assign
+   #:ustr_assign_substr
+   #:ustr_assign_cstr
+
+   ;; Replacing parts of string
+   #:ustr_set_chr
+   #:ustr_replace_range
+
+   ;; Searching
+   #:ustr_find_chr
+   #:ustr_rfind_chr
+   #:ustr_find_set
+   #:ustr_find_set_cstr
+   #:ustr_find_cset
+   #:ustr_find_cset_cstr
+   #:ustr_find_str
+   #:ustr_find_cstr
+   #:ustr_rfind_str
+   #:ustr_rfind_cstr
+   #:ustr_find_replace
+   #:ustr_find_replace_cstr
+
+   ;; Comparing
+   #:ustr_equal
+   #:ustr_compare
+   #:ustr_ncompare
+   #:ustr_has_prefix
+   #:ustr_has_prefix_cstr
+   #:ustr_has_suffix
+   #:ustr_has_suffix_cstr
+
+   ;; UTF-16 conversion
+   #:ustr_new_from_utf16
+   #:ustr_size_utf16
+   #:ustr_encode_utf16
+
+   ;; Low-level UTF-8 routines
+   #:utf8_width
+   #:utf8_encode
+
+   ;; Low-level UTF-16 routines
+   #:utf16_width
+   #:utf16_encode
+
 ;;; Miscellaneous routines
    #:+pi+
    #:run-main
