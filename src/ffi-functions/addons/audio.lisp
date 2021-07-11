@@ -156,8 +156,7 @@
   (fragment-count :uint) (frag-samples :uint) (freq :uint)
   (depth audio-depth) (chan-conf channel-conf))
 (defcfun ("al_destroy_audio_stream" destroy-audio-stream) :void (stream :pointer))
-(defcfun ("al_get_audio_stream_event_source" get-sudio-stream-event-source)
-    :pointer
+(defcfun ("al_get_audio_stream_event_source" get-audio-stream-event-source) :pointer
   (stream :pointer))
 (defcfun ("al_drain_audio_stream" drain-audio-stream) :void (stream :pointer))
 (defcfun ("al_rewind_audio_stream" rewind-audio-stream) :boolean (stream :pointer))
