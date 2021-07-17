@@ -184,7 +184,7 @@
 (defcfun ("al_get_audio_stream_playing" get-audio-stream-playing) :boolean
   (stream :pointer))
 (defcfun ("al_set_audio_stream_playing" set-audio-stream-playing) :boolean
-  (stream :pointer) (val c-float))
+  (stream :pointer) (val :boolean))
 (defcfun ("al_get_audio_stream_playmode" get-audio-stream-playmode) playmode
   (stream :pointer))
 (defcfun ("al_set_audio_stream_playmode" set-audio-stream-playmode) :boolean
