@@ -38,9 +38,13 @@
   (:display-connected 60)
   (:display-disconnected 61)
 
+  ;; Audio event type (addon)
+  (:-kcm-stream-feeder-quit-event-type 512)
+  (:audio-stream-fragment 513)
+  (:audio-stream-finished 514)
+  (:audio-recorder-fragment 515)
+
   ;; Video event type (addon)
   (:video-frame-show 550)
   (:video-finished 551)
-  (:-video-seek 552)
-  )
-
+  (:-video-seek 552))
