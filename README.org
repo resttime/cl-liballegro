@@ -89,5 +89,19 @@ C-x C-f /path/to/Desktop/game/game.lisp
 C-c C-l
 #+END_SRC
 
+* Projects
+Various projects I've found using cl-liballegro.  Feel free to add items onto the list!
+
+** GUI / UI
+- [[https://github.com/lockie/cl-liballegro-nuklear][cl-liballegro-nuklear]] - Bindings to the [[https://github.com/Immediate-Mode-UI/Nuklear][nuklear]] immediate mode GUI library
+
+** Games
+- [[https://awkravchuk.itch.io/darkness-looming-the-dawn][Darkness Looming: The Dawn]] - Old school hack n' slash
+- [[https://github.com/xFA25E/simple-asteroids][simple-asteroids]] - Simple asteroids
+- [[https://github.com/VyacheslavMik/tanks][tanks]] - Tanks
+
+** Engine
+- [[https://github.com/lockie/d2clone-kit][d2clone-kit]] - Diablo 2 game engine
+
 * License
 Project under zlib license
