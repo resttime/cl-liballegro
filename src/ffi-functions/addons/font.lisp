@@ -2,7 +2,7 @@
 
 ;;; Font addons
 ;; General font routinues
-(defcfun ("al_init_font_addon" init-font-addon) :void)
+(defcfun ("al_init_font_addon" init-font-addon) :boolean)
 (defcfun ("al_shutdown_font_addon" shutdown-font-addon) :void)
 (defcfun ("al_load_font" load-font) :pointer
   (filename :string) (size :int) (flags :int))
