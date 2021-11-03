@@ -1,0 +1,20 @@
+* Changelog
+** Unreleased
+- Add projects to readme using cl-liballegro
+- Add changelog file to help devs keep track of changes
+- Fix return value of ~init-font-addon~
+
+** 0.2.15
+- Add audio event type
+- Fix incorrect function parameter for ~set-audio-stream-playing~
+
+** 0.2.13
+- Add Allegro 5 UTF-8
+- Add additional documentation: https://resttime.github.io/cl-liballegro/
+- Fix ~run-system~ on OSX
+
+** 0.2.11
+- Add Allegro 5 video addon
+- Add Allegro 5 filesystem
+- Fix compatibility for OSX requiring GUI code in main thread
+- Fix variadic function definitions for ~al_draw_textf~ and ~al_draw_justified_textf~
