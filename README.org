@@ -1,6 +1,7 @@
+#+TITLE: cl-liballegro
+
 [[http://liballeg.org/images/logo.png]]
 
-* cl-liballegro
 Interface and bindings to the [[https://liballeg.org/][Allegro 5 game programming library]]
 
 Check out how the [[./src][source code]] is organized and compare it to the [[https://liballeg.org/a5docs/trunk/][API
