@@ -50,7 +50,7 @@ Various projects I've found using cl-liballegro.  Feel free to add items onto th
 ** Engine
 - [[https://github.com/lockie/d2clone-kit][d2clone-kit]] - Diablo 2 game engine
 
-** General
+* General
 [[https://user-images.githubusercontent.com/2598904/96662425-f3c4cf00-1313-11eb-9e59-807e27697c20.png]]
 
 The most basic usage is 1-to-1 just uses the bindings "as is" with an
