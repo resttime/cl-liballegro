@@ -254,5 +254,7 @@ C-x C-f /path/to/Desktop/game/game.lisp
 C-c C-l
 #+END_SRC
 
+* [[./CHANGELOG.org][CHANGELOG]]
+
 * License
 Project under zlib license
