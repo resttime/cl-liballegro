@@ -2,7 +2,7 @@
 
 [[http://liballeg.org/images/logo.png]]
 
-Interface and bindings to the [[https://liballeg.org/][Allegro 5 game programming library]]
+Interface and complete bindings to the [[https://liballeg.org/][Allegro 5 game programming library]]
 
 Check out how the [[./src][source code]] is organized and compare it to the [[https://liballeg.org/a5docs/trunk/][API
 reference]].
@@ -35,13 +35,6 @@ reference]].
 
 *Feel free to raise an issue to request a feature or for me to work on
 something*
-
-* Functionality
-Pretty much complete except:
-
-*I won't work on the following sections because Common Lisp has more
-suitable implementations unless there's a usecase or I'm bored.*
- * Threads
 
 * Projects
 Various projects I've found using cl-liballegro.  Feel free to add items onto the list!
