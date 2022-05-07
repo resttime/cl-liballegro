@@ -1,4 +1,4 @@
-Organized according to [[https://liballeg.org/a5docs/trunk/][API reference]]
+Organized according to the [Allegro 5 Documentation](https://liballeg.org/a5docs/trunk/)
 
 Folders
 -------------------------
