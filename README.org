@@ -9,7 +9,7 @@ the [[https://liballeg.org/a5docs/trunk/][API reference]].
 * Requires
 [[https://sourceware.org/libffi/][libffi]]
 
-* Usage
+* Quickstart
 1. ~al_*~ becomes ~al:*~
 2. ~(al:rest secs)~ is ~(al:rest-time secs)~ because of symbol interference with #'cl:rest.
 3. Enums/constants are shortened, check [[https://github.com/resttime/cl-liballegro/tree/master/src/constants][constants]] if you need help finding them.
@@ -29,10 +29,11 @@ the [[https://liballeg.org/a5docs/trunk/][API reference]].
  #+END_SRC
 6. I've got a neat *OPTIONAL* lispy interface [[https://github.com/resttime/cl-liballegro/tree/master/src/interface/interface.lisp][here]] which provides an entire fixed timestep game loop
 7. Everything else is pretty much 1-to-1
-8. If you're getting crashes on MacOS, put all your code into [[https://common-lisp.net/project/cffi/manual/html_node/defcallback.html][callback]] and pass it to [[https://www.allegro.cc/manual/5/al_run_main][al:run-main]].
-9. Examples exist if you get lost
+8. If you're getting crashes on Mac OS X, put all your code into [[https://common-lisp.net/project/cffi/manual/html_node/defcallback.html][callback]] and pass it to [[https://www.allegro.cc/manual/5/al_run_main][al:run-main]].
+9. [[https://github.com/resttime/cl-liballegro/tree/master/examples][Examples]] exist if you get lost
 
-*Feel free to raise an issue to request a feature or for me to work on something*
+*Feel free to raise an issue to request a feature or for me to work on
+something*
 
 * Functionality
 Pretty much complete except:
@@ -42,24 +43,188 @@ suitable implementations unless there's a usecase or I'm bored.*
  * Memory
  * Threads
 
-* FAQ
-** (More found under gh-pages branch)
-https://resttime.github.io/cl-liballegro/
+* Projects
+Various projects I've found using cl-liballegro.  Feel free to add items onto the list!
 
-** Why can't my program find the DLL in Windows?
+** GUI / UI
+- [[https://github.com/lockie/cl-liballegro-nuklear][cl-liballegro-nuklear]] - Bindings to the [[https://github.com/Immediate-Mode-UI/Nuklear][nuklear]] immediate mode GUI library
+
+** Games
+- [[https://awkravchuk.itch.io/darkness-looming-the-dawn][Darkness Looming: The Dawn]] - Old school hack n' slash
+- [[https://github.com/xFA25E/simple-asteroids][simple-asteroids]] - Simple asteroids
+- [[https://github.com/VyacheslavMik/tanks][tanks]] - Tanks
+
+** Engine
+- [[https://github.com/lockie/d2clone-kit][d2clone-kit]] - Diablo 2 game engine
+
+** General
+[[https://user-images.githubusercontent.com/2598904/96662425-f3c4cf00-1313-11eb-9e59-807e27697c20.png]]
+
+The most basic usage is 1-to-1 just uses the bindings "as is", with an
+[[https://github.com/resttime/cl-liballegro/blob/master/examples/simple-window.lisp][example]]
+
+Names have been changed to use a more lispy convention in which ~_~ is
+converted to ~-~
+
+In this case most function names simply match and there's not much
+different ~al_flip_display(display);~ becomes ~(al:flip-display
+display)~
+
+However types, constants, and structures have been shortened for
+convenience.  There's no exact rules for it, but usually any prefix
+with ~ALLEGRO_*~ or ~al_*~ is truncated because Common Lisp has
+multiple namespaces to handle naming clashes.
+
+Another change is that certain constants have been changed to lisp
+keywords.  Keyboard functions in C use an enum values corresponding to
+the key but cl-liballegro uses keywords instead.  An example is
+~ALLEGRO_KEY_K~ becoming ~:K~.  CFFI takes care of translating the
+value to the keyword and vice-versa.  Using keywords over constants
+this way tends to be convenient in practice.
+
+** CFFI
+Occasionally there are times when dropping down to a level lower than
+the bindings using CFFI. This happens when it's necesssary to pass a
+non-opaque data structure by reference.
+
+Consider this block of C:
+#+begin_src c
+{
+  ALLEGRO_EVENT event;
+  bool running = true;
+  while (running) process_event(&event);
+}
+#+end_src
+
+In Common Lisp we use CFFI to allocate the structure for the
+corresponding Allero 5 functions. Remember to free up the memory
+afterwards!
+
+#+begin_src lisp
+(defparameter *running-p* t)
+(let ((event (cffi:foreign-alloc '(:union al:event)))
+  (loop while *running-p* do (process-event event))
+  (cffi:foreign-free event))
+#+end_src
+
+** Orphaned Windows / Cleaning up Windows
+At times when something goes wrong the debugger pops up and a new
+window is created without the previous one being destroyed.  This is
+due to how debugger restarts execution.  One of the ways to handle
+this is wrapping things in an ~UNWIND-PROTECT~ or using the condition
+handlers in Common Lisp.  Errors should be handled in such a way that
+restarts do not re-execute certain s-exps to create a new display.
+
+** Optional Lisp Interface
+An optional lisp interface is included with cl-liballegro which
+provides a full game loop with a fixed timestep and
+Entity-Component-System (ECS) implemented on the CLOS.  Note that it
+is provided as is and not optimized.
+
+1. Define system which holds state
+   #+begin_src lisp
+   ;; Creates a 800x600 resizable OpenGL display titled "Simple"
+   ;; Fixed timestep loop runs logic at 1 FPS
+   ;; The remaining time is spent on render
+   ;;
+   ;; The PREVIOUS-KEY slot is user-defined state for this example
+   (defclass window (al:system)
+     ((previous-key :initform "Nothing" :accessor previous-key))
+     (:default-initargs 
+      :title "Simple"
+      :width 800 :height 600
+      :logic-fps 1
+      :display-flags '(:windowed :opengl :resizable)
+      :display-options '((:sample-buffers 1 :suggest)
+                         (:samples 4 :suggest))))
+   #+end_src
+2. Implement Method for Logic
+   #+begin_src lisp
+   (defmethod al:update ((sys window))
+     (print 'one-logic-frame))
+   #+end_src
+3. Implement Method for Render
+   #+begin_src lisp
+   (defmethod al:render ((sys window))
+     (al:clear-to-color (al:map-rgb 20 150 100))
+     (al:flip-display))
+   #+end_src
+4. Implement Methods(s) for Handler
+   #+begin_src lisp
+   ;; The lisp interface uses this handler in the background of the logic
+   (defmethod al:key-down-handler ((sys window))
+     (let ((keyboard (cffi:mem-ref (al:event sys) '(:struct al:keyboard-event))))
+       (print (getf keyboard 'al::keycode))
+       (setf (previous-key sys) (getf keyboard 'al::keycode))))
+   #+end_src
+5. Run system
+   #+begin_src lisp
+   (al:run-system (make-instance 'window)))
+   #+end_src
+
+** Mac OS X - Main UI Thread
+Running on Mac OS X tends to behave oddly with threads because it requires
+GUI related code to run in the main thread (affects programs outside
+of Common Lisp too).  The Allegro 5 library has a solution with
+[[https://liballeg.org/a5docs/trunk/misc.html#al_run_main][al_run_main]]. Define a callback with [[https://common-lisp.net/project/cffi/manual/html_node/defcallback.html][defcallback]] and pass it to
+~AL:RUN-MAIN~.
+
+#+begin_src lisp
+;; First define a callback
+(cffi:defcallback my-main :void ()
+  ;; Code goes in here
+  (function-with-gui-code))
+
+;; Second execute by passing the callback to AL:RUN-MAIN
+(al:run-main 0 (cffi:null-pointer) (cffi:callback my-main))
+#+end_src
+
+** Ignoring Floating Point Calculation Errors / Traps
+Common Lisp implementations tend to throw floating point calculation
+errors such as ~FLOATING-POINT-OVERFLOW~ and
+~FLOATING-POINT-INVALID-OPERATION~ by default (called traps) to be
+explicitly handled rather than ignored.  These can be valid but
+sometimes such errors as get despite valid code being called through
+the foreign function interface (FFI).
+
+In this case it should be safe to ignore using implementation specific
+or the [[https://github.com/Shinmera/float-features/][float-featues]] portability library:
+
+#+begin_src lisp
+;; SBCL
+;; Sets traps globally
+(sb-int:set-floating-point-modes :traps (:invalid :inexact :overflow))
+
+;; SBCL
+;; Code wrapped in the macro ignores floating point errors in the list
+(sb-int:with-float-traps-masked (:invalid :inexact :overflow)
+  (function-with-floating-point-errors))
+
+;; float-features (portability library)
+;; Code wrapped in the macro ignores floating point errors in the list
+(float-features:with-float-traps-masked (:divide-by-zero
+                                         :invalid
+                                         :inexact
+                                         :overflow
+                                         :underflow)
+  (function-with-floating-point-errors))
+#+end_src
+
+** Windows - Library Paths
 
 There are path problems in Windows because the DLL files (which
 contain all the functions the CFFI calls upon) doesn't have a default
 location unlike in Unix environments. When the library loads in
-Windows, *it will look for the DLL in the current folder of the FILE.LISP that evaluates (ql:quickload "cl-liballegro")*
-This means you must have a copy of the DLL file in the directory of
-FILE.LISP, not in the cl-liballegro directory unless the FILE.LISP is
-in there. SLIME however, likes to change the default search folder to
-the one Emacs is in when it starts.
+Windows, *it will look for the DLL in the current folder of the
+FILE.LISP that evaluates (ql:quickload "cl-liballegro")* This means
+you must have a copy of the DLL file in the directory of FILE.LISP,
+not in the cl-liballegro directory unless the FILE.LISP is in
+there. SLIME however, likes to change the default search folder to the
+one Emacs is in when it starts.
 
 *** With SBCL
 #+BEGIN_SRC
-;; Open command prompt in the folder that contains both the DLL and game.lisp`
+;; Open command prompt in the folder that contains both the DLL and game.lisp
 > sbcl
 > (load "game.lisp") ; File contains (ql:quickload "cl-liballegro")
 #+END_SRC
@@ -88,20 +253,6 @@ M-x slime
 C-x C-f /path/to/Desktop/game/game.lisp
 C-c C-l
 #+END_SRC
-
-* Projects
-Various projects I've found using cl-liballegro.  Feel free to add items onto the list!
-
-** GUI / UI
-- [[https://github.com/lockie/cl-liballegro-nuklear][cl-liballegro-nuklear]] - Bindings to the [[https://github.com/Immediate-Mode-UI/Nuklear][nuklear]] immediate mode GUI library
-
-** Games
-- [[https://awkravchuk.itch.io/darkness-looming-the-dawn][Darkness Looming: The Dawn]] - Old school hack n' slash
-- [[https://github.com/xFA25E/simple-asteroids][simple-asteroids]] - Simple asteroids
-- [[https://github.com/VyacheslavMik/tanks][tanks]] - Tanks
-
-** Engine
-- [[https://github.com/lockie/d2clone-kit][d2clone-kit]] - Diablo 2 game engine
 
 * License
 Project under zlib license
