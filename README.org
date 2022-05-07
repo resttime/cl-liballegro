@@ -12,9 +12,9 @@ reference]].
 
 * Quickstart
 1. ~al_*~ becomes ~al:*~
-2. ~(al:rest secs)~ is ~(al:rest-time secs)~ because of symbol interference with #'cl:rest.
-3. Enums/constants are shortened, check [[./src/constants][constants]] if you need help finding them.
-4. Type names have changed too, check [[./types][types]] if you need help finding them.
+2. ~(al:rest secs)~ is ~(al:rest-time secs)~ because of symbol interference with ~#'cl:rest~
+3. Enums/constants are shortened, check [[./src/constants][constants]] if you need help finding them
+4. Type names have changed too, check [[./src/types][types]] if you need help finding them
 5. To access slots from a C struct, you can use CFFI:MEM-REF create a plist
  #+BEGIN_SRC lisp
    (defcstruct display-mode
@@ -30,7 +30,7 @@ reference]].
  #+END_SRC
 6. I've got a neat *OPTIONAL* [[./src/interface/interface.lisp][lispy interface]] which provides an entire fixed timestep game loop
 7. Everything else is pretty much 1-to-1
-8. If you're getting crashes on Mac OS X, put all your code into [[https://common-lisp.net/project/cffi/manual/html_node/defcallback.html][callback]] and pass it to [[https://www.allegro.cc/manual/5/al_run_main][al:run-main]].
+8. If you're getting crashes on Mac OS X, put all your code into [[https://common-lisp.net/project/cffi/manual/html_node/defcallback.html][callback]] and pass it to [[https://www.allegro.cc/manual/5/al_run_main][al:run-main]]
 9. [[./examples][Examples]] exist if you get lost
 
 *Feel free to raise an issue to request a feature or for me to work on
@@ -57,16 +57,15 @@ The most basic usage is 1-to-1 just uses the bindings "as is" with an
 [[./examples/001-simple-window.lisp][example]]
 
 Names have been changed to use a more lispy convention in which ~_~ is
-converted to ~-~
-
-In this case most function names simply match and there's not much
-different ~al_flip_display(display);~ becomes ~(al:flip-display
-display)~
+converted to ~-~.  In most cases function names match like
+~al_flip_display(display);~ becomes ~(al:flip-display display)~
 
 However types, constants, and structures have been shortened for
 convenience.  There's no exact rules for it, but usually any prefix
 with ~ALLEGRO_*~ or ~al_*~ is truncated because Common Lisp has
-multiple namespaces to handle naming clashes.
+multiple namespaces to handle naming clashes.  There are a few edge
+cases where naming clashes were unavoidable, check the source code to
+be sure.
 
 Another change is that certain constants have been changed to lisp
 keywords.  Keyboard functions in C use an enum values corresponding to
@@ -76,9 +75,9 @@ value to the keyword and vice-versa.  Using keywords over constants
 this way tends to be convenient in practice.
 
 ** CFFI
-Occasionally there are times when dropping down to a level lower than
-the bindings using CFFI. This happens when it's necesssary to pass a
-non-opaque data structure by reference.
+Occasionally dropping down to a level lower using CFFI is necessary.
+One of these situations is passing a non-opaque data structure by
+reference.
 
 Consider this block of C:
 #+begin_src c
@@ -89,8 +88,8 @@ Consider this block of C:
 }
 #+end_src
 
-In Common Lisp we use CFFI to allocate the structure for the
-corresponding Allero 5 functions. Remember to free up the memory
+In Common Lisp we will use CFFI to allocate the structure for the
+corresponding Allegro 5 functions.  Remember to free up the memory
 afterwards!
 
 #+begin_src lisp
@@ -103,17 +102,17 @@ afterwards!
 ** Orphaned Windows / Cleaning up Windows
 At times when something goes wrong the debugger pops up and a new
 window is created without the previous one being destroyed.  This is
-due to how debugger restarts execution.  One of the ways to handle
-this is wrapping things in an ~UNWIND-PROTECT~ or using the condition
-handlers in Common Lisp.  Errors should be handled in such a way that
-restarts do not re-execute certain s-exps to create a new display or
-cleans up resources.
+due to how Common Lisp debugger restarts execution.  One of the ways
+to handle this is wrapping things in an ~UNWIND-PROTECT~ or using the
+condition handlers in Common Lisp.  Errors should be handled in such a
+way that restarts do not re-execute certain s-exps to create a new
+display.  Errors can also be handled by cleaning up resources.
 
 ** Optional Lisp Interface
 An optional lisp interface is included with cl-liballegro which
-provides a full game loop with a fixed timestep and
-Entity-Component-System (ECS) implemented on the CLOS.  Note that it
-is provided as is and not optimized.
+provides a full game loop with a fixed timestep and Entity Component
+System (ECS) implemented on the CLOS.  Note that it is provided as is
+and not optimized.  Multiple dispatch is slower than static dispatch.
 
 1. Define system which holds state
    #+begin_src lisp
@@ -132,6 +131,7 @@ is provided as is and not optimized.
       :display-options '((:sample-buffers 1 :suggest)
                          (:samples 4 :suggest))))
    #+end_src
+
 2. Implement Method for Logic
    #+begin_src lisp
    (defmethod al:update ((sys window))
@@ -143,6 +143,7 @@ is provided as is and not optimized.
      (al:clear-to-color (al:map-rgb 20 150 100))
      (al:flip-display))
    #+end_src
+
 4. Implement Methods(s) for Handler
    #+begin_src lisp
    ;; The lisp interface uses this handler in the background of the logic
@@ -151,16 +152,17 @@ is provided as is and not optimized.
        (print (getf keyboard 'al::keycode))
        (setf (previous-key sys) (getf keyboard 'al::keycode))))
    #+end_src
+
 5. Run system
    #+begin_src lisp
    (al:run-system (make-instance 'window)))
    #+end_src
 
 ** Mac OS X - Main UI Thread
-Running on Mac OS X tends to behave oddly with threads because it requires
-GUI related code to run in the main thread (affects programs outside
-of Common Lisp too).  The Allegro 5 library has a solution with
-[[https://liballeg.org/a5docs/trunk/misc.html#al_run_main][al_run_main]]. Define a callback with [[https://common-lisp.net/project/cffi/manual/html_node/defcallback.html][defcallback]] and pass it to
+Running on Mac OS X tends to behave oddly with threads because it
+requires GUI related code to run in the main thread (affects programs
+outside of Common Lisp too).  The Allegro 5 library has a solution
+with [[https://liballeg.org/a5docs/trunk/misc.html#al_run_main][al_run_main]].  Define a callback with [[https://common-lisp.net/project/cffi/manual/html_node/defcallback.html][defcallback]] and pass it to
 ~AL:RUN-MAIN~.
 
 #+begin_src lisp
@@ -177,12 +179,12 @@ of Common Lisp too).  The Allegro 5 library has a solution with
 Common Lisp implementations tend to throw floating point calculation
 errors such as ~FLOATING-POINT-OVERFLOW~ and
 ~FLOATING-POINT-INVALID-OPERATION~ by default (called traps) to be
-explicitly handled rather than ignored.  These can be valid but
-sometimes such errors as get despite valid code being called through
-the foreign function interface (FFI).
+explicitly handled rather than ignored.  There are situations where
+this is valid behaviour but sometimes such errors get thrown despite
+valid code being called through the foreign function interface (FFI).
 
 In this case it should be safe to ignore using implementation specific
-or the [[https://github.com/Shinmera/float-features/][float-featues]] portability library:
+routines or the [[https://github.com/Shinmera/float-features/][float-features]] portability library:
 
 #+begin_src lisp
 ;; SBCL
@@ -205,16 +207,15 @@ or the [[https://github.com/Shinmera/float-features/][float-featues]] portabilit
 #+end_src
 
 ** Windows - Library Paths
-
-There are path problems in Windows because the DLL files (which
-contain all the functions the CFFI calls upon) doesn't have a default
-location unlike in Unix environments. When the library loads in
-Windows, *it will look for the DLL in the current folder of the
-FILE.LISP that evaluates (ql:quickload "cl-liballegro")* This means
-you must have a copy of the DLL file in the directory of FILE.LISP,
-not in the cl-liballegro directory unless the FILE.LISP is in
-there. SLIME however, likes to change the default search folder to the
-one Emacs is in when it starts.
+There are path problems in Windows because the Allegro 5 library files
+which contain all the functions the CFFI calls upon do not have a
+default location unlike Unix environments.  When the library is loaded
+under Windows, CFFI will look for the library files in the *current
+folder* of the FILE.LISP that evaluates ~(ql:quickload
+"cl-liballegro")~.  This means a copy of the library files must be in
+the directory of FILE.LISP, not in the cl-liballegro directory unless
+the FILE.LISP is in there.  SLIME however, likes to change the default
+search folder to the one Emacs is in when it starts.
 
 *** With SBCL
 #+BEGIN_SRC
