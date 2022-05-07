@@ -1,3 +1,4 @@
+;; Example demonstrating the optional lisp interface built on CLOS
 (ql:quickload "cl-liballegro")
 
 (defclass window (al:system)
