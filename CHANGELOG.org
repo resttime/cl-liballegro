@@ -1,5 +1,5 @@
 * Changelog
-** Unreleased
+** 0.2.16
 - Add projects to readme using cl-liballegro
 - Add changelog file to help devs keep track of changes
 - Fix return value of ~init-font-addon~
