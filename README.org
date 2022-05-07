@@ -40,7 +40,6 @@ Pretty much complete except:
 
 *I won't work on the following sections because Common Lisp has more
 suitable implementations unless there's a usecase or I'm bored.*
- * Memory
  * Threads
 
 * Projects
@@ -113,7 +112,8 @@ window is created without the previous one being destroyed.  This is
 due to how debugger restarts execution.  One of the ways to handle
 this is wrapping things in an ~UNWIND-PROTECT~ or using the condition
 handlers in Common Lisp.  Errors should be handled in such a way that
-restarts do not re-execute certain s-exps to create a new display.
+restarts do not re-execute certain s-exps to create a new display or
+cleans up resources.
 
 ** Optional Lisp Interface
 An optional lisp interface is included with cl-liballegro which

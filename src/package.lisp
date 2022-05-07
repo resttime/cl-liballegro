@@ -562,6 +562,18 @@
    ;; Keyboard state functions
    #:with-keyboard-state
    #:with-current-keyboard-state
+
+;;; Memory
+   #:malloc
+   #:free
+   #:malloc-with-context
+   #:free-with-context
+   #:realloc-with-context
+   #:calloc-with-context
+
+   #:memory-interface
+   #:set-memory-interface
+
 ;;; Monitor
    #:get-new-display-adapter
    #:set-new-display-adapter
