@@ -1,7 +1,9 @@
+Organized according to [[https://liballeg.org/a5docs/trunk/][API reference]]
+
 Folders
 -------------------------
 
-**constants** All constants, enums, and flags will be found here.
+**constants**: All constants, enums, and flags will be found here.
 
 **ffi-functions:** All the functions of allegro are defined in here.
 
