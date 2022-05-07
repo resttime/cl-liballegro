@@ -684,6 +684,31 @@
    #:get-system-config
    #:register-assert-handler
 
+;;; Threads
+   #:thread
+   #:mutex
+   #:thread-condition
+   
+   #:create-thread
+   #:create-thread-with-stacksize
+   #:start-thread
+   #:join-thread
+   #:set-thread-should-stop
+   #:get-thread-should-stop
+   #:destroy-thread
+   #:run-detached-thread
+   #:create-mutex
+   #:create-mutex-recursive
+   #:lock-mutex
+   #:unlock-mutex
+   #:destroy-mutex
+   #:create-cond
+   #:destroy-cond
+   #:wait-cond
+   #:wait-cond-until
+   #:broadcast-cond
+   #:signal-cond
+   
 ;;; Time
    #:get-time
    #:current-time
