@@ -3,6 +3,7 @@
 - Add projects to readme using cl-liballegro
 - Add changelog file to help devs keep track of changes
 - Fix return value of ~init-font-addon~
+- Implemented memory functionality
 
 ** 0.2.15
 - Add audio event type
