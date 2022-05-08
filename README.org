@@ -1,4 +1,6 @@
 #+TITLE: cl-liballegro
+#+OPTIONS: ^:nil
+#+HTML_HEAD_EXTRA: <style>body{font-family: Tahoma, Verdana, Arial, sans-serif;} </style>
 
 [[http://liballeg.org/images/logo.png]]
 
@@ -248,6 +250,39 @@ M-x slime
 C-x C-f /path/to/Desktop/game/game.lisp
 C-c C-l
 #+END_SRC
+
+* Contributing / Developing / Hacking
+cl-liballegro is organized according to the [[https://liballeg.org/a5docs/trunk/][Allegro 5 Documentation]]
+with functions, types, and constants separated.
+
+[[https://cffi.common-lisp.dev/][CFFI]] is used and its [[https://cffi.common-lisp.dev/manual/index.html][manual]] recommended to understand more advanced
+uses though not required for most cases.
+
+Naming conventions has a preference for truncating ~ALLEGRO~ or ~al~
+for user convenience since Common Lisp has multiple namespaces for
+resolving symbol names.  For the rare edge cases, check the [[./src/types/][types]] and
+[[./src/constants/][constants]]
+
+Usage of keywords over enums preferred for user convenience.
+
+** Project Structure
+[[./src/constants/]]: Allegro 5 constants, enums, and flag definitions
+
+[[./src/ffi-functions/]]: Allegro 5 function definitions
+
+[[./src/types/]]: Allegro 5 type definitions
+
+[[./src/interface]]/: Common Lisp interface definition, optional
+
+[[./src/package.lisp]]: Common Lisp package defintion, exports usable symbols
+
+[[./src/library.lisp]]: CFFI library definition, loads Allegro 5 library files into memory
+
+[[./cl-liballegro.asd]]: ASDF project definition, specifies source files to be loaded
+
+** Contribution Checklist
+ - [ ] New bindings added for export to [[./src/package.lisp][package defintion]]
+ - [ ] New source files added for loading to the [[./cl-liballegro.asd][project definition]]
 
 * [[./CHANGELOG.org][CHANGELOG]]
 
