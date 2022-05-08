@@ -4,7 +4,7 @@
 
 [[http://liballeg.org/images/logo.png]]
 
-Interface and complete bindings to the [[https://liballeg.org/][Allegro 5 game programming library]]
+Interface and complete bindings to the [[https://liballeg.org/][Allegro 5 game programming library]].
 
 Check out how the [[./src][source code]] is organized and compare it to the [[https://liballeg.org/a5docs/trunk/][API
 reference]].
@@ -14,11 +14,10 @@ reference]].
 
 * Quickstart
 1. ~al_*~ becomes ~al:*~
-2. ~(al:rest secs)~ is ~(al:rest-time secs)~ because of symbol interference with ~#'cl:rest~
-3. Enums/constants are shortened, check [[./src/constants][constants]] if you need help finding them
-4. Type names have changed too, check [[./src/types][types]] if you need help finding them
-5. To access slots from a C struct, you can use CFFI:MEM-REF create a plist
- #+BEGIN_SRC lisp
+2. [[./src/constants/][Constants]] and [[./src/types][types]] are shortened too, check the source code if you need help finding them
+3. ~(al:rest secs)~ is ~(al:rest-time secs)~ because of symbol clash with ~#'cl:rest~
+4. To access slots from a C struct, you can use ~CFFI:MEM-REF~ generate a plist
+   #+BEGIN_SRC lisp
    (defcstruct display-mode
      (width :int)
      (height :int)
@@ -29,14 +28,11 @@ reference]].
      (let ((plist (mem-ref test '(:struct display-mode))))
        (print plist)
        (print (getf plist 'width))))
- #+END_SRC
-6. I've got a neat *OPTIONAL* [[./src/interface/interface.lisp][lispy interface]] which provides an entire fixed timestep game loop
-7. Everything else is pretty much 1-to-1
-8. If you're getting crashes on Mac OS X, put all your code into [[https://common-lisp.net/project/cffi/manual/html_node/defcallback.html][callback]] and pass it to [[https://www.allegro.cc/manual/5/al_run_main][al:run-main]]
-9. [[./examples][Examples]] exist if you get lost
-
-*Feel free to raise an issue to request a feature or for me to work on
-something*
+   #+END_SRC
+5. I've got a neat *OPTIONAL* [[./src/interface/interface.lisp][lispy interface]] which provides an entire fixed timestep game loop
+6. Everything else is pretty much 1-to-1
+7. If you're getting crashes on Mac OS X, put all your code into [[https://common-lisp.net/project/cffi/manual/html_node/defcallback.html][callback]] and pass it to [[https://www.allegro.cc/manual/5/al_run_main][al:run-main]]
+8. [[./examples][Examples]] exist if you get lost
 
 * Projects
 Various projects I've found using cl-liballegro.  Feel free to add items onto the list!
@@ -55,26 +51,25 @@ Various projects I've found using cl-liballegro.  Feel free to add items onto th
 * General
 [[https://user-images.githubusercontent.com/2598904/96662425-f3c4cf00-1313-11eb-9e59-807e27697c20.png]]
 
-The most basic usage is 1-to-1 just uses the bindings "as is" with an
-[[./examples/001-simple-window.lisp][example]]
+The most basic usage is 1-to-1 just uses the bindings "as is" such as
+in this [[./examples/001-simple-window.lisp][example]].
 
 Names have been changed to use a more lispy convention in which ~_~ is
 converted to ~-~.  In most cases function names match like
 ~al_flip_display(display);~ becomes ~(al:flip-display display)~
 
-However types, constants, and structures have been shortened for
+However types, constants, and structures have been shortened for user
 convenience.  There's no exact rules for it, but usually any prefix
 with ~ALLEGRO_*~ or ~al_*~ is truncated because Common Lisp has
-multiple namespaces to handle naming clashes.  There are a few edge
-cases where naming clashes were unavoidable, check the source code to
-be sure.
+multiple namespaces to handle naming clashes.  For the rare edge
+cases, check the source code.
 
-Another change is that certain constants have been changed to lisp
-keywords.  Keyboard functions in C use an enum values corresponding to
-the key but cl-liballegro uses keywords instead.  An example is
-~ALLEGRO_KEY_K~ becoming ~:K~.  CFFI takes care of translating the
-value to the keyword and vice-versa.  Using keywords over constants
-this way tends to be convenient in practice.
+Another change is that certain constants have been changed to Common
+Lisp keywords.  Keyboard functions in C use an enum values
+corresponding to the key but cl-liballegro uses keywords instead.  An
+example is ~ALLEGRO_KEY_K~ becoming ~:K~.  CFFI takes care of
+translating the value to the keyword and vice-versa.  Using keywords
+over constants tends to be convenient in practice.
 
 ** CFFI
 Occasionally dropping down to a level lower using CFFI is necessary.
@@ -114,7 +109,9 @@ display.  Errors can also be handled by cleaning up resources.
 An optional lisp interface is included with cl-liballegro which
 provides a full game loop with a fixed timestep and Entity Component
 System (ECS) implemented on the CLOS.  Note that it is provided as is
-and not optimized.  Multiple dispatch is slower than static dispatch.
+and not optimized.  If performance is a concern, it is recommended to
+implement your own game loop while avoiding multiple dispatch and I
+will look forward to seeing your AAA game in the future.
 
 1. Define system which holds state
    #+begin_src lisp
@@ -125,7 +122,7 @@ and not optimized.  Multiple dispatch is slower than static dispatch.
    ;; The PREVIOUS-KEY slot is user-defined state for this example
    (defclass window (al:system)
      ((previous-key :initform "Nothing" :accessor previous-key))
-     (:default-initargs 
+     (:default-initargs
       :title "Simple"
       :width 800 :height 600
       :logic-fps 1
@@ -139,6 +136,7 @@ and not optimized.  Multiple dispatch is slower than static dispatch.
    (defmethod al:update ((sys window))
      (print 'one-logic-frame))
    #+end_src
+
 3. Implement Method for Render
    #+begin_src lisp
    (defmethod al:render ((sys window))
@@ -266,25 +264,23 @@ resolving symbol names.  For the rare edge cases, check the [[./src/types/][type
 Usage of keywords over enums preferred for user convenience.
 
 ** Project Structure
-[[./src/constants/]]: Allegro 5 constants, enums, and flag definitions
+- [[./src/constants/]]: Allegro 5 constants, enums, and flag definitions
+- [[./src/ffi-functions/]]: Allegro 5 function definitions
+- [[./src/types/]]: Allegro 5 type definitions
+- [[./src/interface/]]: Common Lisp interface definition, optional fixed timestep game loop implemented with CLOS
+- [[./src/package.lisp]]: Common Lisp package definition, exports usable symbols
+- [[./src/library.lisp]]: CFFI library definition, loads Allegro 5 library files into memory
+- [[./cl-liballegro.asd]]: ASDF project definition, specifies source files to be loaded
 
-[[./src/ffi-functions/]]: Allegro 5 function definitions
-
-[[./src/types/]]: Allegro 5 type definitions
-
-[[./src/interface]]/: Common Lisp interface definition, optional
-
-[[./src/package.lisp]]: Common Lisp package defintion, exports usable symbols
-
-[[./src/library.lisp]]: CFFI library definition, loads Allegro 5 library files into memory
-
-[[./cl-liballegro.asd]]: ASDF project definition, specifies source files to be loaded
-
-** Contribution Checklist
- - [ ] New bindings added for export to [[./src/package.lisp][package defintion]]
- - [ ] New source files added for loading to the [[./cl-liballegro.asd][project definition]]
+** Checklist
+- [ ] New bindings added for export to [[./src/package.lisp][package defintion]]
+- [ ] New source files added for loading to the [[./cl-liballegro.asd][project definition]]
 
 * [[./CHANGELOG.org][CHANGELOG]]
+FYI these bindings are so stable it can make the repo look dead
+
+* Support / Help / Bug Reports
+Feel free to raise an issue on [[https://github.com/resttime/cl-liballegro][GitHub]]
 
 * License
 Project under zlib license
