@@ -279,8 +279,7 @@ Usage of keywords over enums preferred for user convenience.
 * [[./CHANGELOG.org][CHANGELOG]]
 FYI these bindings are so stable it can make the repo look dead
 
-* Support / Help / Bug Reports
-Feel free to raise an issue on [[https://github.com/resttime/cl-liballegro][GitHub]]
+* [[https://github.com/resttime/cl-liballegro/issues][Support / Help / Bug Reports]]
 
 * License
 Project under zlib license
