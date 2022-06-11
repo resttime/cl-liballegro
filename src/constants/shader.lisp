@@ -6,4 +6,8 @@
 (defcenum shader-platform
   :auto
   :glsl
-  :hlsl)
+  :hlsl
+  :auto-minimal
+  :glsl-minimal
+  :hlsl-minimal
+  :hlsl-sm-3-0)
