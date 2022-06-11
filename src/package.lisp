@@ -307,6 +307,12 @@
    #:set-new-bitmap-flags
    #:add-new-bitmap-flag
    #:set-new-bitmap-format
+   #:set-new-bitmap-depth
+   #:get-new-bitmap-depth
+   #:set-new-bitmap-samples
+   #:get-new-bitmap-samples
+   #:set-new-bitmap-wrap
+   #:get-new-bitmap-wrap
 
    ;; Bitmap properties
    #:get-bitmap-flags
@@ -688,7 +694,7 @@
    #:thread
    #:mutex
    #:thread-condition
-   
+
    #:create-thread
    #:create-thread-with-stacksize
    #:start-thread
@@ -708,7 +714,7 @@
    #:wait-cond-until
    #:broadcast-cond
    #:signal-cond
-   
+
 ;;; Time
    #:get-time
    #:current-time

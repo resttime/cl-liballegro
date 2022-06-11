@@ -108,3 +108,10 @@
   :depth
   (:rgb #x0007) ; RED | GREEN | BLUE
   (:rgba #x000F)) ; RGB | ALPHA
+
+;; Bitmap Creation
+(defcenum bitmap-wrap
+  :bitmap-wrap-default
+  :bitmap-wrap-repeat
+  :bitmap-wrap-clamp
+  :bitmap-wrap-mirror)

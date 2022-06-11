@@ -56,6 +56,12 @@
 (defcfun ("al_add_new_bitmap_flag" add-new-bitmap-flag) :void (flag bitmap-flags))
 (defcfun ("al_set_new_bitmap_format" set-new-bitmap-format) :void
   (pixel-format pixel-format))
+(defcfun ("al_set_new_bitmap_depth" set-new-bitmap-depth) :void (depth :int))
+(defcfun ("al_get_new_bitmap_depth" get-new-bitmap-depth) :int)
+(defcfun ("al_set_new_bitmap_samples" set-new-bitmap-samples) :void (samples :int))
+(defcfun ("al_get_new_bitmap_samples" get-new-bitmap-samples) :int)
+(defcfun ("al_set_new_bitmap_wrap" set-new-bitmap-wrap) :void (u bitmap-wrap) (v bitmap-wrap))
+(defcfun ("al_get_new_bitmap_wrap" get-new-bitmap-wrap) :void (u :pointer) (v :pointer))
 
 ;; Bitmap properties
 (defcfun ("al_get_bitmap_flags" get-bitmap-flags) bitmap-flags (bitmap :pointer))
