@@ -44,3 +44,20 @@
   (y c-float) (u c-float) (v c-float)
   (red :pointer) (green :pointer) (blue :pointer))
 (defcfun ("al_get_allegro_color_version" get-allegro-color-version) :uint32)
+(defcfun ("al_is_color_valid" is-color-valid) :bool (color (:struct color)))
+(defcfun ("al_color_rgb_to_oklab" color-rgb-to-oklab) :void
+  (red :float) (green :float) (blue :float)
+  (ol (:pointer :float)) (oa (:pointer :float)) (ob (:pointer :float)))
+(defcfun ("al_color_oklab" color-oklab) (:struct color)
+  (l :float) (a :float) (b :float))
+(defcfun ("al_color_oklab_to_rgb" color-oklab-to-rgb) :void
+  (ol :float) (oa :float) (ob :float)
+  (red (:pointer :float)) (green (:pointer :float)) (blue (:pointer :float)))
+(defcfun ("al_color_rgb_to_linear" color-rgb-to-linear) :void
+  (red :float) (green :float) (blue :float)
+  (r (:pointer :float)) (g (:pointer :float)) (b (:pointer :float)))
+(defcfun ("al_color_linear" color-linear) (:struct color)
+  (r (:pointer :float)) (g (:pointer :float)) (b (:pointer :float)))
+(defcfun ("al_color_linear_to_rgb" color-linear-to-rgb) :void
+  (r :float) (g :float) (b :float)
+  (red (:pointer :float)) (green (:pointer :float)) (blue (:pointer :float)))
