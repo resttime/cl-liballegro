@@ -5,6 +5,8 @@
 (defcfun ("al_shutdown_video_addon" shutdown-video-addon) :void)
 (defcfun ("al_get_allegro_video_version" get-allegro-video-version) :uint32)
 (defcfun ("al_open_video" open-video) :pointer (filename :string))
+(defcfun ("al_identify_video" identify-video) :string (filename :string))
+(defcfun ("al_identify_video_f" identify-video-f) :string (fp :pointer))
 (defcfun ("al_close_video" close-video) :void (video :pointer))
 (defcfun ("al_start_video" start-video) :void (video :pointer) (mixer :pointer))
 (defcfun ("al_start_video_with_voice" start-video-with-voice) :void
