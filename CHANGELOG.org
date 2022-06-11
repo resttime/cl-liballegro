@@ -1,4 +1,35 @@
 * Changelog
+** 0.2.18 (WIP)
+Upgrading for the release of Allegro 5.2.8.  Along with adding new definitions, added older ones never added and exported symbols to package accidentally left out.
+
+*** Graphics
+~al_set_new_bitmap_depth~
+~al_get_new_bitmap_depth~
+~al_set_new_bitmap_samples~
+~al_get_new_bitmap_samples~
+~al_set_new_bitmap_wrap~
+~al_get_new_bitmap_wrap~
+~ALLEGRO_BITMAP_WRAP~
+
+*** Shader
+~ALLEGRO_SHADER_AUTO_MINIMAL~
+~ALLEGRO_SHADER_GLSL_MINIMAL~
+~ALLEGRO_SHADER_HLSL_MINIMAL~
+~ALLEGRO_SHADER_HLSL_SM_3_0~
+
+*** Video addon
+~al_identify_video~
+~al_identify_video_f~
+
+*** Color addon
+~al_is_color_valid~
+~al_color_rgb_to_oklab~
+~al_color_oklab~
+~al_color_oklab_to_rgb~
+~al_color_rgb_to_linear~
+~al_color_linear~
+~al_color_linear_to_rgb~
+
 ** 0.2.17
 - Add Allegro 5 Threads
 
