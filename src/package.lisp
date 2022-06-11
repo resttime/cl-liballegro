@@ -1169,6 +1169,8 @@
    #:shutdown-video-addon
    #:get-allegro-video-version
    #:open-video
+   #:identify-video
+   #:identify-video-f
    #:close-video
    #:start-video
    #:start-video-with-voice
