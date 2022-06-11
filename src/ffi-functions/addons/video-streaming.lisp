@@ -26,5 +26,5 @@
 (defcfun ("al_get_video_frame" get-video-frame) :pointer (video :pointer))
 (defcfun ("al_get_video_position" get-video-position) :double
   (video :pointer) (which video-position-type))
-(defcfun ("al_seek_video" set-seek-video) :bool
+(defcfun ("al_seek_video" seek-video) :bool
   (video :pointer) (pos-in-seconds :double))

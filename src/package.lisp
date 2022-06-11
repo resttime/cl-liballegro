@@ -1183,5 +1183,5 @@
    #:get-video-scaled-height
    #:get-video-frame
    #:get-video-position
-   #:set-seek-video
+   #:seek-video
    ))
