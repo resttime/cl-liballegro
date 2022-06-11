@@ -1015,6 +1015,47 @@
    #:init-acodec-addon
    #:get-allegro-acodec-version
 
+;;; Color addon
+   #:color_cmyk
+   #:color_cmyk_to_rgb
+   #:color_hsl
+   #:color_hsl_to_rgb
+   #:color_hsv
+   #:color_hsv_to_rgb
+   #:color_html
+   #:color_html_to_rgb
+   #:color_rgb_to_html
+   #:color_name
+   #:color_name_to_rgb
+   #:color_rgb_to_cmyk
+   #:color_rgb_to_hsl
+   #:color_rgb_to_hsv
+   #:color_rgb_to_name
+   #:color_rgb_to_xyz
+   #:color_xyz
+   #:color_xyz_to_rgb
+   #:color_rgb_to_xyy
+   #:color_xyy
+   #:color_xyy_to_rgb
+   #:color_rgb_to_lab
+   #:color_lab
+   #:color_lab_to_rgb
+   #:color_rgb_to_lch
+   #:color_lch
+   #:color_lch_to_rgb
+   #:color_distance_ciede2000
+   #:color_rgb_to_yuv
+   #:color_yuv
+   #:color_yuv_to_rgb
+   #:get_allegro_color_version
+   #:is-color-valid
+   #:color-rgb-to-oklab
+   #:color-oklab
+   #:color-oklab-to-rgb
+   #:color-rgb-to-linear
+   #:color-linear
+   #:color-linear-to-rgb
+
 ;;; Font addons
    ;; General font routines
    #:align-left
