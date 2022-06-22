@@ -58,6 +58,11 @@
   (data2 (:pointer :int))
   (data3 (:pointer :int))
   (data4 (:pointer :int)))
+(defcstruct audio-recorder-event
+  (type event-type) (source :pointer) (timestamp :double)
+  (--internal--desc :pointer)
+  (buffer :pointer)
+  (samples :uint))
 (defcunion event
   (type event-type)
   (any (:struct any-event))
@@ -67,7 +72,8 @@
   (mouse (:struct mouse-event))
   (timer (:struct timer-event))
   (touch (:struct touch-event))
-  (user (:struct user-event)))
+  (user (:struct user-event))
+  (audio-record-event (:struct audio-recorder-event)))
 
 (defcstruct (event-source :size 128))
 (defcstruct event-queue)

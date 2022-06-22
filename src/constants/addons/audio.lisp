@@ -34,4 +34,6 @@
   (:loop    #x101)
   (:bidir   #x102)
   (:-stream-once    #x103)
-  (:-stream-onedir  #x104))
+  (:-stream-onedir  #x104)
+  (:loop-once #x105)
+  (:-stream-loop-once    #x106))

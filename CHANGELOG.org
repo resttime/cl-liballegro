@@ -17,6 +17,36 @@ Upgrading for the release of Allegro 5.2.8.  Along with adding new definitions, 
 ~ALLEGRO_SHADER_HLSL_MINIMAL~
 ~ALLEGRO_SHADER_HLSL_SM_3_0~
 
+*** Audio addon
+~ALLEGRO_AUDIO_RECORDER~
+~ALLEGRO_AUDIO_RECORDER_EVENT~
+~ALLEGRO_AUDIO_DEVICE~
+~ALLEGRO_PLAYMODE_LOOP_ONCE~
+
+~al_play_audio_stream~
+~al_play_audio_stream_f~
+~al_register_sample_identifier~
+~al_identify_sample~
+~al_identify_sample_f~
+~al_lock_sample_id~
+~al_unlock_sample_id~
+~al_set_sample_instance_channel_matrix~
+~al_set_audio_stream_channel_matrix~
+
+~al_create_audio_recorder~
+~al_start_audio_recorder~
+~al_stop_audio_recorder~
+~al_is_audio_recorder_recording~
+~al_get_audio_recorder_event~
+~al_get_audio_recorder_event_source~
+~al_destroy_audio_recorder~
+
+~al_get_num_audio_output_devices~
+~al_get_audio_output_device~
+~al_get_audio_device_name~
+
+~al_fill_silence~
+
 *** Video addon
 ~al_identify_video~
 ~al_identify_video_f~
