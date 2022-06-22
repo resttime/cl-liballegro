@@ -140,6 +140,8 @@
   (stream :pointer))
 (defcfun ("al_detach_audio_stream" detach-audio-stream) :boolean
   (stream :pointer))
+(defcfun ("al_get_audio_stream_played_samples" get-audio-stream-played-samples) :uint64
+  (stream :pointer))
 (defcfun ("al_get_audio_stream_fragment" get-audio-stream-fragment) :pointer
   (stream :pointer))
 (defcfun ("al_set_audio_stream_fragment" set-audio-stream-fragment) :boolean

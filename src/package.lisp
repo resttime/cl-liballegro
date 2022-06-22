@@ -877,38 +877,26 @@
    #:set-current-opengl-context
 
 ;;; Audio addon
-   ;; Setting up audio
+   ;; Basic Audio
    #:install-audio
    #:uninstall-audio
    #:is-audio-installed
    #:reserve-samples
-
-   ;; Misc audio functions
-   #:get-allegro-audio-version
-   #:get-audio-depth-size
-   #:get-channel-count
-
-   ;; Voice functions
-   #:create-voice
-   #:destroy-voice
-   #:detach-voice
-   #:attach-audio-stream-to-voice
-   #:attach-mixer-to-voice
-   #:attach-sample-instance-to-voice
-   #:get-voice-frequency
-   #:get-voice-channels
-   #:get-voice-depth
-   #:get-voice-playing
-   #:set-voice-playing
-   #:get-voice-position
-   #:set-voice-position
-
-   ;; Sample functions
-   #:create-sample
-   #:destroy-sample
    #:play-sample
    #:stop-sample
    #:stop-samples
+   #:lock-sample-id
+   #:unlock-sample-id
+   #:play-audio-stream
+   #:play-audio-stream-f
+
+   ;; Samples
+   #:create-sample
+   #:load-sample
+   #:load-sample-f
+   #:save-sample
+   #:save-sample-f
+   #:destroy-sample
    #:get-sample-channels
    #:get-sample-depth
    #:get-sample-frequency
@@ -942,6 +930,81 @@
    #:detach-sample-instance
    #:get-sample
    #:set-sample
+   #:set-sample-instance-channel-matrix
+
+   ;; Audio streams
+   #:create-audio-stream
+   #:load-audio-stream
+   #:load-audio-stream-f
+   #:destroy-audio-stream
+   #:get-audio-stream-event-source
+   #:drain-audio-stream
+   #:rewind-audio-stream
+   #:get-audio-stream-frequency
+   #:get-audio-stream-channels
+   #:get-audio-stream-depth
+   #:get-audio-stream-length
+   #:get-audio-stream-speed
+   #:set-audio-strema-speed
+   #:get-audio-stream-gain
+   #:set-audio-stream-gain
+   #:get-audio-stream-pan
+   #:set-audio-stream-pan
+   #:get-audio-stream-playing
+   #:set-audio-stream-playing
+   #:get-audio-stream-playmode
+   #:set-audio-stream-playmode
+   #:get-audio-stream-attached
+   #:detach-audio-stream
+   #:get-audio-stream-played-samples
+   #:get-audio-stream-fragment
+   #:set-audio-stream-fragment
+   #:get-audio-stream-fragments
+   #:get-available-audio-stream-fragments
+   #:seek-audio-stream-secs
+   #:get-audio-stream-position-secs
+   #:get-audio-stream-length-secs
+   #:set-audio-stream-loop-secs
+
+   ;; Advanced audio file I/O
+   #:register-sample-loader
+   #:register-sample-loader-f
+   #:register-sample-saver
+   #:register-sample-saver-f
+   #:register-audio-stream-loader
+   #:register-audio-stream-loader-f
+   #:register-sample-identifier
+   #:identify-sample
+   #:identify-sample-f
+
+   ;; Audio recording
+   #:create-audio-recorder
+   #:start-audio-recorder
+   #:stop-audio-recorder
+   #:is-audio-recorder-recording
+   #:get-audio-recorder-event
+   #:get-audio-recorder-event-source
+   #:destroy-audio-recorder
+
+   ;; Audio devices
+   #:get-num-audio-output-devices
+   #:get-audio-output-device
+   #:get-audio-device-name
+   
+   ;; Voice functions
+   #:create-voice
+   #:destroy-voice
+   #:detach-voice
+   #:attach-audio-stream-to-voice
+   #:attach-mixer-to-voice
+   #:attach-sample-instance-to-voice
+   #:get-voice-frequency
+   #:get-voice-channels
+   #:get-voice-depth
+   #:get-voice-playing
+   #:set-voice-playing
+   #:get-voice-position
+   #:set-voice-position
 
    ;; Mixer functions
    #:create-mixer
@@ -966,51 +1029,12 @@
    #:detach-mixer
    #:set-mixer-postprocess-callback
 
-   ;; Stream functions
-   #:create-audio-stream
-   #:destroy-audio-stream
-   #:get-audio-stream-event-source
-   #:drain-audio-stream
-   #:rewind-audio-stream
-   #:get-audio-stream-frequency
-   #:get-audio-stream-channels
-   #:get-audio-stream-depth
-   #:get-audio-stream-length
-   #:get-audio-stream-speed
-   #:set-audio-strema-speed
-   #:get-audio-stream-gain
-   #:set-audio-stream-gain
-   #:get-audio-stream-pan
-   #:set-audio-stream-pan
-   #:get-audio-stream-playing
-   #:set-audio-stream-playing
-   #:get-audio-stream-playmode
-   #:set-audio-stream-playmode
-   #:get-audio-stream-attached
-   #:detach-audio-stream
-   #:get-audio-stream-fragment
-   #:set-audio-stream-fragment
-   #:get-audio-stream-fragments
-   #:get-available-audio-stream-fragments
-   #:seek-audio-stream-secs
-   #:get-audio-stream-position-secs
-   #:get-audio-stream-length-secs
-   #:set-audio-stream-loop-secs
-
-   ;; Audio file I/O
-   #:register-sample-loader
-   #:register-sample-loader-f
-   #:register-sample-saver
-   #:register-sample-saver-f
-   #:register-audio-stream-loader
-   #:register-audio-stream-loader-f
-   #:load-sample
-   #:load-sample-f
-   #:load-audio-stream
-   #:load-audio-stream-f
-   #:save-sample
-   #:save-sample-f
-
+   ;; Misc audio functions
+   #:get-allegro-audio-version
+   #:get-audio-depth-size
+   #:get-channel-count
+   #:fill-silence
+   
 ;;; Audio codecs addon
    #:init-acodec-addon
    #:get-allegro-acodec-version
