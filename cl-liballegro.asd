@@ -7,6 +7,7 @@
   :depends-on (:cffi
                :cffi-libffi
                :trivial-garbage
+               :trivial-gray-streams
                :trivial-main-thread
                :float-features)
   :serial t
@@ -112,4 +113,5 @@
      ;; Higher Level Lisp API
      (:module "interface"
       :components
-      ((:file "interface")))))))
+      ((:file "interface")
+       (:file "streams")))))))
