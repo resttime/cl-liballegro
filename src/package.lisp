@@ -57,6 +57,14 @@
    ;; Generic System Runner
    #:run-system
 
+;;; File streams
+   #:ensure-loaded
+   #:character-stream
+   #:make-character-stream
+   #:binary-stream
+   #:make-binary-stream
+   #:stream-size
+
 ;;; Type Accessors
    #:event-type-of
    #:event-struct-type-of

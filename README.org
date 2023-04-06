@@ -249,6 +249,44 @@ C-x C-f /path/to/Desktop/game/game.lisp
 C-c C-l
 #+END_SRC
 
+** File streams
+There are [[https://www.cliki.net/gray%20streams][Gray streams]] wrapping liballegro [[https://liballeg.org/a5docs/trunk/file.html][file IO APIs]]:
+#+begin_src lisp
+  ;; text stream
+  (with-open-stream (stream (al:make-character-stream "credits.txt"))
+    (uiop:slurp-stream-lines stream))
+
+  ;; binary stream
+  (with-open-stream (stream (al:make-binary-stream "loot.ase"))
+    (let ((result (make-array (al:stream-size stream)
+                              :element-type '(unsigned-byte 8))))
+      (read-sequence result stream)
+      result))
+#+end_src
+
+Note: those can be particularly useful when combined with the [[https://liballeg.org/a5docs/trunk/physfs.html][liballegro
+PhysicsFS addon]], which can help with reading files located within game
+archives, such as Quake PAK files, zip archives [[https://icculus.org/physfs][etc]].
+
+To mount such an archive as a folder, use the [[https://icculus.org/physfs/docs/html/physfs_8h.html#a8eb320e9af03dcdb4c05bbff3ea604d4][PHYSFS_mount]] function from
+=libphysfs= library (usually dynamically linked to =liballegro=, except in official
+Windows builds, where it is statically linked):
+#+begin_src lisp
+  #-win32 (progn
+            (cffi:define-foreign-library libphysfs
+              (:darwin (:or "libphysfs.3.0.2.dylib" "libphysfs.1.dylib"))
+              (:unix (:or "libphysfs.so.3.0.2" "libphysfs.so.1"))
+              (t (:default "libphysfs")))
+            (cffi:use-foreign-library libphysfs))
+
+  (cffi:defcfun ("PHYSFS_mount" physfs-mount) :int
+    (new-dir :string) (mount-point :string) (append-to-path :int))
+
+  (assert (not (zerop (physfs-mount "archive.zip" (cffi:null-pointer) 1))))
+  ;; now al:make-character-stream and al:make-binary-stream are able to
+  ;; open files from archive.zip
+#+end_src
+
 * Contributing / Developing / Hacking
 cl-liballegro is organized according to the [[https://liballeg.org/a5docs/trunk/][Allegro 5 Documentation]]
 with functions, types, and constants separated.
@@ -267,7 +305,8 @@ Usage of keywords over enums preferred for user convenience.
 - [[./src/constants/]]: Allegro 5 constants, enums, and flag definitions
 - [[./src/ffi-functions/]]: Allegro 5 function definitions
 - [[./src/types/]]: Allegro 5 type definitions
-- [[./src/interface/]]: Common Lisp interface definition, optional fixed timestep game loop implemented with CLOS
+- [[./src/interface/]]: Common Lisp interface definition, optional fixed timestep
+  game loop implemented with CLOS, Gray streams wrapping file APIs.
 - [[./src/package.lisp]]: Common Lisp package definition, exports usable symbols
 - [[./src/library.lisp]]: CFFI library definition, loads Allegro 5 library files into memory
 - [[./cl-liballegro.asd]]: ASDF project definition, specifies source files to be loaded
