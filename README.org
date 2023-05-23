@@ -46,7 +46,10 @@ Various projects I've found using cl-liballegro.  Feel free to add items onto th
 - [[https://github.com/VyacheslavMik/tanks][tanks]] - Tanks
 
 ** Engine
-- [[https://github.com/lockie/d2clone-kit][d2clone-kit]] - Diablo 2 game engine
+- [[https://github.com/lockie/d2clone-kit][d2clone-kit]] - Diablo 2 clone game engine
+
+** Templates
+- [[https://github.com/lockie/cookiecutter-lisp-game][cookiecutter-lisp-game]] - Cookiecutter template for a game
 
 * General
 [[https://user-images.githubusercontent.com/2598904/96662425-f3c4cf00-1313-11eb-9e59-807e27697c20.png]]
