@@ -2,7 +2,7 @@
 (asdf:defsystem cl-liballegro
   :description "Allegro 5 game programming library bindings for Common Lisp"
   :license "zlib"
-  :version "0.2.18"
+  :version "0.2.19"
   :author "resttime"
   :depends-on (:cffi
                :cffi-libffi
@@ -36,10 +36,10 @@
        (:file "system")
        (:module "addons"
         :components
-        ((:file "audio")
-         (:file "font")
-         (:file "native-dialogs")
-         (:file "video-streaming")))))
+                ((:file "audio")
+                 (:file "font")
+                 (:file "native-dialogs")
+                 (:file "video-streaming")))))
      (:module "types"
       :components
       ((:file "events")
@@ -65,9 +65,9 @@
        (:file "types")
        (:module "addons"
         :components
-        ((:file "audio")
-         (:file "font")
-         (:file "native-dialogs")))))
+                ((:file "audio")
+                 (:file "font")
+                 (:file "native-dialogs")))))
      (:module "ffi-functions"
       :components
       ((:file "configuration-files")
