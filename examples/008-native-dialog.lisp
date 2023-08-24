@@ -10,4 +10,5 @@ Flags are defined in src/constants/addons/native-dialogs.lisp"
   (let ((display (al:create-display 800 600)))
     (al:show-native-message-box display "Title" "Heading" "Text" (cffi:null-pointer) 0)
     (al:destroy-display display))
-  (al:shutdown-native-dialog-addon))
+  (al:shutdown-native-dialog-addon)
+  (al:uninstall-system))
