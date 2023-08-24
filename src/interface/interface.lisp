@@ -150,16 +150,16 @@
 (defvar *system*)
 (defcallback run-system-main :void ()
   (initialize-system *system*)
-  (unwind-protect
-       (system-loop *system*)
+  (unwind-protect (system-loop *system*)
     (al:destroy-display (display *system*))
     (al:destroy-event-queue (event-queue *system*))
     (al:stop-samples)
     (cffi:foreign-free (event *system*))
     (al:uninstall-system)))
+
 (defun run-system (system)
-  (setq *system* system)
   (trivial-main-thread:with-body-in-main-thread ()
-    (float-features:with-float-traps-masked
-        (:divide-by-zero :invalid :inexact :overflow :underflow)
-      (run-main 0 (null-pointer) (callback run-system-main)))))
+    (let ((*system* system))
+      (float-features:with-float-traps-masked
+          (:divide-by-zero :invalid :inexact :overflow :underflow)
+        (run-main 0 (null-pointer) (callback run-system-main))))))
