@@ -2,7 +2,7 @@
 
 (defun display-msg-box ()
   "View the function definition for more details:
-https://liballeg.org/a5docs/trunk/native_dialog.html#al_show_native_message_box
+https://liballeg.github.io/a5docs/trunk/native_dialog.html#al_show_native_message_box
 
 Flags are defined in src/constants/addons/native-dialogs.lisp"
   (al:init)
