@@ -2,11 +2,11 @@
 #+OPTIONS: ^:nil
 #+HTML_HEAD_EXTRA: <style>body{font-family: Tahoma, Verdana, Arial, sans-serif;} </style>
 
-[[http://liballeg.org/images/logo.png]]
+[[http://liballeg.github.io/images/logo.png]]
 
-Interface and complete bindings to the [[https://liballeg.org/][Allegro 5 game programming library]].
+Interface and complete bindings to the [[https://liballeg.github.io/][Allegro 5 game programming library]].
 
-Check out how the [[./src][source code]] is organized and compare it to the [[https://liballeg.org/a5docs/trunk/][API
+Check out how the [[./src][source code]] is organized and compare it to the [[https://liballeg.github.io/a5docs/trunk/][API
 reference]].
 
 * Requires
@@ -165,7 +165,7 @@ will look forward to seeing your AAA game in the future.
 Running on Mac OS X tends to behave oddly with threads because it
 requires GUI related code to run in the main thread (affects programs
 outside of Common Lisp too).  The Allegro 5 library has a solution
-with [[https://liballeg.org/a5docs/trunk/misc.html#al_run_main][al_run_main]].  Define a callback with [[https://common-lisp.net/project/cffi/manual/html_node/defcallback.html][defcallback]] and pass it to
+with [[https://liballeg.github.io/a5docs/trunk/misc.html#al_run_main][al_run_main]].  Define a callback with [[https://common-lisp.net/project/cffi/manual/html_node/defcallback.html][defcallback]] and pass it to
 ~AL:RUN-MAIN~.
 
 #+begin_src lisp
@@ -253,7 +253,7 @@ C-c C-l
 #+END_SRC
 
 ** File streams
-There are [[https://www.cliki.net/gray%20streams][Gray streams]] wrapping liballegro [[https://liballeg.org/a5docs/trunk/file.html][file IO APIs]]:
+There are [[https://www.cliki.net/gray%20streams][Gray streams]] wrapping liballegro [[https://liballeg.github.io/a5docs/trunk/file.html][file IO APIs]]:
 #+begin_src lisp
   ;; text stream
   (with-open-stream (stream (al:make-character-stream "credits.txt"))
@@ -267,7 +267,7 @@ There are [[https://www.cliki.net/gray%20streams][Gray streams]] wrapping liball
       result))
 #+end_src
 
-Note: those can be particularly useful when combined with the [[https://liballeg.org/a5docs/trunk/physfs.html][liballegro
+Note: those can be particularly useful when combined with the [[https://liballeg.github.io/a5docs/trunk/physfs.html][liballegro
 PhysicsFS addon]], which can help with reading files located within game
 archives, such as Quake PAK files, zip archives [[https://icculus.org/physfs][etc]].
 
@@ -291,7 +291,7 @@ Windows builds, where it is statically linked):
 #+end_src
 
 * Contributing / Developing / Hacking
-cl-liballegro is organized according to the [[https://liballeg.org/a5docs/trunk/][Allegro 5 Documentation]]
+cl-liballegro is organized according to the [[https://liballeg.github.io/a5docs/trunk/][Allegro 5 Documentation]]
 with functions, types, and constants separated.
 
 [[https://cffi.common-lisp.dev/][CFFI]] is used and its [[https://cffi.common-lisp.dev/manual/index.html][manual]] recommended to understand more advanced
