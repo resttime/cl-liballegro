@@ -31,6 +31,7 @@
   (display :pointer) (cursor :pointer))
 (defcfun ("al_set_system_mouse_cursor" set-system-mouse-cursor) :boolean
   (display :pointer) (cursor-id system-mouse-cursor))
+(defcfun ("al_can_get_mouse_cursor_position" can-get-mouse-cursor-position) :boolean)
 (defcfun ("al_get_mouse_cursor_position" get-mouse-cursor-position) :boolean
   (ret-x :pointer) (ret-y :pointer))
 (defcfun ("al_hide_mouse_cursor" hide-mouse-cursor) :boolean (display :pointer))

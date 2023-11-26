@@ -149,12 +149,12 @@
 (defcfun ("al_get_audio_stream_fragments" get-audio-stream-fragments) :uint
   (stream :pointer))
 (defcfun ("al_get_available_audio_stream_fragments"
-	  get-available-audio-stream-fragments) :uint
+          get-available-audio-stream-fragments) :uint
   (stream :pointer))
 (defcfun ("al_seek_audio_stream_secs" seek-audio-stream-secs) :boolean
   (stream :pointer) (time c-double))
 (defcfun ("al_get_audio_stream_position_secs"
-	  get-audio-stream-position-secs) c-double
+          get-audio-stream-position-secs) c-double
   (stream :pointer))
 (defcfun ("al_get_audio_stream_length_secs" get-audio-stream-length-secs) c-double
   (stream :pointer))
@@ -208,7 +208,7 @@
 (defcfun ("al_destroy_voice" destory-voice) :void (voice :pointer))
 (defcfun ("al_detach_voice" detach-voice) :void (voice :pointer))
 (defcfun ("al_attach_audio_stream_to_voice" attach-audio-stream-to-voice) :boolean
-    (stream :pointer) (voice :pointer))
+  (stream :pointer) (voice :pointer))
 (defcfun ("al_attach_mixer_to_voice" attach-mixer-to-voice) :boolean
   (mixer :pointer) (voice :pointer))
 (defcfun ("al_attach_sample_instance_to_voice" attach-sample-instance-to-voice)
@@ -225,6 +225,7 @@
 (defcfun ("al_get_voice_position" get-voice-position) :uint (voice :pointer))
 (defcfun ("al_set_voice_position" set-voice-position) :boolean
   (voice :pointer) (val :int))
+(defcfun ("al_voice_has_attachments" voice-has-attachments) :boolean (voice :pointer))
 
 ;; Mixers
 (defcfun ("al_create_mixer" create-mixer) :pointer
@@ -260,6 +261,7 @@
 (defcfun ("al_set_mixer_playing" set-mixer-playing) :boolean
   (mixer :pointer) (val :boolean))
 (defcfun ("al_get_mixer_attached" get-mixer-attached) :boolean (mixer :pointer))
+(defcfun ("al_mixer_has_attachments" mixer-has-attachments) :boolean (mixer :pointer))
 (defcfun ("al_detach_mixer" detach-mixer) :boolean (mixer :pointer))
 (defcfun ("al_set_mixer_postprocess_callback" set-mixer-postprocess-callback)
     :boolean

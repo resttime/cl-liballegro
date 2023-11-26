@@ -14,6 +14,7 @@
 (defcfun ("al_get_shader_platform" get-shader-platform) shader-platform
   (shader (:pointer (:struct shader))))
 (defcfun ("al_use_shader" use-shader) :bool (shader :pointer))
+(defcfun ("al_get_current_shader" get-current-shader) :pointer)
 (defcfun ("al_destroy_shader" destroy-shader) :void (shader :pointer))
 (defcfun ("al_set_shader_sampler" set-shader-sampler) :bool
   (name :string) (bitmap :pointer) (unit :int))

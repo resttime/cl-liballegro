@@ -1,4 +1,13 @@
 * Changelog
+** 0.2.20
+Adds new functionality from Allegro 5.2.9 and few other missing functions
+** 0.2.19
+Added Gray streams for filestreams (PR #36 by @lockie)
+
+Added example for native message box
+
+Fix bug with the (optional) interface with threading
+
 ** 0.2.18
 Upgrading for the release of Allegro 5.2.8.  Along with adding new definitions, added older ones never added and exported symbols to package accidentally left out.
 

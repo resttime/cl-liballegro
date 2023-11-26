@@ -8,7 +8,7 @@
   (filename :string) (size :int) (flags :int))
 (defcfun ("al_destroy_font" destroy-font) :void (f :pointer))
 (defcfun ("al_register_font_loader" register-font-loader) :boolean
-    (extension :string) (load-font :pointer))
+  (extension :string) (load-font :pointer))
 (defcfun ("al_get_font_line_height" get-font-line-height) :int (f :pointer))
 (defcfun ("al_get_font_ascent" get-font-ascent) :int (f :pointer))
 (defcfun ("al_get_font_descent" get-font-descent) :int (f :pointer))
@@ -61,6 +61,57 @@
   (bbx :pointer) (bby :pointer)
   (bbw :pointer) (bbh :pointer))
 (defcfun ("al_get_allegro_font_version" get-allegro-font-version) :uint32)
+
+;; Per glyph text handling
+(defcfun ("al_draw_glyph" draw-glyph) :void
+  (font :pointer)
+  (color (:struct color))
+  (x c-float) (y c-float)
+  (codepoint :int))
+(defcfun ("al_get_glyph_width" get-glyph-width) :int
+  (font :pointer) (codepoint :int))
+(defcfun ("al_get_glyph_dimensions" get-glyph-dimensions) :boolean
+  (f :pointer) (codepoint :int)
+  (bbx :pointer) (bby :pointer)
+  (bbw :pointer) (bbh :pointer))
+(defcfun ("al_get_glyph_advance" get-glyph-advance) :int
+  (font :pointer) (codepoint1 :int) (codepoint2 :int))
+
+;; Multiline text drawing
+(defcfun ("al_draw_multiline_text" draw-multiline-text) :void
+  (font :pointer)
+  (color (:struct color))
+  (x c-float) (y c-float)
+  (max-width c-float) (line-height c-float)
+  (flags :int)
+  (text :string))
+(defcfun ("al_draw_multiline_ustr" draw-multiline-ustr) :void
+  (font :pointer)
+  (color (:struct color))
+  (x c-float) (y c-float)
+  (max-width c-float) (line-height c-float)
+  (flags :int)
+  (ustr :pointer))
+(defcfun ("al_draw_multiline_textf" draw-multiline-textf) :void
+  (font :pointer)
+  (color (:struct color))
+  (x c-float) (y c-float)
+  (max-width c-float) (line-height c-float)
+  (flags :int)
+  (format :string)
+  &rest)
+(defcfun ("al_do_multiline_text" do-multiline-text) :void
+  (font :pointer)
+  (max-width c-float)
+  (text :string)
+  (cb :pointer)
+  (extra :pointer))
+(defcfun ("al_do_multiline_ustr" do-multiline-ustr) :void
+  (font :pointer)
+  (max-width c-float)
+  (ustr :pointer)
+  (cb :pointer)
+  (extra :pointer))
 
 ;; Bitmap fonts
 (defcfun ("al_grab_font_from_bitmap" grab-font-from-bitmap) :pointer

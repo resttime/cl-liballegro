@@ -4,10 +4,10 @@
   "Use macro for easier versioning.  Debug using MACROEXPAND-1"
   `(define-foreign-library ,(intern (string-upcase lib))
      (:windows ,(concatenate 'string (subseq lib 3) "-5.2.dll"))
-     (:darwin (:or ,(concatenate 'string lib ".5.2.8.dylib")
+     (:darwin (:or ,(concatenate 'string lib ".5.2.9.dylib")
                    ,(concatenate 'string lib ".5.2.dylib")
                    ,(concatenate 'string lib ".dylib")))
-     (:unix (:or ,(concatenate 'string lib ".so.5.2.8")
+     (:unix (:or ,(concatenate 'string lib ".so.5.2.9")
                  ,(concatenate 'string lib ".so.5.2")
                  ,(concatenate 'string lib ".so")))
      (t (:default ,(concatenate 'string lib)))))
