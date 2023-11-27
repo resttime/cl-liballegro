@@ -570,6 +570,7 @@
    #:get-keyboard-state
    #:key-down
    #:keycode-to-name
+   #:can-set-keyboard-leds
    #:set-keyboard-leds
    #:get-keyboard-event-source
 
@@ -592,7 +593,9 @@
    #:get-new-display-adapter
    #:set-new-display-adapter
    #:get-monitor-info
+   #:get-monitor-dpi
    #:get-num-video-adapters
+   #:get-monitor-refresh-rate
 
 ;;; Mouse
    #:install-mouse
@@ -614,6 +617,7 @@
    #:destroy-mouse-cursor
    #:set-mouse-cursor
    #:set-system-mouse-cursor
+   #:can-get-mouse-cursor-position
    #:get-mouse-cursor-position
    #:hide-mouse-cursor
    #:show-mouse-cursor
@@ -666,6 +670,7 @@
    #:get-shader-log
    #:get-shader-platform
    #:use-shader
+   #:get-current-shader
    #:destroy-shader
    #:set-shader-sampler
    #:set-shader-matrix
@@ -998,7 +1003,7 @@
    #:get-num-audio-output-devices
    #:get-audio-output-device
    #:get-audio-device-name
-   
+
    ;; Voice functions
    #:create-voice
    #:destroy-voice
@@ -1013,6 +1018,7 @@
    #:set-voice-playing
    #:get-voice-position
    #:set-voice-position
+   #:voice-has-attachments
 
    ;; Mixer functions
    #:create-mixer
@@ -1034,6 +1040,7 @@
    #:get-mixer-playing
    #:set-mixer-playing
    #:get-mixer-attached
+   #:mixer-has-attachments
    #:detach-mixer
    #:set-mixer-postprocess-callback
 
@@ -1042,7 +1049,7 @@
    #:get-audio-depth-size
    #:get-channel-count
    #:fill-silence
-   
+
 ;;; Audio codecs addon
    #:init-acodec-addon
    #:get-allegro-acodec-version
@@ -1115,6 +1122,19 @@
    #:get-text-dimensions
    #:get-ustr-dimensions
    #:get-allegro-font-version
+
+   ;; Per glyph text handling
+   #:draw-glyph
+   #:get-glyph-width
+   #:get-glyph-dimensions
+   #:get-glyph-advance
+
+   ;; Multiline text drawing
+   #:draw-multiline-text
+   #:draw-multiline-ustr
+   #:draw-multiline-textf
+   #:do-multiline-text
+   #:do-multiline-ustr
 
    ;; Bitmap fonts
    #:grab-font-from-bitmap
