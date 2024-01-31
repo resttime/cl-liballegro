@@ -317,6 +317,7 @@ Usage of keywords over enums preferred for user convenience.
 ** Checklist
 - [ ] New bindings added for export to [[./src/package.lisp][package defintion]]
 - [ ] New source files added for loading to the [[./cl-liballegro.asd][project definition]]
+- [ ] Bump version and add description of changes
 
 * [[./CHANGELOG.org][CHANGELOG]]
 FYI these bindings are so stable it can make the repo look dead
