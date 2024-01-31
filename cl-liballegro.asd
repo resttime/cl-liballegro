@@ -2,7 +2,7 @@
 (asdf:defsystem cl-liballegro
   :description "Allegro 5 game programming library bindings for Common Lisp"
   :license "zlib"
-  :version "0.2.21"
+  :version "0.2.22"
   :author "resttime"
   :depends-on (:cffi
                :cffi-libffi

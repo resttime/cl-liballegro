@@ -1,4 +1,6 @@
 * Changelog
+** 0.2.22
+Add missing export and remove nonexistent export related to ~Display~
 ** 0.2.21
 Quick release, forgot to add missing package symbol exports
 ** 0.2.20
