@@ -148,7 +148,6 @@
 
    ;; Display Settings
    #:get-display-flags
-   #:get-display-flag
    #:set-display-flag
    #:get-display-option
    #:get-display-format
