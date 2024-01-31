@@ -148,7 +148,7 @@
 
    ;; Display Settings
    #:get-display-flags
-   #:toggle-display-flag
+   #:set-display-flag
    #:get-display-option
    #:get-display-format
    #:get-display-refresh-rate
