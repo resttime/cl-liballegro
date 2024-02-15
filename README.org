@@ -10,7 +10,8 @@ Check out how the [[./src][source code]] is organized and compare it to the [[ht
 reference]].
 
 * Requires
-[[https://sourceware.org/libffi/][libffi]]
+- [[https://sourceware.org/libffi/][libffi]]
+- [[https://liballeg.github.io/][liballegro5]]
 
 * Quickstart
 1. ~al_*~ becomes ~al:*~
@@ -18,14 +19,14 @@ reference]].
 3. ~(al:rest secs)~ is ~(al:rest-time secs)~ because of symbol clash with ~#'cl:rest~
 4. To access slots from a C struct, you can use ~CFFI:MEM-REF~ generate a plist
    #+BEGIN_SRC lisp
-   (defcstruct display-mode
+   (cffi:defcstruct display-mode
      (width :int)
      (height :int)
      (format :int)
      (refresh-rate :int))
 
-   (with-foreign-object (test '(:struct display-mode))
-     (let ((plist (mem-ref test '(:struct display-mode))))
+   (cffi:with-foreign-object (test '(:struct display-mode))
+     (let ((plist (cffi:mem-ref test '(:struct display-mode))))
        (print plist)
        (print (getf plist 'width))))
    #+END_SRC
@@ -65,7 +66,7 @@ However types, constants, and structures have been shortened for user
 convenience.  There's no exact rules for it, but usually any prefix
 with ~ALLEGRO_*~ or ~al_*~ is truncated because Common Lisp has
 multiple namespaces to handle naming clashes.  For the rare edge
-cases, check the source code.
+cases, check the source code definitions for [[./src/constants/][constants]] and [[./src/types][types]].
 
 Another change is that certain constants have been changed to Common
 Lisp keywords.  Keyboard functions in C use an enum values
@@ -134,22 +135,23 @@ will look forward to seeing your AAA game in the future.
                          (:samples 4 :suggest))))
    #+end_src
 
-2. Implement Method for Logic
+2. Implement Method for Logic Step
    #+begin_src lisp
    (defmethod al:update ((sys window))
      (print 'one-logic-frame))
    #+end_src
 
-3. Implement Method for Render
+3. Implement Method for Render Step
    #+begin_src lisp
    (defmethod al:render ((sys window))
      (al:clear-to-color (al:map-rgb 20 150 100))
      (al:flip-display))
    #+end_src
 
-4. Implement Methods(s) for Handler
+4. Implement Methods(s) for Event Handling
    #+begin_src lisp
-   ;; The lisp interface uses this handler in the background of the logic
+   ;; The lisp interface runs handlers during the logic step
+   ;; Handlers are defined according to allegro events
    (defmethod al:key-down-handler ((sys window))
      (let ((keyboard (cffi:mem-ref (al:event sys) '(:struct al:keyboard-event))))
        (print (getf keyboard 'al::keycode))
