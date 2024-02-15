@@ -54,6 +54,8 @@
    #:process-event-queue
    ;; Generic System Loop
    #:system-loop
+   ;; Generic System Initializer
+   #:initialize-system
    ;; Generic System Runner
    #:run-system
 

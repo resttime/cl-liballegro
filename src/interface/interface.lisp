@@ -141,6 +141,7 @@
     (al:init-font-addon)
     (al:init-ttf-addon)
     (al:install-audio)
+    (al:restore-default-mixer)
     (al:init-acodec-addon)
     (initialize-event-queue system)
     (initialize-display system)
