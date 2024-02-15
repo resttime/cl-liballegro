@@ -1,4 +1,6 @@
 * Changelog
+** 0.2.23
+Fix for audio system init and export initialize-system
 ** 0.2.22
 Add missing export and remove nonexistent export related to ~Display~
 ** 0.2.21
