@@ -134,7 +134,7 @@
 (defgeneric initialize-system (system)
   (:method (system)
     (trivial-garbage:gc :full t)
-    (al:init)
+    (al:install-system (al:get-allegro-version) (null-pointer))
     (setf (system-time system) (al:get-time))
     (al:init-image-addon)
     (al:init-font-addon)
@@ -166,6 +166,11 @@
     (float-features:with-float-traps-masked t
       (%run-system system))))
 
+;; OS X requires GUI related code to run in the main thread (not
+;; specific to Common Lisp).  The arrived solution is a simple closure
+;; to pass the system to a callback that will run in the main thread.
+;;
+;; Also see: https://liballeg.org/a5docs/trunk/misc.html#al_run_main
 #+darwin
 (let ((main-system))
   (defcallback run-system-main :void () (%run-system main-system))
