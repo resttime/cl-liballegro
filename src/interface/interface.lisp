@@ -36,7 +36,7 @@
     (setf (display system) (al:create-display (width system) (height system)))
     (al:set-window-title (display system) (title system))
     (al:register-event-source (event-queue system)
-			                  (al:get-display-event-source (display system)))))
+                              (al:get-display-event-source (display system)))))
 (defgeneric initialize-mouse (system)
   (:method (system)
     (al:install-mouse)
@@ -54,8 +54,8 @@
 (defgeneric key-down-handler (system)
   (:method (system)
     (print (cffi:foreign-slot-value (al:event system)
-				                    '(:struct al:keyboard-event)
-				                    'al::keycode))))
+                                    '(:struct al:keyboard-event)
+                                    'al::keycode))))
 (defgeneric key-char-handler (system) (:method (system)))
 (defgeneric key-up-handler (system) (:method (system)))
 (defgeneric mouse-axis-handler (system) (:method (system)))
@@ -119,18 +119,18 @@
     (with-slots (system-time new-time frame-time accumulator logic-fps) system
       (loop while (system-loop-running-p system)
             with lpt = (/ 1.0 logic-fps)
-	        do
-	           (setf new-time (get-time))
-	           (setf frame-time (- new-time system-time))
-	           (when (> frame-time lpt)
-	             (setf frame-time lpt))
-	           (setf system-time new-time)
-	           (incf accumulator frame-time)
-	           (loop while (>= accumulator lpt) do
-		         (process-event-queue system)
-		         (update system)
-		         (decf accumulator lpt))
-	           (render system)))))
+            do
+               (setf new-time (get-time))
+               (setf frame-time (- new-time system-time))
+               (when (> frame-time lpt)
+                 (setf frame-time lpt))
+               (setf system-time new-time)
+               (incf accumulator frame-time)
+               (loop while (>= accumulator lpt) do
+                 (process-event-queue system)
+                 (update system)
+                 (decf accumulator lpt))
+               (render system)))))
 
 (defgeneric initialize-system (system)
   (:method (system)
@@ -148,19 +148,32 @@
     (initialize-mouse system)
     (initialize-keyboard system)))
 
-(defvar *system*)
-(defcallback run-system-main :void ()
-  (initialize-system *system*)
-  (unwind-protect (system-loop *system*)
-    (al:destroy-display (display *system*))
-    (al:destroy-event-queue (event-queue *system*))
+(defgeneric shutdown-system (system)
+  (:method (system)
+    (al:destroy-display (display system))
+    (al:destroy-event-queue (event-queue system))
     (al:stop-samples)
-    (cffi:foreign-free (event *system*))
-    (al:uninstall-system)))
+    (cffi:foreign-free (event system))
+    (trivial-garbage:gc :full t)))
 
-(defun run-system (system)
-  (trivial-main-thread:with-body-in-main-thread ()
-    (let ((*system* system))
-      (float-features:with-float-traps-masked
-          (:divide-by-zero :invalid :inexact :overflow :underflow)
-        (run-main 0 (null-pointer) (callback run-system-main))))))
+(defun %run-system (system)
+  (initialize-system system)
+  (unwind-protect (system-loop system)
+    (shutdown-system system)))
+
+#-darwin
+(defgeneric run-system (system)
+  (:method (system)
+    (float-features:with-float-traps-masked t
+      (%run-system system))))
+
+#+darwin
+(let ((main-system))
+  (defcallback run-system-main :void () (%run-system main-system))
+
+  (defgeneric run-system (system)
+    (:method (system)
+      (setf main-system system)
+      (trivial-main-thread:with-body-in-main-thread ()
+        (float-features:with-float-traps-masked t
+          (run-main 0 (null-pointer) (callback run-system-main)))))))
