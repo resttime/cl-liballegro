@@ -119,17 +119,16 @@
     (with-slots (system-time new-time frame-time accumulator logic-fps) system
       (loop while (system-loop-running-p system)
             with lpt = (/ 1.0 logic-fps)
-            do
-               (setf new-time (get-time))
+            do (setf new-time (get-time))
                (setf frame-time (- new-time system-time))
                (when (> frame-time lpt)
                  (setf frame-time lpt))
                (setf system-time new-time)
                (incf accumulator frame-time)
-               (loop while (>= accumulator lpt) do
-                 (process-event-queue system)
-                 (update system)
-                 (decf accumulator lpt))
+               (loop while (>= accumulator lpt)
+                     do (process-event-queue system)
+                        (update system)
+                        (decf accumulator lpt))
                (render system)))))
 
 (defgeneric initialize-system (system)
