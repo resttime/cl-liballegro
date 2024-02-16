@@ -3,12 +3,14 @@
 
 (defclass window (al:system)
   ((previous-key :initform "Nothing" :accessor previous-key))
-  (:default-initargs :title "Simple"
-    :width 800 :height 600
-    :logic-fps 1
-    :display-flags '(:windowed :opengl :resizable)
-    :display-options '((:sample-buffers 1 :suggest)
-		       (:samples 4 :suggest))))
+  (:default-initargs
+   :title "Simple"
+   :width 800
+   :height 600
+   :logic-fps 1
+   :display-flags '(:windowed :opengl :resizable)
+   :display-options '((:sample-buffers 1 :suggest)
+                      (:samples 4 :suggest))))
 
 (defmethod al:update ((sys window))
   (print 'one-logic-frame))
