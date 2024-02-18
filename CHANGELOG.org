@@ -1,4 +1,6 @@
 * Changelog
+** 0.2.24
+Add new keycodes.  Cleanup the interface a little.
 ** 0.2.23
 Fix for the interface running crossplatform.  Issue with the GUI code needing to run in the main thread on Darwin machines
 ** 0.2.23
