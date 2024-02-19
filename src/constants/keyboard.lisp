@@ -2,7 +2,7 @@
 
 ;; Keycodes
 (defcenum keycodes
-    (:|none| 0)
+  (:|none| 0)
   (:a 1)
   (:b 2)
   (:c 3)
@@ -161,7 +161,7 @@
 
 ;; Keyboard modifier flags
 (defbitfield keymods
-    (:shift #x00001)
+  (:shift #x00001)
   (:ctrl #x00002)
   (:alt #x00004)
   (:lwin #x00008)
