@@ -196,6 +196,9 @@
    #:user-event
    #:event
 
+   #:event-source
+   #:event-queue
+
    #:create-event-queue
    #:destroy-event-queue
    #:register-event-source
