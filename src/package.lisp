@@ -26,6 +26,7 @@
    #:initialize-display
    #:initialize-mouse
    #:initialize-keyboard
+   #:initialize-joystick
    ;; Generic Event Handler Methods
    #:joystick-axis-handler
    #:joystick-button-down-handler
@@ -1239,5 +1240,4 @@
    #:get-video-scaled-height
    #:get-video-frame
    #:get-video-position
-   #:seek-video
-   #:initialize-joystick))
+   #:seek-video))
