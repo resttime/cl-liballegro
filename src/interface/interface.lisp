@@ -178,7 +178,9 @@
 ;; Also see: https://liballeg.org/a5docs/trunk/misc.html#al_run_main
 #+darwin
 (let ((main-system))
-  (defcallback run-system-main :void () (%run-system main-system))
+  (defcallback run-system-main :void ((argc :int) (argv :pointer))
+    (declare (ignore argc argv))
+    (%run-system main-system))
 
   (defgeneric run-system (system)
     (:method (system)
