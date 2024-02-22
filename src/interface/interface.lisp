@@ -45,6 +45,10 @@
   (:method (system)
     (al:install-keyboard)
     (al:register-event-source (event-queue system) (al:get-keyboard-event-source))))
+(defgeneric initialize-joystick (system)
+  (:method (system)
+    (al:install-joystick)
+    (al:register-event-source (event-queue system) (al:get-joystick-event-source))))
 
 ;;; Generic Handlers
 (defgeneric joystick-axis-handler (system) (:method (system)))
@@ -145,7 +149,8 @@
     (initialize-event-queue system)
     (initialize-display system)
     (initialize-mouse system)
-    (initialize-keyboard system)))
+    (initialize-keyboard system)
+    (initialize-joystick system)))
 
 (defgeneric shutdown-system (system)
   (:method (system)
