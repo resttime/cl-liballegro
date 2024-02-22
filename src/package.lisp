@@ -1240,4 +1240,4 @@
    #:get-video-frame
    #:get-video-position
    #:seek-video
-   ))
+   #:initialize-joystick))
