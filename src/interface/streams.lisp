@@ -144,6 +144,15 @@ interactive restart allowing to specify another filename."
       (let ((pointer (cffi:inc-pointer buffer start)))
         (+ start (fread file pointer (- end start)))))))
 
+(defmethod trivial-gray-streams:stream-file-position ((stream binary-stream))
+  (with-slots (file) stream
+    (ftell file)))
+
+(defmethod (setf trivial-gray-streams:stream-file-position)
+    (newval (stream binary-stream))
+  (with-slots (file) stream
+    (fseek file newval 0)))
+
 (defmethod trivial-gray-streams::close ((stream binary-stream) &key abort)
   (declare (ignore abort))
   (with-slots (file) stream
