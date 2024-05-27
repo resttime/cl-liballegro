@@ -42,6 +42,9 @@ Various projects I've found using cl-liballegro.  Feel free to add items onto th
 - [[https://github.com/lockie/cl-liballegro-nuklear][cl-liballegro-nuklear]] - Bindings to the [[https://github.com/Immediate-Mode-UI/Nuklear][nuklear]] immediate mode GUI library
 
 ** Games
+- [[https://awkravchuk.itch.io/cycle-of-evil][Cycle of Evil]] - A fantasy-themed strategy/simulation with indirect player control
+- [[https://awkravchuk.itch.io/mana-break][Mana Break]] - Indirect colony simulator
+- [[https://awkravchuk.itch.io/thoughtbound][Thoughtbound]] - Post-modern dungeon crawler in fantasy setting
 - [[https://awkravchuk.itch.io/darkness-looming-the-dawn][Darkness Looming: The Dawn]] - Old school hack n' slash
 - [[https://github.com/xFA25E/simple-asteroids][simple-asteroids]] - Simple asteroids
 - [[https://github.com/VyacheslavMik/tanks][tanks]] - Tanks
