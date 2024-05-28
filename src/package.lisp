@@ -1060,38 +1060,25 @@
    #:get-allegro-acodec-version
 
 ;;; Color addon
-   #:color_cmyk
-   #:color_cmyk_to_rgb
-   #:color_hsl
-   #:color_hsl_to_rgb
-   #:color_hsv
-   #:color_hsv_to_rgb
-   #:color_html
-   #:color_html_to_rgb
-   #:color_rgb_to_html
-   #:color_name
-   #:color_name_to_rgb
-   #:color_rgb_to_cmyk
-   #:color_rgb_to_hsl
-   #:color_rgb_to_hsv
-   #:color_rgb_to_name
-   #:color_rgb_to_xyz
-   #:color_xyz
-   #:color_xyz_to_rgb
-   #:color_rgb_to_xyy
-   #:color_xyy
-   #:color_xyy_to_rgb
-   #:color_rgb_to_lab
-   #:color_lab
-   #:color_lab_to_rgb
-   #:color_rgb_to_lch
-   #:color_lch
-   #:color_lch_to_rgb
-   #:color_distance_ciede2000
-   #:color_rgb_to_yuv
-   #:color_yuv
-   #:color_yuv_to_rgb
-   #:get_allegro_color_version
+   #:color-cymk
+   #:color-cmyk-to-rgb
+   #:color-hsl
+   #:color-hsl-to-rgb
+   #:color-hsv
+   #:color-hsv-to-rgb
+   #:color-html
+   #:color-html-to-rgb
+   #:color-rgb-to-html
+   #:color-name
+   #:color-name-to-rgb
+   #:color-rgb-to-cmyk
+   #:color-rgb-to-hsl
+   #:color-rgb-to-hsv
+   #:color-rgb-to-name
+   #:color-rgb-to-yuv
+   #:color-yuv
+   #:color-yuv-to-rgb
+   #:get-allegro-color-version
    #:is-color-valid
    #:color-rgb-to-oklab
    #:color-oklab
