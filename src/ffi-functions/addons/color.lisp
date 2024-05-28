@@ -11,7 +11,7 @@
 (defcfun ("al_color_hsl_to_rgb" color-hsl-to-rgb) :void
   (hue c-float) (saturation c-float) (lightness c-float)
   (red :pointer) (green :pointer) (blue :pointer))
-(defcfun ("al_color_hsl" color-hsv) (:struct color)
+(defcfun ("al_color_hsv" color-hsv) (:struct color)
   (h c-float) (s c-float) (r c-float))
 (defcfun ("al_color_hsv_to_rgb" color-hsv-to-rgb) :void
   (hue c-float) (saturation c-float) (value c-float)
