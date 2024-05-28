@@ -1060,7 +1060,7 @@
    #:get-allegro-acodec-version
 
 ;;; Color addon
-   #:color-cymk
+   #:color-cmyk
    #:color-cmyk-to-rgb
    #:color-hsl
    #:color-hsl-to-rgb

@@ -1,7 +1,7 @@
 (in-package #:cl-liballegro)
 
 ;;; Color addon
-(defcfun ("al_color_cmyk" color-cymk) (:struct color)
+(defcfun ("al_color_cmyk" color-cmyk) (:struct color)
   (c c-float) (m c-float) (y c-float) (k c-float))
 (defcfun ("al_color_cmyk_to_rgb" color-cmyk-to-rgb) :void
   (cyan c-float) (magenta c-float) (yellow c-float) (key c-float)
