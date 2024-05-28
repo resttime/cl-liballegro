@@ -47,4 +47,7 @@
   ;; Video event type (addon)
   (:video-frame-show 550)
   (:video-finished 551)
-  (:-video-seek 552))
+  (:-video-seek 552)
+
+  ;; For user events (interface)
+  (:wakeup 999))

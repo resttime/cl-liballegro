@@ -1075,6 +1075,19 @@
    #:color-rgb-to-hsl
    #:color-rgb-to-hsv
    #:color-rgb-to-name
+   #:color-rgb-to-xyz
+   #:color-xyz
+   #:color-xyz-to-rgb
+   #:color-rgb-to-xyy
+   #:color-xyy
+   #:color-xyy-to-rgb
+   #:color-rgb-to-lab
+   #:color-lab
+   #:color-lab-to-rgb
+   #:color-rgb-to-lch
+   #:color-lch
+   #:color-lch-to-rgb
+   #:color-distance-ciede2000
    #:color-rgb-to-yuv
    #:color-yuv
    #:color-yuv-to-rgb
