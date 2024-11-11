@@ -14,3 +14,7 @@
   (:ok-cancel 4)
   (:yes-no 8)
   (:question 16))
+
+(defbitfield textlog-flags
+  (:no-close 1)
+  (:monospace 2))
