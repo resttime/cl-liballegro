@@ -21,7 +21,7 @@
 (defcfun ("al_close_native_text_log" close-native-text-log) :void
   (textlog :pointer))
 (defcfun ("al_append_native_text_log" append-native-text-log) :void
-  (textlog :pointer) (format :string))
+  (textlog :pointer) (format :string) &rest)
 (defcfun ("al_get_native_text_log_event_source" get-native-text-log-event-source)
     :pointer
   (textlog :pointer))
