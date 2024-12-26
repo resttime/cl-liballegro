@@ -12,7 +12,9 @@
 
 (defmacro with-mouse-state (state &body body)
   `(with-foreign-object (,state '(:struct mouse-state))
-     ,@body))
+     (with-foreign-slots ((x y z w more-axis buttons pressure display)
+                          ,state (:struct mouse-state))
+       ,@body)))
 
 (defmacro with-current-mouse-state (state &body body)
   `(with-mouse-state ,state

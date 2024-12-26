@@ -189,16 +189,81 @@
    #:event-display-orientation
 
    #:any-event
+   #:type
+   #:source
+   #:timestamp
+
    #:display-event
+   #:x
+   #:y
+   #:width
+   #:height
+   #:orientation
+
    #:joystick-event
+   #:id
+   #:stick
+   #:axis
+   #:pos
+   #:button
+
    #:keyboard-event
+   #:display
+   #:keycode
+   #:unichar
+   #:modifiers
+   #:repeat
+
    #:mouse-event
+   #:display
+   #:x
+   #:y
+   #:z
+   #:w
+   #:dx
+   #:dy
+   #:dz
+   #:dw
+   #:button
+   #:pressure
+
    #:timer-event
+   #:count
+   #:error
+
+   #:touch-event
+   #:display
+   #:id
+   #:x
+   #:y
+   #:dx
+   #:dy
+   #:primary
+
    #:user-event
+   #:data1
+   #:data2
+   #:data3
+   #:data4
+
+   #:audio-recorder-event
+   #:buffer
+   #:samples
+
    #:event
 
    #:event-source
    #:event-queue
+
+   #:with-event
+   #:with-display-event-slots
+   #:with-joystick-event-slots
+   #:with-keyboard-event-slots
+   #:with-mouse-event-slots
+   #:with-timer-event-slots
+   #:with-touch-event-slots
+   #:with-user-event-slots
+   #:with-audio-recorder-event-slots
 
    #:create-event-queue
    #:destroy-event-queue
@@ -635,7 +700,7 @@
    #:y
    #:z
    #:w
-   #:mouse-axis
+   #:more-axis
    #:buttons
    #:pressure
    #:display
