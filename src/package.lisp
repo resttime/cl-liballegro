@@ -365,8 +365,8 @@
    #:set-separate-blender
 
    ;; Clipping
-   #:get-clippng-rectangle
-   #:set-clippng-rectangle
+   #:get-clipping-rectangle
+   #:set-clipping-rectangle
    #:reset-clipping-rectangle
 
    ;; Graphics utility functions
