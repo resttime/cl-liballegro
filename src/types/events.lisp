@@ -77,3 +77,40 @@
 
 (defcstruct (event-source :size 128))
 (defcstruct event-queue)
+
+(defmacro with-event (event &body body)
+  `(with-foreign-object (,event '(:union event))
+     (with-foreign-slots ((type source timestamp) ,event (:struct any-event))
+       ,@body)))
+
+(defmacro with-display-event-slots (event &body body)
+  `(with-foreign-slots ((x y width height orientation) ,event (:struct display-event))
+     ,@body))
+
+(defmacro with-joystick-event-slots (event &body body)
+  `(with-foreign-slots ((id stick axis pos button) ,event (:struct joystick-event))
+     ,@body))
+
+(defmacro with-keyboard-event-slots (event &body body)
+  `(with-foreign-slots ((display keycode unichar modifiers repeat) ,event (:struct keyboard-event))
+     ,@body))
+
+(defmacro with-mouse-event-slots (event &body body)
+  `(with-foreign-slots ((x y z w dx dy dz dw button pressure) ,event (:struct mouse-event))
+     ,@body))
+
+(defmacro with-timer-event-slots (event &body body)
+  `(with-foreign-slots ((count error) ,event (:struct timer-event))
+     ,@body))
+
+(defmacro with-touch-event-slots (event &body body)
+  `(with-foreign-slots ((display id x y dx dy primary) ,event (:struct touch-event))
+     ,@body))
+
+(defmacro with-user-event-slots (event &body body)
+  `(with-foreign-slots ((data1 data2 data3 data4) ,event (:struct user-event))
+     ,@body))
+
+(defmacro with-audio-recorder-event-slots (event &body body)
+  `(with-foreign-slots ((buffer samples) ,event (:struct audio-recorder-event))
+     ,@body))
