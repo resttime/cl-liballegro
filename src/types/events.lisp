@@ -80,37 +80,74 @@
 
 (defmacro with-event (event &body body)
   `(with-foreign-object (,event '(:union event))
-     (with-foreign-slots ((type source timestamp) ,event (:struct any-event))
-       ,@body)))
-
-(defmacro with-display-event-slots (event &body body)
-  `(with-foreign-slots ((x y width height orientation) ,event (:struct display-event))
      ,@body))
 
-(defmacro with-joystick-event-slots (event &body body)
-  `(with-foreign-slots ((id stick axis pos button) ,event (:struct joystick-event))
+(defun %foreign-slot-spec (requested-slots all-slots)
+  (if requested-slots
+      (loop :for slot :in requested-slots
+            :collecting
+               (etypecase slot
+                 (symbol
+                  `(,slot ,(intern (string slot) :cl-liballegro)))
+                 (cons
+                  (destructuring-bind (variable-name slot-name) slot
+                    `(,variable-name
+                      ,(intern (string slot-name) :cl-liballegro))))))
+      (mapcar
+       (lambda (slot)
+         `(,(intern (string slot) *package*) ,slot))
+       all-slots)))
+
+(defmacro with-event-slots (event (&rest slots) &body body)
+  `(with-foreign-slots
+       (,(%foreign-slot-spec slots '(type source timestamp))
+        ,event (:struct any-event))
      ,@body))
 
-(defmacro with-keyboard-event-slots (event &body body)
-  `(with-foreign-slots ((display keycode unichar modifiers repeat) ,event (:struct keyboard-event))
+(defmacro with-display-event-slots (event (&rest slots) &body body)
+  `(with-foreign-slots
+       (,(%foreign-slot-spec slots '(x y width height orientation))
+        ,event (:struct display-event))
      ,@body))
 
-(defmacro with-mouse-event-slots (event &body body)
-  `(with-foreign-slots ((x y z w dx dy dz dw button pressure) ,event (:struct mouse-event))
+(defmacro with-joystick-event-slots (event (&rest slots) &body body)
+  `(with-foreign-slots
+       (,(%foreign-slot-spec slots '(id stick axis pos button))
+        ,event (:struct joystick-event))
      ,@body))
 
-(defmacro with-timer-event-slots (event &body body)
-  `(with-foreign-slots ((count error) ,event (:struct timer-event))
+(defmacro with-keyboard-event-slots (event (&rest slots) &body body)
+  `(with-foreign-slots
+       (,(%foreign-slot-spec slots '(display keycode unichar modifiers repeat))
+        ,event (:struct keyboard-event))
      ,@body))
 
-(defmacro with-touch-event-slots (event &body body)
-  `(with-foreign-slots ((display id x y dx dy primary) ,event (:struct touch-event))
+(defmacro with-mouse-event-slots (event (&rest slots) &body body)
+  `(with-foreign-slots
+       (,(%foreign-slot-spec slots '(x y z w dx dy dz dw button pressure))
+        ,event (:struct mouse-event))
      ,@body))
 
-(defmacro with-user-event-slots (event &body body)
-  `(with-foreign-slots ((data1 data2 data3 data4) ,event (:struct user-event))
+(defmacro with-timer-event-slots (event (&rest slots) &body body)
+  `(with-foreign-slots
+       (,(%foreign-slot-spec slots '(count error))
+        ,event (:struct timer-event))
      ,@body))
 
-(defmacro with-audio-recorder-event-slots (event &body body)
-  `(with-foreign-slots ((buffer samples) ,event (:struct audio-recorder-event))
+(defmacro with-touch-event-slots (event (&rest slots) &body body)
+  `(with-foreign-slots
+       (,(%foreign-slot-spec slots '(display id x y dx dy primary))
+        ,event (:struct touch-event))
+     ,@body))
+
+(defmacro with-user-event-slots (event (&rest slots) &body body)
+  `(with-foreign-slots
+       (,(%foreign-slot-spec slots '(data1 data2 data3 data4))
+        ,event (:struct user-event))
+     ,@body))
+
+(defmacro with-audio-recorder-event-slots (event (&rest slots) &body body)
+  `(with-foreign-slots
+       (,(%foreign-slot-spec slots '(buffer samples))
+        ,event (:struct audio-recorder-event))
      ,@body))
