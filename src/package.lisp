@@ -339,7 +339,7 @@
    #:get-parent-bitmap
    #:get-bitmap-x
    #:get-bitmap-y
-   #:get-reparent-bitmap
+   #:reparent-bitmap
 
    ;; Drawing Operations
    #:clear-to-color
