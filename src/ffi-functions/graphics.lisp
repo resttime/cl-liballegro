@@ -68,8 +68,8 @@
 (defcfun ("al_get_bitmap_format" get-bitmap-format) pixel-format (bitmap :pointer))
 (defcfun ("al_get_bitmap_height" get-bitmap-height) :int (bitmap :pointer))
 (defcfun ("al_get_bitmap_width" get-bitmap-width) :int (bitmap :pointer))
-(defcfun ("al_get_pixel" get-pixel) (:struct color) (bitmap :pointer) (x c-int) (y c-int))
 (defcfun ("al_is_bitmap_locked" is-bitmap-locked) :boolean (bitmap :pointer))
+(defcfun ("al_get_pixel" get-pixel) (:struct color) (bitmap :pointer) (x c-int) (y c-int))
 (defcfun ("al_is_compatible_bitmap" is-compatible-bitmap) :boolean (bitmap :pointer))
 (defcfun ("al_is_sub_bitmap" is-sub-bitmap) :boolean (bitmap :pointer))
 (defcfun ("al_get_parent_bitmap" get-parent-bitmap) :pointer (bitmap :pointer))
@@ -77,7 +77,6 @@
 (defcfun ("al_get_bitmap_y" get-bitmap-y) :int (bitmap :pointer))
 (defcfun ("al_reparent_bitmap" reparent-bitmap) :void
   (bitmap :pointer) (parent :pointer) (x c-int) (y c-int) (w c-int) (h c-int))
-
 
 ;; Drawing Operations
 (defcfun ("al_clear_to_color" clear-to-color) :void (color (:struct color)))
@@ -131,7 +130,7 @@
   (angle c-float)
   (flags draw-flags))
 (defcfun ("al_draw_tinted_scaled_rotated_bitmap_region"
-	  draw-tinted-scaled-rotated-bitmap-region) :void
+          draw-tinted-scaled-rotated-bitmap-region) :void
   (bitmap :pointer)
   (sx c-float) (sy c-float) (sw c-float) (sh c-float)
   (color (:struct color))

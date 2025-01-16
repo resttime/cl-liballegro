@@ -332,10 +332,14 @@
    #:get-bitmap-format
    #:get-bitmap-height
    #:get-bitmap-width
+   #:get-pixel
    #:is-bitmap-locked
    #:is-compatible-bitmap
    #:is-sub-bitmap
    #:get-parent-bitmap
+   #:get-bitmap-x
+   #:get-bitmap-y
+   #:get-reparent-bitmap
 
    ;; Drawing Operations
    #:clear-to-color
