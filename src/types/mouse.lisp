@@ -19,7 +19,7 @@
      (al:get-mouse-state ,state)
      ,@body))
 
-(defmacro with-mouse-state-slots (state (&rest slots) &body body)
+(defmacro with-mouse-state-slots ((&rest slots) state &body body)
   `(with-foreign-slots
        (,(%foreign-slot-spec
           slots '(x y z w more-axis buttons pressure display))
