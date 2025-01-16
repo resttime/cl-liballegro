@@ -1,4 +1,6 @@
 * Changelog
+** 0.2.27
+Add links to readme, Fixed and added definitions, Added missing package symbols
 ** 0.2.26
 Fix and add missing color addon functions.  Added stream-file-position accesors for binary-stream
 ** 0.2.25
