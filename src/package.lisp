@@ -194,11 +194,24 @@
    #:keyboard-event
    #:mouse-event
    #:timer-event
+   #:touch-event
    #:user-event
+   #:audio-recorder-event
    #:event
 
    #:event-source
    #:event-queue
+
+   #:with-event
+   #:with-event-slots
+   #:with-display-event-slots
+   #:with-joystick-event-slots
+   #:with-keyboard-event-slots
+   #:with-mouse-event-slots
+   #:with-timer-event-slots
+   #:with-touch-event-slots
+   #:with-user-event-slots
+   #:with-audio-recorder-event-slots
 
    #:create-event-queue
    #:destroy-event-queue
@@ -639,13 +652,14 @@
    #:y
    #:z
    #:w
-   #:mouse-axis
+   #:more-axis
    #:buttons
    #:pressure
    #:display
 
    #:with-mouse-state
    #:with-current-mouse-state
+   #:with-mouse-state-slots
 ;;; Path
    #:create-path
    #:create-path-for-directory

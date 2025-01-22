@@ -19,11 +19,6 @@
    (accumulator :accessor accumulator :initform 0.0)
    (logic-fps :accessor logic-fps :initarg :logic-fps :initform 30)))
 
-(defmacro with-event (event &body body)
-  `(let ((,event (cffi:foreign-alloc '(:union al:event))))
-     ,@body
-     (cffi:foreign-free event)))
-
 ;;; Initializations
 (defgeneric initialize-event-queue (system)
   (:method (system)
