@@ -1,4 +1,6 @@
 * Changelog
+** 0.2.28
+Convenience macros for accessing slots (thanks to @lockie)
 ** 0.2.27
 Add links to readme, Fixed and added definitions, Added missing package symbols
 ** 0.2.26
