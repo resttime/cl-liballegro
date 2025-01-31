@@ -43,7 +43,8 @@ interactive restart allowing to specify another filename."
   (:documentation
    "Wrapper around liballegro file IO to manipulate read-only text file."))
 
-(declaim (ftype (function ((or pathname string)) character-stream)
+(declaim (ftype (function ((or string pathname))
+                          (values character-stream &optional))
                 make-character-stream))
 (defun make-character-stream (path)
   "Convenience constructor function for CHARACTER-STREAM."
@@ -109,7 +110,8 @@ interactive restart allowing to specify another filename."
   (:documentation
    "Wrapper around liballegro file IO to manipulate read-only binary file."))
 
-(declaim (ftype (function ((or pathname string)) binary-stream)
+(declaim (ftype (function ((or string pathname))
+                          (values binary-stream &optional))
                 make-binary-stream))
 (defun make-binary-stream (path)
   "Convenience constructor function for BINARY-STREAM."
