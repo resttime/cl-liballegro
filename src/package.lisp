@@ -586,6 +586,7 @@
    #:keymod-numlock
    #:keymod-capslock
 
+   #:keyboard-state
    #:install-keyboard
    #:is-keyboard-installed
    #:uninstall-keyboard
