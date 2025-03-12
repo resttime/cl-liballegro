@@ -726,6 +726,7 @@
    #:get-org-name
    #:get-system-config
    #:register-assert-handler
+   #:register-trace-handler
 
 ;;; Threads
    #:thread
