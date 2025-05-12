@@ -276,6 +276,30 @@
 ;;; File system routines
    #:create-fs-entry
    #:destroy-fs-entry
+   #:get-fs-entry-name
+   #:update-fs-entry
+   #:get-fs-entry-mode
+   #:get-fs-entry-atime
+   #:get-fs-entry-ctime
+   #:get-fs-entry-mtime
+   #:get-fs-entry-size
+   #:fs-entry-exists
+   #:remove-fs-entry
+   #:filename-exists
+   #:remove-filename
+   #:open-directory
+   #:read-directory
+   #:close-directory
+   #:get-current-directory
+   #:make-directory
+   #:open-fs-entry
+   #:for-each-fs-entry
+   #:set-fs-interface
+   #:set-standard-fs-interface
+   #:get-fs-interface
+   #:fs-entry
+   #:file-mode
+   #:for-each-fs-entry-result
 
 ;;; Fixed point math
    #:itofix
