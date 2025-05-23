@@ -652,12 +652,14 @@
    #:get-mouse-num-buttons
    #:get-mouse-state
    #:get-mouse-state-axis
-   #:get-mouse-button-down
+   #:mouse-button-down
    #:set-mouse-xy
    #:set-mouse-z
    #:set-mouse-w
    #:set-mouse-axis
    #:get-mouse-event-source
+   #:set-mouse-wheel-precision
+   #:get-mouse-wheel-precision
 
    ;; Mouse cursors
    #:create-mouse-cursor
