@@ -485,10 +485,10 @@
    #:with-joystick-state
    #:with-current-joystick-state
    #:with-joystick-state-slots
-   #:with-joystick-axis
-   #:with-joystick-axes
-   #:with-joystick-button
-   #:with-joystick-buttons
+   #:get-joystick-state-axis
+   #:with-joystick-state-axes
+   #:get-joystick-state-button
+   #:with-joystick-state-buttons
    #:get-joystick-event-source
 
 ;;; Keyboard

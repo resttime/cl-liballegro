@@ -37,8 +37,10 @@
           ;; :joystick-button-up, but its also possible to actively poll
           ;; current joystick state:
           (al:with-current-joystick-state joystick-state joystick
-            (al:with-joystick-axis (left-stick-horizontal :stick 0 :index 0)
-                                   joystick-state
+            (let ((left-stick-horizontal (al:get-joystick-state-axis
+                                          joystick-state
+                                          :stick 0
+                                          :index 0)))
               ;; stick 0 axis 0 corresponds to horizontal axis of left stick
               ;; in Xbox controller, but your mileage may vary
               (unless (zerop left-stick-horizontal)
@@ -47,11 +49,12 @@
                               text
                               left-stick-horizontal))))
             ;; you can also get multiple axes in one go:
-            (al:with-joystick-axes ((right-stick-horizontal :stick 1 :index 1)
-                                    (right-stick-vertical :stick 2 :index 0))
-                                   ;; again, indices are for Xbox controller,
-                                   ;; your mileage may vary
-                                   joystick-state
+            (al:with-joystick-state-axes
+                ((right-stick-horizontal :stick 1 :index 1)
+                 (right-stick-vertical :stick 2 :index 0))
+              ;; again, indices are for Xbox controller,
+              ;; your mileage may vary
+              joystick-state
               (unless (zerop right-stick-horizontal)
                 (setf text
                       (format nil "~a right stick horizontal axis moved to ~a~%"
@@ -63,16 +66,18 @@
                               text
                               right-stick-vertical))))
             ;; button indices are for Xbox controller, your mileage may vary
-            (al:with-joystick-button (menu :index 7) joystick-state
+            (let ((menu (al:get-joystick-state-button
+                         joystick-state
+                         :index 7)))
               (unless (zerop menu)
                 (setf text (format nil "~a menu button pressed: ~a~%"
                                    text menu))))
             ;; you can also get multiple buttons in one go:
-            (al:with-joystick-buttons ((a :index 0)
-                                       (b :index 1)
-                                       (x :index 2)
-                                       (y :index 3))
-                                      joystick-state
+            (al:with-joystick-state-buttons ((a :index 0)
+                                             (b :index 1)
+                                             (x :index 2)
+                                             (y :index 3))
+              joystick-state
               (unless (zerop a)
                 (setf text (format nil "~a A button pressed: ~a~%" text a)))
               (unless (zerop b)
