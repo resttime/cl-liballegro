@@ -478,6 +478,17 @@
    #:get-joystick-num-axes
    #:get-joystick-num-buttons
    #:get-joystick-state
+   #:+max-joystick-axes+
+   #:+max-joystick-sticks+
+   #:+max-joystick-buttons+
+   #:joystick-state
+   #:with-joystick-state
+   #:with-current-joystick-state
+   #:with-joystick-state-slots
+   #:get-joystick-state-axis
+   #:with-joystick-state-axes
+   #:get-joystick-state-button
+   #:with-joystick-state-buttons
    #:get-joystick-event-source
 
 ;;; Keyboard
