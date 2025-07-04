@@ -1,4 +1,6 @@
 * Changelog
+** 0.2.29
+Fixed compiler warnings, Added missing export symbols, Improvements to joystick state API (PR #61)
 ** 0.2.28
 Convenience macros for accessing slots (thanks to @lockie)
 ** 0.2.27

@@ -323,9 +323,10 @@ Usage of keywords over enums preferred for user convenience.
 - [[./cl-liballegro.asd]]: ASDF project definition, specifies source files to be loaded
 
 ** Checklist
-- [ ] New bindings added for export to [[./src/package.lisp][package defintion]]
+- [ ] New bindings added for export to [[./src/package.lisp][package definition]]
 - [ ] New source files added for loading to the [[./cl-liballegro.asd][project definition]]
-- [ ] Bump version and add description of changes
+- [ ] Add description of changes in [[./CHANGELOG.org]]
+- [ ] Increment version in [[./cl-liballegro.asd]]
 
 * [[./CHANGELOG.org][CHANGELOG]]
 FYI these bindings are so stable it can make the repo look dead
