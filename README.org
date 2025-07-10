@@ -141,20 +141,30 @@ will look forward to seeing your AAA game in the future.
                          (:samples 4 :suggest))))
    #+end_src
 
-2. Implement Method for Logic Step
+2. Use [[https://lispcookbook.github.io/cl-cookbook/clos.html#method-qualifiers-before-after-around][CLOS method qualifiers (before, after, and etc.)]] to modify
+   behaviour of default methods defined by the interface
+
+   #+begin_src lisp
+   ;; This method will be invoked after the default
+   ;; `al:initialize-system' method
+   (defmethod al:initialize-system :after (system)
+     (al:init-primitives-addon)
+   #+end_src
+
+3. Implement Method for Logic Step
    #+begin_src lisp
    (defmethod al:update ((sys window))
      (print 'one-logic-frame))
    #+end_src
 
-3. Implement Method for Render Step
+4. Implement Method for Render Step
    #+begin_src lisp
    (defmethod al:render ((sys window))
      (al:clear-to-color (al:map-rgb 20 150 100))
      (al:flip-display))
    #+end_src
 
-4. Implement Methods(s) for Event Handling
+5. Implement Methods(s) for Event Handling
    #+begin_src lisp
    ;; The lisp interface runs handlers during the logic step
    ;; Handlers are defined according to allegro events
@@ -164,7 +174,7 @@ will look forward to seeing your AAA game in the future.
        (setf (previous-key sys) (getf keyboard 'al::keycode))))
    #+end_src
 
-5. Run system
+6. Run system
    #+begin_src lisp
    (al:run-system (make-instance 'window)))
    #+end_src

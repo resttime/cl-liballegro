@@ -141,6 +141,7 @@
     (al:install-audio)
     (al:restore-default-mixer)
     (al:init-acodec-addon)
+    (al:init-primitives-addon)
     (initialize-event-queue system)
     (initialize-display system)
     (initialize-mouse system)
