@@ -12,11 +12,17 @@
    :display-options '((:sample-buffers 1 :suggest)
                       (:samples 4 :suggest))))
 
+;; This method will be invoked after the default
+;; `al:initialize-system' method
+(defmethod al:initialize-system :after (system)
+  (al:init-primitives-addon))
+
 (defmethod al:update ((sys window))
   (print 'one-logic-frame))
 
 (defmethod al:render ((sys window))
   (al:clear-to-color (al:map-rgb 20 150 100))
+  (al:draw-line 0 0 100 100 (al:map-rgb 255 0 0) 10)
   (al:flip-display))
 
 (defmethod al:key-down-handler ((sys window))

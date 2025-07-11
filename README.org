@@ -148,7 +148,7 @@ will look forward to seeing your AAA game in the future.
    ;; This method will be invoked after the default
    ;; `al:initialize-system' method
    (defmethod al:initialize-system :after (system)
-     (al:init-primitives-addon)
+     (al:init-primitives-addon))
    #+end_src
 
 3. Implement Method for Logic Step
@@ -161,6 +161,7 @@ will look forward to seeing your AAA game in the future.
    #+begin_src lisp
    (defmethod al:render ((sys window))
      (al:clear-to-color (al:map-rgb 20 150 100))
+     (al:draw-line 0 0 100 100 (al:map-rgb 255 0 0) 10)
      (al:flip-display))
    #+end_src
 
