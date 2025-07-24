@@ -497,6 +497,7 @@
    #:is-keyboard-installed
    #:uninstall-keyboard
    #:get-keyboard-state
+   #:clear-keyboard-state
    #:key-down
    #:keycode-to-name
    #:can-set-keyboard-leds
