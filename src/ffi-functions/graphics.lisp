@@ -16,7 +16,7 @@
   (r :uchar) (g :uchar) (b :uchar) (a :uchar))
 (defcfun ("al_unmap_rgb" unmap-rgb) :void
   (color (:struct color))
-  (r (:pointer :uchar)) (g (:pointer :uchar)) (b (:pointer :uchar)) (a (:pointer :uchar)))
+  (r (:pointer :uchar)) (g (:pointer :uchar)) (b (:pointer :uchar)))
 (defcfun ("al_unmap_rgb_f" unmap-rgb-f) :void
   (color (:struct color))
   (r (:pointer :float)) (g (:pointer :float)) (b (:pointer :float)))
@@ -25,7 +25,7 @@
   (r (:pointer :uchar)) (g (:pointer :uchar)) (b (:pointer :uchar)) (a (:pointer :uchar)))
 (defcfun ("al_unmap_rgba_f" unmap-rgba-f) :void
   (color (:struct color))
-  (r (:pointer :float)) (g (:pointer :float)) (b (:pointer :float)))
+  (r (:pointer :float)) (g (:pointer :float)) (b (:pointer :float)) (a (:pointer :float)))
 
 ;; Locking and pixel formats
 (defcfun ("al_get_pixel_size" get-pixel-size) :int (format pixel-format))
