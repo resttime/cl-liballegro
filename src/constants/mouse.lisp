@@ -3,6 +3,11 @@
 (defconstant +mouse-max-extra-axes+ 4
   "Allow up to four extra axes for future expansion.")
 
+(defcenum mouse-button
+  (:left 1)
+  (:right 2)
+  (:middle 3))
+
 ;; Mouse cursors
 (defcenum system-mouse-cursor
   (:none         0)
