@@ -29,3 +29,6 @@
 
 #+unix
 (defcfun ("al_get_x_window_id" get-x-window-id) :ulong (display :pointer))
+
+#+unix
+(defcfun ("al_x_set_initial_icon" x-set-initial-icon) :boolean (bitmap :pointer))
