@@ -39,6 +39,7 @@
                 ((:file "audio")
                  (:file "font")
                  (:file "native-dialogs")
+                 (:file "primatives")
                  (:file "video-streaming")))))
      (:module "types"
       :components
@@ -67,7 +68,8 @@
         :components
                 ((:file "audio")
                  (:file "font")
-                 (:file "native-dialogs")))))
+                 (:file "native-dialogs")
+                 (:file "primatives")))))
      (:module "ffi-functions"
       :components
       ((:file "configuration-files")

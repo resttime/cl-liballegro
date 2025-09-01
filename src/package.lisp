@@ -1148,6 +1148,31 @@
    #:draw-soft-triangle
    #:draw-soft-line
 
+   ;; Custom vertex declaration routines
+   #:create-vertex-decl
+   #:destroy-vertex-decl
+
+   ;; Vertex buffer routines
+   #:create-vertex-buffer
+   #:destroy-vertex-buffer
+   #:lock-vertex-buffer
+   #:unlock-vertex-buffer
+   #:get-vertex-buffer-size
+
+   ;; Index buffer routines
+   #:create-index-buffer
+   #:destroy-index-buffer
+   #:lock-index-buffer
+   #:unlock-index-buffer
+   #:get-index-buffer-size
+
+   ;; Polygon routines
+   #:draw-polyline
+   #:draw-polygon
+   #:draw-filled-polygon
+   #:draw-filled-polygon-with-holes
+   #:triangulate-polygon
+
 ;;; Video streaming addon
    ;; Functions
    #:init-video-addon
