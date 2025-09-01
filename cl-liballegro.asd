@@ -39,7 +39,7 @@
                 ((:file "audio")
                  (:file "font")
                  (:file "native-dialogs")
-                 (:file "primatives")
+                 (:file "primitives")
                  (:file "video-streaming")))))
      (:module "types"
       :components
@@ -69,7 +69,7 @@
                 ((:file "audio")
                  (:file "font")
                  (:file "native-dialogs")
-                 (:file "primatives")))))
+                 (:file "primitives")))))
      (:module "ffi-functions"
       :components
       ((:file "configuration-files")
@@ -110,7 +110,7 @@
                  (:file "memfile")
                  (:file "native-dialogs")
                  (:file "physicsfs")
-                 (:file "primatives")
+                 (:file "primitives")
                  (:file "video-streaming")))))
      ;; Higher Level Lisp API
      (:module "interface"

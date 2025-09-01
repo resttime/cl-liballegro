@@ -1143,8 +1143,8 @@
    ;; Low level drawing routines
    #:draw-prim
    #:draw-indexed-prim
-   #:create-vertex-decl
-   #:destroy-vertex-decl
+   #:draw-vertex-buffer
+   #:draw-indexed-buffer
    #:draw-soft-triangle
    #:draw-soft-line
 

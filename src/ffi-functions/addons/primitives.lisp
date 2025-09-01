@@ -105,9 +105,12 @@
 (defcfun ("al_draw_indexed_prim" draw-indexed-prim) :int
   (vtxs :pointer) (decl :pointer) (texture :pointer)
   (indices :pointer) (num-vtx :int) (type :int))
-(defcfun ("al_create_vertex_decl" create-vertex-decl) :pointer
-  (elements :pointer) (stride :int))
-(defcfun ("al_destroy_vertex_decl" destroy-vertex-decl) :void)
+(defcfun ("al_draw_vertex_buffer" draw-vertex-buffer) :int
+  (vertex-buffer :pointer) (texture :pointer)
+  (start :int) (end :int) (type :int))
+(defcfun ("al_draw_indexed_buffer" draw-indexed-buffer) :int
+  (vertex-buffer :pointer) (texture :pointer) (index-buffer :pointer)
+  (start :int) (end :int) (type :int))
 (defcfun ("al_draw_soft_triangle" draw-soft-triangle) :void
   (v1 :pointer) (v2 :pointer) (v3 :pointer) (state :pointer)
   (init :pointer) (first :pointer) (step :pointer) (draw :pointer))
