@@ -17,7 +17,9 @@
   :programmable-pipeline
   :gtk-toplevel-internal
   :maximized
-  :opengl-es-profile)
+  :opengl-es-profile
+  :opengl-core-profile
+  :drag-and-drop)
 
 ;; Display Options
 (defcenum display-options
